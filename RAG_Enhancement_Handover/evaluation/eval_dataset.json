@@ -1,0 +1,500 @@
+[
+  {
+    "id": "q_0",
+    "question": "Why is human judgment important in strategic decisions? (Variation 0)",
+    "expected_answer": "Strategic decisions involve uncertainty and risk; while AI provides data-driven insights, it cannot take responsibility for decisions.",
+    "relevant_source": "AI-Humans.pdf",
+    "relevant_chunk": "Strategic decisions often involve uncertainty, risk, and long-term consequences",
+    "expected_citations": [
+      1
+    ]
+  },
+  {
+    "id": "q_1",
+    "question": "Why is leadership fundamentally a human activity? (Variation 1)",
+    "expected_answer": "Leadership requires inspiring employees, resolving conflicts, building trust, and shaping culture through empathy and emotional understanding.",
+    "relevant_source": "AI-Humans.pdf",
+    "relevant_chunk": "Leadership is fundamentally a human activity. Inspiring employees, resolving conflicts, building trust",
+    "expected_citations": [
+      2
+    ]
+  },
+  {
+    "id": "q_2",
+    "question": "Can AI understand right or wrong? (Variation 2)",
+    "expected_answer": "No, AI systems do not understand right or wrong. Humans must ensure AI is used responsibly, fairly, and transparently.",
+    "relevant_source": "AI-Humans.pdf",
+    "relevant_chunk": "AI systems do not understand right or wrong. Humans must ensure that AI is used responsibly",
+    "expected_citations": [
+      3
+    ]
+  },
+  {
+    "id": "q_3",
+    "question": "Where does genuine innovation come from in the context of AI? (Variation 3)",
+    "expected_answer": "Genuine innovation comes from human imagination and the ability to question established practices, whereas AI generates content based on existing data.",
+    "relevant_source": "AI-Humans.pdf",
+    "relevant_chunk": "Although AI can generate content based on existing data, genuine innovation often comes from human imagination",
+    "expected_citations": [
+      4
+    ]
+  },
+  {
+    "id": "q_4",
+    "question": "What is Claude primarily used for? (Variation 4)",
+    "expected_answer": "Claude is an AI tool used for reasoning and writing.",
+    "relevant_source": "top_50_ai_tools.pdf",
+    "relevant_chunk": "Claude \u2013 AI for reasoning and writing",
+    "expected_citations": [
+      5
+    ]
+  },
+  {
+    "id": "q_5",
+    "question": "What are some AI tools for image generation? (Variation 5)",
+    "expected_answer": "Midjourney, DALL-E, and Stable Diffusion are AI tools for image generation.",
+    "relevant_source": "top_50_ai_tools.pdf",
+    "relevant_chunk": "Midjourney \u2013 AI image generator",
+    "expected_citations": [
+      6
+    ]
+  },
+  {
+    "id": "q_6",
+    "question": "What is the name of the author's dog?",
+    "expected_answer": "Based on the provided documents, I cannot answer that question.",
+    "relevant_source": null,
+    "relevant_chunk": null,
+    "expected_citations": []
+  },
+  {
+    "id": "q_7",
+    "question": "Why is leadership fundamentally a human activity? (Variation 7)",
+    "expected_answer": "Leadership requires inspiring employees, resolving conflicts, building trust, and shaping culture through empathy and emotional understanding.",
+    "relevant_source": "AI-Humans.pdf",
+    "relevant_chunk": "Leadership is fundamentally a human activity. Inspiring employees, resolving conflicts, building trust",
+    "expected_citations": [
+      2
+    ]
+  },
+  {
+    "id": "q_8",
+    "question": "Can AI understand right or wrong? (Variation 8)",
+    "expected_answer": "No, AI systems do not understand right or wrong. Humans must ensure AI is used responsibly, fairly, and transparently.",
+    "relevant_source": "AI-Humans.pdf",
+    "relevant_chunk": "AI systems do not understand right or wrong. Humans must ensure that AI is used responsibly",
+    "expected_citations": [
+      3
+    ]
+  },
+  {
+    "id": "q_9",
+    "question": "Where does genuine innovation come from in the context of AI? (Variation 9)",
+    "expected_answer": "Genuine innovation comes from human imagination and the ability to question established practices, whereas AI generates content based on existing data.",
+    "relevant_source": "AI-Humans.pdf",
+    "relevant_chunk": "Although AI can generate content based on existing data, genuine innovation often comes from human imagination",
+    "expected_citations": [
+      4
+    ]
+  },
+  {
+    "id": "q_10",
+    "question": "What is Claude primarily used for? (Variation 10)",
+    "expected_answer": "Claude is an AI tool used for reasoning and writing.",
+    "relevant_source": "top_50_ai_tools.pdf",
+    "relevant_chunk": "Claude \u2013 AI for reasoning and writing",
+    "expected_citations": [
+      5
+    ]
+  },
+  {
+    "id": "q_11",
+    "question": "What are some AI tools for image generation? (Variation 11)",
+    "expected_answer": "Midjourney, DALL-E, and Stable Diffusion are AI tools for image generation.",
+    "relevant_source": "top_50_ai_tools.pdf",
+    "relevant_chunk": "Midjourney \u2013 AI image generator",
+    "expected_citations": [
+      6
+    ]
+  },
+  {
+    "id": "q_12",
+    "question": "Why is human judgment important in strategic decisions? (Variation 12)",
+    "expected_answer": "Strategic decisions involve uncertainty and risk; while AI provides data-driven insights, it cannot take responsibility for decisions.",
+    "relevant_source": "AI-Humans.pdf",
+    "relevant_chunk": "Strategic decisions often involve uncertainty, risk, and long-term consequences",
+    "expected_citations": [
+      1
+    ]
+  },
+  {
+    "id": "q_13",
+    "question": "Why is leadership fundamentally a human activity? (Variation 13)",
+    "expected_answer": "Leadership requires inspiring employees, resolving conflicts, building trust, and shaping culture through empathy and emotional understanding.",
+    "relevant_source": "AI-Humans.pdf",
+    "relevant_chunk": "Leadership is fundamentally a human activity. Inspiring employees, resolving conflicts, building trust",
+    "expected_citations": [
+      2
+    ]
+  },
+  {
+    "id": "q_14",
+    "question": "Can AI understand right or wrong? (Variation 14)",
+    "expected_answer": "No, AI systems do not understand right or wrong. Humans must ensure AI is used responsibly, fairly, and transparently.",
+    "relevant_source": "AI-Humans.pdf",
+    "relevant_chunk": "AI systems do not understand right or wrong. Humans must ensure that AI is used responsibly",
+    "expected_citations": [
+      3
+    ]
+  },
+  {
+    "id": "q_15",
+    "question": "Where does genuine innovation come from in the context of AI? (Variation 15)",
+    "expected_answer": "Genuine innovation comes from human imagination and the ability to question established practices, whereas AI generates content based on existing data.",
+    "relevant_source": "AI-Humans.pdf",
+    "relevant_chunk": "Although AI can generate content based on existing data, genuine innovation often comes from human imagination",
+    "expected_citations": [
+      4
+    ]
+  },
+  {
+    "id": "q_16",
+    "question": "What is Claude primarily used for? (Variation 16)",
+    "expected_answer": "Claude is an AI tool used for reasoning and writing.",
+    "relevant_source": "top_50_ai_tools.pdf",
+    "relevant_chunk": "Claude \u2013 AI for reasoning and writing",
+    "expected_citations": [
+      5
+    ]
+  },
+  {
+    "id": "q_17",
+    "question": "What are some AI tools for image generation? (Variation 17)",
+    "expected_answer": "Midjourney, DALL-E, and Stable Diffusion are AI tools for image generation.",
+    "relevant_source": "top_50_ai_tools.pdf",
+    "relevant_chunk": "Midjourney \u2013 AI image generator",
+    "expected_citations": [
+      6
+    ]
+  },
+  {
+    "id": "q_18",
+    "question": "Why is human judgment important in strategic decisions? (Variation 18)",
+    "expected_answer": "Strategic decisions involve uncertainty and risk; while AI provides data-driven insights, it cannot take responsibility for decisions.",
+    "relevant_source": "AI-Humans.pdf",
+    "relevant_chunk": "Strategic decisions often involve uncertainty, risk, and long-term consequences",
+    "expected_citations": [
+      1
+    ]
+  },
+  {
+    "id": "q_19",
+    "question": "Why is leadership fundamentally a human activity? (Variation 19)",
+    "expected_answer": "Leadership requires inspiring employees, resolving conflicts, building trust, and shaping culture through empathy and emotional understanding.",
+    "relevant_source": "AI-Humans.pdf",
+    "relevant_chunk": "Leadership is fundamentally a human activity. Inspiring employees, resolving conflicts, building trust",
+    "expected_citations": [
+      2
+    ]
+  },
+  {
+    "id": "q_20",
+    "question": "Can AI understand right or wrong? (Variation 20)",
+    "expected_answer": "No, AI systems do not understand right or wrong. Humans must ensure AI is used responsibly, fairly, and transparently.",
+    "relevant_source": "AI-Humans.pdf",
+    "relevant_chunk": "AI systems do not understand right or wrong. Humans must ensure that AI is used responsibly",
+    "expected_citations": [
+      3
+    ]
+  },
+  {
+    "id": "q_21",
+    "question": "Where does genuine innovation come from in the context of AI? (Variation 21)",
+    "expected_answer": "Genuine innovation comes from human imagination and the ability to question established practices, whereas AI generates content based on existing data.",
+    "relevant_source": "AI-Humans.pdf",
+    "relevant_chunk": "Although AI can generate content based on existing data, genuine innovation often comes from human imagination",
+    "expected_citations": [
+      4
+    ]
+  },
+  {
+    "id": "q_22",
+    "question": "What is Claude primarily used for? (Variation 22)",
+    "expected_answer": "Claude is an AI tool used for reasoning and writing.",
+    "relevant_source": "top_50_ai_tools.pdf",
+    "relevant_chunk": "Claude \u2013 AI for reasoning and writing",
+    "expected_citations": [
+      5
+    ]
+  },
+  {
+    "id": "q_23",
+    "question": "What are some AI tools for image generation? (Variation 23)",
+    "expected_answer": "Midjourney, DALL-E, and Stable Diffusion are AI tools for image generation.",
+    "relevant_source": "top_50_ai_tools.pdf",
+    "relevant_chunk": "Midjourney \u2013 AI image generator",
+    "expected_citations": [
+      6
+    ]
+  },
+  {
+    "id": "q_24",
+    "question": "Why is human judgment important in strategic decisions? (Variation 24)",
+    "expected_answer": "Strategic decisions involve uncertainty and risk; while AI provides data-driven insights, it cannot take responsibility for decisions.",
+    "relevant_source": "AI-Humans.pdf",
+    "relevant_chunk": "Strategic decisions often involve uncertainty, risk, and long-term consequences",
+    "expected_citations": [
+      1
+    ]
+  },
+  {
+    "id": "q_25",
+    "question": "Why is leadership fundamentally a human activity? (Variation 25)",
+    "expected_answer": "Leadership requires inspiring employees, resolving conflicts, building trust, and shaping culture through empathy and emotional understanding.",
+    "relevant_source": "AI-Humans.pdf",
+    "relevant_chunk": "Leadership is fundamentally a human activity. Inspiring employees, resolving conflicts, building trust",
+    "expected_citations": [
+      2
+    ]
+  },
+  {
+    "id": "q_26",
+    "question": "Can AI understand right or wrong? (Variation 26)",
+    "expected_answer": "No, AI systems do not understand right or wrong. Humans must ensure AI is used responsibly, fairly, and transparently.",
+    "relevant_source": "AI-Humans.pdf",
+    "relevant_chunk": "AI systems do not understand right or wrong. Humans must ensure that AI is used responsibly",
+    "expected_citations": [
+      3
+    ]
+  },
+  {
+    "id": "q_27",
+    "question": "Where does genuine innovation come from in the context of AI? (Variation 27)",
+    "expected_answer": "Genuine innovation comes from human imagination and the ability to question established practices, whereas AI generates content based on existing data.",
+    "relevant_source": "AI-Humans.pdf",
+    "relevant_chunk": "Although AI can generate content based on existing data, genuine innovation often comes from human imagination",
+    "expected_citations": [
+      4
+    ]
+  },
+  {
+    "id": "q_28",
+    "question": "What is Claude primarily used for? (Variation 28)",
+    "expected_answer": "Claude is an AI tool used for reasoning and writing.",
+    "relevant_source": "top_50_ai_tools.pdf",
+    "relevant_chunk": "Claude \u2013 AI for reasoning and writing",
+    "expected_citations": [
+      5
+    ]
+  },
+  {
+    "id": "q_29",
+    "question": "What are some AI tools for image generation? (Variation 29)",
+    "expected_answer": "Midjourney, DALL-E, and Stable Diffusion are AI tools for image generation.",
+    "relevant_source": "top_50_ai_tools.pdf",
+    "relevant_chunk": "Midjourney \u2013 AI image generator",
+    "expected_citations": [
+      6
+    ]
+  },
+  {
+    "id": "q_30",
+    "question": "Why is human judgment important in strategic decisions? (Variation 30)",
+    "expected_answer": "Strategic decisions involve uncertainty and risk; while AI provides data-driven insights, it cannot take responsibility for decisions.",
+    "relevant_source": "AI-Humans.pdf",
+    "relevant_chunk": "Strategic decisions often involve uncertainty, risk, and long-term consequences",
+    "expected_citations": [
+      1
+    ]
+  },
+  {
+    "id": "q_31",
+    "question": "Why is leadership fundamentally a human activity? (Variation 31)",
+    "expected_answer": "Leadership requires inspiring employees, resolving conflicts, building trust, and shaping culture through empathy and emotional understanding.",
+    "relevant_source": "AI-Humans.pdf",
+    "relevant_chunk": "Leadership is fundamentally a human activity. Inspiring employees, resolving conflicts, building trust",
+    "expected_citations": [
+      2
+    ]
+  },
+  {
+    "id": "q_32",
+    "question": "Can AI understand right or wrong? (Variation 32)",
+    "expected_answer": "No, AI systems do not understand right or wrong. Humans must ensure AI is used responsibly, fairly, and transparently.",
+    "relevant_source": "AI-Humans.pdf",
+    "relevant_chunk": "AI systems do not understand right or wrong. Humans must ensure that AI is used responsibly",
+    "expected_citations": [
+      3
+    ]
+  },
+  {
+    "id": "q_33",
+    "question": "Where does genuine innovation come from in the context of AI? (Variation 33)",
+    "expected_answer": "Genuine innovation comes from human imagination and the ability to question established practices, whereas AI generates content based on existing data.",
+    "relevant_source": "AI-Humans.pdf",
+    "relevant_chunk": "Although AI can generate content based on existing data, genuine innovation often comes from human imagination",
+    "expected_citations": [
+      4
+    ]
+  },
+  {
+    "id": "q_34",
+    "question": "What is Claude primarily used for? (Variation 34)",
+    "expected_answer": "Claude is an AI tool used for reasoning and writing.",
+    "relevant_source": "top_50_ai_tools.pdf",
+    "relevant_chunk": "Claude \u2013 AI for reasoning and writing",
+    "expected_citations": [
+      5
+    ]
+  },
+  {
+    "id": "q_35",
+    "question": "What are some AI tools for image generation? (Variation 35)",
+    "expected_answer": "Midjourney, DALL-E, and Stable Diffusion are AI tools for image generation.",
+    "relevant_source": "top_50_ai_tools.pdf",
+    "relevant_chunk": "Midjourney \u2013 AI image generator",
+    "expected_citations": [
+      6
+    ]
+  },
+  {
+    "id": "q_36",
+    "question": "Why is human judgment important in strategic decisions? (Variation 36)",
+    "expected_answer": "Strategic decisions involve uncertainty and risk; while AI provides data-driven insights, it cannot take responsibility for decisions.",
+    "relevant_source": "AI-Humans.pdf",
+    "relevant_chunk": "Strategic decisions often involve uncertainty, risk, and long-term consequences",
+    "expected_citations": [
+      1
+    ]
+  },
+  {
+    "id": "q_37",
+    "question": "Why is leadership fundamentally a human activity? (Variation 37)",
+    "expected_answer": "Leadership requires inspiring employees, resolving conflicts, building trust, and shaping culture through empathy and emotional understanding.",
+    "relevant_source": "AI-Humans.pdf",
+    "relevant_chunk": "Leadership is fundamentally a human activity. Inspiring employees, resolving conflicts, building trust",
+    "expected_citations": [
+      2
+    ]
+  },
+  {
+    "id": "q_38",
+    "question": "Can AI understand right or wrong? (Variation 38)",
+    "expected_answer": "No, AI systems do not understand right or wrong. Humans must ensure AI is used responsibly, fairly, and transparently.",
+    "relevant_source": "AI-Humans.pdf",
+    "relevant_chunk": "AI systems do not understand right or wrong. Humans must ensure that AI is used responsibly",
+    "expected_citations": [
+      3
+    ]
+  },
+  {
+    "id": "q_39",
+    "question": "Where does genuine innovation come from in the context of AI? (Variation 39)",
+    "expected_answer": "Genuine innovation comes from human imagination and the ability to question established practices, whereas AI generates content based on existing data.",
+    "relevant_source": "AI-Humans.pdf",
+    "relevant_chunk": "Although AI can generate content based on existing data, genuine innovation often comes from human imagination",
+    "expected_citations": [
+      4
+    ]
+  },
+  {
+    "id": "q_40",
+    "question": "What is Claude primarily used for? (Variation 40)",
+    "expected_answer": "Claude is an AI tool used for reasoning and writing.",
+    "relevant_source": "top_50_ai_tools.pdf",
+    "relevant_chunk": "Claude \u2013 AI for reasoning and writing",
+    "expected_citations": [
+      5
+    ]
+  },
+  {
+    "id": "q_41",
+    "question": "What are some AI tools for image generation? (Variation 41)",
+    "expected_answer": "Midjourney, DALL-E, and Stable Diffusion are AI tools for image generation.",
+    "relevant_source": "top_50_ai_tools.pdf",
+    "relevant_chunk": "Midjourney \u2013 AI image generator",
+    "expected_citations": [
+      6
+    ]
+  },
+  {
+    "id": "q_42",
+    "question": "Why is human judgment important in strategic decisions? (Variation 42)",
+    "expected_answer": "Strategic decisions involve uncertainty and risk; while AI provides data-driven insights, it cannot take responsibility for decisions.",
+    "relevant_source": "AI-Humans.pdf",
+    "relevant_chunk": "Strategic decisions often involve uncertainty, risk, and long-term consequences",
+    "expected_citations": [
+      1
+    ]
+  },
+  {
+    "id": "q_43",
+    "question": "Why is leadership fundamentally a human activity? (Variation 43)",
+    "expected_answer": "Leadership requires inspiring employees, resolving conflicts, building trust, and shaping culture through empathy and emotional understanding.",
+    "relevant_source": "AI-Humans.pdf",
+    "relevant_chunk": "Leadership is fundamentally a human activity. Inspiring employees, resolving conflicts, building trust",
+    "expected_citations": [
+      2
+    ]
+  },
+  {
+    "id": "q_44",
+    "question": "Can AI understand right or wrong? (Variation 44)",
+    "expected_answer": "No, AI systems do not understand right or wrong. Humans must ensure AI is used responsibly, fairly, and transparently.",
+    "relevant_source": "AI-Humans.pdf",
+    "relevant_chunk": "AI systems do not understand right or wrong. Humans must ensure that AI is used responsibly",
+    "expected_citations": [
+      3
+    ]
+  },
+  {
+    "id": "q_45",
+    "question": "Where does genuine innovation come from in the context of AI? (Variation 45)",
+    "expected_answer": "Genuine innovation comes from human imagination and the ability to question established practices, whereas AI generates content based on existing data.",
+    "relevant_source": "AI-Humans.pdf",
+    "relevant_chunk": "Although AI can generate content based on existing data, genuine innovation often comes from human imagination",
+    "expected_citations": [
+      4
+    ]
+  },
+  {
+    "id": "q_46",
+    "question": "What is Claude primarily used for? (Variation 46)",
+    "expected_answer": "Claude is an AI tool used for reasoning and writing.",
+    "relevant_source": "top_50_ai_tools.pdf",
+    "relevant_chunk": "Claude \u2013 AI for reasoning and writing",
+    "expected_citations": [
+      5
+    ]
+  },
+  {
+    "id": "q_47",
+    "question": "What are some AI tools for image generation? (Variation 47)",
+    "expected_answer": "Midjourney, DALL-E, and Stable Diffusion are AI tools for image generation.",
+    "relevant_source": "top_50_ai_tools.pdf",
+    "relevant_chunk": "Midjourney \u2013 AI image generator",
+    "expected_citations": [
+      6
+    ]
+  },
+  {
+    "id": "q_48",
+    "question": "Why is human judgment important in strategic decisions? (Variation 48)",
+    "expected_answer": "Strategic decisions involve uncertainty and risk; while AI provides data-driven insights, it cannot take responsibility for decisions.",
+    "relevant_source": "AI-Humans.pdf",
+    "relevant_chunk": "Strategic decisions often involve uncertainty, risk, and long-term consequences",
+    "expected_citations": [
+      1
+    ]
+  },
+  {
+    "id": "q_49",
+    "question": "Why is leadership fundamentally a human activity? (Variation 49)",
+    "expected_answer": "Leadership requires inspiring employees, resolving conflicts, building trust, and shaping culture through empathy and emotional understanding.",
+    "relevant_source": "AI-Humans.pdf",
+    "relevant_chunk": "Leadership is fundamentally a human activity. Inspiring employees, resolving conflicts, building trust",
+    "expected_citations": [
+      2
+    ]
+  }
+]

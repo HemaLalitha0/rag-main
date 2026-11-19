@@ -1,0 +1,702 @@
+{"event": "retrieval_success", "timestamp": 1791343481.1988623, "query": "What is the primary difference between artificial intelligence and human intelligence?", "latency": 5.956140995025635, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343481.5990877, "question": "What is the primary difference between artificial intelligence and human intelligence?", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343481.6158137, "query": "How does machine learning differ from traditional programming?", "latency": 0.016726016998291016, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343482.027783, "question": "How does machine learning differ from traditional programming?", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343482.0397794, "query": "What are the main ethical concerns regarding AI?", "latency": 0.011467933654785156, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343482.3677719, "question": "What are the main ethical concerns regarding AI?", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343482.391246, "query": "List some popular AI tools used for natural language processing.", "latency": 0.02294778823852539, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343482.8094757, "question": "List some popular AI tools used for natural language processing.", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343482.8232563, "query": "Can AI experience emotions?", "latency": 0.012781620025634766, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343483.2418933, "question": "Can AI experience emotions?", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343483.282006, "query": "Considering both the ethical concerns and the differences between AI and humans, why is bias a significant issue in machine learning?", "latency": 0.03951525688171387, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343483.6718025, "question": "Considering both the ethical concerns and the differences between AI and humans, why is bias a significant issue in machine learning?", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343483.694806, "query": "What is the name of the author's dog?", "latency": 0.020270586013793945, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343483.9961288, "question": "What is the name of the author's dog?", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343484.0096982, "query": "What are the main ethical concerns regarding AI? (Variation 7)", "latency": 0.013034343719482422, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343484.40166, "question": "What are the main ethical concerns regarding AI? (Variation 7)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343484.4162343, "query": "List some popular AI tools used for natural language processing. (Variation 8)", "latency": 0.01404714584350586, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343484.7374067, "question": "List some popular AI tools used for natural language processing. (Variation 8)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343484.745581, "query": "Can AI experience emotions? (Variation 9)", "latency": 0.00817418098449707, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343485.1692097, "question": "Can AI experience emotions? (Variation 9)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343485.1810052, "query": "What is the primary difference between artificial intelligence and human intelligence? (Variation 10)", "latency": 0.011287689208984375, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343485.528661, "question": "What is the primary difference between artificial intelligence and human intelligence? (Variation 10)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343485.540668, "query": "How does machine learning differ from traditional programming? (Variation 11)", "latency": 0.012006998062133789, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343485.9362345, "question": "How does machine learning differ from traditional programming? (Variation 11)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343485.9479132, "query": "What are the main ethical concerns regarding AI? (Variation 12)", "latency": 0.011153221130371094, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343486.254958, "question": "What are the main ethical concerns regarding AI? (Variation 12)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343486.269912, "query": "List some popular AI tools used for natural language processing. (Variation 13)", "latency": 0.014425039291381836, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343486.6742682, "question": "List some popular AI tools used for natural language processing. (Variation 13)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343486.6830413, "query": "Can AI experience emotions? (Variation 14)", "latency": 0.008265495300292969, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343487.019716, "question": "Can AI experience emotions? (Variation 14)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343487.0309975, "query": "What is the primary difference between artificial intelligence and human intelligence? (Variation 15)", "latency": 0.010749340057373047, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343487.4230294, "question": "What is the primary difference between artificial intelligence and human intelligence? (Variation 15)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343487.4342315, "query": "How does machine learning differ from traditional programming? (Variation 16)", "latency": 0.011202096939086914, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343487.761934, "question": "How does machine learning differ from traditional programming? (Variation 16)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343487.7705798, "query": "What are the main ethical concerns regarding AI? (Variation 17)", "latency": 0.008138656616210938, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343488.184481, "question": "What are the main ethical concerns regarding AI? (Variation 17)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343488.200442, "query": "List some popular AI tools used for natural language processing. (Variation 18)", "latency": 0.015453338623046875, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343488.5299897, "question": "List some popular AI tools used for natural language processing. (Variation 18)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343488.5388775, "query": "Can AI experience emotions? (Variation 19)", "latency": 0.00835418701171875, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343488.9198928, "question": "Can AI experience emotions? (Variation 19)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343488.9331458, "query": "What is the primary difference between artificial intelligence and human intelligence? (Variation 20)", "latency": 0.012718677520751953, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343489.3204863, "question": "What is the primary difference between artificial intelligence and human intelligence? (Variation 20)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343489.335692, "query": "How does machine learning differ from traditional programming? (Variation 21)", "latency": 0.015205621719360352, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343489.6637506, "question": "How does machine learning differ from traditional programming? (Variation 21)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343489.6770017, "query": "What are the main ethical concerns regarding AI? (Variation 22)", "latency": 0.012719869613647461, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343490.0673013, "question": "What are the main ethical concerns regarding AI? (Variation 22)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343490.081614, "query": "List some popular AI tools used for natural language processing. (Variation 23)", "latency": 0.014312744140625, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343490.4301867, "question": "List some popular AI tools used for natural language processing. (Variation 23)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343490.4427202, "query": "Can AI experience emotions? (Variation 24)", "latency": 0.012533426284790039, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343490.857742, "question": "Can AI experience emotions? (Variation 24)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343490.8666842, "query": "What is the primary difference between artificial intelligence and human intelligence? (Variation 25)", "latency": 0.008942127227783203, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343491.1933966, "question": "What is the primary difference between artificial intelligence and human intelligence? (Variation 25)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343491.200487, "query": "How does machine learning differ from traditional programming? (Variation 26)", "latency": 0.006563425064086914, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343491.5966349, "question": "How does machine learning differ from traditional programming? (Variation 26)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343491.6072786, "query": "What are the main ethical concerns regarding AI? (Variation 27)", "latency": 0.009647846221923828, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343491.946641, "question": "What are the main ethical concerns regarding AI? (Variation 27)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343491.9590504, "query": "List some popular AI tools used for natural language processing. (Variation 28)", "latency": 0.012409448623657227, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343492.3944168, "question": "List some popular AI tools used for natural language processing. (Variation 28)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343492.4040744, "query": "Can AI experience emotions? (Variation 29)", "latency": 0.009126663208007812, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343492.8138824, "question": "Can AI experience emotions? (Variation 29)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343492.8253376, "query": "What is the primary difference between artificial intelligence and human intelligence? (Variation 30)", "latency": 0.010924100875854492, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343493.2087584, "question": "What is the primary difference between artificial intelligence and human intelligence? (Variation 30)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343493.2207453, "query": "How does machine learning differ from traditional programming? (Variation 31)", "latency": 0.01145482063293457, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343493.598898, "question": "How does machine learning differ from traditional programming? (Variation 31)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343493.6135352, "query": "What are the main ethical concerns regarding AI? (Variation 32)", "latency": 0.009674787521362305, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343493.9590247, "question": "What are the main ethical concerns regarding AI? (Variation 32)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343493.9670162, "query": "List some popular AI tools used for natural language processing. (Variation 33)", "latency": 0.007991552352905273, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343494.1982825, "question": "List some popular AI tools used for natural language processing. (Variation 33)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343494.2122881, "query": "Can AI experience emotions? (Variation 34)", "latency": 0.014005661010742188, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343494.4121275, "question": "Can AI experience emotions? (Variation 34)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343494.4224033, "query": "What is the primary difference between artificial intelligence and human intelligence? (Variation 35)", "latency": 0.009767293930053711, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343494.6142967, "question": "What is the primary difference between artificial intelligence and human intelligence? (Variation 35)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343494.627152, "query": "How does machine learning differ from traditional programming? (Variation 36)", "latency": 0.01232767105102539, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343494.815095, "question": "How does machine learning differ from traditional programming? (Variation 36)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343494.8286366, "query": "What are the main ethical concerns regarding AI? (Variation 37)", "latency": 0.013028144836425781, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343495.024006, "question": "What are the main ethical concerns regarding AI? (Variation 37)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343495.0398183, "query": "List some popular AI tools used for natural language processing. (Variation 38)", "latency": 0.015812397003173828, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343495.2307782, "question": "List some popular AI tools used for natural language processing. (Variation 38)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343495.2437215, "query": "Can AI experience emotions? (Variation 39)", "latency": 0.012943267822265625, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343495.4751484, "question": "Can AI experience emotions? (Variation 39)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343495.4901412, "query": "What is the primary difference between artificial intelligence and human intelligence? (Variation 40)", "latency": 0.014992713928222656, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343495.6900826, "question": "What is the primary difference between artificial intelligence and human intelligence? (Variation 40)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343495.6990902, "query": "How does machine learning differ from traditional programming? (Variation 41)", "latency": 0.009007692337036133, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343495.9051683, "question": "How does machine learning differ from traditional programming? (Variation 41)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343495.9171035, "query": "What are the main ethical concerns regarding AI? (Variation 42)", "latency": 0.011239290237426758, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343496.144716, "question": "What are the main ethical concerns regarding AI? (Variation 42)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343496.1597087, "query": "List some popular AI tools used for natural language processing. (Variation 43)", "latency": 0.014992713928222656, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343496.383502, "question": "List some popular AI tools used for natural language processing. (Variation 43)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343496.3964667, "query": "Can AI experience emotions? (Variation 44)", "latency": 0.012964725494384766, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343496.6217723, "question": "Can AI experience emotions? (Variation 44)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343496.6370888, "query": "What is the primary difference between artificial intelligence and human intelligence? (Variation 45)", "latency": 0.015316486358642578, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343496.8667047, "question": "What is the primary difference between artificial intelligence and human intelligence? (Variation 45)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343496.8792868, "query": "How does machine learning differ from traditional programming? (Variation 46)", "latency": 0.012582063674926758, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343497.1630359, "question": "How does machine learning differ from traditional programming? (Variation 46)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343497.1780279, "query": "What are the main ethical concerns regarding AI? (Variation 47)", "latency": 0.014991998672485352, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343497.379001, "question": "What are the main ethical concerns regarding AI? (Variation 47)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343497.3926213, "query": "List some popular AI tools used for natural language processing. (Variation 48)", "latency": 0.013092994689941406, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343497.5929139, "question": "List some popular AI tools used for natural language processing. (Variation 48)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791343497.6053321, "query": "Can AI experience emotions? (Variation 49)", "latency": 0.011890888214111328, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791343497.7936308, "question": "Can AI experience emotions? (Variation 49)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344071.605796, "query": "Why is human judgment important in strategic decisions? (Variation 0)", "latency": 5.060716152191162, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344072.4506147, "question": "Why is human judgment important in strategic decisions? (Variation 0)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344072.4587176, "query": "Why is leadership fundamentally a human activity? (Variation 1)", "latency": 0.0075986385345458984, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344072.8876345, "question": "Why is leadership fundamentally a human activity? (Variation 1)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344072.9255557, "query": "Can AI understand right or wrong? (Variation 2)", "latency": 0.036071062088012695, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344073.2557542, "question": "Can AI understand right or wrong? (Variation 2)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344073.2775521, "query": "Where does genuine innovation come from in the context of AI? (Variation 3)", "latency": 0.02124166488647461, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344073.6893897, "question": "Where does genuine innovation come from in the context of AI? (Variation 3)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344073.728133, "query": "What is Claude primarily used for? (Variation 4)", "latency": 0.03764843940734863, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344074.0557249, "question": "What is Claude primarily used for? (Variation 4)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344074.0855303, "query": "What are some AI tools for image generation? (Variation 5)", "latency": 0.02881026268005371, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344074.4948783, "question": "What are some AI tools for image generation? (Variation 5)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344074.5470538, "query": "What is the name of the author's dog?", "latency": 0.050179481506347656, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344074.9037516, "question": "What is the name of the author's dog?", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344074.9344983, "query": "Why is leadership fundamentally a human activity? (Variation 7)", "latency": 0.029612302780151367, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344075.3201623, "question": "Why is leadership fundamentally a human activity? (Variation 7)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344075.370805, "query": "Can AI understand right or wrong? (Variation 8)", "latency": 0.04947495460510254, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344075.697328, "question": "Can AI understand right or wrong? (Variation 8)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344075.731996, "query": "Where does genuine innovation come from in the context of AI? (Variation 9)", "latency": 0.03331255912780762, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344076.1218507, "question": "Where does genuine innovation come from in the context of AI? (Variation 9)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344076.149803, "query": "What is Claude primarily used for? (Variation 10)", "latency": 0.026696205139160156, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344076.4871047, "question": "What is Claude primarily used for? (Variation 10)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344076.4975154, "query": "What are some AI tools for image generation? (Variation 11)", "latency": 0.010410785675048828, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344076.9008715, "question": "What are some AI tools for image generation? (Variation 11)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344076.9098477, "query": "Why is human judgment important in strategic decisions? (Variation 12)", "latency": 0.008976221084594727, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344077.3126495, "question": "Why is human judgment important in strategic decisions? (Variation 12)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344077.3444626, "query": "Why is leadership fundamentally a human activity? (Variation 13)", "latency": 0.02980637550354004, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344077.7547889, "question": "Why is leadership fundamentally a human activity? (Variation 13)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344077.77731, "query": "Can AI understand right or wrong? (Variation 14)", "latency": 0.021523714065551758, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344078.0989335, "question": "Can AI understand right or wrong? (Variation 14)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344078.1153224, "query": "Where does genuine innovation come from in the context of AI? (Variation 15)", "latency": 0.015857696533203125, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344078.5291536, "question": "Where does genuine innovation come from in the context of AI? (Variation 15)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344078.5369005, "query": "What is Claude primarily used for? (Variation 16)", "latency": 0.006747722625732422, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344078.9225652, "question": "What is Claude primarily used for? (Variation 16)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344078.9330313, "query": "What are some AI tools for image generation? (Variation 17)", "latency": 0.009936809539794922, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344079.2813735, "question": "What are some AI tools for image generation? (Variation 17)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344079.2964156, "query": "Why is human judgment important in strategic decisions? (Variation 18)", "latency": 0.01448965072631836, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344079.7145524, "question": "Why is human judgment important in strategic decisions? (Variation 18)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344079.7470844, "query": "Why is leadership fundamentally a human activity? (Variation 19)", "latency": 0.03138279914855957, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344080.0605283, "question": "Why is leadership fundamentally a human activity? (Variation 19)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344080.0821571, "query": "Can AI understand right or wrong? (Variation 20)", "latency": 0.021098613739013672, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344080.4986885, "question": "Can AI understand right or wrong? (Variation 20)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344080.5404882, "query": "Where does genuine innovation come from in the context of AI? (Variation 21)", "latency": 0.03982281684875488, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344080.8860707, "question": "Where does genuine innovation come from in the context of AI? (Variation 21)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344080.9092486, "query": "What is Claude primarily used for? (Variation 22)", "latency": 0.022045612335205078, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344081.2983224, "question": "What is Claude primarily used for? (Variation 22)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344081.333546, "query": "What are some AI tools for image generation? (Variation 23)", "latency": 0.03412485122680664, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344081.6632438, "question": "What are some AI tools for image generation? (Variation 23)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344081.6870477, "query": "Why is human judgment important in strategic decisions? (Variation 24)", "latency": 0.023258447647094727, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344082.077302, "question": "Why is human judgment important in strategic decisions? (Variation 24)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344082.1093793, "query": "Why is leadership fundamentally a human activity? (Variation 25)", "latency": 0.03093123435974121, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344082.483616, "question": "Why is leadership fundamentally a human activity? (Variation 25)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344082.5252047, "query": "Can AI understand right or wrong? (Variation 26)", "latency": 0.039659738540649414, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344082.9429061, "question": "Can AI understand right or wrong? (Variation 26)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344082.9916813, "query": "Where does genuine innovation come from in the context of AI? (Variation 27)", "latency": 0.04758191108703613, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344083.31942, "question": "Where does genuine innovation come from in the context of AI? (Variation 27)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344083.330076, "query": "What is Claude primarily used for? (Variation 28)", "latency": 0.010117292404174805, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344083.7955763, "question": "What is Claude primarily used for? (Variation 28)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344083.8323035, "query": "What are some AI tools for image generation? (Variation 29)", "latency": 0.03525662422180176, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344084.166879, "question": "What are some AI tools for image generation? (Variation 29)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344084.197479, "query": "Why is human judgment important in strategic decisions? (Variation 30)", "latency": 0.029427289962768555, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344084.6115162, "question": "Why is human judgment important in strategic decisions? (Variation 30)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344084.6369143, "query": "Why is leadership fundamentally a human activity? (Variation 31)", "latency": 0.02378392219543457, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344084.972655, "question": "Why is leadership fundamentally a human activity? (Variation 31)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344085.000697, "query": "Can AI understand right or wrong? (Variation 32)", "latency": 0.027498722076416016, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344085.2111073, "question": "Can AI understand right or wrong? (Variation 32)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344085.257581, "query": "Where does genuine innovation come from in the context of AI? (Variation 33)", "latency": 0.04470109939575195, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344085.471099, "question": "Where does genuine innovation come from in the context of AI? (Variation 33)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344085.4930022, "query": "What is Claude primarily used for? (Variation 34)", "latency": 0.0207974910736084, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344085.7082565, "question": "What is Claude primarily used for? (Variation 34)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344085.743556, "query": "What are some AI tools for image generation? (Variation 35)", "latency": 0.03316020965576172, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344085.9518468, "question": "What are some AI tools for image generation? (Variation 35)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344085.9726038, "query": "Why is human judgment important in strategic decisions? (Variation 36)", "latency": 0.01968860626220703, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344086.175412, "question": "Why is human judgment important in strategic decisions? (Variation 36)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344086.1911497, "query": "Why is leadership fundamentally a human activity? (Variation 37)", "latency": 0.015199899673461914, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344086.4028633, "question": "Why is leadership fundamentally a human activity? (Variation 37)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344086.4506066, "query": "Can AI understand right or wrong? (Variation 38)", "latency": 0.04656195640563965, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344086.6615603, "question": "Can AI understand right or wrong? (Variation 38)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344086.6725886, "query": "Where does genuine innovation come from in the context of AI? (Variation 39)", "latency": 0.01053476333618164, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344086.8755472, "question": "Where does genuine innovation come from in the context of AI? (Variation 39)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344086.889488, "query": "What is Claude primarily used for? (Variation 40)", "latency": 0.013410329818725586, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344087.0921266, "question": "What is Claude primarily used for? (Variation 40)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344087.1317856, "query": "What are some AI tools for image generation? (Variation 41)", "latency": 0.03852200508117676, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344087.351264, "question": "What are some AI tools for image generation? (Variation 41)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344087.384482, "query": "Why is human judgment important in strategic decisions? (Variation 42)", "latency": 0.03200650215148926, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344087.5745332, "question": "Why is human judgment important in strategic decisions? (Variation 42)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344087.6034122, "query": "Why is leadership fundamentally a human activity? (Variation 43)", "latency": 0.027691125869750977, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344087.8223388, "question": "Why is leadership fundamentally a human activity? (Variation 43)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344087.8371563, "query": "Can AI understand right or wrong? (Variation 44)", "latency": 0.014817476272583008, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344088.0433817, "question": "Can AI understand right or wrong? (Variation 44)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344088.0555527, "query": "Where does genuine innovation come from in the context of AI? (Variation 45)", "latency": 0.012171030044555664, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344088.241167, "question": "Where does genuine innovation come from in the context of AI? (Variation 45)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344088.2476792, "query": "What is Claude primarily used for? (Variation 46)", "latency": 0.005983591079711914, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344088.455414, "question": "What is Claude primarily used for? (Variation 46)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344088.4663308, "query": "What are some AI tools for image generation? (Variation 47)", "latency": 0.010408639907836914, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344088.6502705, "question": "What are some AI tools for image generation? (Variation 47)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344088.6611426, "query": "Why is human judgment important in strategic decisions? (Variation 48)", "latency": 0.010340690612792969, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344088.8566365, "question": "Why is human judgment important in strategic decisions? (Variation 48)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344088.865505, "query": "Why is leadership fundamentally a human activity? (Variation 49)", "latency": 0.008360624313354492, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344089.0550067, "question": "Why is leadership fundamentally a human activity? (Variation 49)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344089.584925, "query": "Why is human judgment important in strategic decisions? (Variation 0)", "latency": 0.00897359848022461, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344090.0002558, "question": "Why is human judgment important in strategic decisions? (Variation 0)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344090.0082967, "query": "Why is leadership fundamentally a human activity? (Variation 1)", "latency": 0.007509708404541016, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344090.4527733, "question": "Why is leadership fundamentally a human activity? (Variation 1)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344090.4921834, "query": "Can AI understand right or wrong? (Variation 2)", "latency": 0.03775286674499512, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344090.8408365, "question": "Can AI understand right or wrong? (Variation 2)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344090.855205, "query": "Where does genuine innovation come from in the context of AI? (Variation 3)", "latency": 0.01385641098022461, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344091.2777922, "question": "Where does genuine innovation come from in the context of AI? (Variation 3)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344091.2844453, "query": "What is Claude primarily used for? (Variation 4)", "latency": 0.006142854690551758, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344091.6163597, "question": "What is Claude primarily used for? (Variation 4)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344091.6581962, "query": "What are some AI tools for image generation? (Variation 5)", "latency": 0.0400853157043457, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344092.0331233, "question": "What are some AI tools for image generation? (Variation 5)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344092.0632665, "query": "What is the name of the author's dog?", "latency": 0.02948784828186035, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344092.4460177, "question": "What is the name of the author's dog?", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344092.4714003, "query": "Why is leadership fundamentally a human activity? (Variation 7)", "latency": 0.02426457405090332, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344092.808136, "question": "Why is leadership fundamentally a human activity? (Variation 7)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344092.863494, "query": "Can AI understand right or wrong? (Variation 8)", "latency": 0.054732322692871094, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344093.2120123, "question": "Can AI understand right or wrong? (Variation 8)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344093.2560198, "query": "Where does genuine innovation come from in the context of AI? (Variation 9)", "latency": 0.04198122024536133, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344093.6107569, "question": "Where does genuine innovation come from in the context of AI? (Variation 9)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344093.6376576, "query": "What is Claude primarily used for? (Variation 10)", "latency": 0.02472972869873047, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344094.0709858, "question": "What is Claude primarily used for? (Variation 10)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344094.1060817, "query": "What are some AI tools for image generation? (Variation 11)", "latency": 0.033422231674194336, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344094.4539635, "question": "What are some AI tools for image generation? (Variation 11)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344094.4875207, "query": "Why is human judgment important in strategic decisions? (Variation 12)", "latency": 0.03239035606384277, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344094.860878, "question": "Why is human judgment important in strategic decisions? (Variation 12)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344094.8694792, "query": "Why is leadership fundamentally a human activity? (Variation 13)", "latency": 0.008071184158325195, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344095.3097315, "question": "Why is leadership fundamentally a human activity? (Variation 13)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344095.3240025, "query": "Can AI understand right or wrong? (Variation 14)", "latency": 0.013744354248046875, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344095.649499, "question": "Can AI understand right or wrong? (Variation 14)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344095.6586025, "query": "Where does genuine innovation come from in the context of AI? (Variation 15)", "latency": 0.008596420288085938, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344096.0539863, "question": "Where does genuine innovation come from in the context of AI? (Variation 15)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344096.0597615, "query": "What is Claude primarily used for? (Variation 16)", "latency": 0.0057752132415771484, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344096.3881505, "question": "What is Claude primarily used for? (Variation 16)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344096.3981476, "query": "What are some AI tools for image generation? (Variation 17)", "latency": 0.009997129440307617, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344096.8135355, "question": "What are some AI tools for image generation? (Variation 17)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344096.8225298, "query": "Why is human judgment important in strategic decisions? (Variation 18)", "latency": 0.008467912673950195, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344097.1608627, "question": "Why is human judgment important in strategic decisions? (Variation 18)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344097.1693528, "query": "Why is leadership fundamentally a human activity? (Variation 19)", "latency": 0.007941722869873047, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344097.57249, "question": "Why is leadership fundamentally a human activity? (Variation 19)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344097.587269, "query": "Can AI understand right or wrong? (Variation 20)", "latency": 0.014251232147216797, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344097.915942, "question": "Can AI understand right or wrong? (Variation 20)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344097.926597, "query": "Where does genuine innovation come from in the context of AI? (Variation 21)", "latency": 0.010128974914550781, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344098.3597257, "question": "Where does genuine innovation come from in the context of AI? (Variation 21)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344098.369023, "query": "What is Claude primarily used for? (Variation 22)", "latency": 0.008771181106567383, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344098.7265627, "question": "What is Claude primarily used for? (Variation 22)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344098.740888, "query": "What are some AI tools for image generation? (Variation 23)", "latency": 0.013248205184936523, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344099.1058896, "question": "What are some AI tools for image generation? (Variation 23)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344099.117162, "query": "Why is human judgment important in strategic decisions? (Variation 24)", "latency": 0.010736942291259766, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344099.5227518, "question": "Why is human judgment important in strategic decisions? (Variation 24)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344099.532801, "query": "Why is leadership fundamentally a human activity? (Variation 25)", "latency": 0.009517669677734375, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344099.8714757, "question": "Why is leadership fundamentally a human activity? (Variation 25)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344099.8904257, "query": "Can AI understand right or wrong? (Variation 26)", "latency": 0.01894998550415039, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344100.396958, "question": "Can AI understand right or wrong? (Variation 26)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344100.4108276, "query": "Where does genuine innovation come from in the context of AI? (Variation 27)", "latency": 0.013869524002075195, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344100.7250042, "question": "Where does genuine innovation come from in the context of AI? (Variation 27)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344100.733195, "query": "What is Claude primarily used for? (Variation 28)", "latency": 0.007657766342163086, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344101.1345363, "question": "What is Claude primarily used for? (Variation 28)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344101.1506693, "query": "What are some AI tools for image generation? (Variation 29)", "latency": 0.01513361930847168, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344101.5229888, "question": "What are some AI tools for image generation? (Variation 29)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344101.537029, "query": "Why is human judgment important in strategic decisions? (Variation 30)", "latency": 0.014040231704711914, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344101.9539952, "question": "Why is human judgment important in strategic decisions? (Variation 30)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344101.9625132, "query": "Why is leadership fundamentally a human activity? (Variation 31)", "latency": 0.007520198822021484, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344102.307499, "question": "Why is leadership fundamentally a human activity? (Variation 31)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344102.3207092, "query": "Can AI understand right or wrong? (Variation 32)", "latency": 0.013210296630859375, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344102.5362754, "question": "Can AI understand right or wrong? (Variation 32)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344102.5496144, "query": "Where does genuine innovation come from in the context of AI? (Variation 33)", "latency": 0.013339042663574219, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344102.7517579, "question": "Where does genuine innovation come from in the context of AI? (Variation 33)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344102.758739, "query": "What is Claude primarily used for? (Variation 34)", "latency": 0.0069811344146728516, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344102.9883363, "question": "What is Claude primarily used for? (Variation 34)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344102.9997573, "query": "What are some AI tools for image generation? (Variation 35)", "latency": 0.011420965194702148, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344103.2348597, "question": "What are some AI tools for image generation? (Variation 35)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344103.245937, "query": "Why is human judgment important in strategic decisions? (Variation 36)", "latency": 0.01055765151977539, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344103.4676027, "question": "Why is human judgment important in strategic decisions? (Variation 36)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344103.4765997, "query": "Why is leadership fundamentally a human activity? (Variation 37)", "latency": 0.007876396179199219, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344103.7196038, "question": "Why is leadership fundamentally a human activity? (Variation 37)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344103.7358267, "query": "Can AI understand right or wrong? (Variation 38)", "latency": 0.01622295379638672, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344103.9350255, "question": "Can AI understand right or wrong? (Variation 38)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344103.9500732, "query": "Where does genuine innovation come from in the context of AI? (Variation 39)", "latency": 0.01451873779296875, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344104.1498294, "question": "Where does genuine innovation come from in the context of AI? (Variation 39)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344104.1578155, "query": "What is Claude primarily used for? (Variation 40)", "latency": 0.007986068725585938, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344104.35876, "question": "What is Claude primarily used for? (Variation 40)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344104.3729358, "query": "What are some AI tools for image generation? (Variation 41)", "latency": 0.014175653457641602, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344104.5849812, "question": "What are some AI tools for image generation? (Variation 41)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344104.5979643, "query": "Why is human judgment important in strategic decisions? (Variation 42)", "latency": 0.0124664306640625, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344104.830745, "question": "Why is human judgment important in strategic decisions? (Variation 42)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344104.8420107, "query": "Why is leadership fundamentally a human activity? (Variation 43)", "latency": 0.010734796524047852, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344105.0522206, "question": "Why is leadership fundamentally a human activity? (Variation 43)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344105.073856, "query": "Can AI understand right or wrong? (Variation 44)", "latency": 0.0211026668548584, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344105.2971525, "question": "Can AI understand right or wrong? (Variation 44)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344105.3154979, "query": "Where does genuine innovation come from in the context of AI? (Variation 45)", "latency": 0.017348289489746094, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344105.5225317, "question": "Where does genuine innovation come from in the context of AI? (Variation 45)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344105.531245, "query": "What is Claude primarily used for? (Variation 46)", "latency": 0.008227825164794922, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344105.7420268, "question": "What is Claude primarily used for? (Variation 46)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344105.7562988, "query": "What are some AI tools for image generation? (Variation 47)", "latency": 0.014271974563598633, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344105.96662, "question": "What are some AI tools for image generation? (Variation 47)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344105.978934, "query": "Why is human judgment important in strategic decisions? (Variation 48)", "latency": 0.012314081192016602, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344106.174746, "question": "Why is human judgment important in strategic decisions? (Variation 48)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344106.185548, "query": "Why is leadership fundamentally a human activity? (Variation 49)", "latency": 0.010802030563354492, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344106.3891184, "question": "Why is leadership fundamentally a human activity? (Variation 49)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344107.3685868, "query": "Why is human judgment important in strategic decisions? (Variation 0)", "latency": 0.013770341873168945, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344107.801034, "question": "Why is human judgment important in strategic decisions? (Variation 0)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344107.8126318, "query": "Why is leadership fundamentally a human activity? (Variation 1)", "latency": 0.011092185974121094, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344108.1007318, "question": "Why is leadership fundamentally a human activity? (Variation 1)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344108.1193097, "query": "Can AI understand right or wrong? (Variation 2)", "latency": 0.01758098602294922, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344108.521303, "question": "Can AI understand right or wrong? (Variation 2)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344108.5401037, "query": "Where does genuine innovation come from in the context of AI? (Variation 3)", "latency": 0.018800735473632812, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344108.8810973, "question": "Where does genuine innovation come from in the context of AI? (Variation 3)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344108.891678, "query": "What is Claude primarily used for? (Variation 4)", "latency": 0.009582281112670898, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344109.30162, "question": "What is Claude primarily used for? (Variation 4)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344109.3169727, "query": "What are some AI tools for image generation? (Variation 5)", "latency": 0.015352725982666016, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344109.718347, "question": "What are some AI tools for image generation? (Variation 5)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344109.7327008, "query": "What is the name of the author's dog?", "latency": 0.014353752136230469, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344110.1359398, "question": "What is the name of the author's dog?", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344110.1481068, "query": "Why is leadership fundamentally a human activity? (Variation 7)", "latency": 0.011059284210205078, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344110.5001101, "question": "Why is leadership fundamentally a human activity? (Variation 7)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344110.518701, "query": "Can AI understand right or wrong? (Variation 8)", "latency": 0.018590927124023438, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344110.9584334, "question": "Can AI understand right or wrong? (Variation 8)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344110.9741275, "query": "Where does genuine innovation come from in the context of AI? (Variation 9)", "latency": 0.014696598052978516, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344111.3133142, "question": "Where does genuine innovation come from in the context of AI? (Variation 9)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344111.3238106, "query": "What is Claude primarily used for? (Variation 10)", "latency": 0.009502887725830078, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344111.7395148, "question": "What is Claude primarily used for? (Variation 10)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344111.7502663, "query": "What are some AI tools for image generation? (Variation 11)", "latency": 0.009753227233886719, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344112.1377702, "question": "What are some AI tools for image generation? (Variation 11)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344112.1504326, "query": "Why is human judgment important in strategic decisions? (Variation 12)", "latency": 0.012662410736083984, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344112.4840527, "question": "Why is human judgment important in strategic decisions? (Variation 12)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344112.4941344, "query": "Why is leadership fundamentally a human activity? (Variation 13)", "latency": 0.009745359420776367, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344112.8807507, "question": "Why is leadership fundamentally a human activity? (Variation 13)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344112.8999453, "query": "Can AI understand right or wrong? (Variation 14)", "latency": 0.018198013305664062, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344113.2624722, "question": "Can AI understand right or wrong? (Variation 14)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344113.278782, "query": "Where does genuine innovation come from in the context of AI? (Variation 15)", "latency": 0.015490293502807617, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344113.665861, "question": "Where does genuine innovation come from in the context of AI? (Variation 15)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344113.6726441, "query": "What is Claude primarily used for? (Variation 16)", "latency": 0.0062770843505859375, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344114.0784538, "question": "What is Claude primarily used for? (Variation 16)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344114.0918963, "query": "What are some AI tools for image generation? (Variation 17)", "latency": 0.013442516326904297, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344114.4135213, "question": "What are some AI tools for image generation? (Variation 17)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344114.4236274, "query": "Why is human judgment important in strategic decisions? (Variation 18)", "latency": 0.010106086730957031, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344114.8264227, "question": "Why is human judgment important in strategic decisions? (Variation 18)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344114.8377109, "query": "Why is leadership fundamentally a human activity? (Variation 19)", "latency": 0.011288166046142578, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344115.1628516, "question": "Why is leadership fundamentally a human activity? (Variation 19)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344115.1794617, "query": "Can AI understand right or wrong? (Variation 20)", "latency": 0.016610145568847656, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344115.577682, "question": "Can AI understand right or wrong? (Variation 20)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344115.5939643, "query": "Where does genuine innovation come from in the context of AI? (Variation 21)", "latency": 0.016282320022583008, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344115.9142659, "question": "Where does genuine innovation come from in the context of AI? (Variation 21)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344115.9230897, "query": "What is Claude primarily used for? (Variation 22)", "latency": 0.008823871612548828, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344116.3421175, "question": "What is Claude primarily used for? (Variation 22)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344116.3509107, "query": "What are some AI tools for image generation? (Variation 23)", "latency": 0.00825357437133789, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344116.66396, "question": "What are some AI tools for image generation? (Variation 23)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344116.6709414, "query": "Why is human judgment important in strategic decisions? (Variation 24)", "latency": 0.006981372833251953, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344116.9573438, "question": "Why is human judgment important in strategic decisions? (Variation 24)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344116.9672537, "query": "Why is leadership fundamentally a human activity? (Variation 25)", "latency": 0.009909868240356445, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344117.3712282, "question": "Why is leadership fundamentally a human activity? (Variation 25)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344117.3916092, "query": "Can AI understand right or wrong? (Variation 26)", "latency": 0.019385099411010742, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344117.610948, "question": "Can AI understand right or wrong? (Variation 26)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344117.6266906, "query": "Where does genuine innovation come from in the context of AI? (Variation 27)", "latency": 0.014745235443115234, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344117.8259814, "question": "Where does genuine innovation come from in the context of AI? (Variation 27)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344117.8338227, "query": "What is Claude primarily used for? (Variation 28)", "latency": 0.007841348648071289, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344118.0246336, "question": "What is Claude primarily used for? (Variation 28)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344118.039758, "query": "What are some AI tools for image generation? (Variation 29)", "latency": 0.015124320983886719, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344118.3030453, "question": "What are some AI tools for image generation? (Variation 29)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344118.3148377, "query": "Why is human judgment important in strategic decisions? (Variation 30)", "latency": 0.010794401168823242, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344118.5042837, "question": "Why is human judgment important in strategic decisions? (Variation 30)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344118.515624, "query": "Why is leadership fundamentally a human activity? (Variation 31)", "latency": 0.010342836380004883, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344118.7294652, "question": "Why is leadership fundamentally a human activity? (Variation 31)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344118.7472074, "query": "Can AI understand right or wrong? (Variation 32)", "latency": 0.016742944717407227, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344119.0992997, "question": "Can AI understand right or wrong? (Variation 32)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344119.11419, "query": "Where does genuine innovation come from in the context of AI? (Variation 33)", "latency": 0.014890432357788086, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344119.3218331, "question": "Where does genuine innovation come from in the context of AI? (Variation 33)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344119.3307943, "query": "What is Claude primarily used for? (Variation 34)", "latency": 0.008961200714111328, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344119.5226703, "question": "What is Claude primarily used for? (Variation 34)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344119.5365343, "query": "What are some AI tools for image generation? (Variation 35)", "latency": 0.01286768913269043, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344119.777478, "question": "What are some AI tools for image generation? (Variation 35)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344119.7882504, "query": "Why is human judgment important in strategic decisions? (Variation 36)", "latency": 0.010627985000610352, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344120.0082855, "question": "Why is human judgment important in strategic decisions? (Variation 36)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344120.018348, "query": "Why is leadership fundamentally a human activity? (Variation 37)", "latency": 0.010062456130981445, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344120.2259877, "question": "Why is leadership fundamentally a human activity? (Variation 37)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344120.2427347, "query": "Can AI understand right or wrong? (Variation 38)", "latency": 0.016204118728637695, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344120.482686, "question": "Can AI understand right or wrong? (Variation 38)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344120.4980917, "query": "Where does genuine innovation come from in the context of AI? (Variation 39)", "latency": 0.014407634735107422, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344120.6951792, "question": "Where does genuine innovation come from in the context of AI? (Variation 39)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344120.7035198, "query": "What is Claude primarily used for? (Variation 40)", "latency": 0.008340597152709961, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344120.9002006, "question": "What is Claude primarily used for? (Variation 40)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344120.9107282, "query": "What are some AI tools for image generation? (Variation 41)", "latency": 0.010527610778808594, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344121.1087763, "question": "What are some AI tools for image generation? (Variation 41)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344121.1203864, "query": "Why is human judgment important in strategic decisions? (Variation 42)", "latency": 0.011610031127929688, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344121.3157275, "question": "Why is human judgment important in strategic decisions? (Variation 42)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344121.327446, "query": "Why is leadership fundamentally a human activity? (Variation 43)", "latency": 0.011718511581420898, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344121.5205753, "question": "Why is leadership fundamentally a human activity? (Variation 43)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344121.539825, "query": "Can AI understand right or wrong? (Variation 44)", "latency": 0.018251657485961914, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344121.7343142, "question": "Can AI understand right or wrong? (Variation 44)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344121.750536, "query": "Where does genuine innovation come from in the context of AI? (Variation 45)", "latency": 0.015223979949951172, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344121.9461386, "question": "Where does genuine innovation come from in the context of AI? (Variation 45)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344121.9542007, "query": "What is Claude primarily used for? (Variation 46)", "latency": 0.0070645809173583984, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344122.1568482, "question": "What is Claude primarily used for? (Variation 46)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344122.1710873, "query": "What are some AI tools for image generation? (Variation 47)", "latency": 0.013240814208984375, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344122.3758204, "question": "What are some AI tools for image generation? (Variation 47)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344122.3862498, "query": "Why is human judgment important in strategic decisions? (Variation 48)", "latency": 0.01042938232421875, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344122.5959566, "question": "Why is human judgment important in strategic decisions? (Variation 48)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344122.6071858, "query": "Why is leadership fundamentally a human activity? (Variation 49)", "latency": 0.011229276657104492, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344122.88047, "question": "Why is leadership fundamentally a human activity? (Variation 49)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344124.0026226, "query": "Why is human judgment important in strategic decisions? (Variation 0)", "latency": 0.027927160263061523, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344124.5566666, "question": "Why is human judgment important in strategic decisions? (Variation 0)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344124.567637, "query": "Why is leadership fundamentally a human activity? (Variation 1)", "latency": 0.010970354080200195, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344125.0026445, "question": "Why is leadership fundamentally a human activity? (Variation 1)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344125.0215933, "query": "Can AI understand right or wrong? (Variation 2)", "latency": 0.017951011657714844, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344125.430359, "question": "Can AI understand right or wrong? (Variation 2)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344125.4453182, "query": "Where does genuine innovation come from in the context of AI? (Variation 3)", "latency": 0.014959335327148438, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344126.1112661, "question": "Where does genuine innovation come from in the context of AI? (Variation 3)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344126.1222353, "query": "What is Claude primarily used for? (Variation 4)", "latency": 0.010969161987304688, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344126.5628088, "question": "What is Claude primarily used for? (Variation 4)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344126.5782588, "query": "What are some AI tools for image generation? (Variation 5)", "latency": 0.015450000762939453, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344126.9149477, "question": "What are some AI tools for image generation? (Variation 5)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344126.9271157, "query": "What is the name of the author's dog?", "latency": 0.012167930603027344, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344127.433632, "question": "What is the name of the author's dog?", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344127.444786, "query": "Why is leadership fundamentally a human activity? (Variation 7)", "latency": 0.0111541748046875, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344127.761557, "question": "Why is leadership fundamentally a human activity? (Variation 7)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344127.7820828, "query": "Can AI understand right or wrong? (Variation 8)", "latency": 0.019527912139892578, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344128.205129, "question": "Can AI understand right or wrong? (Variation 8)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344128.2180943, "query": "Where does genuine innovation come from in the context of AI? (Variation 9)", "latency": 0.01296544075012207, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344128.5667872, "question": "Where does genuine innovation come from in the context of AI? (Variation 9)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344128.5747657, "query": "What is Claude primarily used for? (Variation 10)", "latency": 0.006980419158935547, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344129.0348463, "question": "What is Claude primarily used for? (Variation 10)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344129.0498059, "query": "What are some AI tools for image generation? (Variation 11)", "latency": 0.0139617919921875, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344129.4051137, "question": "What are some AI tools for image generation? (Variation 11)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344129.4153805, "query": "Why is human judgment important in strategic decisions? (Variation 12)", "latency": 0.009268522262573242, "retrieved_count": 5}
+{"event": "retrieval_success", "timestamp": 1791344129.5941944, "query": "Why is leadership a human activity?", "latency": 9.291579008102417, "retrieved_count": 2}
+{"event": "retrieval_success", "timestamp": 1791344129.5971851, "query": "zxczxc qweqwe asdasd", "latency": 0.001993894577026367, "retrieved_count": 2}
+{"event": "llm_generation", "timestamp": 1791344129.8152077, "question": "Why is human judgment important in strategic decisions? (Variation 12)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344129.8249369, "query": "Why is leadership fundamentally a human activity? (Variation 13)", "latency": 0.009729146957397461, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344130.1577802, "question": "Why is leadership fundamentally a human activity? (Variation 13)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344130.1739058, "query": "Can AI understand right or wrong? (Variation 14)", "latency": 0.015129327774047852, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344130.579225, "question": "Can AI understand right or wrong? (Variation 14)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344130.5901957, "query": "Where does genuine innovation come from in the context of AI? (Variation 15)", "latency": 0.010970592498779297, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344130.921825, "question": "Where does genuine innovation come from in the context of AI? (Variation 15)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344130.9288452, "query": "What is Claude primarily used for? (Variation 16)", "latency": 0.006514310836791992, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344131.3475072, "question": "What is Claude primarily used for? (Variation 16)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344131.360688, "query": "What are some AI tools for image generation? (Variation 17)", "latency": 0.012653589248657227, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344131.687905, "question": "What are some AI tools for image generation? (Variation 17)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344131.6986132, "query": "Why is human judgment important in strategic decisions? (Variation 18)", "latency": 0.01017308235168457, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344132.0905774, "question": "Why is human judgment important in strategic decisions? (Variation 18)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344132.1012657, "query": "Why is leadership fundamentally a human activity? (Variation 19)", "latency": 0.010161638259887695, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344132.4705298, "question": "Why is leadership fundamentally a human activity? (Variation 19)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344132.4890919, "query": "Can AI understand right or wrong? (Variation 20)", "latency": 0.018056154251098633, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344132.867847, "question": "Can AI understand right or wrong? (Variation 20)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344132.8801773, "query": "Where does genuine innovation come from in the context of AI? (Variation 21)", "latency": 0.012330293655395508, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344133.2055264, "question": "Where does genuine innovation come from in the context of AI? (Variation 21)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344133.2161357, "query": "What is Claude primarily used for? (Variation 22)", "latency": 0.01060938835144043, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344133.62342, "question": "What is Claude primarily used for? (Variation 22)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344133.6316571, "query": "What are some AI tools for image generation? (Variation 23)", "latency": 0.008237123489379883, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344133.9312885, "question": "What are some AI tools for image generation? (Variation 23)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344133.9433303, "query": "Why is human judgment important in strategic decisions? (Variation 24)", "latency": 0.012041807174682617, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344134.351288, "question": "Why is human judgment important in strategic decisions? (Variation 24)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344134.3611996, "query": "Why is leadership fundamentally a human activity? (Variation 25)", "latency": 0.009383916854858398, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344134.6809564, "question": "Why is leadership fundamentally a human activity? (Variation 25)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344134.700214, "query": "Can AI understand right or wrong? (Variation 26)", "latency": 0.018730640411376953, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344135.1244924, "question": "Can AI understand right or wrong? (Variation 26)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344135.1353052, "query": "Where does genuine innovation come from in the context of AI? (Variation 27)", "latency": 0.010283708572387695, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344135.465553, "question": "Where does genuine innovation come from in the context of AI? (Variation 27)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344135.4720886, "query": "What is Claude primarily used for? (Variation 28)", "latency": 0.00600743293762207, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344135.8810058, "question": "What is Claude primarily used for? (Variation 28)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344135.8944874, "query": "What are some AI tools for image generation? (Variation 29)", "latency": 0.012953758239746094, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344136.2100618, "question": "What are some AI tools for image generation? (Variation 29)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344136.2205138, "query": "Why is human judgment important in strategic decisions? (Variation 30)", "latency": 0.010364770889282227, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344136.6564865, "question": "Why is human judgment important in strategic decisions? (Variation 30)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344136.6674569, "query": "Why is leadership fundamentally a human activity? (Variation 31)", "latency": 0.010970354080200195, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344137.077217, "question": "Why is leadership fundamentally a human activity? (Variation 31)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344137.0955358, "query": "Can AI understand right or wrong? (Variation 32)", "latency": 0.017793893814086914, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344137.4749262, "question": "Can AI understand right or wrong? (Variation 32)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344137.4895954, "query": "Where does genuine innovation come from in the context of AI? (Variation 33)", "latency": 0.014669179916381836, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344137.7392976, "question": "Where does genuine innovation come from in the context of AI? (Variation 33)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344137.748762, "query": "What is Claude primarily used for? (Variation 34)", "latency": 0.008845806121826172, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344137.9416735, "question": "What is Claude primarily used for? (Variation 34)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344137.9549072, "query": "What are some AI tools for image generation? (Variation 35)", "latency": 0.012704133987426758, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344138.182736, "question": "What are some AI tools for image generation? (Variation 35)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344138.1907146, "query": "Why is human judgment important in strategic decisions? (Variation 36)", "latency": 0.0069806575775146484, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344138.430457, "question": "Why is human judgment important in strategic decisions? (Variation 36)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344138.438645, "query": "Why is leadership fundamentally a human activity? (Variation 37)", "latency": 0.00818777084350586, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344138.6585147, "question": "Why is leadership fundamentally a human activity? (Variation 37)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344138.6758242, "query": "Can AI understand right or wrong? (Variation 38)", "latency": 0.01730942726135254, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344138.8796897, "question": "Can AI understand right or wrong? (Variation 38)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344138.8955693, "query": "Where does genuine innovation come from in the context of AI? (Variation 39)", "latency": 0.01587963104248047, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344139.0995364, "question": "Where does genuine innovation come from in the context of AI? (Variation 39)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344139.1082234, "query": "What is Claude primarily used for? (Variation 40)", "latency": 0.007689237594604492, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344139.3084316, "question": "What is Claude primarily used for? (Variation 40)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344139.3226533, "query": "What are some AI tools for image generation? (Variation 41)", "latency": 0.01371145248413086, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344139.5283153, "question": "What are some AI tools for image generation? (Variation 41)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344139.5396538, "query": "Why is human judgment important in strategic decisions? (Variation 42)", "latency": 0.010806560516357422, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344139.7997, "question": "Why is human judgment important in strategic decisions? (Variation 42)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344139.8088446, "query": "Why is leadership fundamentally a human activity? (Variation 43)", "latency": 0.008614778518676758, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344139.994891, "question": "Why is leadership fundamentally a human activity? (Variation 43)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344140.0138664, "query": "Can AI understand right or wrong? (Variation 44)", "latency": 0.018443822860717773, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344140.206386, "question": "Can AI understand right or wrong? (Variation 44)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344140.2205563, "query": "Where does genuine innovation come from in the context of AI? (Variation 45)", "latency": 0.013642311096191406, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344140.395069, "question": "Where does genuine innovation come from in the context of AI? (Variation 45)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344140.4032347, "query": "What is Claude primarily used for? (Variation 46)", "latency": 0.0075168609619140625, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344140.5942638, "question": "What is Claude primarily used for? (Variation 46)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344140.6081924, "query": "What are some AI tools for image generation? (Variation 47)", "latency": 0.013928651809692383, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344140.7995894, "question": "What are some AI tools for image generation? (Variation 47)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344140.8115072, "query": "Why is human judgment important in strategic decisions? (Variation 48)", "latency": 0.011391401290893555, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344141.0004022, "question": "Why is human judgment important in strategic decisions? (Variation 48)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344141.0108259, "query": "Why is leadership fundamentally a human activity? (Variation 49)", "latency": 0.009427309036254883, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344141.206573, "question": "Why is leadership fundamentally a human activity? (Variation 49)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344141.9962049, "query": "Why is human judgment important in strategic decisions? (Variation 0)", "latency": 0.012964248657226562, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344142.428252, "question": "Why is human judgment important in strategic decisions? (Variation 0)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344142.442879, "query": "Why is leadership fundamentally a human activity? (Variation 1)", "latency": 0.01462697982788086, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344142.9178953, "question": "Why is leadership fundamentally a human activity? (Variation 1)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344142.940216, "query": "Can AI understand right or wrong? (Variation 2)", "latency": 0.021323680877685547, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344143.3354201, "question": "Can AI understand right or wrong? (Variation 2)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344143.352893, "query": "Where does genuine innovation come from in the context of AI? (Variation 3)", "latency": 0.01747298240661621, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344143.9819963, "question": "Where does genuine innovation come from in the context of AI? (Variation 3)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344143.991668, "query": "What is Claude primarily used for? (Variation 4)", "latency": 0.009671688079833984, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344144.4208996, "question": "What is Claude primarily used for? (Variation 4)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344144.4351985, "query": "What are some AI tools for image generation? (Variation 5)", "latency": 0.013791561126708984, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344144.840348, "question": "What are some AI tools for image generation? (Variation 5)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344144.8546422, "query": "What is the name of the author's dog?", "latency": 0.014294147491455078, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344145.2498534, "question": "What is the name of the author's dog?", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344145.2615614, "query": "Why is leadership fundamentally a human activity? (Variation 7)", "latency": 0.010710000991821289, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344145.593488, "question": "Why is leadership fundamentally a human activity? (Variation 7)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344145.614681, "query": "Can AI understand right or wrong? (Variation 8)", "latency": 0.020663738250732422, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344146.0186598, "question": "Can AI understand right or wrong? (Variation 8)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344146.030479, "query": "Where does genuine innovation come from in the context of AI? (Variation 9)", "latency": 0.011819124221801758, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344146.337514, "question": "Where does genuine innovation come from in the context of AI? (Variation 9)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344146.3462348, "query": "What is Claude primarily used for? (Variation 10)", "latency": 0.008191108703613281, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344146.762917, "question": "What is Claude primarily used for? (Variation 10)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344146.7748535, "query": "What are some AI tools for image generation? (Variation 11)", "latency": 0.011936426162719727, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344147.10022, "question": "What are some AI tools for image generation? (Variation 11)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344147.1095243, "query": "Why is human judgment important in strategic decisions? (Variation 12)", "latency": 0.008776426315307617, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344147.508791, "question": "Why is human judgment important in strategic decisions? (Variation 12)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344147.5190923, "query": "Why is leadership fundamentally a human activity? (Variation 13)", "latency": 0.008929967880249023, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344147.8544302, "question": "Why is leadership fundamentally a human activity? (Variation 13)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344147.8724375, "query": "Can AI understand right or wrong? (Variation 14)", "latency": 0.01747894287109375, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344148.2483869, "question": "Can AI understand right or wrong? (Variation 14)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344148.263414, "query": "Where does genuine innovation come from in the context of AI? (Variation 15)", "latency": 0.014501571655273438, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344148.608737, "question": "Where does genuine innovation come from in the context of AI? (Variation 15)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344148.6186085, "query": "What is Claude primarily used for? (Variation 16)", "latency": 0.008987188339233398, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344148.9671474, "question": "What is Claude primarily used for? (Variation 16)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344148.9803088, "query": "What are some AI tools for image generation? (Variation 17)", "latency": 0.012636899948120117, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344149.3161788, "question": "What are some AI tools for image generation? (Variation 17)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344149.3272295, "query": "Why is human judgment important in strategic decisions? (Variation 18)", "latency": 0.010523080825805664, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344149.7716985, "question": "Why is human judgment important in strategic decisions? (Variation 18)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344149.7812312, "query": "Why is leadership fundamentally a human activity? (Variation 19)", "latency": 0.00902414321899414, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344150.132835, "question": "Why is leadership fundamentally a human activity? (Variation 19)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344150.1499062, "query": "Can AI understand right or wrong? (Variation 20)", "latency": 0.016544342041015625, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344150.5419612, "question": "Can AI understand right or wrong? (Variation 20)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344150.5566633, "query": "Where does genuine innovation come from in the context of AI? (Variation 21)", "latency": 0.013972759246826172, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344150.9247053, "question": "Where does genuine innovation come from in the context of AI? (Variation 21)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344150.9336295, "query": "What is Claude primarily used for? (Variation 22)", "latency": 0.008395671844482422, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344151.331404, "question": "What is Claude primarily used for? (Variation 22)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344151.3473773, "query": "What are some AI tools for image generation? (Variation 23)", "latency": 0.015703201293945312, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344151.7292352, "question": "What are some AI tools for image generation? (Variation 23)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344151.7422023, "query": "Why is human judgment important in strategic decisions? (Variation 24)", "latency": 0.010970115661621094, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344152.2236469, "question": "Why is human judgment important in strategic decisions? (Variation 24)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344152.2343156, "query": "Why is leadership fundamentally a human activity? (Variation 25)", "latency": 0.00983572006225586, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344152.5567732, "question": "Why is leadership fundamentally a human activity? (Variation 25)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344152.5749626, "query": "Can AI understand right or wrong? (Variation 26)", "latency": 0.017660140991210938, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344152.9846156, "question": "Can AI understand right or wrong? (Variation 26)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344153.0018404, "query": "Where does genuine innovation come from in the context of AI? (Variation 27)", "latency": 0.016864299774169922, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344153.344714, "question": "Where does genuine innovation come from in the context of AI? (Variation 27)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344153.3554864, "query": "What is Claude primarily used for? (Variation 28)", "latency": 0.009773492813110352, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344153.813125, "question": "What is Claude primarily used for? (Variation 28)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344153.8270867, "query": "What are some AI tools for image generation? (Variation 29)", "latency": 0.0139617919921875, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344154.3265731, "question": "What are some AI tools for image generation? (Variation 29)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344154.3385398, "query": "Why is human judgment important in strategic decisions? (Variation 30)", "latency": 0.011966705322265625, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344155.125732, "question": "Why is human judgment important in strategic decisions? (Variation 30)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344155.1367013, "query": "Why is leadership fundamentally a human activity? (Variation 31)", "latency": 0.010969400405883789, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344155.4623046, "question": "Why is leadership fundamentally a human activity? (Variation 31)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344155.4812531, "query": "Can AI understand right or wrong? (Variation 32)", "latency": 0.01795172691345215, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344155.931672, "question": "Can AI understand right or wrong? (Variation 32)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344155.9506216, "query": "Where does genuine innovation come from in the context of AI? (Variation 33)", "latency": 0.018949508666992188, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344156.7473462, "question": "Where does genuine innovation come from in the context of AI? (Variation 33)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344156.7583175, "query": "What is Claude primarily used for? (Variation 34)", "latency": 0.009974002838134766, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344157.1036148, "question": "What is Claude primarily used for? (Variation 34)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344157.1205685, "query": "What are some AI tools for image generation? (Variation 35)", "latency": 0.015956401824951172, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344157.6319637, "question": "What are some AI tools for image generation? (Variation 35)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344157.6433575, "query": "Why is human judgment important in strategic decisions? (Variation 36)", "latency": 0.01139378547668457, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344157.891968, "question": "Why is human judgment important in strategic decisions? (Variation 36)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344157.9026222, "query": "Why is leadership fundamentally a human activity? (Variation 37)", "latency": 0.010654211044311523, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344158.1010907, "question": "Why is leadership fundamentally a human activity? (Variation 37)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344158.120377, "query": "Can AI understand right or wrong? (Variation 38)", "latency": 0.019286394119262695, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344158.3326585, "question": "Can AI understand right or wrong? (Variation 38)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344158.3485417, "query": "Where does genuine innovation come from in the context of AI? (Variation 39)", "latency": 0.015883207321166992, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344158.5809515, "question": "Where does genuine innovation come from in the context of AI? (Variation 39)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344158.5878663, "query": "What is Claude primarily used for? (Variation 40)", "latency": 0.006914854049682617, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344158.7941632, "question": "What is Claude primarily used for? (Variation 40)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344158.8074696, "query": "What are some AI tools for image generation? (Variation 41)", "latency": 0.012310266494750977, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344158.9987164, "question": "What are some AI tools for image generation? (Variation 41)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344159.0133474, "query": "Why is human judgment important in strategic decisions? (Variation 42)", "latency": 0.013634920120239258, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344159.2208734, "question": "Why is human judgment important in strategic decisions? (Variation 42)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344159.2310297, "query": "Why is leadership fundamentally a human activity? (Variation 43)", "latency": 0.009628057479858398, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344159.4463203, "question": "Why is leadership fundamentally a human activity? (Variation 43)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344159.4661918, "query": "Can AI understand right or wrong? (Variation 44)", "latency": 0.01987147331237793, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344159.7325318, "question": "Can AI understand right or wrong? (Variation 44)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344159.7455847, "query": "Where does genuine innovation come from in the context of AI? (Variation 45)", "latency": 0.012527942657470703, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344159.9570162, "question": "Where does genuine innovation come from in the context of AI? (Variation 45)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344159.9654024, "query": "What is Claude primarily used for? (Variation 46)", "latency": 0.007855653762817383, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344160.1745844, "question": "What is Claude primarily used for? (Variation 46)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344160.1887019, "query": "What are some AI tools for image generation? (Variation 47)", "latency": 0.013077259063720703, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344160.3731022, "question": "What are some AI tools for image generation? (Variation 47)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344160.386468, "query": "Why is human judgment important in strategic decisions? (Variation 48)", "latency": 0.012851476669311523, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344160.575523, "question": "Why is human judgment important in strategic decisions? (Variation 48)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344160.58649, "query": "Why is leadership fundamentally a human activity? (Variation 49)", "latency": 0.010967016220092773, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344160.793636, "question": "Why is leadership fundamentally a human activity? (Variation 49)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344161.8001056, "query": "Why is human judgment important in strategic decisions? (Variation 0)", "latency": 0.011487960815429688, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344162.2021303, "question": "Why is human judgment important in strategic decisions? (Variation 0)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344162.2129226, "query": "Why is leadership fundamentally a human activity? (Variation 1)", "latency": 0.010277032852172852, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344162.8269944, "question": "Why is leadership fundamentally a human activity? (Variation 1)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344162.846621, "query": "Can AI understand right or wrong? (Variation 2)", "latency": 0.01894092559814453, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344163.170823, "question": "Can AI understand right or wrong? (Variation 2)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344163.1881518, "query": "Where does genuine innovation come from in the context of AI? (Variation 3)", "latency": 0.017328739166259766, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344163.6161344, "question": "Where does genuine innovation come from in the context of AI? (Variation 3)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344163.6258514, "query": "What is Claude primarily used for? (Variation 4)", "latency": 0.009282588958740234, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344163.9316006, "question": "What is Claude primarily used for? (Variation 4)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344163.9459422, "query": "What are some AI tools for image generation? (Variation 5)", "latency": 0.013817310333251953, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344164.3653016, "question": "What are some AI tools for image generation? (Variation 5)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344164.379637, "query": "What is the name of the author's dog?", "latency": 0.013808488845825195, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344164.69051, "question": "What is the name of the author's dog?", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344164.6977034, "query": "Why is leadership fundamentally a human activity? (Variation 7)", "latency": 0.007193326950073242, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344165.1281142, "question": "Why is leadership fundamentally a human activity? (Variation 7)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344165.1457236, "query": "Can AI understand right or wrong? (Variation 8)", "latency": 0.017609357833862305, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344165.571482, "question": "Can AI understand right or wrong? (Variation 8)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344165.5857158, "query": "Where does genuine innovation come from in the context of AI? (Variation 9)", "latency": 0.014233827590942383, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344166.082005, "question": "Where does genuine innovation come from in the context of AI? (Variation 9)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344166.0897799, "query": "What is Claude primarily used for? (Variation 10)", "latency": 0.007774829864501953, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344166.4245079, "question": "What is Claude primarily used for? (Variation 10)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344166.4381158, "query": "What are some AI tools for image generation? (Variation 11)", "latency": 0.013607978820800781, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344166.8265803, "question": "What are some AI tools for image generation? (Variation 11)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344166.836426, "query": "Why is human judgment important in strategic decisions? (Variation 12)", "latency": 0.009845733642578125, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344167.251623, "question": "Why is human judgment important in strategic decisions? (Variation 12)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344167.2645786, "query": "Why is leadership fundamentally a human activity? (Variation 13)", "latency": 0.012955665588378906, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344167.6719136, "question": "Why is leadership fundamentally a human activity? (Variation 13)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344167.6929038, "query": "Can AI understand right or wrong? (Variation 14)", "latency": 0.019702434539794922, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344168.0598478, "question": "Can AI understand right or wrong? (Variation 14)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344168.0725274, "query": "Where does genuine innovation come from in the context of AI? (Variation 15)", "latency": 0.012173891067504883, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344168.489153, "question": "Where does genuine innovation come from in the context of AI? (Variation 15)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344168.4971745, "query": "What is Claude primarily used for? (Variation 16)", "latency": 0.00802159309387207, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344168.8244731, "question": "What is Claude primarily used for? (Variation 16)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344168.8377595, "query": "What are some AI tools for image generation? (Variation 17)", "latency": 0.01228952407836914, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344169.2685213, "question": "What are some AI tools for image generation? (Variation 17)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344169.2779663, "query": "Why is human judgment important in strategic decisions? (Variation 18)", "latency": 0.008921623229980469, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344169.59104, "question": "Why is human judgment important in strategic decisions? (Variation 18)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344169.601269, "query": "Why is leadership fundamentally a human activity? (Variation 19)", "latency": 0.009721040725708008, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344170.0220456, "question": "Why is leadership fundamentally a human activity? (Variation 19)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344170.0416589, "query": "Can AI understand right or wrong? (Variation 20)", "latency": 0.019080638885498047, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344170.357766, "question": "Can AI understand right or wrong? (Variation 20)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344170.373309, "query": "Where does genuine innovation come from in the context of AI? (Variation 21)", "latency": 0.014590024948120117, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344170.7752194, "question": "Where does genuine innovation come from in the context of AI? (Variation 21)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344170.783403, "query": "What is Claude primarily used for? (Variation 22)", "latency": 0.0076558589935302734, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344171.106022, "question": "What is Claude primarily used for? (Variation 22)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344171.1193712, "query": "What are some AI tools for image generation? (Variation 23)", "latency": 0.012835025787353516, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344171.4985063, "question": "What are some AI tools for image generation? (Variation 23)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344171.5102482, "query": "Why is human judgment important in strategic decisions? (Variation 24)", "latency": 0.011213541030883789, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344171.8240006, "question": "Why is human judgment important in strategic decisions? (Variation 24)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344171.8338687, "query": "Why is leadership fundamentally a human activity? (Variation 25)", "latency": 0.009339094161987305, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344172.2444274, "question": "Why is leadership fundamentally a human activity? (Variation 25)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344172.2602148, "query": "Can AI understand right or wrong? (Variation 26)", "latency": 0.015259981155395508, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344172.595675, "question": "Can AI understand right or wrong? (Variation 26)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344172.6058617, "query": "Where does genuine innovation come from in the context of AI? (Variation 27)", "latency": 0.009656190872192383, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344173.012075, "question": "Where does genuine innovation come from in the context of AI? (Variation 27)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344173.0208116, "query": "What is Claude primarily used for? (Variation 28)", "latency": 0.008209705352783203, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344173.3853586, "question": "What is Claude primarily used for? (Variation 28)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344173.3994584, "query": "What are some AI tools for image generation? (Variation 29)", "latency": 0.014099836349487305, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344173.630487, "question": "What are some AI tools for image generation? (Variation 29)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344173.6413636, "query": "Why is human judgment important in strategic decisions? (Variation 30)", "latency": 0.010876655578613281, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344173.8308055, "question": "Why is human judgment important in strategic decisions? (Variation 30)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344173.8396573, "query": "Why is leadership fundamentally a human activity? (Variation 31)", "latency": 0.008851766586303711, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344174.1648219, "question": "Why is leadership fundamentally a human activity? (Variation 31)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344174.182763, "query": "Can AI understand right or wrong? (Variation 32)", "latency": 0.01794123649597168, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344174.4146273, "question": "Can AI understand right or wrong? (Variation 32)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344174.4299273, "query": "Where does genuine innovation come from in the context of AI? (Variation 33)", "latency": 0.01530003547668457, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344174.6349747, "question": "Where does genuine innovation come from in the context of AI? (Variation 33)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344174.6454997, "query": "What is Claude primarily used for? (Variation 34)", "latency": 0.010524988174438477, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344174.90664, "question": "What is Claude primarily used for? (Variation 34)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344174.9215987, "query": "What are some AI tools for image generation? (Variation 35)", "latency": 0.012964248657226562, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344175.3025985, "question": "What are some AI tools for image generation? (Variation 35)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344175.3151047, "query": "Why is human judgment important in strategic decisions? (Variation 36)", "latency": 0.01150822639465332, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344175.5335925, "question": "Why is human judgment important in strategic decisions? (Variation 36)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344175.5445116, "query": "Why is leadership fundamentally a human activity? (Variation 37)", "latency": 0.010390520095825195, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344175.7299397, "question": "Why is leadership fundamentally a human activity? (Variation 37)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344175.7461176, "query": "Can AI understand right or wrong? (Variation 38)", "latency": 0.015650033950805664, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344175.9328861, "question": "Can AI understand right or wrong? (Variation 38)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344175.9437492, "query": "Where does genuine innovation come from in the context of AI? (Variation 39)", "latency": 0.010274171829223633, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344176.1505363, "question": "Where does genuine innovation come from in the context of AI? (Variation 39)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344176.1579776, "query": "What is Claude primarily used for? (Variation 40)", "latency": 0.006913661956787109, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344176.342935, "question": "What is Claude primarily used for? (Variation 40)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344176.3557875, "query": "What are some AI tools for image generation? (Variation 41)", "latency": 0.01232767105102539, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344176.5510035, "question": "What are some AI tools for image generation? (Variation 41)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344176.5608156, "query": "Why is human judgment important in strategic decisions? (Variation 42)", "latency": 0.009283781051635742, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344176.757199, "question": "Why is human judgment important in strategic decisions? (Variation 42)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344176.7672706, "query": "Why is leadership fundamentally a human activity? (Variation 43)", "latency": 0.009523868560791016, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344176.9569483, "question": "Why is leadership fundamentally a human activity? (Variation 43)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344176.97755, "query": "Can AI understand right or wrong? (Variation 44)", "latency": 0.02004241943359375, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344177.1645405, "question": "Can AI understand right or wrong? (Variation 44)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344177.177766, "query": "Where does genuine innovation come from in the context of AI? (Variation 45)", "latency": 0.012696504592895508, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344177.3670275, "question": "Where does genuine innovation come from in the context of AI? (Variation 45)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344177.3749638, "query": "What is Claude primarily used for? (Variation 46)", "latency": 0.007936239242553711, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344177.5571287, "question": "What is Claude primarily used for? (Variation 46)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344177.5699863, "query": "What are some AI tools for image generation? (Variation 47)", "latency": 0.012331008911132812, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344177.762274, "question": "What are some AI tools for image generation? (Variation 47)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344177.7728736, "query": "Why is human judgment important in strategic decisions? (Variation 48)", "latency": 0.010075092315673828, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344177.9609663, "question": "Why is human judgment important in strategic decisions? (Variation 48)", "answer_length": 66, "citations_found": false}
+{"event": "retrieval_success", "timestamp": 1791344177.9709299, "query": "Why is leadership fundamentally a human activity? (Variation 49)", "latency": 0.009963512420654297, "retrieved_count": 5}
+{"event": "llm_generation", "timestamp": 1791344178.157841, "question": "Why is leadership fundamentally a human activity? (Variation 49)", "answer_length": 66, "citations_found": false}

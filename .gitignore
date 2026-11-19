@@ -1,0 +1,16 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Secrets & credentials (kept locally, never pushed to GitHub)
+.streamlit/secrets.toml
+client_secret.json
+*.env
+.env
+
+# Duplicate nested archive/backup folders with embedded secrets
+rag-main/
+RAG_Enhancement_Handover.zip
+temp_rag_enhancement.zip
+*.ipynb
