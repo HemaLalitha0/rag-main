@@ -1,9 +1,13 @@
 # =============================================================================
 # AksharaMitra (అక్షరమిత్ర) – Isolated Production Docker Compose
-# Bound exclusively to 127.0.0.1:8510 so it NEVER conflicts with FinPilot AI
-# or other existing SHR Trinity services on the host server.
+# Target Host Directory: /opt/shrtrinity/aksharamitra
+# Internal Container Port: 8501  |  VPS Host Port: 127.0.0.1:8510
+#
+# SAFETY & ISOLATION:
+# - Bound exclusively to 127.0.0.1:8510 (never conflicts with FinPilot AI)
+# - Secrets mounted read-only from host (.streamlit/) outside the image
+# - SQLite database, uploads (pdfs/), and RAG indexes (kb_cache/) persisted
 # =============================================================================
-version: "3.9"
 
 services:
   aksharamitra:
@@ -20,13 +24,22 @@ services:
       - STREAMLIT_SERVER_ADDRESS=0.0.0.0
       - STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
     volumes:
-      - aksharamitra_data:/app/kb_cache
+      # Persist SQLite database & student/application data
+      - ./users.db:/app/users.db
+      - ./data:/app/data
+      # Preserve uploaded files & RAG indexes
+      - ./kb_cache:/app/kb_cache
+      - ./pdfs:/app/pdfs
+      # Mount Streamlit config & host-only secrets.toml read-only
+      - ./.streamlit:/app/.streamlit:ro
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
       interval: 30s
       timeout: 10s
+      start_period: 20s
       retries: 3
-
-volumes:
-  aksharamitra_data:
-
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"

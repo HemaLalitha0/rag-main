@@ -1,5 +1,6 @@
 [server]
 headless = true
+address = "0.0.0.0"
 port = 8501
 enableCORS = false
 enableXsrfProtection = true
@@ -14,4 +15,3 @@ backgroundColor = "#f8fafc"
 secondaryBackgroundColor = "#ffffff"
 textColor = "#0f172a"
 font = "sans serif"
-

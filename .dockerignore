@@ -1,0 +1,37 @@
+# Git & VCS
+.git
+.gitignore
+
+# Secrets & Environment Files (NEVER bake into Docker image)
+.streamlit/secrets.toml
+client_secret.json
+.env
+*.env
+
+# Python Caches & Virtual Environments
+__pycache__/
+*.py[cod]
+*.pyo
+venv/
+.venv/
+.ipynb_checkpoints/
+
+# Local Archives, Notebooks & Pitch Decks (not needed at runtime)
+rag-main/
+*.zip
+*.ipynb
+*.bak
+*.pdf
+*.pptx
+Every_Child_Reads_UI_Screens/
+RAG_Enhancement_Handover/
+screenshots/
+test_*.py
+eval_*.json
+evaluation_results.json
+rag_metrics.jsonl
+
+# Keep only the SHR Trinity logo from TISC_Pitch_Deck_Assets
+TISC_Pitch_Deck_Assets/*
+!TISC_Pitch_Deck_Assets/shr_trinity_logo.png
+
