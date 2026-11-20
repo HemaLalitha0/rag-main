@@ -1,14 +1,34 @@
 """
-Every Child Reads – Telugu AI Assessment Prototype
-Department of School Education, Government of Andhra Pradesh
-Core Streamlit UI Prototype Module (Frontend-Only)
+AksharaMitra (అక్షరమిత్ర) – AI-Powered Bilingual Reading Intelligence & Personalized Learning Platform
+An Education Technology Innovation by SHR Trinity
+Core Streamlit UI Module
 """
+import base64
+import os
 import time
 import textwrap
 import pandas as pd
 import streamlit as st
 
 import telugu_reading_data as data
+
+
+def get_shr_trinity_logo_b64() -> str:
+    """Load the original SHR Trinity logo as a base64 data URI if available."""
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    candidates = [
+        os.path.join(base_dir, "TISC_Pitch_Deck_Assets", "shr_trinity_logo.png"),
+        os.path.join(base_dir, "shr_trinity_logo.png"),
+    ]
+    for path in candidates:
+        if os.path.exists(path):
+            try:
+                with open(path, "rb") as f:
+                    encoded = base64.b64encode(f.read()).decode("utf-8")
+                return f"data:image/png;base64,{encoded}"
+            except Exception:
+                pass
+    return ""
 
 
 def render_html(html_str: str):
@@ -391,23 +411,32 @@ def init_session_state():
 
 
 # ============================================================================
-# 3. GLOBAL HEADER & SIDEBAR NAVIGATION
+# 3. GLOBAL HEADER, SIDEBAR NAVIGATION & FOOTER
 # ============================================================================
 def render_header():
-    """Render the official Department of School Education header."""
+    """Render the official SHR Trinity — AksharaMitra header."""
+    logo_uri = get_shr_trinity_logo_b64()
+    logo_html = (
+        f'<img src="{logo_uri}" alt="SHR Trinity" style="width: 54px; height: 54px; border-radius: 12px; object-fit: contain; background: #ffffff; padding: 3px; box-shadow: 0 3px 10px rgba(0,0,0,0.22); flex-shrink: 0;" />'
+        if logo_uri
+        else '<span style="font-size: 2rem;">📖</span>'
+    )
     st.markdown(
-        """
-        <div class="gov-top-bar">
-            <div>
-                <h1>
-                    <span>📖 ప్రతి బిడ్డా చదవాలి</span>
-                    <span style="font-size: 1.05rem; font-weight: 400; opacity: 0.9;">| Every Child Reads</span>
-                </h1>
-                <p>AI-Powered Telugu & English Reading Assessment • Department of School Education, Govt. of Andhra Pradesh</p>
+        f"""
+        <div class="gov-top-bar" style="border-bottom: 3px solid #f59e0b;">
+            <div style="display: flex; align-items: center; gap: 14px;">
+                {logo_html}
+                <div>
+                    <h1>
+                        <span>📖 AksharaMitra (అక్షరమిత్ర)</span>
+                        <span style="font-size: 0.95rem; font-weight: 500; opacity: 0.92; color: #fde68a;">| Every Child Heard. Every Reader Empowered.</span>
+                    </h1>
+                    <p>AI-Powered Bilingual Reading Intelligence &amp; Personalized Learning Platform • An Education Technology Innovation by <b>SHR Trinity</b></p>
+                </div>
             </div>
-            <div style="display: flex; gap: 8px; align-items: center;">
-                <span class="gov-badge">🏛️ AP FLN MISSION 2026</span>
-                <span class="gov-badge" style="background: rgba(16, 185, 129, 0.35);">🟢 PROTOTYPE LIVE</span>
+            <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+                <span class="gov-badge" style="background: rgba(229, 25, 35, 0.35); border-color: rgba(252, 165, 165, 0.5);">🏢 SHR TRINITY</span>
+                <span class="gov-badge" style="background: rgba(16, 185, 129, 0.35);">🟢 AKSHARAMITRA LIVE</span>
             </div>
         </div>
         """,
@@ -416,14 +445,21 @@ def render_header():
 
 
 def render_sidebar():
-    """Render professional navigation sidebar with student switch and quick links."""
+    """Render professional navigation sidebar with AksharaMitra branding, student switch, and quick links."""
+    logo_uri = get_shr_trinity_logo_b64()
+    sidebar_logo_html = (
+        f'<img src="{logo_uri}" alt="SHR Trinity" style="width: 58px; height: 58px; border-radius: 50%; object-fit: contain; background: #ffffff; padding: 3px; border: 2px solid #1e40af; margin-bottom: 6px; box-shadow: 0 3px 8px rgba(0,0,0,0.12);" />'
+        if logo_uri
+        else '<div style="font-size: 2.2rem; margin-bottom: 4px;">📖</div>'
+    )
     with st.sidebar:
         st.markdown(
-            """
+            f"""
             <div style="text-align: center; padding: 10px 0 16px 0; border-bottom: 1px solid #e2e8f0;">
-                <div style="font-size: 2.2rem; margin-bottom: 4px;">🇮🇳</div>
-                <div style="font-weight: 700; font-size: 0.95rem; color: #1e3a8a;">పాఠశాల విద్యాశాఖ</div>
-                <div style="font-size: 0.78rem; color: #64748b;">Govt. of Andhra Pradesh</div>
+                {sidebar_logo_html}
+                <div style="font-weight: 800; font-size: 1.08rem; color: #1e3a8a;">AksharaMitra (అక్షరమిత్ర)</div>
+                <div style="font-size: 0.78rem; font-weight: 600; color: #0d9488; margin-top: 2px;">Every Child Heard. Every Reader Empowered.</div>
+                <div style="font-size: 0.74rem; color: #64748b; margin-top: 2px;">An Innovation by <b>SHR Trinity</b></div>
             </div>
             """,
             unsafe_allow_html=True,
@@ -476,7 +512,12 @@ def render_sidebar():
         )
 
         st.markdown("---")
-        st.caption("Developed for Department of School Education prototype presentation. Static mock demonstration.")
+        st.markdown("#### ℹ️ About AksharaMitra")
+        st.caption(
+            "**AksharaMitra (అక్షరమిత్ర)** is a student-focused bilingual reading and learning companion by **SHR Trinity**, "
+            "designed to help students in Classes 1–10 improve their Telugu and English reading skills.\n\n"
+            "*ప్రతి చిన్నారి స్వరం వినిపించాలి • ప్రతి చదువు మెరుగుపడాలి*"
+        )
 
 
 # ============================================================================
@@ -1086,7 +1127,7 @@ def render_assessment_results():
                     <div style="display: flex; align-items: center; gap: 10px;">
                         <span style="font-size: 2.2rem;">🏅</span>
                         <div>
-                            <span class="gov-badge" style="background: rgba(255, 255, 255, 0.2);">OFFICIAL EVALUATION REPORT</span>
+                            <span class="gov-badge" style="background: rgba(255, 255, 255, 0.2);">AKSHARAMITRA EVALUATION REPORT</span>
                             <h1 style="margin: 4px 0 0 0; font-size: 1.8rem; color: #ffffff;">{student['name']} ({student['name_te']})</h1>
                         </div>
                     </div>
@@ -1565,10 +1606,27 @@ def render_teacher_dashboard():
 
 
 # ============================================================================
-# 9. MAIN ORCHESTRATOR
+# 9. FOOTER & MAIN ORCHESTRATOR
 # ============================================================================
+def render_footer():
+    """Render consistent SHR Trinity | AksharaMitra footer."""
+    st.markdown(
+        """
+        <div style="margin-top: 36px; padding: 16px 24px; background: #ffffff; border: 1px solid #e2e8f0; border-top: 3px solid #1e40af; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; font-size: 0.84rem; color: #475569;">
+            <div>
+                <b style="color: #1e3a8a;">SHR Trinity | AksharaMitra (అక్షరమిత్ర)</b> — AI-Powered Bilingual Reading Intelligence &amp; Personalized Learning Platform
+            </div>
+            <div style="color: #0d9488; font-weight: 600;">
+                Every Child Heard. Every Reader Empowered. • ప్రతి చిన్నారి స్వరం వినిపించాలి • ప్రతి చదువు మెరుగుపడాలి
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
 def render_main_app():
-    """Main application router handling styles, header, sidebar, and all 5 screens."""
+    """Main application router handling styles, header, sidebar, all 5 screens, and footer."""
     inject_custom_styles()
     init_session_state()
     render_header()
@@ -1588,4 +1646,6 @@ def render_main_app():
         render_teacher_dashboard()
     else:
         render_student_dashboard()
+
+    render_footer()
 

@@ -325,7 +325,7 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-nav_c1, nav_c2, nav_c3, nav_c4, nav_c5 = st.columns(5)
+nav_c1, nav_c2, nav_c3, nav_c4, nav_c5, nav_c6 = st.columns(6)
 with nav_c1:
     if st.button("🔐 Login", key="top_nav_login", use_container_width=True):
         st.switch_page("pages/login.py")
@@ -340,6 +340,9 @@ with nav_c4:
 with nav_c5:
     if st.button("🎯 Mock Interview", key="top_nav_mock", type="primary", use_container_width=True):
         st.switch_page("pages/mock_interview.py")
+with nav_c6:
+    if st.button("📖 AksharaMitra", key="top_nav_akshara", use_container_width=True):
+        st.switch_page("pages/AksharaMitra.py")
 
 # ---------------------------
 # Logout handling (clears session and redirects)

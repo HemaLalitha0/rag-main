@@ -1,0 +1,29 @@
+# =============================================================================
+# Systemd Service Unit for AksharaMitra (Non-Docker Ubuntu / Hostinger VPS)
+# Target path: /etc/systemd/system/aksharamitra.service
+# Enable & Start:
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable aksharamitra
+#   sudo systemctl start aksharamitra
+# =============================================================================
+[Unit]
+Description=AksharaMitra (SHR Trinity) - AI-Powered Bilingual Reading Platform
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/shrtrinity/aksharamitra
+Environment="PATH=/opt/shrtrinity/aksharamitra/venv/bin:/usr/local/bin:/usr/bin:/bin"
+Environment="STREAMLIT_SERVER_HEADLESS=true"
+Environment="STREAMLIT_BROWSER_GATHER_USAGE_STATS=false"
+ExecStart=/opt/shrtrinity/aksharamitra/venv/bin/streamlit run pages/AksharaMitra.py --server.port=8510 --server.address=127.0.0.1
+Restart=always
+RestartSec=5
+StandardOutput=append:/var/log/aksharamitra/access.log
+StandardError=append:/var/log/aksharamitra/error.log
+
+[Install]
+WantedBy=multi-user.target
+

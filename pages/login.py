@@ -907,10 +907,11 @@ def main():
         <a class="nav-button" href="/RAG_Assistant" target="_self" style="cursor:pointer; text-decoration:none; display:inline-block;">Free</a>
         <a class="nav-button" href="/testing" target="_self" style="cursor:pointer; text-decoration:none; display:inline-block;">Pro</a>
         <a class="nav-button" href="/mock_interview" target="_self" style="cursor:pointer; text-decoration:none; display:inline-block; border-color:#3B82F6; color:#60A5FA;">🎯 Mock Interview</a>
+        <a class="nav-button" href="/AksharaMitra" target="_self" style="cursor:pointer; text-decoration:none; display:inline-block; border-color:#14B8A6; color:#5EEAD4;">📖 AksharaMitra</a>
     </div>
     """, unsafe_allow_html=True)
 
-    ln_c1, ln_c2, ln_c3 = st.columns(3)
+    ln_c1, ln_c2, ln_c3, ln_c4 = st.columns(4)
     with ln_c1:
         if st.button("📚 RAG Assistant", key="login_to_rag_btn", use_container_width=True):
             st.switch_page("pages/RAG_Assistant.py")
@@ -920,6 +921,9 @@ def main():
     with ln_c3:
         if st.button("🎯 Mock Interview", key="login_to_mock_btn", type="primary", use_container_width=True):
             st.switch_page("pages/mock_interview.py")
+    with ln_c4:
+        if st.button("📖 AksharaMitra", key="login_to_akshara_btn", use_container_width=True):
+            st.switch_page("pages/AksharaMitra.py")
 
     # Auth container
     with st.container():

@@ -1,0 +1,1933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SHR Trinity | AksharaMitra (అక్షరమిత్ర) | TISC Innovation Pitch</title>
+<style>
+  @page {
+    size: 16in 9in;
+    margin: 0;
+  }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  :root {
+    /* Extracted directly from the original SHR Trinity logo & corporate system */
+    --shr-blue: #0A6CFF;
+    --shr-blue-dark: #1D4ED8;
+    --shr-blue-light: #DBEAFE;
+    --shr-blue-soft: #EFF6FF;
+    --shr-red: #E51923;
+    --shr-red-soft: #FEE2E2;
+    --shr-charcoal: #2D3136;
+    --navy-950: #071120;
+    --navy-900: #0B1930;
+    --navy-800: #122647;
+    --navy-700: #1B3664;
+    --teal-700: #0F766E;
+    --teal-600: #0D9488;
+    --teal-500: #14B8A6;
+    --teal-100: #CCFBF1;
+    --teal-50: #F0FDFA;
+    --amber-500: #F59E0B;
+    --amber-400: #FBBF24;
+    --amber-100: #FEF3C7;
+    --amber-50: #FFFBEB;
+    --green-600: #16A34A;
+    --green-100: #DCFCE7;
+    --green-50: #F0FDF4;
+    --slate-900: #0F172A;
+    --slate-800: #1E293B;
+    --slate-700: #334155;
+    --slate-600: #475569;
+    --slate-500: #64748B;
+    --slate-300: #CBD5E1;
+    --slate-200: #E2E8F0;
+    --slate-100: #F1F5F9;
+    --bg-neutral: #F8FAFC;
+    --white: #FFFFFF;
+  }
+  body {
+    font-family: 'Segoe UI', 'Nirmala UI', system-ui, -apple-system, sans-serif;
+    background: var(--navy-950);
+    color: var(--slate-900);
+    margin: 0;
+  }
+  .slide {
+    width: 16in;
+    height: 9in;
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+    break-after: page;
+    background: var(--bg-neutral);
+    display: flex;
+    flex-direction: column;
+  }
+  .slide-dark {
+    background: var(--navy-900);
+    color: var(--white);
+  }
+
+  /* Corporate Top Header for Slides 2-11 */
+  .top-bar {
+    height: 1.08in;
+    padding: 0 0.52in;
+    background: var(--navy-900);
+    border-bottom: 3.5px solid var(--shr-blue);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .top-bar::after {
+    content: "";
+    position: absolute;
+    bottom: -3.5px;
+    left: 0;
+    width: 2.4in;
+    height: 3.5px;
+    background: var(--shr-red);
+  }
+  .top-bar-left {
+    display: flex;
+    align-items: center;
+    gap: 0.18in;
+  }
+  .slide-num-pill {
+    background: rgba(10, 108, 255, 0.2);
+    border: 1.5px solid var(--shr-blue);
+    color: #93C5FD;
+    font-size: 9.5pt;
+    font-weight: 800;
+    letter-spacing: 1.1px;
+    padding: 0.06in 0.14in;
+    border-radius: 999px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .header-text h1 {
+    color: var(--white);
+    font-size: 20.5pt;
+    font-weight: 800;
+    letter-spacing: -0.3px;
+    line-height: 1.15;
+  }
+  .header-text p {
+    color: #99F6E4;
+    font-size: 11.2pt;
+    font-weight: 500;
+    margin-top: 0.02in;
+  }
+
+  /* Elegant Corner Logo Badge for Slides 2-11 */
+  .corner-logo-lockup {
+    display: flex;
+    align-items: center;
+    gap: 0.1in;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    padding: 0.06in 0.14in 0.06in 0.07in;
+    border-radius: 999px;
+    flex-shrink: 0;
+  }
+  .corner-logo-img {
+    width: 0.44in;
+    height: 0.44in;
+    border-radius: 50%;
+    object-fit: contain;
+    background: var(--white);
+    padding: 2px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    display: block;
+  }
+  .corner-logo-meta {
+    display: flex;
+    flex-direction: column;
+  }
+  .corner-logo-company {
+    font-size: 9.5pt;
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: 0.6px;
+    line-height: 1.1;
+  }
+  .corner-logo-product {
+    font-size: 8.5pt;
+    font-weight: 700;
+    color: #93C5FD;
+    line-height: 1.15;
+  }
+
+  /* Main Slide Workspace */
+  .workspace {
+    flex: 1;
+    padding: 0.25in 0.52in 0.2in 0.52in;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* Consistent Corporate Footer across all 12 slides */
+  .footer-bar {
+    height: 0.42in;
+    padding: 0 0.52in;
+    background: var(--white);
+    border-top: 1.5px solid var(--slate-200);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 9.5pt;
+    font-weight: 700;
+    color: var(--slate-600);
+    flex-shrink: 0;
+  }
+  .footer-bar-dark {
+    background: var(--navy-950);
+    border-top: 1.5px solid rgba(148, 163, 184, 0.18);
+    color: #94A3B8;
+  }
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.1in;
+  }
+  .footer-mini-logo {
+    width: 0.24in;
+    height: 0.24in;
+    border-radius: 50%;
+    object-fit: contain;
+    background: var(--white);
+    padding: 1px;
+    border: 1px solid var(--slate-300);
+  }
+
+  /* Diagnostic Word Chips */
+  .tok {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.04in;
+    padding: 0.04in 0.11in;
+    border-radius: 0.07in;
+    font-weight: 700;
+    font-size: 11.2pt;
+    margin: 0.025in;
+    border: 1.5px solid;
+  }
+  .tok-g { background: var(--green-100); color: #15803D; border-color: var(--green-600); }
+  .tok-r { background: var(--shr-red-soft); color: #B91C1C; border-color: var(--shr-red); }
+  .tok-o { background: var(--amber-100); color: #B45309; border-color: var(--amber-500); }
+  .tok-b { background: var(--shr-blue-light); color: #1D4ED8; border-color: var(--shr-blue-dark); }
+</style>
+</head>
+<body>
+
+<!-- ======================================================================= -->
+<!-- SLIDE 1 — THE VISION -->
+<!-- ======================================================================= -->
+<div class="slide slide-dark">
+  <div style="position:absolute; inset:0; background:radial-gradient(circle at 76% 42%, rgba(10,108,255,0.22), transparent 54%), radial-gradient(circle at 18% 82%, rgba(13,148,136,0.18), transparent 48%); pointer-events:none;"></div>
+  <!-- Corporate Top Accent Bar Using SHR Trinity Logo Palette (Red + Blue + Teal) -->
+  <div style="height:0.07in; background:linear-gradient(90deg, var(--shr-red) 0%, var(--shr-red) 18%, var(--shr-blue) 18%, var(--shr-blue) 65%, var(--teal-500) 100%); z-index:2;"></div>
+
+  <div style="flex:1; padding:0.36in 0.6in 0.28in 0.6in; display:grid; grid-template-columns: 1.07fr 0.93fr; gap:0.42in; align-items:center; z-index:2;">
+    <!-- Left Column: Prominent Top-Left Original SHR Trinity Logo + Product Identity -->
+    <div style="display:flex; flex-direction:column; gap:0.17in;">
+      <!-- Prominent Top-Left Original SHR Trinity Logo Lockup -->
+      <div style="display:flex; align-items:center; gap:0.18in; background:rgba(255,255,255,0.06); border:1.5px solid rgba(147,197,253,0.35); border-left:5px solid var(--shr-red); border-radius:0.16in; padding:0.11in 0.2in; align-self:flex-start; box-shadow:0 8px 22px rgba(0,0,0,0.28);">
+        <img src="file:///C:/Users/lenovo/Downloads/rag-main/TISC_Pitch_Deck_Assets/shr_trinity_logo.png" style="width:0.78in; height:0.78in; border-radius:0.12in; object-fit:contain; background:var(--white); padding:0.04in; flex-shrink:0; box-shadow:0 4px 12px rgba(0,0,0,0.3);" />
+        <div style="display:flex; flex-direction:column; gap:0.03in;">
+          <div style="display:flex; align-items:center; gap:0.1in;">
+            <span style="font-size:15pt; font-weight:900; color:var(--white); letter-spacing:0.8px;">SHR TRINITY</span>
+            <span style="background:var(--shr-blue); color:var(--white); font-size:8.5pt; font-weight:800; padding:0.03in 0.1in; border-radius:999px; letter-spacing:0.8px;">TISC INNOVATION PITCH</span>
+          </div>
+          <div style="font-size:11pt; font-weight:600; color:#93C5FD;">
+            AksharaMitra is an education technology innovation by SHR Trinity.
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Name & Description -->
+      <div>
+        <div style="display:flex; align-items:baseline; gap:0.16in; flex-wrap:wrap;">
+          <h1 style="font-size:44pt; font-weight:900; color:var(--white); letter-spacing:-1px; line-height:1.05;">
+            AksharaMitra
+          </h1>
+          <span style="font-size:30pt; font-weight:800; color:var(--amber-400); line-height:1.1;">
+            (అక్షరమిత్ర)
+          </span>
+        </div>
+        <p style="font-size:16pt; font-weight:700; color:#93C5FD; margin-top:0.06in; line-height:1.28;">
+          AI-Powered Bilingual Reading Intelligence &amp; Personalized Learning Platform
+        </p>
+      </div>
+
+      <!-- Primary English & Telugu Slogans -->
+      <div style="background:linear-gradient(135deg, rgba(18,38,71,0.94), rgba(11,25,48,0.96)); border-left:5px solid var(--amber-400); border-radius:0 0.15in 0.15in 0; padding:0.17in 0.22in; box-shadow:0 10px 24px rgba(0,0,0,0.3);">
+        <div style="font-size:18.5pt; font-weight:800; color:var(--white); letter-spacing:-0.2px; line-height:1.24;">
+          “Every Child Heard. Every Reader Empowered.”
+        </div>
+        <div style="font-size:14pt; font-weight:700; color:#5EEAD4; margin-top:0.06in; line-height:1.34;">
+          ప్రతి చిన్నారి స్వరం వినిపించాలి • ప్రతి చదువు మెరుగుపడాలి
+        </div>
+        <div style="font-size:10.5pt; color:#CBD5E1; margin-top:0.05in; font-weight:500;">
+          Every child’s reading voice deserves attention — turning oral reading into meaningful learning insights.
+        </div>
+      </div>
+
+      <!-- 4 Core Scope Highlights -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.12in;">
+        <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(148,163,184,0.25); border-radius:0.11in; padding:0.11in 0.14in; display:flex; align-items:center; gap:0.11in;">
+          <div style="width:0.38in; height:0.38in; border-radius:0.08in; background:rgba(10,108,255,0.22); border:1.5px solid var(--shr-blue); display:flex; align-items:center; justify-content:center; font-size:10.5pt; font-weight:900; color:#93C5FD; flex-shrink:0; white-space:nowrap;">1–10</div>
+          <div>
+            <div style="font-size:11pt; font-weight:800; color:var(--white);">Classes 1 to 10</div>
+            <div style="font-size:9.5pt; color:#CBD5E1;">Primary &amp; secondary school students</div>
+          </div>
+        </div>
+
+        <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(148,163,184,0.25); border-radius:0.11in; padding:0.11in 0.14in; display:flex; align-items:center; gap:0.11in;">
+          <div style="width:0.38in; height:0.38in; border-radius:0.08in; background:rgba(20,184,166,0.2); border:1.5px solid var(--teal-500); display:flex; align-items:center; justify-content:center; font-size:12pt; font-weight:900; color:#5EEAD4; flex-shrink:0; white-space:nowrap;">అ/A</div>
+          <div>
+            <div style="font-size:11pt; font-weight:800; color:var(--white);">Telugu &amp; English</div>
+            <div style="font-size:9.5pt; color:#CBD5E1;">Bilingual reading intelligence</div>
+          </div>
+        </div>
+
+        <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(148,163,184,0.25); border-radius:0.11in; padding:0.11in 0.14in; display:flex; align-items:center; gap:0.11in;">
+          <div style="width:0.38in; height:0.38in; border-radius:0.08in; background:rgba(229,25,35,0.2); border:1.5px solid var(--shr-red); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FCA5A5" stroke-width="2.2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
+          </div>
+          <div>
+            <div style="font-size:11pt; font-weight:800; color:var(--white);">AI Oral Reading Assessment</div>
+            <div style="font-size:9.5pt; color:#CBD5E1;">Word-level listening &amp; error diagnosis</div>
+          </div>
+        </div>
+
+        <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(148,163,184,0.25); border-radius:0.11in; padding:0.11in 0.14in; display:flex; align-items:center; gap:0.11in;">
+          <div style="width:0.38in; height:0.38in; border-radius:0.08in; background:rgba(251,191,36,0.2); border:1.5px solid var(--amber-400); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FBBF24" stroke-width="2.2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <div>
+            <div style="font-size:11pt; font-weight:800; color:var(--white);">Personalized Literacy</div>
+            <div style="font-size:9.5pt; color:#CBD5E1;">Targeted practice &amp; teacher insights</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Realistic Indian Schoolchild Reading + Subtle AI Voice-Wave Visualization -->
+    <div style="position:relative;">
+      <div style="border-radius:0.22in; overflow:hidden; border:2.5px solid var(--shr-blue); box-shadow:0 22px 50px rgba(0,0,0,0.55); position:relative; height:5.55in;">
+        <img src="file:///C:/Users/lenovo/Downloads/rag-main/TISC_Pitch_Deck_Assets/hero_child_reading.jpg" style="width:100%; height:100%; object-fit:cover; display:block;" />
+        <div style="position:absolute; left:0.2in; right:0.2in; bottom:0.2in; background:rgba(7,17,32,0.9); border:1.5px solid rgba(59,130,246,0.55); border-radius:0.15in; padding:0.15in 0.18in; display:flex; align-items:center; justify-content:space-between;">
+          <div>
+            <div style="font-size:9pt; font-weight:800; color:var(--amber-400); letter-spacing:0.8px; text-transform:uppercase;">
+              SHR TRINITY • AKSHARAMITRA (అక్షరమిత్ర)
+            </div>
+            <div style="font-size:12.5pt; font-weight:700; color:var(--white); margin-top:0.03in;">
+              “గోదావరి నది ప్రవాహం చుట్టూ పచ్చని పొలాలు...”
+            </div>
+            <div style="font-size:9.8pt; color:#93C5FD; font-weight:700; margin-top:0.02in;">
+              READ → LISTEN → ANALYSE → IDENTIFY → IMPROVE → TRACK
+            </div>
+          </div>
+          <svg width="104" height="42" viewBox="0 0 104 42" style="flex-shrink:0;">
+            <rect x="4" y="15" width="5" height="12" rx="2.5" fill="#0A6CFF"/>
+            <rect x="14" y="9" width="5" height="24" rx="2.5" fill="#14B8A6"/>
+            <rect x="24" y="4" width="5" height="34" rx="2.5" fill="#E51923"/>
+            <rect x="34" y="11" width="5" height="20" rx="2.5" fill="#0A6CFF"/>
+            <rect x="44" y="6" width="5" height="30" rx="2.5" fill="#14B8A6"/>
+            <rect x="54" y="2" width="5" height="38" rx="2.5" fill="#FBBF24"/>
+            <rect x="64" y="8" width="5" height="26" rx="2.5" fill="#0A6CFF"/>
+            <rect x="74" y="13" width="5" height="16" rx="2.5" fill="#E51923"/>
+            <rect x="84" y="7" width="5" height="28" rx="2.5" fill="#14B8A6"/>
+            <rect x="94" y="14" width="5" height="14" rx="2.5" fill="#93C5FD"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar footer-bar-dark">
+    <div class="footer-brand">
+      <img src="file:///C:/Users/lenovo/Downloads/rag-main/TISC_Pitch_Deck_Assets/shr_trinity_logo.png" class="footer-mini-logo" />
+      <span>SHR Trinity | AksharaMitra | TISC Innovation Pitch</span>
+    </div>
+    <span style="color:#93C5FD;">Slide 1 of 12</span>
+  </div>
+</div>
+
+<!-- ======================================================================= -->
+<!-- SLIDE 2 — THE REAL CLASSROOM PROBLEM -->
+<!-- ======================================================================= -->
+<div class="slide">
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <span class="slide-num-pill">Slide 02</span>
+      <div class="header-text">
+        <h1>One Teacher. Many Students. Every Reading Difficulty Matters.</h1>
+        <p>The Real Classroom Challenge of Understanding Every Child’s Oral Reading Needs</p>
+      </div>
+    </div>
+    <div class="corner-logo-lockup">
+      <img src="file:///C:/Users/lenovo/Downloads/rag-main/TISC_Pitch_Deck_Assets/shr_trinity_logo.png" class="corner-logo-img" />
+      <div class="corner-logo-meta">
+        <span class="corner-logo-company">SHR TRINITY</span>
+        <span class="corner-logo-product">AksharaMitra</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="workspace" style="display:grid; grid-template-columns: 0.95fr 1.05fr; gap:0.32in; align-items:stretch;">
+    <!-- Left: Authentic Indian Classroom Photograph & Ratio Reality -->
+    <div style="background:var(--navy-900); border-radius:0.18in; overflow:hidden; display:flex; flex-direction:column; border:2px solid var(--navy-700); box-shadow:0 10px 24px rgba(10,24,46,0.12);">
+      <div style="position:relative; height:4.45in; overflow:hidden;">
+        <img src="file:///C:/Users/lenovo/Downloads/rag-main/TISC_Pitch_Deck_Assets/classroom_bottleneck.jpg" style="width:100%; height:100%; object-fit:cover; display:block;" />
+        <div style="position:absolute; top:0.16in; left:0.16in; background:rgba(7,17,32,0.9); border:1.5px solid var(--amber-400); color:var(--amber-400); font-weight:800; font-size:9.8pt; padding:0.05in 0.14in; border-radius:999px; letter-spacing:0.6px;">
+          CLASSROOM REALITY • 1 TEACHER : 35+ STUDENTS
+        </div>
+      </div>
+      <div style="padding:0.18in 0.22in; flex:1; display:flex; flex-direction:column; justify-content:center; gap:0.07in;">
+        <div style="font-size:14pt; font-weight:800; color:var(--white);">
+          Why Individual Reading Difficulties Go Unseen
+        </div>
+        <p style="font-size:11.2pt; color:#CBD5E1; line-height:1.4;">
+          In a typical school classroom of 35+ students across Classes 1 to 10, listening to each child read aloud and manually recording every pronunciation or fluency hurdle is a daily time bottleneck.
+        </p>
+      </div>
+    </div>
+
+    <!-- Right: 6 Clear Classroom Bottlenecks -->
+    <div style="display:grid; grid-template-columns:1fr 1fr; grid-template-rows:repeat(3, 1fr); gap:0.16in;">
+      <div style="background:var(--white); border-radius:0.14in; padding:0.16in 0.18in; border:1.5px solid var(--slate-200); border-left:5px solid var(--shr-blue); display:flex; flex-direction:column; justify-content:center; gap:0.05in; box-shadow:0 4px 10px rgba(15,23,42,0.03);">
+        <div style="font-size:9.2pt; font-weight:800; color:var(--shr-blue); letter-spacing:0.6px;">01 • TIME BOTTLENECK</div>
+        <div style="font-size:12.8pt; font-weight:800; color:var(--navy-900);">Limited Individual Assessment Time</div>
+        <div style="font-size:10.8pt; color:var(--slate-700); line-height:1.36;">Teachers have only minutes per student, limiting how frequently each child’s oral reading can be evaluated.</div>
+      </div>
+
+      <div style="background:var(--white); border-radius:0.14in; padding:0.16in 0.18in; border:1.5px solid var(--slate-200); border-left:5px solid var(--shr-red); display:flex; flex-direction:column; justify-content:center; gap:0.05in; box-shadow:0 4px 10px rgba(15,23,42,0.03);">
+        <div style="font-size:9.2pt; font-weight:800; color:var(--shr-red); letter-spacing:0.6px;">02 • HIDDEN ERRORS</div>
+        <div style="font-size:12.8pt; font-weight:800; color:var(--navy-900);">Pronunciation Mistakes Go Unnoticed</div>
+        <div style="font-size:10.8pt; color:var(--slate-700); line-height:1.36;">Subtle articulation errors and silent decoding struggles are easily missed during group reading sessions.</div>
+      </div>
+
+      <div style="background:var(--white); border-radius:0.14in; padding:0.16in 0.18in; border:1.5px solid var(--slate-200); border-left:5px solid var(--teal-600); display:flex; flex-direction:column; justify-content:center; gap:0.05in; box-shadow:0 4px 10px rgba(15,23,42,0.03);">
+        <div style="font-size:9.2pt; font-weight:800; color:var(--teal-600); letter-spacing:0.6px;">03 • MIXED PROFICIENCY</div>
+        <div style="font-size:12.8pt; font-weight:800; color:var(--navy-900);">Different Abilities in One Classroom</div>
+        <div style="font-size:10.8pt; color:var(--slate-700); line-height:1.36;">Children within the same grade read at widely different proficiency levels yet receive identical practice texts.</div>
+      </div>
+
+      <div style="background:var(--white); border-radius:0.14in; padding:0.16in 0.18in; border:1.5px solid var(--slate-200); border-left:5px solid var(--shr-blue); display:flex; flex-direction:column; justify-content:center; gap:0.05in; box-shadow:0 4px 10px rgba(15,23,42,0.03);">
+        <div style="font-size:9.2pt; font-weight:800; color:var(--shr-blue); letter-spacing:0.6px;">04 • MANUAL LOGGING LIMITS</div>
+        <div style="font-size:12.8pt; font-weight:800; color:var(--navy-900);">Hard to Track Skipped &amp; Repeated Words</div>
+        <div style="font-size:10.8pt; color:var(--slate-700); line-height:1.36;">Manually recording skipped words, repeated words, hesitation pauses, and reading speed in real time is impractical.</div>
+      </div>
+
+      <div style="background:var(--white); border-radius:0.14in; padding:0.16in 0.18in; border:1.5px solid var(--slate-200); border-left:5px solid var(--amber-500); display:flex; flex-direction:column; justify-content:center; gap:0.05in; box-shadow:0 4px 10px rgba(15,23,42,0.03);">
+        <div style="font-size:9.2pt; font-weight:800; color:#B45309; letter-spacing:0.6px;">05 • DIAGNOSTIC GAP</div>
+        <div style="font-size:12.8pt; font-weight:800; color:var(--navy-900);">Lack of Detailed Bilingual Diagnostics</div>
+        <div style="font-size:10.8pt; color:var(--slate-700); line-height:1.36;">Teachers lack granular insight into specific Telugu <i>Ottulu / Mahapranalu</i> or English phonics difficulties per child.</div>
+      </div>
+
+      <div style="background:var(--white); border-radius:0.14in; padding:0.16in 0.18in; border:1.5px solid var(--slate-200); border-left:5px solid var(--teal-600); display:flex; flex-direction:column; justify-content:center; gap:0.05in; box-shadow:0 4px 10px rgba(15,23,42,0.03);">
+        <div style="font-size:9.2pt; font-weight:800; color:var(--teal-600); letter-spacing:0.6px;">06 • DELAYED REMEDIATION</div>
+        <div style="font-size:12.8pt; font-weight:800; color:var(--navy-900);">Delayed Personalized Support</div>
+        <div style="font-size:10.8pt; color:var(--slate-700); line-height:1.36;">Without early diagnostic visibility, struggling readers do not receive targeted practice when they need it most.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <div class="footer-brand">
+      <img src="file:///C:/Users/lenovo/Downloads/rag-main/TISC_Pitch_Deck_Assets/shr_trinity_logo.png" class="footer-mini-logo" />
+      <span>SHR Trinity | AksharaMitra | TISC Innovation Pitch</span>
+    </div>
+    <span style="color:var(--navy-900);">Slide 2 of 12</span>
+  </div>
+</div>
+
+<!-- ======================================================================= -->
+<!-- SLIDE 3 — THE MISSING LINK IN READING ASSESSMENT -->
+<!-- ======================================================================= -->
+<div class="slide">
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <span class="slide-num-pill">Slide 03</span>
+      <div class="header-text">
+        <h1>Hearing a Child Read Is Not the Same as Understanding How They Read.</h1>
+        <p>The Missing Link Between Manual Classroom Observation and Granular Reading Intelligence</p>
+      </div>
+    </div>
+    <div class="corner-logo-lockup">
+      <img src="file:///C:/Users/lenovo/Downloads/rag-main/TISC_Pitch_Deck_Assets/shr_trinity_logo.png" class="corner-logo-img" />
+      <div class="corner-logo-meta">
+        <span class="corner-logo-company">SHR TRINITY</span>
+        <span class="corner-logo-product">AksharaMitra</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="workspace" style="justify-content:space-between;">
+    <div style="flex:1; display:grid; grid-template-columns: 0.9fr 0.16fr 1.1fr; gap:0.2in; align-items:stretch;">
+      <!-- Left: Traditional Approach (5 items) -->
+      <div style="background:var(--slate-100); border:2px solid var(--slate-300); border-radius:0.2in; padding:0.22in 0.25in; display:flex; flex-direction:column; justify-content:space-between;">
+        <div>
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.11in;">
+            <span style="background:var(--slate-200); color:var(--slate-700); font-weight:800; font-size:9.5pt; padding:0.05in 0.13in; border-radius:999px; letter-spacing:0.8px;">
+              BEFORE • CONVENTIONAL METHOD
+            </span>
+            <span style="font-size:10pt; font-weight:700; color:var(--slate-500);">Manual &amp; Broad</span>
+          </div>
+          <h2 style="font-size:21pt; font-weight:800; color:var(--slate-800); margin-bottom:0.14in;">
+            Traditional Approach
+          </h2>
+
+          <div style="display:flex; flex-direction:column; gap:0.1in;">
+            <div style="background:var(--white); border:1.5px solid var(--slate-300); border-radius:0.12in; padding:0.1in 0.15in; display:flex; align-items:center; gap:0.13in;">
+              <div style="width:0.32in; height:0.32in; border-radius:50%; background:var(--slate-200); color:var(--slate-700); font-weight:800; display:flex; align-items:center; justify-content:center; font-size:11pt; flex-shrink:0;">1</div>
+              <div>
+                <div style="font-size:12pt; font-weight:800; color:var(--slate-800);">Teacher Listens</div>
+                <div style="font-size:10pt; color:var(--slate-600);">Relies on live listening during limited classroom time.</div>
+              </div>
+            </div>
+
+            <div style="background:var(--white); border:1.5px solid var(--slate-300); border-radius:0.12in; padding:0.1in 0.15in; display:flex; align-items:center; gap:0.13in;">
+              <div style="width:0.32in; height:0.32in; border-radius:50%; background:var(--slate-200); color:var(--slate-700); font-weight:800; display:flex; align-items:center; justify-content:center; font-size:11pt; flex-shrink:0;">2</div>
+              <div>
+                <div style="font-size:12pt; font-weight:800; color:var(--slate-800);">Observes Generally</div>
+                <div style="font-size:10pt; color:var(--slate-600);">Captures overall impression without word-level error logs.</div>
+              </div>
+            </div>
+
+            <div style="background:var(--white); border:1.5px solid var(--slate-300); border-radius:0.12in; padding:0.1in 0.15in; display:flex; align-items:center; gap:0.13in;">
+              <div style="width:0.32in; height:0.32in; border-radius:50%; background:var(--slate-200); color:var(--slate-700); font-weight:800; display:flex; align-items:center; justify-content:center; font-size:11pt; flex-shrink:0;">3</div>
+              <div>
+                <div style="font-size:12pt; font-weight:800; color:var(--slate-800);">Gives Broad Feedback</div>
+                <div style="font-size:10pt; color:var(--slate-600);">General remarks (“Read more carefully”) without specific syllable drills.</div>
+              </div>
+            </div>
+
+            <div style="background:var(--white); border:1.5px solid var(--slate-300); border-radius:0.12in; padding:0.1in 0.15in; display:flex; align-items:center; gap:0.13in;">
+              <div style="width:0.32in; height:0.32in; border-radius:50%; background:var(--slate-200); color:var(--slate-700); font-weight:800; display:flex; align-items:center; justify-content:center; font-size:11pt; flex-shrink:0;">4</div>
+              <div>
+                <div style="font-size:12pt; font-weight:800; color:var(--slate-800);">Limited Tracking</div>
+                <div style="font-size:10pt; color:var(--slate-600);">No historical record of how a child’s accuracy or WPM changes over time.</div>
+              </div>
+            </div>
+
+            <div style="background:var(--white); border:1.5px solid var(--slate-300); border-radius:0.12in; padding:0.1in 0.15in; display:flex; align-items:center; gap:0.13in;">
+              <div style="width:0.32in; height:0.32in; border-radius:50%; background:var(--slate-200); color:var(--slate-700); font-weight:800; display:flex; align-items:center; justify-content:center; font-size:11pt; flex-shrink:0;">5</div>
+              <div>
+                <div style="font-size:12pt; font-weight:800; color:var(--slate-800);">Manual Intervention</div>
+                <div style="font-size:10pt; color:var(--slate-600);">Teachers must manually find or create remedial practice material.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:var(--slate-200); border-radius:0.1in; padding:0.1in 0.14in; font-size:10.5pt; font-weight:700; color:var(--slate-700); text-align:center;">
+          Limitation: Listening alone does not preserve diagnostic learning data.
+        </div>
+      </div>
+
+      <!-- Center Visual Bridge -->
+      <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0.14in;">
+        <div style="width:2px; flex:1; background:linear-gradient(180deg, transparent, var(--shr-blue), var(--teal-500), transparent);"></div>
+        <div style="background:var(--navy-900); border:2px solid var(--shr-blue); color:var(--white); border-radius:0.16in; padding:0.15in 0.1in; text-align:center; width:100%; box-shadow:0 8px 20px rgba(10,24,46,0.18);">
+          <div style="font-size:8.8pt; font-weight:800; color:var(--amber-400); letter-spacing:0.8px;">THE INSIGHT</div>
+          <div style="font-size:20pt; font-weight:900; color:var(--teal-500); margin:0.03in 0;">→</div>
+          <div style="font-size:9.2pt; font-weight:700; color:#E2E8F0; line-height:1.25;">From Hearing to Diagnostic Understanding</div>
+        </div>
+        <div style="width:2px; flex:1; background:linear-gradient(180deg, transparent, var(--teal-500), var(--shr-blue), transparent);"></div>
+      </div>
+
+      <!-- Right: AksharaMitra Approach (6 items) -->
+      <div style="background:var(--navy-900); border:2.5px solid var(--shr-blue); border-radius:0.2in; padding:0.22in 0.26in; color:var(--white); display:flex; flex-direction:column; justify-content:space-between; box-shadow:0 14px 32px rgba(10,24,46,0.18);">
+        <div>
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.11in;">
+            <span style="background:rgba(10,108,255,0.22); border:1.5px solid var(--shr-blue); color:#93C5FD; font-weight:800; font-size:9.5pt; padding:0.05in 0.13in; border-radius:999px; letter-spacing:0.8px;">
+              AFTER • AKSHARAMITRA (అక్షరమిత్ర)
+            </span>
+            <span style="font-size:10pt; font-weight:700; color:var(--amber-400);">SHR Trinity Innovation</span>
+          </div>
+          <h2 style="font-size:21pt; font-weight:800; color:var(--white); margin-bottom:0.14in;">
+            AksharaMitra Approach
+          </h2>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.12in;">
+            <div style="background:rgba(255,255,255,0.06); border:1.5px solid rgba(10,108,255,0.5); border-radius:0.13in; padding:0.13in 0.15in;">
+              <div style="font-size:9pt; font-weight:800; color:#93C5FD;">01 • AUDIO CAPTURE</div>
+              <div style="font-size:12.5pt; font-weight:800; color:var(--white); margin:0.03in 0;">Captures Reading Audio</div>
+              <div style="font-size:10.2pt; color:#CBD5E1; line-height:1.34;">Records the child’s aloud reading in Telugu or English with noise filtering.</div>
+            </div>
+
+            <div style="background:rgba(255,255,255,0.06); border:1.5px solid rgba(10,108,255,0.5); border-radius:0.13in; padding:0.13in 0.15in;">
+              <div style="font-size:9pt; font-weight:800; color:#93C5FD;">02 • SPOKEN WORD ANALYSIS</div>
+              <div style="font-size:12.5pt; font-weight:800; color:var(--white); margin:0.03in 0;">Analyses Spoken Words</div>
+              <div style="font-size:10.2pt; color:#CBD5E1; line-height:1.34;">Compares spoken word tokens directly against the reference passage.</div>
+            </div>
+
+            <div style="background:rgba(255,255,255,0.06); border:1.5px solid rgba(20,184,166,0.5); border-radius:0.13in; padding:0.13in 0.15in;">
+              <div style="font-size:9pt; font-weight:800; color:#5EEAD4;">03 • ERROR DETECTION</div>
+              <div style="font-size:12.5pt; font-weight:800; color:var(--white); margin:0.03in 0;">Identifies Reading Errors</div>
+              <div style="font-size:10.2pt; color:#CBD5E1; line-height:1.34;">Pinpoints skipped words, repeated words, pauses, and pronunciation mismatches.</div>
+            </div>
+
+            <div style="background:rgba(255,255,255,0.06); border:1.5px solid rgba(20,184,166,0.5); border-radius:0.13in; padding:0.13in 0.15in;">
+              <div style="font-size:9pt; font-weight:800; color:#5EEAD4;">04 • PERFORMANCE METRICS</div>
+              <div style="font-size:12.5pt; font-weight:800; color:var(--white); margin:0.03in 0;">Measures Reading Performance</div>
+              <div style="font-size:10.2pt; color:#CBD5E1; line-height:1.34;">Evaluates word accuracy %, reading speed (WPM), fluency, and hesitation.</div>
+            </div>
+
+            <div style="background:rgba(255,255,255,0.06); border:1.5px solid rgba(251,191,36,0.55); border-radius:0.13in; padding:0.13in 0.15in;">
+              <div style="font-size:9pt; font-weight:800; color:var(--amber-400);">05 • GAP IDENTIFICATION</div>
+              <div style="font-size:12.5pt; font-weight:800; color:var(--white); margin:0.03in 0;">Highlights Potential Learning Gaps</div>
+              <div style="font-size:10.2pt; color:#CBD5E1; line-height:1.34;">Surfaces Telugu <i>Ottulu / Mahapranalu</i> and English phonics difficulties.</div>
+            </div>
+
+            <div style="background:rgba(255,255,255,0.06); border:1.5px solid rgba(251,191,36,0.55); border-radius:0.13in; padding:0.13in 0.15in;">
+              <div style="font-size:9pt; font-weight:800; color:var(--amber-400);">06 • PERSONALIZED GUIDANCE</div>
+              <div style="font-size:12.5pt; font-weight:800; color:var(--white); margin:0.03in 0;">Recommends Targeted Practice</div>
+              <div style="font-size:10.2pt; color:#CBD5E1; line-height:1.34;">Connects detected reading difficulties to tailored practice exercises.</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:rgba(20,184,166,0.2); border:1.5px solid var(--teal-500); border-radius:0.1in; padding:0.1in 0.14in; font-size:10.5pt; font-weight:700; color:#99F6E4; text-align:center;">
+          Outcome: Turns every reading session into actionable intelligence for the child and teacher.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <div class="footer-brand">
+      <img src="file:///C:/Users/lenovo/Downloads/rag-main/TISC_Pitch_Deck_Assets/shr_trinity_logo.png" class="footer-mini-logo" />
+      <span>SHR Trinity | AksharaMitra | TISC Innovation Pitch</span>
+    </div>
+    <span style="color:var(--navy-900);">Slide 3 of 12</span>
+  </div>
+</div>
+
+<!-- ======================================================================= -->
+<!-- SLIDE 4 — INTRODUCING AKSHARAMITRA -->
+<!-- ======================================================================= -->
+<div class="slide slide-dark">
+  <div style="position:absolute; inset:0; background:radial-gradient(circle at 50% 22%, rgba(10,108,255,0.24), transparent 58%), radial-gradient(circle at 82% 82%, rgba(13,148,136,0.2), transparent 48%); pointer-events:none;"></div>
+
+  <div class="top-bar" style="background:transparent;">
+    <div class="top-bar-left">
+      <span class="slide-num-pill">Slide 04</span>
+      <div class="header-text">
+        <h1>Meet AksharaMitra — A Reading Companion That Listens, Understands and Guides.</h1>
+        <p>Turning Every Child’s Reading Voice Into Meaningful Learning Insights</p>
+      </div>
+    </div>
+    <div class="corner-logo-lockup">
+      <img src="file:///C:/Users/lenovo/Downloads/rag-main/TISC_Pitch_Deck_Assets/shr_trinity_logo.png" class="corner-logo-img" />
+      <div class="corner-logo-meta">
+        <span class="corner-logo-company">SHR TRINITY</span>
+        <span class="corner-logo-product">AksharaMitra</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="solution-reveal-box" class="workspace" style="justify-content:space-between; gap:0.2in; z-index:2;">
+    <!-- Central Product Reveal Banner -->
+    <div style="text-align:center; padding-top:0.02in;">
+      <div style="display:inline-flex; align-items:center; gap:0.12in; background:rgba(255,255,255,0.08); border:1.5px solid var(--amber-400); color:var(--amber-400); font-weight:800; font-size:10pt; padding:0.04in 0.18in; border-radius:999px; letter-spacing:0.9px; margin-bottom:0.07in;">
+        <span>AN EDUCATION TECHNOLOGY INNOVATION BY SHR TRINITY</span>
+        <span>•</span>
+        <span>CLASSES 1–10 (TELUGU &amp; ENGLISH)</span>
+      </div>
+      <h2 style="font-size:34pt; font-weight:900; color:var(--white); letter-spacing:-0.6px; line-height:1.08;">
+        AksharaMitra <span style="color:var(--amber-400); font-weight:800;">(అక్షరమిత్ర)</span>
+      </h2>
+      <p style="font-size:14.5pt; font-weight:600; color:#99F6E4; margin-top:0.04in;">
+        Every Child Heard. Every Reader Empowered. • ప్రతి చిన్నారి స్వరం వినిపించాలి • ప్రతి చదువు మెరుగుపడాలి
+      </p>
+    </div>
+
+    <!-- 6-Stage Platform Workflow: READ -> LISTEN -> ANALYSE -> IDENTIFY -> IMPROVE -> TRACK -->
+    <div style="background:rgba(18,38,71,0.9); border:2px solid rgba(10,108,255,0.52); border-radius:0.22in; padding:0.22in 0.24in; box-shadow:0 16px 38px rgba(0,0,0,0.35);">
+      <div style="text-align:center; font-size:10pt; font-weight:800; color:#93C5FD; letter-spacing:1.2px; text-transform:uppercase; margin-bottom:0.16in;">
+        THE SIX-STAGE AKSHARAMITRA PLATFORM WORKFLOW
+      </div>
+
+      <div style="display:grid; grid-template-columns: repeat(6, 1fr); gap:0.14in;">
+        <!-- 1. READ -->
+        <div style="background:linear-gradient(180deg, rgba(10,108,255,0.28), rgba(11,25,48,0.95)); border:2px solid var(--shr-blue); border-radius:0.16in; padding:0.17in 0.13in; text-align:center; display:flex; flex-direction:column; align-items:center; gap:0.08in;">
+          <div style="width:0.48in; height:0.48in; border-radius:50%; background:var(--shr-blue); display:flex; align-items:center; justify-content:center; box-shadow:0 0 14px rgba(10,108,255,0.55);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <div style="font-size:9pt; font-weight:800; color:#93C5FD; letter-spacing:0.8px;">STAGE 01</div>
+          <div style="font-size:15.5pt; font-weight:900; color:var(--white);">READ</div>
+          <div style="font-size:10pt; color:#CBD5E1; line-height:1.35;">Child reads a grade-appropriate Telugu or English passage aloud.</div>
+        </div>
+
+        <!-- 2. LISTEN -->
+        <div style="background:linear-gradient(180deg, rgba(10,108,255,0.28), rgba(11,25,48,0.95)); border:2px solid var(--shr-blue); border-radius:0.16in; padding:0.17in 0.13in; text-align:center; display:flex; flex-direction:column; align-items:center; gap:0.08in;">
+          <div style="width:0.48in; height:0.48in; border-radius:50%; background:var(--shr-blue); display:flex; align-items:center; justify-content:center; box-shadow:0 0 14px rgba(10,108,255,0.55);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
+          </div>
+          <div style="font-size:9pt; font-weight:800; color:#93C5FD; letter-spacing:0.8px;">STAGE 02</div>
+          <div style="font-size:15.5pt; font-weight:900; color:var(--white);">LISTEN</div>
+          <div style="font-size:10pt; color:#CBD5E1; line-height:1.35;">Platform captures the reading audio with voice detection &amp; noise handling.</div>
+        </div>
+
+        <!-- 3. ANALYSE -->
+        <div style="background:linear-gradient(180deg, rgba(13,148,136,0.3), rgba(11,25,48,0.95)); border:2px solid var(--teal-500); border-radius:0.16in; padding:0.17in 0.13in; text-align:center; display:flex; flex-direction:column; align-items:center; gap:0.08in;">
+          <div style="width:0.48in; height:0.48in; border-radius:50%; background:var(--teal-600); display:flex; align-items:center; justify-content:center; box-shadow:0 0 14px rgba(20,184,166,0.55);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2"><path d="M2 12h4l3-9 4 18 3-9h6"/></svg>
+          </div>
+          <div style="font-size:9pt; font-weight:800; color:#5EEAD4; letter-spacing:0.8px;">STAGE 03</div>
+          <div style="font-size:15.5pt; font-weight:900; color:var(--white);">ANALYSE</div>
+          <div style="font-size:10pt; color:#CBD5E1; line-height:1.35;">AI processes the spoken reading against the reference passage.</div>
+        </div>
+
+        <!-- 4. IDENTIFY -->
+        <div style="background:linear-gradient(180deg, rgba(229,25,35,0.28), rgba(11,25,48,0.95)); border:2px solid var(--shr-red); border-radius:0.16in; padding:0.17in 0.13in; text-align:center; display:flex; flex-direction:column; align-items:center; gap:0.08in;">
+          <div style="width:0.48in; height:0.48in; border-radius:50%; background:var(--shr-red); display:flex; align-items:center; justify-content:center; box-shadow:0 0 14px rgba(229,25,35,0.55);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <div style="font-size:9pt; font-weight:800; color:#FCA5A5; letter-spacing:0.8px;">STAGE 04</div>
+          <div style="font-size:15.5pt; font-weight:900; color:var(--white);">IDENTIFY</div>
+          <div style="font-size:10pt; color:#CBD5E1; line-height:1.35;">Detects reading errors, hesitation, and potential phonetic learning gaps.</div>
+        </div>
+
+        <!-- 5. IMPROVE -->
+        <div style="background:linear-gradient(180deg, rgba(13,148,136,0.3), rgba(11,25,48,0.95)); border:2px solid var(--teal-500); border-radius:0.16in; padding:0.17in 0.13in; text-align:center; display:flex; flex-direction:column; align-items:center; gap:0.08in;">
+          <div style="width:0.48in; height:0.48in; border-radius:50%; background:var(--teal-600); display:flex; align-items:center; justify-content:center; box-shadow:0 0 14px rgba(20,184,166,0.55);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          </div>
+          <div style="font-size:9pt; font-weight:800; color:#5EEAD4; letter-spacing:0.8px;">STAGE 05</div>
+          <div style="font-size:15.5pt; font-weight:900; color:var(--white);">IMPROVE</div>
+          <div style="font-size:10pt; color:#CBD5E1; line-height:1.35;">Recommends targeted Telugu &amp; English reading practice exercises.</div>
+        </div>
+
+        <!-- 6. TRACK -->
+        <div style="background:linear-gradient(180deg, rgba(10,108,255,0.28), rgba(11,25,48,0.95)); border:2px solid var(--shr-blue); border-radius:0.16in; padding:0.17in 0.13in; text-align:center; display:flex; flex-direction:column; align-items:center; gap:0.08in;">
+          <div style="width:0.48in; height:0.48in; border-radius:50%; background:var(--shr-blue); display:flex; align-items:center; justify-content:center; box-shadow:0 0 14px rgba(10,108,255,0.55);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          </div>
+          <div style="font-size:9pt; font-weight:800; color:#93C5FD; letter-spacing:0.8px;">STAGE 06</div>
+          <div style="font-size:15.5pt; font-weight:900; color:var(--white);">TRACK</div>
+          <div style="font-size:10pt; color:#CBD5E1; line-height:1.35;">Monitors reading progress across sessions for students and teachers.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Three Beneficiaries: Student | Teacher | School -->
+    <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:0.2in;">
+      <div style="background:rgba(255,255,255,0.05); border:1.5px solid rgba(251,191,36,0.45); border-radius:0.14in; padding:0.13in 0.18in; display:flex; align-items:center; gap:0.14in;">
+        <div style="width:0.42in; height:0.42in; border-radius:0.1in; background:rgba(251,191,36,0.18); border:1.5px solid var(--amber-400); display:flex; align-items:center; justify-content:center; font-weight:900; color:var(--amber-400); font-size:12.5pt; flex-shrink:0;">01</div>
+        <div>
+          <div style="font-size:12pt; font-weight:800; color:var(--white);">Beneficiary 1: The Student</div>
+          <div style="font-size:10pt; color:#CBD5E1;">Receives patient listening, clear feedback, and personalized practice.</div>
+        </div>
+      </div>
+
+      <div style="background:rgba(255,255,255,0.05); border:1.5px solid rgba(20,184,166,0.45); border-radius:0.14in; padding:0.13in 0.18in; display:flex; align-items:center; gap:0.14in;">
+        <div style="width:0.42in; height:0.42in; border-radius:0.1in; background:rgba(20,184,166,0.18); border:1.5px solid var(--teal-500); display:flex; align-items:center; justify-content:center; font-weight:900; color:#5EEAD4; font-size:12.5pt; flex-shrink:0;">02</div>
+        <div>
+          <div style="font-size:12pt; font-weight:800; color:var(--white);">Beneficiary 2: The Teacher</div>
+          <div style="font-size:10pt; color:#CBD5E1;">Gains word-level reading diagnostics and targeted intervention cues.</div>
+        </div>
+      </div>
+
+      <div style="background:rgba(255,255,255,0.05); border:1.5px solid rgba(10,108,255,0.48); border-radius:0.14in; padding:0.13in 0.18in; display:flex; align-items:center; gap:0.14in;">
+        <div style="width:0.42in; height:0.42in; border-radius:0.1in; background:rgba(10,108,255,0.2); border:1.5px solid var(--shr-blue); display:flex; align-items:center; justify-content:center; font-weight:900; color:#93C5FD; font-size:12.5pt; flex-shrink:0;">03</div>
+        <div>
+          <div style="font-size:12pt; font-weight:800; color:var(--white);">Beneficiary 3: The School</div>
+          <div style="font-size:10pt; color:#CBD5E1;">Tracks structured Telugu &amp; English literacy progress across Classes 1–10.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar footer-bar-dark">
+    <div class="footer-brand">
+      <img src="file:///C:/Users/lenovo/Downloads/rag-main/TISC_Pitch_Deck_Assets/shr_trinity_logo.png" class="footer-mini-logo" />
+      <span>SHR Trinity | AksharaMitra | TISC Innovation Pitch</span>
+    </div>
+    <span style="color:#93C5FD;">Slide 4 of 12</span>
+  </div>
+</div>
+
+<!-- ======================================================================= -->
+<!-- SLIDE 5 — THE STUDENT EXPERIENCE -->
+<!-- ======================================================================= -->
+<div class="slide">
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <span class="slide-num-pill">Slide 05</span>
+      <div class="header-text">
+        <h1>Simple for Children. Meaningful for Learning.</h1>
+        <p>Child-Friendly Student Journey Backed by Our Five-Screen Functional UI Prototype</p>
+      </div>
+    </div>
+    <div class="corner-logo-lockup">
+      <img src="file:///C:/Users/lenovo/Downloads/rag-main/TISC_Pitch_Deck_Assets/shr_trinity_logo.png" class="corner-logo-img" />
+      <div class="corner-logo-meta">
+        <span class="corner-logo-company">SHR TRINITY</span>
+        <span class="corner-logo-product">AksharaMitra</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="workspace" style="justify-content:space-between; gap:0.18in;">
+    <!-- Top Split: 5-Step Student Journey (Left) + Primary Student UI Screens 1 & 2 (Right) -->
+    <div style="display:grid; grid-template-columns: 0.88fr 1.12fr; gap:0.24in; flex:1; align-items:stretch;">
+      <!-- Left: 5-Step Student Journey + Large Bilingual Passage Preview -->
+      <div style="background:var(--white); border-radius:0.18in; border:1.5px solid var(--slate-200); padding:0.17in 0.2in; display:flex; flex-direction:column; justify-content:space-between; box-shadow:0 4px 14px rgba(15,23,42,0.04);">
+        <div>
+          <div style="font-size:9.8pt; font-weight:800; color:var(--shr-blue); letter-spacing:0.8px; text-transform:uppercase; margin-bottom:0.1in;">
+            THE 5-STEP AKSHARAMITRA STUDENT JOURNEY (CLASSES 1–10)
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:0.08in;">
+            <div style="display:flex; align-items:center; gap:0.12in; background:var(--shr-blue-soft); border:1px solid var(--shr-blue-light); border-radius:0.1in; padding:0.07in 0.12in;">
+              <div style="width:0.27in; height:0.27in; border-radius:50%; background:var(--shr-blue); color:var(--white); font-weight:800; font-size:10pt; display:flex; align-items:center; justify-content:center; flex-shrink:0;">1</div>
+              <div style="font-size:10.8pt; color:var(--slate-800);"><b>Select Class from 1–10:</b> Tailors passage level to primary or secondary grade.</div>
+            </div>
+
+            <div style="display:flex; align-items:center; gap:0.12in; background:var(--teal-50); border:1px solid var(--teal-100); border-radius:0.1in; padding:0.07in 0.12in;">
+              <div style="width:0.27in; height:0.27in; border-radius:50%; background:var(--teal-600); color:var(--white); font-weight:800; font-size:10pt; display:flex; align-items:center; justify-content:center; flex-shrink:0;">2</div>
+              <div style="font-size:10.8pt; color:var(--slate-800);"><b>Choose Telugu or English:</b> Seamless bilingual language selection.</div>
+            </div>
+
+            <div style="display:flex; align-items:center; gap:0.12in; background:var(--shr-blue-soft); border:1px solid var(--shr-blue-light); border-radius:0.1in; padding:0.07in 0.12in;">
+              <div style="width:0.27in; height:0.27in; border-radius:50%; background:var(--shr-blue); color:var(--white); font-weight:800; font-size:10pt; display:flex; align-items:center; justify-content:center; flex-shrink:0;">3</div>
+              <div style="font-size:10.8pt; color:var(--slate-800);"><b>Select an Appropriate Passage:</b> Age-appropriate stories &amp; curriculum texts.</div>
+            </div>
+
+            <div style="display:flex; align-items:center; gap:0.12in; background:var(--amber-50); border:1px solid var(--amber-100); border-radius:0.1in; padding:0.07in 0.12in;">
+              <div style="width:0.27in; height:0.27in; border-radius:50%; background:var(--amber-500); color:var(--navy-900); font-weight:800; font-size:10pt; display:flex; align-items:center; justify-content:center; flex-shrink:0;">4</div>
+              <div style="font-size:10.8pt; color:var(--slate-800);"><b>Read Aloud Using Microphone Capture:</b> Simple one-click voice recording.</div>
+            </div>
+
+            <div style="display:flex; align-items:center; gap:0.12in; background:var(--green-50); border:1px solid var(--green-100); border-radius:0.1in; padding:0.07in 0.12in;">
+              <div style="width:0.27in; height:0.27in; border-radius:50%; background:var(--green-600); color:var(--white); font-weight:800; font-size:10pt; display:flex; align-items:center; justify-content:center; flex-shrink:0;">5</div>
+              <div style="font-size:10.8pt; color:var(--slate-800);"><b>View Reading Feedback &amp; Practice:</b> Child-friendly word highlights &amp; drills.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Child-Friendly Large Bilingual Text Sample -->
+        <div style="background:var(--navy-900); border-radius:0.12in; padding:0.11in 0.15in; color:var(--white);">
+          <div style="font-size:8.8pt; font-weight:800; color:var(--amber-400); letter-spacing:0.6px; text-transform:uppercase;">
+            CHILD-FRIENDLY LARGE BILINGUAL TYPOGRAPHY
+          </div>
+          <div style="font-size:12.8pt; font-weight:800; color:#5EEAD4; margin-top:0.03in;">
+            “గోదావరి నది ప్రవాహం చుట్టూ పచ్చని పొలాలు సస్యశ్యామలంగా మారుతున్నాయి.”
+          </div>
+          <div style="font-size:10.8pt; font-weight:600; color:#E2E8F0; margin-top:0.02in;">
+            “The village library opened early every morning for curious young readers.”
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Featured Student Prototype Screens (Screen 1 & Screen 2) -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.16in;">
+        <div style="background:var(--navy-900); border:2px solid var(--shr-blue); border-radius:0.16in; padding:0.13in; display:flex; flex-direction:column; gap:0.08in;">
+          <div style="display:flex; align-items:center; justify-content:space-between;">
+            <span style="background:rgba(10,108,255,0.22); border:1px solid var(--shr-blue); color:#93C5FD; font-size:8.5pt; font-weight:800; padding:0.03in 0.09in; border-radius:999px;">PROTOTYPE SCREEN 01</span>
+            <span style="font-size:9.2pt; font-weight:700; color:#CBD5E1;">Student Setup</span>
+          </div>
+          <div style="background:var(--white); border-radius:0.1in; flex:1; display:flex; align-items:center; justify-content:center; padding:0.04in; overflow:hidden;">
+            <img src="file:///C:/Users/lenovo/Downloads/rag-main/TISC_Pitch_Deck_Assets/01_Student_Dashboard.png" style="max-width:100%; max-height:2.8in; object-fit:contain;" />
+          </div>
+          <div style="font-size:9.8pt; color:#E2E8F0; line-height:1.3;">
+            <b>Student Dashboard:</b> Class (1–10), language (Telugu/English), and difficulty tier selector.
+          </div>
+        </div>
+
+        <div style="background:var(--navy-900); border:2px solid var(--teal-500); border-radius:0.16in; padding:0.13in; display:flex; flex-direction:column; gap:0.08in;">
+          <div style="display:flex; align-items:center; justify-content:space-between;">
+            <span style="background:rgba(20,184,166,0.22); border:1px solid var(--teal-500); color:#5EEAD4; font-size:8.5pt; font-weight:800; padding:0.03in 0.09in; border-radius:999px;">PROTOTYPE SCREEN 02</span>
+            <span style="font-size:9.2pt; font-weight:700; color:#CBD5E1;">Passage &amp; Voice Capture</span>
+          </div>
+          <div style="background:var(--white); border-radius:0.1in; flex:1; display:flex; align-items:center; justify-content:center; padding:0.04in; overflow:hidden;">
+            <img src="file:///C:/Users/lenovo/Downloads/rag-main/TISC_Pitch_Deck_Assets/02_Reading_Assessment.png" style="max-width:100%; max-height:2.8in; object-fit:contain;" />
+          </div>
+          <div style="font-size:9.8pt; color:#E2E8F0; line-height:1.3;">
+            <b>Reading Assessment View:</b> Large passage text, microphone control, timer, and progress bar.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Strip: Complete 5-Screen Functional UI Prototype Evidence Bar -->
+    <div style="background:var(--white); border:1.5px solid var(--slate-300); border-radius:0.14in; padding:0.09in 0.16in; display:flex; align-items:center; justify-content:space-between; gap:0.14in;">
+      <div style="max-width:3.2in;">
+        <div style="font-size:9.2pt; font-weight:800; color:var(--shr-blue); letter-spacing:0.5px;">ACTUAL 5-SCREEN PROTOTYPE EVIDENCE</div>
+        <div style="font-size:9.8pt; color:var(--slate-600); line-height:1.28; margin-top:0.02in;">
+          All 5 interactive prototype screens are already built (shown with illustrative static demo data).
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(5, 1fr); gap:0.1in; flex:1;">
+        <div style="background:var(--slate-100); border:1px solid var(--slate-300); border-radius:0.08in; padding:0.04in 0.06in; display:flex; align-items:center; gap:0.06in;">
+          <img src="file:///C:/Users/lenovo/Downloads/rag-main/TISC_Pitch_Deck_Assets/01_Student_Dashboard.png" style="width:0.64in; height:0.4in; object-fit:cover; border-radius:0.04in; border:1px solid var(--slate-300);" />
+          <div style="font-size:8.5pt; font-weight:700; color:var(--navy-900); line-height:1.15;">1. Student Setup</div>
+        </div>
+        <div style="background:var(--slate-100); border:1px solid var(--slate-300); border-radius:0.08in; padding:0.04in 0.06in; display:flex; align-items:center; gap:0.06in;">
+          <img src="file:///C:/Users/lenovo/Downloads/rag-main/TISC_Pitch_Deck_Assets/02_Reading_Assessment.png" style="width:0.64in; height:0.4in; object-fit:cover; border-radius:0.04in; border:1px solid var(--slate-300);" />
+          <div style="font-size:8.5pt; font-weight:700; color:var(--navy-900); line-height:1.15;">2. Voice Capture</div>
+        </div>
+        <div style="background:var(--slate-100); border:1px solid var(--slate-300); border-radius:0.08in; padding:0.04in 0.06in; display:flex; align-items:center; gap:0.06in;">
+          <img src="file:///C:/Users/lenovo/Downloads/rag-main/TISC_Pitch_Deck_Assets/03_Reading_Analysis.png" style="width:0.64in; height:0.4in; object-fit:cover; border-radius:0.04in; border:1px solid var(--slate-300);" />
+          <div style="font-size:8.5pt; font-weight:700; color:var(--navy-900); line-height:1.15;">3. Word Analysis</div>
+        </div>
+        <div style="background:var(--slate-100); border:1px solid var(--slate-300); border-radius:0.08in; padding:0.04in 0.06in; display:flex; align-items:center; gap:0.06in;">
+          <img src="file:///C:/Users/lenovo/Downloads/rag-main/TISC_Pitch_Deck_Assets/04_Assessment_Results.png" style="width:0.64in; height:0.4in; object-fit:cover; border-radius:0.04in; border:1px solid var(--slate-300);" />
+          <div style="font-size:8.5pt; font-weight:700; color:var(--navy-900); line-height:1.15;">4. Scorecard</div>
+        </div>
+        <div style="background:var(--slate-100); border:1px solid var(--slate-300); border-radius:0.08in; padding:0.04in 0.06in; display:flex; align-items:center; gap:0.06in;">
+          <img src="file:///C:/Users/lenovo/Downloads/rag-main/TISC_Pitch_Deck_Assets/05_Teacher_Dashboard.png" style="width:0.64in; height:0.4in; object-fit:cover; border-radius:0.04in; border:1px solid var(--slate-300);" />
+          <div style="font-size:8.5pt; font-weight:700; color:var(--navy-900); line-height:1.15;">5. Teacher View</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <div class="footer-brand">
+      <img src="file:///C:/Users/lenovo/Downloads/rag-main/TISC_Pitch_Deck_Assets/shr_trinity_logo.png" class="footer-mini-logo" />
+      <span>SHR Trinity | AksharaMitra | TISC Innovation Pitch</span>
+    </div>
+    <span style="color:var(--navy-900);">Slide 5 of 12</span>
+  </div>
+</div>
+
+<!-- ======================================================================= -->
+<!-- SLIDE 6 — HOW AI UNDERSTANDS READING MISTAKES -->
+<!-- ======================================================================= -->
+<div class="slide">
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <span class="slide-num-pill">Slide 06</span>
+      <div class="header-text">
+        <h1>Beyond Speech Recognition — Understanding How a Child Reads.</h1>
+        <p>Comparing Reference Passages with Spoken Reading Across Telugu and English</p>
+      </div>
+    </div>
+    <div class="corner-logo-lockup">
+      <img src="file:///C:/Users/lenovo/Downloads/rag-main/TISC_Pitch_Deck_Assets/shr_trinity_logo.png" class="corner-logo-img" />
+      <div class="corner-logo-meta">
+        <span class="corner-logo-company">SHR TRINITY</span>
+        <span class="corner-logo-product">AksharaMitra</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="error-diagnostics-box" class="workspace" style="justify-content:space-between; gap:0.15in;">
+    <!-- Top Section: Telugu Example + English Example + Prototype Screen 3 -->
+    <div style="display:grid; grid-template-columns: 1.18fr 0.82fr; gap:0.22in; flex:1; align-items:stretch;">
+      <!-- Left Column: Both Telugu & English Reference vs. Spoken Examples + Legend & Metrics -->
+      <div style="display:flex; flex-direction:column; justify-content:space-between; gap:0.11in;">
+        <!-- Example 1: Telugu Reading Diagnostic -->
+        <div style="background:var(--white); border:1.5px solid var(--slate-200); border-left:5px solid var(--teal-600); border-radius:0.14in; padding:0.12in 0.16in; box-shadow:0 4px 12px rgba(15,23,42,0.03);">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.04in;">
+            <span style="font-size:9.2pt; font-weight:800; color:var(--teal-700); letter-spacing:0.6px;">1. TELUGU READING EXAMPLE (CLASS 4 SAMPLE)</span>
+            <span style="font-size:8.8pt; font-weight:700; color:var(--slate-500);">Reference vs. Spoken Alignment</span>
+          </div>
+          <div style="font-size:11.2pt; color:var(--slate-700); margin-bottom:0.05in;">
+            <b>Reference Passage:</b> <span style="color:var(--navy-900); font-weight:800;">“గోదావరి నది ప్రవాహం మరియు తమ పచ్చని పొలాలు సస్యశ్యామలంగా మారుతున్నాయి.”</span>
+          </div>
+          <div style="background:var(--bg-neutral); border:1px dashed var(--slate-300); border-radius:0.1in; padding:0.06in 0.1in;">
+            <span style="font-size:8.8pt; font-weight:800; color:var(--slate-500); margin-right:0.05in;">SPOKEN:</span>
+            <span class="tok tok-g">గోదావరి ✓</span>
+            <span class="tok tok-g">నది ✓</span>
+            <span class="tok tok-r">ప్రవాహం → పవాహం (Dropped ఒత్తు)</span>
+            <span class="tok tok-o">మరియు (Skipped)</span>
+            <span class="tok tok-b">తమ తమ (Repeated)</span>
+            <span style="display:inline-block; background:var(--slate-200); color:var(--slate-700); font-weight:800; font-size:8.8pt; padding:0.03in 0.08in; border-radius:999px;">⏸ 1.8s Pause</span>
+            <span class="tok tok-g">పచ్చని ✓</span>
+            <span class="tok tok-g">పొలాలు ✓</span>
+            <span class="tok tok-r">సస్యశ్యామలంగా → సస్యసామలంగా</span>
+            <span class="tok tok-g">మారుతున్నాయి ✓</span>
+          </div>
+        </div>
+
+        <!-- Example 2: English Reading Diagnostic -->
+        <div style="background:var(--white); border:1.5px solid var(--slate-200); border-left:5px solid var(--shr-blue); border-radius:0.14in; padding:0.12in 0.16in; box-shadow:0 4px 12px rgba(15,23,42,0.03);">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.04in;">
+            <span style="font-size:9.2pt; font-weight:800; color:var(--shr-blue); letter-spacing:0.6px;">2. ENGLISH READING EXAMPLE (CLASS 5 SAMPLE)</span>
+            <span style="font-size:8.8pt; font-weight:700; color:var(--slate-500);">Reference vs. Spoken Alignment</span>
+          </div>
+          <div style="font-size:10.8pt; color:var(--slate-700); margin-bottom:0.05in;">
+            <b>Reference Passage:</b> <span style="color:var(--navy-900); font-weight:800;">“The curious children explored the natural environment around their village school.”</span>
+          </div>
+          <div style="background:var(--bg-neutral); border:1px dashed var(--slate-300); border-radius:0.1in; padding:0.06in 0.1in;">
+            <span style="font-size:8.8pt; font-weight:800; color:var(--slate-500); margin-right:0.05in;">SPOKEN:</span>
+            <span class="tok tok-g">The ✓</span>
+            <span class="tok tok-r">curious → curous (Syllable Drop)</span>
+            <span class="tok tok-g">children ✓</span>
+            <span class="tok tok-b">explored explored (Repeated)</span>
+            <span class="tok tok-o">the (Skipped)</span>
+            <span class="tok tok-g">natural ✓</span>
+            <span style="display:inline-block; background:var(--slate-200); color:var(--slate-700); font-weight:800; font-size:8.8pt; padding:0.03in 0.08in; border-radius:999px;">⏸ 2.1s Hesitation</span>
+            <span class="tok tok-r">environment → en-vir-ment</span>
+            <span class="tok tok-g">around ✓</span>
+            <span class="tok tok-g">their ✓</span>
+            <span class="tok tok-g">village ✓</span>
+            <span class="tok tok-g">school ✓</span>
+          </div>
+        </div>
+
+        <!-- Visual Color Legend (4 Boxes) + 5 Intended Assessment Metrics -->
+        <div style="display:flex; flex-direction:column; gap:0.08in;">
+          <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:0.08in;">
+            <div style="background:var(--green-100); border:1.5px solid var(--green-600); border-radius:0.08in; padding:0.05in 0.08in; text-align:center;">
+              <div style="font-size:9.8pt; font-weight:900; color:#15803D;">Green • Correct</div>
+              <div style="font-size:8.5pt; color:#166534;">Matched spoken word</div>
+            </div>
+            <div style="background:var(--shr-red-soft); border:1.5px solid var(--shr-red); border-radius:0.08in; padding:0.05in 0.08in; text-align:center;">
+              <div style="font-size:9.8pt; font-weight:900; color:#B91C1C;">Red • Pronunciation Mismatch</div>
+              <div style="font-size:8.5pt; color:#991B1B;">Potential phonetic difference</div>
+            </div>
+            <div style="background:var(--amber-100); border:1.5px solid var(--amber-500); border-radius:0.08in; padding:0.05in 0.08in; text-align:center;">
+              <div style="font-size:9.8pt; font-weight:900; color:#B45309;">Orange • Skipped Word</div>
+              <div style="font-size:8.5pt; color:#92400E;">Omitted reference word</div>
+            </div>
+            <div style="background:var(--shr-blue-light); border:1.5px solid var(--shr-blue-dark); border-radius:0.08in; padding:0.05in 0.08in; text-align:center;">
+              <div style="font-size:9.8pt; font-weight:900; color:#1D4ED8;">Blue • Repeated Word</div>
+              <div style="font-size:8.5pt; color:#1E40AF;">Spoken more than once</div>
+            </div>
+          </div>
+
+          <!-- 5 Intended Assessment Metrics Strip -->
+          <div style="display:grid; grid-template-columns:repeat(5, 1fr); gap:0.08in;">
+            <div style="background:var(--navy-900); color:var(--white); border-radius:0.08in; padding:0.05in 0.08in; text-align:center;">
+              <div style="font-size:8pt; color:#93C5FD; font-weight:700;">METRIC 01</div>
+              <div style="font-size:9.8pt; font-weight:800;">Word Accuracy</div>
+            </div>
+            <div style="background:var(--navy-900); color:var(--white); border-radius:0.08in; padding:0.05in 0.08in; text-align:center;">
+              <div style="font-size:8pt; color:#5EEAD4; font-weight:700;">METRIC 02</div>
+              <div style="font-size:9.8pt; font-weight:800;">Speed (WPM)</div>
+            </div>
+            <div style="background:var(--navy-900); color:var(--white); border-radius:0.08in; padding:0.05in 0.08in; text-align:center;">
+              <div style="font-size:8pt; color:var(--amber-400); font-weight:700;">METRIC 03</div>
+              <div style="font-size:9.8pt; font-weight:800;">Reading Fluency</div>
+            </div>
+            <div style="background:var(--navy-900); color:var(--white); border-radius:0.08in; padding:0.05in 0.08in; text-align:center;">
+              <div style="font-size:8pt; color:#93C5FD; font-weight:700;">METRIC 04</div>
+              <div style="font-size:9.8pt; font-weight:800;">Hesitation &amp; Pauses</div>
+            </div>
+            <div style="background:var(--navy-900); color:var(--white); border-radius:0.08in; padding:0.05in 0.08in; text-align:center;">
+              <div style="font-size:8pt; color:#5EEAD4; font-weight:700;">METRIC 05</div>
+              <div style="font-size:9.8pt; font-weight:800;">Pronunciation Score</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Actual Screen 3 UI Prototype + Strict Technical Honesty Matrix -->
+      <div style="display:flex; flex-direction:column; justify-content:space-between; gap:0.11in;">
+        <div style="background:var(--navy-900); border:2px solid var(--shr-blue); border-radius:0.16in; padding:0.13in; flex:1; display:flex; flex-direction:column; gap:0.07in;">
+          <div style="display:flex; align-items:center; justify-content:space-between;">
+            <span style="background:rgba(10,108,255,0.22); border:1px solid var(--shr-blue); color:#93C5FD; font-size:8.5pt; font-weight:800; padding:0.03in 0.1in; border-radius:999px;">ACTUAL PROTOTYPE • SCREEN 03</span>
+            <span style="font-size:9.2pt; font-weight:700; color:#CBD5E1;">Word-Level Analysis UI</span>
+          </div>
+          <div style="background:var(--white); border-radius:0.1in; flex:1; display:flex; align-items:center; justify-content:center; padding:0.04in; overflow:hidden;">
+            <img src="file:///C:/Users/lenovo/Downloads/rag-main/TISC_Pitch_Deck_Assets/03_Reading_Analysis.png" style="max-width:100%; max-height:2.65in; object-fit:contain;" />
+          </div>
+        </div>
+
+        <!-- Explicit 5-Stage Technical Distinction Box -->
+        <div style="background:var(--amber-50); border:2px solid var(--amber-500); border-radius:0.14in; padding:0.11in 0.14in;">
+          <div style="font-size:9.2pt; font-weight:900; color:#B45309; letter-spacing:0.4px; margin-bottom:0.03in;">
+            TRANSPARENT AI CAPABILITY DISTINCTION (NO OVERCLAIMS)
+          </div>
+          <div style="font-size:9.3pt; color:#78350F; line-height:1.35; display:flex; flex-direction:column; gap:0.02in;">
+            <div>• <b>1. Current Prototype Visualization:</b> Interactive color-coded word-token UI built today.</div>
+            <div>• <b>2. Baseline Speech Recognition:</b> Whisper STT &amp; Audio VAD available in codebase.</div>
+            <div>• <b>3. Ongoing Telugu ASR Evaluation:</b> Benchmarking Sarvam AI &amp; Whisper on Telugu speech.</div>
+            <div>• <b>4. Planned Word Alignment:</b> Forced reference-to-spoken timestamp alignment in development.</div>
+            <div>• <b>5. Future Acoustic Pronunciation Scoring:</b> Phoneme-level scoring planned (not claimed as completed STT output).</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <div class="footer-brand">
+      <img src="file:///C:/Users/lenovo/Downloads/rag-main/TISC_Pitch_Deck_Assets/shr_trinity_logo.png" class="footer-mini-logo" />
+      <span>SHR Trinity | AksharaMitra | TISC Innovation Pitch</span>
+    </div>
+    <span style="color:var(--navy-900);">Slide 6 of 12</span>
+  </div>
+</div>
+
+<!-- ======================================================================= -->
+<!-- SLIDE 7 — PERSONALIZED READING IMPROVEMENT -->
+<!-- ======================================================================= -->
+<div class="slide">
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <span class="slide-num-pill">Slide 07</span>
+      <div class="header-text">
+        <h1>Every Reading Mistake Becomes an Opportunity to Improve.</h1>
+        <p>Connecting Diagnosed Reading Difficulties to Targeted Bilingual Practice Exercises</p>
+      </div>
+    </div>
+    <div class="corner-logo-lockup">
+      <img src="file:///C:/Users/lenovo/Downloads/rag-main/TISC_Pitch_Deck_Assets/shr_trinity_logo.png" class="corner-logo-img" />
+      <div class="corner-logo-meta">
+        <span class="corner-logo-company">SHR TRINITY</span>
+        <span class="corner-logo-product">AksharaMitra</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="improvement-bridge-box" class="workspace" style="justify-content:space-between; gap:0.18in;">
+    <!-- 5-Stage Closed-Loop Learning Process Banner -->
+    <div style="background:var(--navy-900); border-radius:0.18in; padding:0.15in 0.22in; border:2px solid var(--shr-blue);">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.09in;">
+        <span style="font-size:9.2pt; font-weight:800; color:var(--amber-400); letter-spacing:1px;">CLOSED-LOOP LEARNING PROCESS</span>
+        <span style="background:rgba(251,191,36,0.16); border:1px solid var(--amber-400); color:#FDE68A; font-size:8.5pt; font-weight:800; padding:0.03in 0.1in; border-radius:999px;">
+          PROPOSED CAPABILITY (BUILT ON EXISTING HYBRID RAG + LLM FOUNDATION)
+        </span>
+      </div>
+      <div style="display:grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr auto 1fr; align-items:center; gap:0.08in;">
+        <div style="background:rgba(229,25,35,0.2); border:1.5px solid #F87171; border-radius:0.12in; padding:0.08in 0.1in; text-align:center;">
+          <div style="font-size:8pt; font-weight:800; color:#FCA5A5;">STEP 01</div>
+          <div style="font-size:12pt; font-weight:900; color:var(--white);">Reading Mistake</div>
+          <div style="font-size:8.8pt; color:#FEE2E2;">Spoken error detected</div>
+        </div>
+        <div style="font-size:15pt; font-weight:900; color:var(--amber-400);">→</div>
+        <div style="background:rgba(245,158,11,0.18); border:1.5px solid var(--amber-400); border-radius:0.12in; padding:0.08in 0.1in; text-align:center;">
+          <div style="font-size:8pt; font-weight:800; color:#FDE68A;">STEP 02</div>
+          <div style="font-size:12pt; font-weight:900; color:var(--white);">Learning Gap</div>
+          <div style="font-size:8.8pt; color:#FEF3C7;">Phonetic pattern identified</div>
+        </div>
+        <div style="font-size:15pt; font-weight:900; color:var(--teal-500);">→</div>
+        <div style="background:rgba(10,108,255,0.24); border:1.5px solid var(--shr-blue); border-radius:0.12in; padding:0.08in 0.1in; text-align:center;">
+          <div style="font-size:8pt; font-weight:800; color:#93C5FD;">STEP 03</div>
+          <div style="font-size:12pt; font-weight:900; color:var(--white);">Personalized Practice</div>
+          <div style="font-size:8.8pt; color:#DBEAFE;">Targeted remedial drill</div>
+        </div>
+        <div style="font-size:15pt; font-weight:900; color:#4ADE80;">→</div>
+        <div style="background:rgba(22,163,74,0.24); border:1.5px solid #4ADE80; border-radius:0.12in; padding:0.08in 0.1in; text-align:center;">
+          <div style="font-size:8pt; font-weight:800; color:#86EFAC;">STEP 04</div>
+          <div style="font-size:12pt; font-weight:900; color:var(--white);">Improved Reading</div>
+          <div style="font-size:8.8pt; color:#DCFCE7;">Better accuracy &amp; confidence</div>
+        </div>
+        <div style="font-size:15pt; font-weight:900; color:#93C5FD;">→</div>
+        <div style="background:rgba(20,184,166,0.22); border:1.5px solid var(--teal-500); border-radius:0.12in; padding:0.08in 0.1in; text-align:center;">
+          <div style="font-size:8pt; font-weight:800; color:#5EEAD4;">STEP 05</div>
+          <div style="font-size:12pt; font-weight:900; color:var(--white);">Progress Tracking</div>
+          <div style="font-size:8.8pt; color:#CCFBF1;">Logged across sessions</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 Practice Categories with Real Bilingual Examples -->
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.16in; flex:1;">
+      <!-- Category 1 -->
+      <div style="background:var(--white); border-radius:0.15in; border:1.5px solid var(--slate-200); border-top:5px solid var(--teal-600); padding:0.15in 0.18in; display:flex; flex-direction:column; justify-content:space-between; box-shadow:0 4px 12px rgba(15,23,42,0.03);">
+        <div>
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.06in;">
+            <span style="background:var(--teal-50); color:var(--teal-700); font-weight:800; font-size:9.2pt; padding:0.03in 0.1in; border-radius:999px;">1. TELUGU OTTULU &amp; CONJUNCT CONSONANTS</span>
+            <span style="font-size:10.8pt; font-weight:800; color:var(--navy-900);">సంయుక్తాక్షరాలు</span>
+          </div>
+          <div style="font-size:12.5pt; font-weight:800; color:var(--navy-900); margin-bottom:0.04in;">
+            Telugu Syllable Segmentation Practice
+          </div>
+          <div style="font-size:10.4pt; color:var(--slate-700); line-height:1.36;">
+            • <b>Identified Difficulty:</b> Simplifying compound clusters in words like <b>“సస్యశ్యామలంగా”</b> or <b>“ప్రవాహం”</b>.<br>
+            • <b>Real Practice Example:</b> Step-by-step syllable breakdown (<b>స - స్య - శ్యా - మ - లం - గా</b> and <b>ప్ర - వా - హం</b>) paired with graduated <i>Ottulu</i> word ladders.
+          </div>
+        </div>
+        <div style="background:var(--teal-50); border:1px solid var(--teal-100); border-radius:0.08in; padding:0.05in 0.1in; font-size:9.8pt; font-weight:700; color:var(--teal-700);">
+          Proposed Practice Output: Builds automatic recognition of Telugu conjunct clusters.
+        </div>
+      </div>
+
+      <!-- Category 2 -->
+      <div style="background:var(--white); border-radius:0.15in; border:1.5px solid var(--slate-200); border-top:5px solid var(--shr-blue); padding:0.15in 0.18in; display:flex; flex-direction:column; justify-content:space-between; box-shadow:0 4px 12px rgba(15,23,42,0.03);">
+        <div>
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.06in;">
+            <span style="background:var(--shr-blue-soft); color:var(--shr-blue-dark); font-weight:800; font-size:9.2pt; padding:0.03in 0.1in; border-radius:999px;">2. TELUGU MAHAPRANALU</span>
+            <span style="font-size:10.8pt; font-weight:800; color:var(--navy-900);">మహాప్రాణాక్షరాలు</span>
+          </div>
+          <div style="font-size:12.5pt; font-weight:800; color:var(--navy-900); margin-bottom:0.04in;">
+            Alpaprana &amp; Mahaprana Contrast Drills
+          </div>
+          <div style="font-size:10.4pt; color:var(--slate-700); line-height:1.36;">
+            • <b>Identified Difficulty:</b> Substituting unaspirated consonants for aspirated <b>ఖ, ఘ, ఛ, థ, ధ, ఫ, భ</b>.<br>
+            • <b>Real Practice Example:</b> Side-by-side <i>Alpaprana vs. Mahaprana</i> contrast pairs (e.g., <b>దైర్యం vs. ధైర్యం</b>, <b>ఫలం vs. పలం</b>, <b>మేఘం</b>) with guided articulation practice.
+          </div>
+        </div>
+        <div style="background:var(--shr-blue-soft); border:1px solid var(--shr-blue-light); border-radius:0.08in; padding:0.05in 0.1in; font-size:9.8pt; font-weight:700; color:var(--shr-blue-dark);">
+          Proposed Practice Output: Strengthens clear aspirated consonant pronunciation.
+        </div>
+      </div>
+
+      <!-- Category 3 -->
+      <div style="background:var(--white); border-radius:0.15in; border:1.5px solid var(--slate-200); border-top:5px solid var(--amber-500); padding:0.15in 0.18in; display:flex; flex-direction:column; justify-content:space-between; box-shadow:0 4px 12px rgba(15,23,42,0.03);">
+        <div>
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.06in;">
+            <span style="background:var(--amber-50); color:#B45309; font-weight:800; font-size:9.2pt; padding:0.03in 0.1in; border-radius:999px;">3. ENGLISH PHONICS &amp; PRONUNCIATION</span>
+            <span style="font-size:10.8pt; font-weight:800; color:var(--navy-900);">Syllable Chunking</span>
+          </div>
+          <div style="font-size:12.5pt; font-weight:800; color:var(--navy-900); margin-bottom:0.04in;">
+            English Syllable Chunking &amp; Phonics Families
+          </div>
+          <div style="font-size:10.4pt; color:var(--slate-700); line-height:1.36;">
+            • <b>Identified Difficulty:</b> Struggling with multi-syllabic words or vowel blends (e.g., <i>“environment”</i>, <i>“curious”</i>).<br>
+            • <b>Real Practice Example:</b> Visual syllable chunking (<b>en - vi - ron - ment</b>, <b>cu - ri - ous</b>) and rhyming phonics word-family drills.
+          </div>
+        </div>
+        <div style="background:var(--amber-50); border:1px solid var(--amber-100); border-radius:0.08in; padding:0.05in 0.1in; font-size:9.8pt; font-weight:700; color:#B45309;">
+          Proposed Practice Output: Improves multi-syllabic decoding and word stress.
+        </div>
+      </div>
+
+      <!-- Category 4 -->
+      <div style="background:var(--white); border-radius:0.15in; border:1.5px solid var(--slate-200); border-top:5px solid var(--green-600); padding:0.15in 0.18in; display:flex; flex-direction:column; justify-content:space-between; box-shadow:0 4px 12px rgba(15,23,42,0.03);">
+        <div>
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.06in;">
+            <span style="background:var(--green-50); color:#15803D; font-weight:800; font-size:9.2pt; padding:0.03in 0.1in; border-radius:999px;">4. READING FLUENCY, PACING &amp; CONFIDENCE</span>
+            <span style="font-size:10.8pt; font-weight:800; color:var(--navy-900);">Guided Reading</span>
+          </div>
+          <div style="font-size:12.5pt; font-weight:800; color:var(--navy-900); margin-bottom:0.04in;">
+            Short Guided Reading &amp; Rhythm Exercises
+          </div>
+          <div style="font-size:10.4pt; color:var(--slate-700); line-height:1.36;">
+            • <b>Identified Difficulty:</b> Frequent mid-sentence hesitation pauses, word repetitions, or skipped connectors.<br>
+            • <b>Real Practice Example:</b> Short phrase-grouped guided reading passages and repeated-reading confidence builders matched to the child’s level.
+          </div>
+        </div>
+        <div style="background:var(--green-50); border:1px solid var(--green-100); border-radius:0.08in; padding:0.05in 0.1in; font-size:9.8pt; font-weight:700; color:#15803D;">
+          Proposed Practice Output: Builds smooth pacing, cadence, and reading confidence.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <div class="footer-brand">
+      <img src="file:///C:/Users/lenovo/Downloads/rag-main/TISC_Pitch_Deck_Assets/shr_trinity_logo.png" class="footer-mini-logo" />
+      <span>SHR Trinity | AksharaMitra | TISC Innovation Pitch</span>
+    </div>
+    <span style="color:var(--navy-900);">Slide 7 of 12</span>
+  </div>
+</div>
+
+<!-- ======================================================================= -->
+<!-- SLIDE 8 — TEACHER INTELLIGENCE DASHBOARD -->
+<!-- ======================================================================= -->
+<div class="slide">
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <span class="slide-num-pill">Slide 08</span>
+      <div class="header-text">
+        <h1>From Classroom Observation to Actionable Reading Insights.</h1>
+        <p>Equipping Teachers with Student Scorecards, Cohort Trends, and Targeted Intervention Guidance</p>
+      </div>
+    </div>
+    <div class="corner-logo-lockup">
+      <img src="file:///C:/Users/lenovo/Downloads/rag-main/TISC_Pitch_Deck_Assets/shr_trinity_logo.png" class="corner-logo-img" />
+      <div class="corner-logo-meta">
+        <span class="corner-logo-company">SHR TRINITY</span>
+        <span class="corner-logo-product">AksharaMitra</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="workspace" style="justify-content:space-between; gap:0.17in;">
+    <!-- Top Row: 4 Key Questions the Dashboard Helps Teachers Answer -->
+    <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:0.15in;">
+      <div style="background:var(--navy-900); border-bottom:4px solid var(--shr-red); border-radius:0.13in; padding:0.11in 0.15in; color:var(--white);">
+        <div style="font-size:8.8pt; font-weight:800; color:#FCA5A5; letter-spacing:0.6px;">TEACHER QUESTION 01</div>
+        <div style="font-size:11.8pt; font-weight:800; margin:0.03in 0;">Which student may need additional support?</div>
+        <div style="font-size:9.4pt; color:#CBD5E1;">Surfaces learners needing priority attention.</div>
+      </div>
+
+      <div style="background:var(--navy-900); border-bottom:4px solid var(--shr-blue); border-radius:0.13in; padding:0.11in 0.15in; color:var(--white);">
+        <div style="font-size:8.8pt; font-weight:800; color:#93C5FD; letter-spacing:0.6px;">TEACHER QUESTION 02</div>
+        <div style="font-size:11.8pt; font-weight:800; margin:0.03in 0;">What reading difficulties are appearing?</div>
+        <div style="font-size:9.4pt; color:#CBD5E1;">Pinpoints recurring Telugu &amp; English error patterns.</div>
+      </div>
+
+      <div style="background:var(--navy-900); border-bottom:4px solid var(--teal-500); border-radius:0.13in; padding:0.11in 0.15in; color:var(--white);">
+        <div style="font-size:8.8pt; font-weight:800; color:#5EEAD4; letter-spacing:0.6px;">TEACHER QUESTION 03</div>
+        <div style="font-size:11.8pt; font-weight:800; margin:0.03in 0;">What practice should be recommended?</div>
+        <div style="font-size:9.4pt; color:#CBD5E1;">Suggests targeted individual &amp; group exercises.</div>
+      </div>
+
+      <div style="background:var(--navy-900); border-bottom:4px solid #4ADE80; border-radius:0.13in; padding:0.11in 0.15in; color:var(--white);">
+        <div style="font-size:8.8pt; font-weight:800; color:#86EFAC; letter-spacing:0.6px;">TEACHER QUESTION 04</div>
+        <div style="font-size:11.8pt; font-weight:800; margin:0.03in 0;">Is the student improving over time?</div>
+        <div style="font-size:9.4pt; color:#CBD5E1;">Tracks longitudinal growth across sessions.</div>
+      </div>
+    </div>
+
+    <!-- Main Content: Actual Prototype Screenshots (Screens 4 & 5) + 7 Highlighted Capabilities -->
+    <div style="display:grid; grid-template-columns: 1.24fr 0.76fr; gap:0.2in; flex:1; align-items:stretch;">
+      <!-- Left: Actual Prototype Screenshots (Student Scorecard & Teacher Analytics Dashboard) -->
+      <div style="background:var(--white); border-radius:0.16in; border:1.5px solid var(--slate-200); padding:0.13in 0.16in; display:grid; grid-template-columns: 1fr 1fr; gap:0.15in; align-items:stretch; box-shadow:0 6px 18px rgba(15,23,42,0.04);">
+        <div style="display:flex; flex-direction:column; gap:0.06in;">
+          <div style="display:flex; align-items:center; justify-content:space-between;">
+            <span style="background:var(--shr-blue); color:var(--white); font-size:8.3pt; font-weight:800; padding:0.03in 0.09in; border-radius:999px;">ACTUAL PROTOTYPE • SCREEN 04</span>
+            <span style="font-size:8.8pt; font-weight:700; color:var(--slate-500);">Student Scorecard (Demo Data)</span>
+          </div>
+          <div style="background:var(--bg-neutral); border:1px solid var(--slate-200); border-radius:0.1in; flex:1; display:flex; align-items:center; justify-content:center; padding:0.04in; overflow:hidden;">
+            <img src="file:///C:/Users/lenovo/Downloads/rag-main/TISC_Pitch_Deck_Assets/04_Assessment_Results.png" style="max-width:100%; max-height:3.55in; object-fit:contain;" />
+          </div>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:0.06in;">
+          <div style="display:flex; align-items:center; justify-content:space-between;">
+            <span style="background:var(--navy-900); color:#5EEAD4; font-size:8.3pt; font-weight:800; padding:0.03in 0.09in; border-radius:999px;">ACTUAL PROTOTYPE • SCREEN 05</span>
+            <span style="font-size:8.8pt; font-weight:700; color:var(--slate-500);">Teacher Analytics (Demo Data)</span>
+          </div>
+          <div style="background:var(--bg-neutral); border:1px solid var(--slate-200); border-radius:0.1in; flex:1; display:flex; align-items:center; justify-content:center; padding:0.04in; overflow:hidden;">
+            <img src="file:///C:/Users/lenovo/Downloads/rag-main/TISC_Pitch_Deck_Assets/05_Teacher_Dashboard.png" style="max-width:100%; max-height:3.55in; object-fit:contain;" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: 7 Highlighted Insights + Explicit Demo Data Label -->
+      <div style="background:var(--white); border-radius:0.16in; border:1.5px solid var(--slate-200); padding:0.15in 0.18in; display:flex; flex-direction:column; justify-content:space-between; box-shadow:0 6px 18px rgba(15,23,42,0.04);">
+        <div>
+          <div style="font-size:9.8pt; font-weight:800; color:var(--shr-blue); letter-spacing:0.6px; text-transform:uppercase; margin-bottom:0.08in;">
+            KEY INSIGHTS DELIVERED TO EDUCATORS
+          </div>
+          <div style="display:flex; flex-direction:column; gap:0.07in; font-size:10.3pt; color:var(--slate-700);">
+            <div style="display:flex; align-items:flex-start; gap:0.08in;">
+              <span style="color:var(--shr-blue); font-weight:900;">▸</span>
+              <span><b>Student Reading Performance:</b> Complete bilingual reading summary per learner.</span>
+            </div>
+            <div style="display:flex; align-items:flex-start; gap:0.08in;">
+              <span style="color:var(--shr-blue); font-weight:900;">▸</span>
+              <span><b>Word Accuracy &amp; WPM:</b> Clear visibility into accuracy % and reading speed.</span>
+            </div>
+            <div style="display:flex; align-items:flex-start; gap:0.08in;">
+              <span style="color:var(--teal-600); font-weight:900;">▸</span>
+              <span><b>Reading Fluency:</b> Smoothness, pacing, and hesitation pause indicators.</span>
+            </div>
+            <div style="display:flex; align-items:flex-start; gap:0.08in;">
+              <span style="color:var(--teal-600); font-weight:900;">▸</span>
+              <span><b>Pronunciation Patterns:</b> Visibility into Telugu clusters &amp; English phonics issues.</span>
+            </div>
+            <div style="display:flex; align-items:flex-start; gap:0.08in;">
+              <span style="color:var(--shr-red); font-weight:900;">▸</span>
+              <span><b>Individual Reading Weaknesses:</b> Skipped, repeated, and mispronounced words.</span>
+            </div>
+            <div style="display:flex; align-items:flex-start; gap:0.08in;">
+              <span style="color:var(--amber-500); font-weight:900;">▸</span>
+              <span><b>Classroom-Level Trends:</b> Grade-wise (Classes 1–10) &amp; language comparisons.</span>
+            </div>
+            <div style="display:flex; align-items:flex-start; gap:0.08in;">
+              <span style="color:var(--green-600); font-weight:900;">▸</span>
+              <span><b>Progress History:</b> Session-over-session reading improvement tracking.</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:var(--amber-50); border:1.5px solid var(--amber-500); border-radius:0.1in; padding:0.08in 0.11in; font-size:9.3pt; font-weight:700; color:#92400E; line-height:1.3;">
+          <b>TRANSPARENCY NOTE (DEMO DATA):</b> All numerical scores and charts shown in the prototype screenshots above are illustrative demo data designed to showcase the teacher analytics interface.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <div class="footer-brand">
+      <img src="file:///C:/Users/lenovo/Downloads/rag-main/TISC_Pitch_Deck_Assets/shr_trinity_logo.png" class="footer-mini-logo" />
+      <span>SHR Trinity | AksharaMitra | TISC Innovation Pitch</span>
+    </div>
+    <span style="color:var(--navy-900);">Slide 8 of 12</span>
+  </div>
+</div>
+
+<!-- ======================================================================= -->
+<!-- SLIDE 9 — AI & TECHNICAL ARCHITECTURE -->
+<!-- ======================================================================= -->
+<div class="slide">
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <span class="slide-num-pill">Slide 09</span>
+      <div class="header-text">
+        <h1>The Intelligence Behind AksharaMitra.</h1>
+        <p>Seven-Layer Architecture Built on an Existing Python, Hybrid RAG &amp; Audio-Processing Foundation</p>
+      </div>
+    </div>
+    <div class="corner-logo-lockup">
+      <img src="file:///C:/Users/lenovo/Downloads/rag-main/TISC_Pitch_Deck_Assets/shr_trinity_logo.png" class="corner-logo-img" />
+      <div class="corner-logo-meta">
+        <span class="corner-logo-company">SHR TRINITY</span>
+        <span class="corner-logo-product">AksharaMitra</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="tech-architecture-box" class="workspace" style="justify-content:space-between; gap:0.17in;">
+    <!-- Readiness Legend Bar -->
+    <div style="display:flex; align-items:center; justify-content:space-between; background:var(--white); border:1.5px solid var(--slate-200); border-radius:0.12in; padding:0.09in 0.18in;">
+      <span style="font-size:9.8pt; font-weight:800; color:var(--navy-900); letter-spacing:0.5px;">ARCHITECTURE READINESS LEGEND:</span>
+      <div style="display:flex; align-items:center; gap:0.2in; font-size:9.8pt; font-weight:800;">
+        <span style="display:inline-flex; align-items:center; gap:0.06in; color:var(--shr-blue);"><span style="width:12px; height:12px; border-radius:3px; background:var(--shr-blue); display:inline-block;"></span> Developed UI Prototype</span>
+        <span style="display:inline-flex; align-items:center; gap:0.06in; color:var(--green-600);"><span style="width:12px; height:12px; border-radius:3px; background:var(--green-600); display:inline-block;"></span> Existing Reusable Foundation</span>
+        <span style="display:inline-flex; align-items:center; gap:0.06in; color:#B45309;"><span style="width:12px; height:12px; border-radius:3px; background:var(--amber-500); display:inline-block;"></span> Under Evaluation</span>
+        <span style="display:inline-flex; align-items:center; gap:0.06in; color:var(--teal-700);"><span style="width:12px; height:12px; border-radius:3px; background:var(--teal-600); display:inline-block;"></span> Planned Implementation</span>
+      </div>
+    </div>
+
+    <!-- 7 Connected Architecture Layers -->
+    <div style="display:grid; grid-template-columns: repeat(7, 1fr); gap:0.11in; flex:1; align-items:stretch;">
+      <!-- Layer 1 -->
+      <div style="background:var(--white); border:2px solid var(--shr-blue); border-top:6px solid var(--shr-blue); border-radius:0.15in; padding:0.13in 0.11in; display:flex; flex-direction:column; justify-content:space-between; box-shadow:0 4px 12px rgba(15,23,42,0.04);">
+        <div>
+          <span style="background:var(--shr-blue-soft); color:var(--shr-blue-dark); font-size:7.8pt; font-weight:800; padding:0.03in 0.07in; border-radius:999px;">LAYER 1 • DEVELOPED UI</span>
+          <div style="font-size:11.8pt; font-weight:800; color:var(--navy-900); margin:0.08in 0 0.05in 0; line-height:1.2;">Student Interface</div>
+          <div style="font-size:9.6pt; color:var(--slate-700); line-height:1.38;">
+            • Class (1–10) selection<br>
+            • Telugu &amp; English mode<br>
+            • Passage selection<br>
+            • Browser mic capture
+          </div>
+        </div>
+        <div style="font-size:8.4pt; font-weight:800; color:var(--shr-blue-dark); background:var(--shr-blue-soft); padding:0.05in 0.06in; border-radius:0.06in; text-align:center;">
+          Developed UI Prototype
+        </div>
+      </div>
+
+      <!-- Layer 2 -->
+      <div style="background:var(--white); border:2px solid var(--green-600); border-top:6px solid var(--green-600); border-radius:0.15in; padding:0.13in 0.11in; display:flex; flex-direction:column; justify-content:space-between; box-shadow:0 4px 12px rgba(15,23,42,0.04);">
+        <div>
+          <span style="background:var(--green-100); color:#15803D; font-size:7.8pt; font-weight:800; padding:0.03in 0.07in; border-radius:999px;">LAYER 2 • REUSABLE</span>
+          <div style="font-size:11.8pt; font-weight:800; color:var(--navy-900); margin:0.08in 0 0.05in 0; line-height:1.2;">Audio Capture &amp; Processing</div>
+          <div style="font-size:9.6pt; color:var(--slate-700); line-height:1.38;">
+            • Audio preprocessing<br>
+            • Voice Activity Detection (VAD)<br>
+            • Classroom noise handling<br>
+            • Silence segmentation
+          </div>
+        </div>
+        <div style="font-size:8.4pt; font-weight:800; color:#15803D; background:var(--green-100); padding:0.05in 0.06in; border-radius:0.06in; text-align:center;">
+          Existing Reusable Base
+        </div>
+      </div>
+
+      <!-- Layer 3 -->
+      <div style="background:var(--white); border:2px solid var(--amber-500); border-top:6px solid var(--amber-500); border-radius:0.15in; padding:0.13in 0.11in; display:flex; flex-direction:column; justify-content:space-between; box-shadow:0 4px 12px rgba(15,23,42,0.04);">
+        <div>
+          <span style="background:var(--amber-100); color:#B45309; font-size:7.8pt; font-weight:800; padding:0.03in 0.07in; border-radius:999px;">LAYER 3 • EVALUATING</span>
+          <div style="font-size:11.8pt; font-weight:800; color:var(--navy-900); margin:0.08in 0 0.05in 0; line-height:1.2;">Speech Recognition</div>
+          <div style="font-size:9.6pt; color:var(--slate-700); line-height:1.38;">
+            • Whisper baseline STT<br>
+            • Sarvam AI evaluation for Telugu ASR<br>
+            • Bilingual transcription<br>
+            • Children’s voice testing
+          </div>
+        </div>
+        <div style="font-size:8.4pt; font-weight:800; color:#B45309; background:var(--amber-100); padding:0.05in 0.06in; border-radius:0.06in; text-align:center;">
+          Under Evaluation
+        </div>
+      </div>
+
+      <!-- Layer 4 -->
+      <div style="background:var(--white); border:2px solid var(--teal-600); border-top:6px solid var(--teal-600); border-radius:0.15in; padding:0.13in 0.11in; display:flex; flex-direction:column; justify-content:space-between; box-shadow:0 4px 12px rgba(15,23,42,0.04);">
+        <div>
+          <span style="background:var(--teal-50); color:var(--teal-700); font-size:7.8pt; font-weight:800; padding:0.03in 0.07in; border-radius:999px;">LAYER 4 • PLANNED</span>
+          <div style="font-size:11.8pt; font-weight:800; color:var(--navy-900); margin:0.08in 0 0.05in 0; line-height:1.2;">Word Alignment &amp; Error Analysis</div>
+          <div style="font-size:9.6pt; color:var(--slate-700); line-height:1.38;">
+            • Reference-to-spoken word comparison<br>
+            • Word-level timestamps<br>
+            • Skipped &amp; repeated diff<br>
+            • Pause duration detection
+          </div>
+        </div>
+        <div style="font-size:8.4pt; font-weight:800; color:var(--teal-700); background:var(--teal-50); padding:0.05in 0.06in; border-radius:0.06in; text-align:center;">
+          Planned Implementation
+        </div>
+      </div>
+
+      <!-- Layer 5 -->
+      <div style="background:var(--white); border:2px solid var(--teal-600); border-top:6px solid var(--teal-600); border-radius:0.15in; padding:0.13in 0.11in; display:flex; flex-direction:column; justify-content:space-between; box-shadow:0 4px 12px rgba(15,23,42,0.04);">
+        <div>
+          <span style="background:var(--teal-50); color:var(--teal-700); font-size:7.8pt; font-weight:800; padding:0.03in 0.07in; border-radius:999px;">LAYER 5 • PLANNED</span>
+          <div style="font-size:11.8pt; font-weight:800; color:var(--navy-900); margin:0.08in 0 0.05in 0; line-height:1.2;">Reading Assessment Engine</div>
+          <div style="font-size:9.6pt; color:var(--slate-700); line-height:1.38;">
+            • Word accuracy scoring<br>
+            • Reading speed (WPM)<br>
+            • Fluency &amp; hesitation rubric<br>
+            • Pronunciation evaluation
+          </div>
+        </div>
+        <div style="font-size:8.4pt; font-weight:800; color:var(--teal-700); background:var(--teal-50); padding:0.05in 0.06in; border-radius:0.06in; text-align:center;">
+          Planned Implementation
+        </div>
+      </div>
+
+      <!-- Layer 6 -->
+      <div style="background:var(--white); border:2px solid var(--green-600); border-top:6px solid var(--green-600); border-radius:0.15in; padding:0.13in 0.11in; display:flex; flex-direction:column; justify-content:space-between; box-shadow:0 4px 12px rgba(15,23,42,0.04);">
+        <div>
+          <span style="background:var(--green-100); color:#15803D; font-size:7.8pt; font-weight:800; padding:0.03in 0.07in; border-radius:999px;">LAYER 6 • REUSABLE</span>
+          <div style="font-size:11.8pt; font-weight:800; color:var(--navy-900); margin:0.08in 0 0.05in 0; line-height:1.2;">Hybrid RAG &amp; Recommendation Engine</div>
+          <div style="font-size:9.6pt; color:var(--slate-700); line-height:1.38;">
+            • FAISS vector search<br>
+            • BM25 keyword retrieval<br>
+            • Cross-encoder reranking<br>
+            • Multi-LLM practice engine
+          </div>
+        </div>
+        <div style="font-size:8.4pt; font-weight:800; color:#15803D; background:var(--green-100); padding:0.05in 0.06in; border-radius:0.06in; text-align:center;">
+          Existing Reusable Base
+        </div>
+      </div>
+
+      <!-- Layer 7 -->
+      <div style="background:var(--white); border:2px solid var(--shr-blue); border-top:6px solid var(--shr-blue); border-radius:0.15in; padding:0.13in 0.11in; display:flex; flex-direction:column; justify-content:space-between; box-shadow:0 4px 12px rgba(15,23,42,0.04);">
+        <div>
+          <span style="background:var(--shr-blue-soft); color:var(--shr-blue-dark); font-size:7.8pt; font-weight:800; padding:0.03in 0.07in; border-radius:999px;">LAYER 7 • UI + PLANNED DB</span>
+          <div style="font-size:11.8pt; font-weight:800; color:var(--navy-900); margin:0.08in 0 0.05in 0; line-height:1.2;">Student &amp; Teacher Insights</div>
+          <div style="font-size:9.6pt; color:var(--slate-700); line-height:1.38;">
+            • Student scorecards<br>
+            • Guided practice cards<br>
+            • Teacher analytics views<br>
+            • Session progress tracking
+          </div>
+        </div>
+        <div style="font-size:8.4pt; font-weight:800; color:var(--shr-blue-dark); background:var(--shr-blue-soft); padding:0.05in 0.06in; border-radius:0.06in; text-align:center;">
+          Prototype UI Developed
+        </div>
+      </div>
+    </div>
+
+    <!-- Technical Feasibility Callout -->
+    <div style="background:var(--navy-900); border-radius:0.13in; padding:0.12in 0.2in; color:var(--white); font-size:10.3pt; line-height:1.35;">
+      <span style="color:var(--amber-400); font-weight:800;">Technical Feasibility on SHR Trinity’s Python Codebase:</span> AksharaMitra leverages our existing <b>Hybrid RAG pipeline (FAISS + BM25 + Cross-Encoder Reranking)</b>, <b>Audio VAD &amp; noise-filtering service</b>, <b>Whisper baseline integration</b>, and <b>5-Screen UI Prototype</b>—while transparently scoping Layers 3–5 for upcoming integration and classroom validation.
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <div class="footer-brand">
+      <img src="file:///C:/Users/lenovo/Downloads/rag-main/TISC_Pitch_Deck_Assets/shr_trinity_logo.png" class="footer-mini-logo" />
+      <span>SHR Trinity | AksharaMitra | TISC Innovation Pitch</span>
+    </div>
+    <span style="color:var(--navy-900);">Slide 9 of 12</span>
+  </div>
+</div>
+
+<!-- ======================================================================= -->
+<!-- SLIDE 10 — INNOVATION & DIFFERENTIATION -->
+<!-- ======================================================================= -->
+<div class="slide">
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <span class="slide-num-pill">Slide 10</span>
+      <div class="header-text">
+        <h1>Not Just Measuring Reading. Enabling Reading Improvement.</h1>
+        <p>How AksharaMitra Transforms a Static Assessment Score Into a Continuous Learning Cycle</p>
+      </div>
+    </div>
+    <div class="corner-logo-lockup">
+      <img src="file:///C:/Users/lenovo/Downloads/rag-main/TISC_Pitch_Deck_Assets/shr_trinity_logo.png" class="corner-logo-img" />
+      <div class="corner-logo-meta">
+        <span class="corner-logo-company">SHR TRINITY</span>
+        <span class="corner-logo-product">AksharaMitra</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="innovation-cycle-box" class="workspace" style="display:grid; grid-template-columns: 0.94fr 1.06fr; gap:0.26in; align-items:stretch;">
+    <!-- Left: Visual Contrast — Conventional One-Time Assessment vs. AksharaMitra Learning Cycle -->
+    <div style="display:flex; flex-direction:column; gap:0.16in; justify-content:space-between;">
+      <!-- Top Box: Conventional One-Time Reading Assessment -->
+      <div style="background:var(--slate-100); border:2px solid var(--slate-300); border-radius:0.18in; padding:0.17in 0.2in;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.08in;">
+          <span style="background:var(--slate-200); color:var(--slate-700); font-size:8.8pt; font-weight:800; padding:0.04in 0.1in; border-radius:999px;">CONVENTIONAL ONE-TIME READING ASSESSMENT</span>
+          <span style="font-size:9.2pt; font-weight:700; color:var(--slate-500);">Measures Only</span>
+        </div>
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:0.08in; margin:0.11in 0;">
+          <div style="background:var(--white); border:1.5px solid var(--slate-300); border-radius:0.1in; padding:0.08in 0.1in; text-align:center; flex:1; font-size:10.2pt; font-weight:700; color:var(--slate-700);">Oral / Written Check</div>
+          <span style="color:var(--slate-500); font-weight:900; font-size:13pt;">→</span>
+          <div style="background:var(--white); border:1.5px solid var(--slate-300); border-radius:0.1in; padding:0.08in 0.1in; text-align:center; flex:1; font-size:10.2pt; font-weight:700; color:var(--slate-700);">Summary Score / Grade</div>
+          <span style="color:var(--slate-500); font-weight:900; font-size:13pt;">→</span>
+          <div style="background:var(--shr-red-soft); border:1.5px solid #FCA5A5; border-radius:0.1in; padding:0.08in 0.1in; text-align:center; flex:1; font-size:10.2pt; font-weight:800; color:#B91C1C;">No Learning Loop ✕</div>
+        </div>
+        <div style="font-size:9.8pt; color:var(--slate-600); line-height:1.34;">
+          Stops at measurement: assigns a grade or raw transcript without diagnosing root phonetic gaps or generating personalized remedial practice.
+        </div>
+      </div>
+
+      <!-- Bottom Box: AksharaMitra Continuous Learning Cycle -->
+      <div style="background:var(--navy-900); border:2.5px solid var(--shr-blue); border-radius:0.18in; padding:0.19in 0.22in; color:var(--white); flex:1; display:flex; flex-direction:column; justify-content:space-between; box-shadow:0 12px 26px rgba(10,24,46,0.16);">
+        <div>
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.09in;">
+            <span style="background:rgba(10,108,255,0.22); border:1px solid var(--shr-blue); color:#93C5FD; font-size:8.8pt; font-weight:800; padding:0.04in 0.1in; border-radius:999px;">THE AKSHARAMITRA LEARNING CYCLE</span>
+            <span style="font-size:9.2pt; font-weight:800; color:var(--amber-400);">Measures &amp; Improves</span>
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr auto 1fr; grid-template-rows:auto auto auto; gap:0.08in; align-items:center; margin:0.09in 0;">
+            <div style="background:rgba(10,108,255,0.22); border:1.5px solid var(--shr-blue); border-radius:0.12in; padding:0.09in 0.12in; text-align:center;">
+              <div style="font-size:8.3pt; font-weight:800; color:#93C5FD;">DIAGNOSTIC LISTENING</div>
+              <div style="font-size:11.2pt; font-weight:800; color:var(--white);">Word-Level Error Mapping</div>
+            </div>
+            <div style="font-size:15pt; font-weight:900; color:var(--teal-500);">→</div>
+            <div style="background:rgba(245,158,11,0.2); border:1.5px solid var(--amber-400); border-radius:0.12in; padding:0.09in 0.12in; text-align:center;">
+              <div style="font-size:8.3pt; font-weight:800; color:var(--amber-400);">LINGUISTIC ROOT CAUSE</div>
+              <div style="font-size:11.2pt; font-weight:800; color:var(--white);">Telugu Ottulu &amp; English Phonics</div>
+            </div>
+
+            <div style="text-align:center; font-size:13pt; font-weight:900; color:#4ADE80;">↑</div>
+            <div></div>
+            <div style="text-align:center; font-size:13pt; font-weight:900; color:var(--teal-500);">↓</div>
+
+            <div style="background:rgba(22,163,74,0.22); border:1.5px solid #4ADE80; border-radius:0.12in; padding:0.09in 0.12in; text-align:center;">
+              <div style="font-size:8.3pt; font-weight:800; color:#86EFAC;">LONGITUDINAL MASTERY</div>
+              <div style="font-size:11.2pt; font-weight:800; color:var(--white);">Continuous Growth &amp; Insights</div>
+            </div>
+            <div style="font-size:15pt; font-weight:900; color:#4ADE80;">←</div>
+            <div style="background:rgba(20,184,166,0.22); border:1.5px solid var(--teal-500); border-radius:0.12in; padding:0.09in 0.12in; text-align:center;">
+              <div style="font-size:8.3pt; font-weight:800; color:#5EEAD4;">PERSONALIZED PRACTICE</div>
+              <div style="font-size:11.2pt; font-weight:800; color:var(--white);">Mistake-Driven Practice Drills</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="font-size:10.2pt; color:#CCFBF1; font-weight:600; text-align:center; background:rgba(255,255,255,0.05); padding:0.07in 0.12in; border-radius:0.08in;">
+          Core Shift: Moves from “What score did the child get?” to “How do we help the child read better today?”
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: 8 Key Differentiators -->
+    <div style="display:grid; grid-template-columns:1fr 1fr; grid-template-rows:repeat(4, 1fr); gap:0.13in;">
+      <div style="background:var(--white); border:1.5px solid var(--slate-200); border-left:4px solid var(--shr-blue); border-radius:0.13in; padding:0.11in 0.15in; display:flex; flex-direction:column; justify-content:center;">
+        <div style="font-size:11.8pt; font-weight:800; color:var(--navy-900);">1. Bilingual Telugu &amp; English Support</div>
+        <div style="font-size:9.8pt; color:var(--slate-700); margin-top:0.02in;">Designed specifically for both mother-tongue Telugu and English reading across Classes 1–10.</div>
+      </div>
+
+      <div style="background:var(--white); border:1.5px solid var(--slate-200); border-left:4px solid var(--teal-600); border-radius:0.13in; padding:0.11in 0.15in; display:flex; flex-direction:column; justify-content:center;">
+        <div style="font-size:11.8pt; font-weight:800; color:var(--navy-900);">2. Word-Level Reading Diagnostics</div>
+        <div style="font-size:9.8pt; color:var(--slate-700); margin-top:0.02in;">Pinpoints exact skipped, repeated, and mispronounced words rather than passage-level averages.</div>
+      </div>
+
+      <div style="background:var(--white); border:1.5px solid var(--slate-200); border-left:4px solid var(--shr-red); border-radius:0.13in; padding:0.11in 0.15in; display:flex; flex-direction:column; justify-content:center;">
+        <div style="font-size:11.8pt; font-weight:800; color:var(--navy-900);">3. Telugu-Specific Linguistic Challenges</div>
+        <div style="font-size:9.8pt; color:var(--slate-700); margin-top:0.02in;">Addresses Telugu <i>Ottulu</i>, conjunct consonants (<i>సంయుక్తాక్షరాలు</i>), and <i>Mahapranalu</i>.</div>
+      </div>
+
+      <div style="background:var(--white); border:1.5px solid var(--slate-200); border-left:4px solid var(--shr-blue); border-radius:0.13in; padding:0.11in 0.15in; display:flex; flex-direction:column; justify-content:center;">
+        <div style="font-size:11.8pt; font-weight:800; color:var(--navy-900);">4. English Phonics &amp; Pronunciation</div>
+        <div style="font-size:9.8pt; color:var(--slate-700); margin-top:0.02in;">Supports English syllable chunking, vowel blends, and multi-syllabic word decoding.</div>
+      </div>
+
+      <div style="background:var(--white); border:1.5px solid var(--slate-200); border-left:4px solid var(--teal-600); border-radius:0.13in; padding:0.11in 0.15in; display:flex; flex-direction:column; justify-content:center;">
+        <div style="font-size:11.8pt; font-weight:800; color:var(--navy-900);">5. Mistake-Driven Personalized Practice</div>
+        <div style="font-size:9.8pt; color:var(--slate-700); margin-top:0.02in;">Generates practice exercises directly from the specific words and syllables a child missed.</div>
+      </div>
+
+      <div style="background:var(--white); border:1.5px solid var(--slate-200); border-left:4px solid var(--amber-500); border-radius:0.13in; padding:0.11in 0.15in; display:flex; flex-direction:column; justify-content:center;">
+        <div style="font-size:11.8pt; font-weight:800; color:var(--navy-900);">6. Student &amp; Teacher Intelligence</div>
+        <div style="font-size:9.8pt; color:var(--slate-700); margin-top:0.02in;">Provides encouraging feedback for children and actionable intervention views for educators.</div>
+      </div>
+
+      <div style="background:var(--white); border:1.5px solid var(--slate-200); border-left:4px solid var(--shr-blue); border-radius:0.13in; padding:0.11in 0.15in; display:flex; flex-direction:column; justify-content:center;">
+        <div style="font-size:11.8pt; font-weight:800; color:var(--navy-900);">7. Continuous Reading Progress Tracking</div>
+        <div style="font-size:9.8pt; color:var(--slate-700); margin-top:0.02in;">Monitors accuracy, WPM, and fluency across multiple reading sessions over time.</div>
+      </div>
+
+      <div style="background:var(--white); border:1.5px solid var(--slate-200); border-left:4px solid var(--green-600); border-radius:0.13in; padding:0.11in 0.15in; display:flex; flex-direction:column; justify-content:center;">
+        <div style="font-size:11.8pt; font-weight:800; color:var(--navy-900);">8. Closed-Loop Assessment &amp; Improvement</div>
+        <div style="font-size:9.8pt; color:var(--slate-700); margin-top:0.02in;">Unifies oral assessment, gap diagnosis, and guided practice in one cohesive platform.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <div class="footer-brand">
+      <img src="file:///C:/Users/lenovo/Downloads/rag-main/TISC_Pitch_Deck_Assets/shr_trinity_logo.png" class="footer-mini-logo" />
+      <span>SHR Trinity | AksharaMitra | TISC Innovation Pitch</span>
+    </div>
+    <span style="color:var(--navy-900);">Slide 10 of 12</span>
+  </div>
+</div>
+
+<!-- ======================================================================= -->
+<!-- SLIDE 11 — DEVELOPMENT STATUS, FEASIBILITY & ROADMAP -->
+<!-- ======================================================================= -->
+<div class="slide">
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <span class="slide-num-pill">Slide 11</span>
+      <div class="header-text">
+        <h1>Built on an Existing Foundation. Advancing Toward Classroom Validation.</h1>
+        <p>Honest Implementation Status and Five-Phase Progression from Prototype to Multi-School Scale</p>
+      </div>
+    </div>
+    <div class="corner-logo-lockup">
+      <img src="file:///C:/Users/lenovo/Downloads/rag-main/TISC_Pitch_Deck_Assets/shr_trinity_logo.png" class="corner-logo-img" />
+      <div class="corner-logo-meta">
+        <span class="corner-logo-company">SHR TRINITY</span>
+        <span class="corner-logo-product">AksharaMitra</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="roadmap-feasibility-box" class="workspace" style="justify-content:space-between; gap:0.17in;">
+    <!-- Three Distinct Sections: A. DEVELOPED TODAY | B. UNDER EVALUATION / DEVELOPMENT | C. FUTURE ROADMAP -->
+    <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:0.2in; flex:1;">
+      <!-- Section A: Developed Today -->
+      <div style="background:var(--white); border:2px solid var(--green-600); border-radius:0.16in; overflow:hidden; display:flex; flex-direction:column; box-shadow:0 6px 16px rgba(15,23,42,0.04);">
+        <div style="background:var(--green-600); color:var(--white); padding:0.12in 0.18in; display:flex; align-items:center; justify-content:space-between;">
+          <span style="font-size:12.5pt; font-weight:900;">A. DEVELOPED TODAY</span>
+          <span style="background:rgba(255,255,255,0.22); font-size:8.3pt; font-weight:800; padding:0.03in 0.09in; border-radius:999px;">EXISTING FOUNDATION</span>
+        </div>
+        <div style="padding:0.14in 0.18in; display:flex; flex-direction:column; gap:0.085in; font-size:10.5pt; color:var(--slate-700); flex:1;">
+          <div style="display:flex; align-items:flex-start; gap:0.09in;">
+            <span style="color:var(--green-600); font-weight:900;">✓</span>
+            <span><b>Five-Screen Functional UI Prototype:</b> Complete interactive prototype across student, analysis, scorecard, and teacher views.</span>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:0.09in;">
+            <span style="color:var(--green-600); font-weight:900;">✓</span>
+            <span><b>Student &amp; Teacher Interface Workflows:</b> Class 1–10 and Telugu/English passage selection &amp; dashboard layouts.</span>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:0.09in;">
+            <span style="color:var(--green-600); font-weight:900;">✓</span>
+            <span><b>Existing Hybrid RAG Foundation:</b> FAISS vector search, BM25 lexical retrieval, cross-encoder reranking &amp; multi-LLM integration.</span>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:0.09in;">
+            <span style="color:var(--green-600); font-weight:900;">✓</span>
+            <span><b>Existing Audio-Processing &amp; VAD Foundation:</b> Voice Activity Detection, noise handling, and audio preprocessing modules.</span>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:0.09in;">
+            <span style="color:var(--green-600); font-weight:900;">✓</span>
+            <span><b>Baseline Whisper Speech Recognition Workflow:</b> Existing speech-to-text transcription baseline in the Python codebase.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section B: Under Evaluation / Development -->
+      <div style="background:var(--white); border:2px solid var(--amber-500); border-radius:0.16in; overflow:hidden; display:flex; flex-direction:column; box-shadow:0 6px 16px rgba(15,23,42,0.04);">
+        <div style="background:#D97706; color:var(--white); padding:0.12in 0.18in; display:flex; align-items:center; justify-content:space-between;">
+          <span style="font-size:12.5pt; font-weight:900;">B. UNDER EVALUATION / DEV</span>
+          <span style="background:rgba(255,255,255,0.22); font-size:8.3pt; font-weight:800; padding:0.03in 0.09in; border-radius:999px;">IN PROGRESS</span>
+        </div>
+        <div style="padding:0.14in 0.18in; display:flex; flex-direction:column; gap:0.085in; font-size:10.5pt; color:var(--slate-700); flex:1;">
+          <div style="display:flex; align-items:flex-start; gap:0.09in;">
+            <span style="color:#D97706; font-weight:900;">⧗</span>
+            <span><b>Telugu ASR Benchmarking (Sarvam AI &amp; Whisper):</b> Evaluating recognition accuracy on Telugu reading passages.</span>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:0.09in;">
+            <span style="color:#D97706; font-weight:900;">⧗</span>
+            <span><b>Children’s Voice Recognition Accuracy:</b> Testing and tuning acoustic recognition for student speech across grades.</span>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:0.09in;">
+            <span style="color:#D97706; font-weight:900;">⧗</span>
+            <span><b>Word-Level Alignment:</b> Reference-to-spoken forced word alignment and pause timestamp mapping.</span>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:0.09in;">
+            <span style="color:#D97706; font-weight:900;">⧗</span>
+            <span><b>Pronunciation Assessment:</b> Developing phonetic evaluation for Telugu <i>Ottulu / Mahapranalu</i> and English phonics.</span>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:0.09in;">
+            <span style="color:#D97706; font-weight:900;">⧗</span>
+            <span><b>Reading Error Detection &amp; Scoring Validation:</b> Calibrating skipped, repeated, and mispronounced word scoring logic.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section C: Future Roadmap -->
+      <div style="background:var(--white); border:2px solid var(--shr-blue); border-radius:0.16in; overflow:hidden; display:flex; flex-direction:column; box-shadow:0 6px 16px rgba(15,23,42,0.04);">
+        <div style="background:var(--shr-blue); color:var(--white); padding:0.12in 0.18in; display:flex; align-items:center; justify-content:space-between;">
+          <span style="font-size:12.5pt; font-weight:900;">C. FUTURE ROADMAP</span>
+          <span style="background:rgba(255,255,255,0.22); font-size:8.3pt; font-weight:800; padding:0.03in 0.09in; border-radius:999px;">PLANNED EXPANSION</span>
+        </div>
+        <div style="padding:0.14in 0.18in; display:flex; flex-direction:column; gap:0.085in; font-size:10.5pt; color:var(--slate-700); flex:1;">
+          <div style="display:flex; align-items:flex-start; gap:0.09in;">
+            <span style="color:var(--shr-blue); font-weight:900;">→</span>
+            <span><b>Permissioned School Pilot:</b> Real classroom testing with formal school and parental permissions.</span>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:0.09in;">
+            <span style="color:var(--shr-blue); font-weight:900;">→</span>
+            <span><b>Teacher Validation &amp; Student Feedback:</b> Benchmarking AI diagnostics against experienced educator evaluations.</span>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:0.09in;">
+            <span style="color:var(--shr-blue); font-weight:900;">→</span>
+            <span><b>Curriculum-Aligned Passage Expansion:</b> Comprehensive Classes 1–10 Telugu &amp; English reading knowledge base.</span>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:0.09in;">
+            <span style="color:var(--shr-blue); font-weight:900;">→</span>
+            <span><b>Multi-School Deployment:</b> Scalable cloud/hybrid deployment across school districts.</span>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:0.09in;">
+            <span style="color:var(--shr-blue); font-weight:900;">→</span>
+            <span><b>Future Indian-Language Expansion:</b> Extending the modular pipeline to additional regional school languages.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Five-Phase Roadmap: Prototype -> AI Validation -> School Pilot -> Refinement -> Scale -->
+    <div style="background:var(--navy-900); border-radius:0.16in; padding:0.15in 0.22in; border:2px solid var(--shr-blue);">
+      <div style="font-size:9.2pt; font-weight:800; color:var(--amber-400); letter-spacing:1px; text-transform:uppercase; margin-bottom:0.08in; text-align:center;">
+        FIVE-PHASE IMPLEMENTATION ROADMAP
+      </div>
+      <div style="display:grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr auto 1fr; align-items:center; gap:0.1in;">
+        <div style="background:rgba(22,163,74,0.24); border:1.5px solid #4ADE80; border-radius:0.11in; padding:0.08in 0.1in; text-align:center;">
+          <div style="font-size:8pt; font-weight:800; color:#86EFAC;">PHASE 01 • COMPLETED</div>
+          <div style="font-size:12.5pt; font-weight:900; color:var(--white);">Prototype</div>
+          <div style="font-size:8.8pt; color:#DCFCE7;">5-Screen UI &amp; RAG Base</div>
+        </div>
+        <div style="font-size:15pt; font-weight:900; color:#4ADE80;">→</div>
+        <div style="background:rgba(245,158,11,0.22); border:1.5px solid var(--amber-400); border-radius:0.11in; padding:0.08in 0.1in; text-align:center;">
+          <div style="font-size:8pt; font-weight:800; color:var(--amber-400);">PHASE 02 • ACTIVE</div>
+          <div style="font-size:12.5pt; font-weight:900; color:var(--white);">AI Validation</div>
+          <div style="font-size:8.8pt; color:#FEF3C7;">ASR &amp; Word Alignment</div>
+        </div>
+        <div style="font-size:15pt; font-weight:900; color:var(--amber-400);">→</div>
+        <div style="background:rgba(20,184,166,0.22); border:1.5px solid var(--teal-500); border-radius:0.11in; padding:0.08in 0.1in; text-align:center;">
+          <div style="font-size:8pt; font-weight:800; color:#5EEAD4;">PHASE 03 • PLANNED</div>
+          <div style="font-size:12.5pt; font-weight:900; color:var(--white);">School Pilot</div>
+          <div style="font-size:8.8pt; color:#CCFBF1;">Permissioned Classrooms</div>
+        </div>
+        <div style="font-size:15pt; font-weight:900; color:var(--teal-500);">→</div>
+        <div style="background:rgba(10,108,255,0.22); border:1.5px solid var(--shr-blue); border-radius:0.11in; padding:0.08in 0.1in; text-align:center;">
+          <div style="font-size:8pt; font-weight:800; color:#93C5FD;">PHASE 04 • PLANNED</div>
+          <div style="font-size:12.5pt; font-weight:900; color:var(--white);">Refinement</div>
+          <div style="font-size:8.8pt; color:#DBEAFE;">Teacher &amp; Student Feedback</div>
+        </div>
+        <div style="font-size:15pt; font-weight:900; color:var(--shr-blue);">→</div>
+        <div style="background:rgba(10,108,255,0.28); border:1.5px solid #93C5FD; border-radius:0.11in; padding:0.08in 0.1in; text-align:center;">
+          <div style="font-size:8pt; font-weight:800; color:#BFDBFE;">PHASE 05 • LONG-TERM</div>
+          <div style="font-size:12.5pt; font-weight:900; color:var(--white);">Scale</div>
+          <div style="font-size:8.8pt; color:#EFF6FF;">Multi-School &amp; Languages</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <div class="footer-brand">
+      <img src="file:///C:/Users/lenovo/Downloads/rag-main/TISC_Pitch_Deck_Assets/shr_trinity_logo.png" class="footer-mini-logo" />
+      <span>SHR Trinity | AksharaMitra | TISC Innovation Pitch</span>
+    </div>
+    <span style="color:var(--navy-900);">Slide 11 of 12</span>
+  </div>
+</div>
+
+<!-- ======================================================================= -->
+<!-- SLIDE 12 — IMPACT & CLOSING VISION -->
+<!-- ======================================================================= -->
+<div class="slide slide-dark">
+  <div style="position:absolute; inset:0; background:radial-gradient(circle at 80% 35%, rgba(10,108,255,0.24), transparent 55%), radial-gradient(circle at 20% 75%, rgba(13,148,136,0.2), transparent 50%); pointer-events:none;"></div>
+
+  <div class="top-bar" style="background:transparent;">
+    <div class="top-bar-left">
+      <span class="slide-num-pill">Slide 12</span>
+      <div class="header-text">
+        <h1>A Future Where Every Child Can Read with Confidence.</h1>
+        <p>Expected Educational Impact Across Students, Teachers, and Schools</p>
+      </div>
+    </div>
+    <div class="corner-logo-lockup">
+      <img src="file:///C:/Users/lenovo/Downloads/rag-main/TISC_Pitch_Deck_Assets/shr_trinity_logo.png" class="corner-logo-img" />
+      <div class="corner-logo-meta">
+        <span class="corner-logo-company">SHR TRINITY</span>
+        <span class="corner-logo-product">AksharaMitra</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="workspace" style="justify-content:space-between; gap:0.2in; z-index:2;">
+    <!-- Top 3 Impact Pillars: STUDENTS | TEACHERS | SCHOOLS -->
+    <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:0.2in;">
+      <!-- Students -->
+      <div style="background:rgba(18,38,71,0.9); border:2px solid var(--amber-400); border-radius:0.18in; padding:0.17in 0.2in; display:flex; flex-direction:column; gap:0.08in;">
+        <div style="display:flex; align-items:center; justify-content:space-between;">
+          <span style="background:rgba(251,191,36,0.18); color:var(--amber-400); font-size:9pt; font-weight:800; padding:0.04in 0.11in; border-radius:999px;">EXPECTED BENEFIT 01 • STUDENTS</span>
+          <span style="font-size:12.5pt; font-weight:900; color:var(--amber-400);">01</span>
+        </div>
+        <div style="font-size:15.5pt; font-weight:900; color:var(--white);">For Students (Classes 1–10)</div>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:0.07in; font-size:10.6pt; color:#E2E8F0; line-height:1.35;">
+          <li><span style="color:var(--amber-400); font-weight:900;">✦</span> <b>More Opportunities for Reading Practice:</b> Frequent, encouraging oral reading sessions.</li>
+          <li><span style="color:var(--amber-400); font-weight:900;">✦</span> <b>Early Visibility Into Learning Difficulties:</b> Identifies word and syllable gaps early.</li>
+          <li><span style="color:var(--amber-400); font-weight:900;">✦</span> <b>Personalized Support:</b> Practice tailored to individual Telugu &amp; English mistakes.</li>
+          <li><span style="color:var(--amber-400); font-weight:900;">✦</span> <b>Greater Reading Confidence:</b> Empowers hesitant readers to speak and improve.</li>
+        </ul>
+      </div>
+
+      <!-- Teachers -->
+      <div style="background:rgba(18,38,71,0.9); border:2px solid var(--teal-500); border-radius:0.18in; padding:0.17in 0.2in; display:flex; flex-direction:column; gap:0.08in;">
+        <div style="display:flex; align-items:center; justify-content:space-between;">
+          <span style="background:rgba(20,184,166,0.2); color:#5EEAD4; font-size:9pt; font-weight:800; padding:0.04in 0.11in; border-radius:999px;">EXPECTED BENEFIT 02 • TEACHERS</span>
+          <span style="font-size:12.5pt; font-weight:900; color:#5EEAD4;">02</span>
+        </div>
+        <div style="font-size:15.5pt; font-weight:900; color:var(--white);">For Classroom Teachers</div>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:0.07in; font-size:10.6pt; color:#E2E8F0; line-height:1.35;">
+          <li><span style="color:var(--teal-500); font-weight:900;">✦</span> <b>Reduced Manual Assessment Effort:</b> Automates time-consuming error logging and timing.</li>
+          <li><span style="color:var(--teal-500); font-weight:900;">✦</span> <b>More Detailed Student Reading Insights:</b> Word-level visibility across all 35+ students.</li>
+          <li><span style="color:var(--teal-500); font-weight:900;">✦</span> <b>Better-Targeted Intervention:</b> Helps teachers focus instruction on exact learning gaps.</li>
+        </ul>
+      </div>
+
+      <!-- Schools -->
+      <div style="background:rgba(18,38,71,0.9); border:2px solid var(--shr-blue); border-radius:0.18in; padding:0.17in 0.2in; display:flex; flex-direction:column; gap:0.08in;">
+        <div style="display:flex; align-items:center; justify-content:space-between;">
+          <span style="background:rgba(10,108,255,0.22); color:#93C5FD; font-size:9pt; font-weight:800; padding:0.04in 0.11in; border-radius:999px;">EXPECTED BENEFIT 03 • SCHOOLS</span>
+          <span style="font-size:12.5pt; font-weight:900; color:#93C5FD;">03</span>
+        </div>
+        <div style="font-size:15.5pt; font-weight:900; color:var(--white);">For Schools &amp; Institutions</div>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:0.07in; font-size:10.6pt; color:#E2E8F0; line-height:1.35;">
+          <li><span style="color:var(--shr-blue); font-weight:900;">✦</span> <b>Structured Reading Progress Monitoring:</b> Longitudinal literacy tracking from Class 1 to 10.</li>
+          <li><span style="color:var(--shr-blue); font-weight:900;">✦</span> <b>Bilingual Literacy Visibility:</b> Unified insight into both Telugu and English reading proficiency.</li>
+          <li><span style="color:var(--shr-blue); font-weight:900;">✦</span> <b>Data-Informed Support Strategies:</b> Guides school-level foundational literacy programs.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom Closing Vision Banner with Prominent Original SHR Trinity Logo + AksharaMitra Identity -->
+    <div style="background:linear-gradient(135deg, rgba(18,38,71,0.95), rgba(10,108,255,0.28)); border:2.5px solid var(--shr-blue); border-left:6px solid var(--shr-red); border-radius:0.22in; padding:0.2in 0.26in; display:grid; grid-template-columns: auto 1fr 0.56fr; gap:0.24in; align-items:center; box-shadow:0 16px 38px rgba(0,0,0,0.4);">
+      <!-- Prominent Original SHR Trinity Company Logo -->
+      <div style="display:flex; flex-direction:column; align-items:center; gap:0.06in; background:rgba(255,255,255,0.06); border:1.5px solid rgba(147,197,253,0.35); border-radius:0.18in; padding:0.14in 0.18in;">
+        <img src="file:///C:/Users/lenovo/Downloads/rag-main/TISC_Pitch_Deck_Assets/shr_trinity_logo.png" style="width:1.25in; height:1.25in; border-radius:0.16in; object-fit:contain; background:var(--white); padding:0.06in; box-shadow:0 6px 18px rgba(0,0,0,0.35);" />
+        <span style="font-size:10pt; font-weight:900; color:var(--white); letter-spacing:1px;">SHR TRINITY</span>
+      </div>
+
+      <!-- Product Identity & Slogans -->
+      <div style="display:flex; flex-direction:column; gap:0.07in;">
+        <div style="display:inline-flex; align-items:center; gap:0.1in;">
+          <span style="background:var(--shr-red); color:var(--white); font-size:9.2pt; font-weight:900; padding:0.04in 0.14in; border-radius:999px; letter-spacing:0.8px;">SHR TRINITY | TISC INNOVATION PITCH</span>
+          <span style="font-size:10pt; font-weight:700; color:#93C5FD;">An Education Technology Innovation by SHR Trinity</span>
+        </div>
+        <h2 style="font-size:32pt; font-weight:900; color:var(--white); line-height:1.08; letter-spacing:-0.6px; margin-top:0.02in;">
+          AksharaMitra — <span style="color:var(--amber-400);">అక్షరమిత్ర</span>
+        </h2>
+        <div style="font-size:19pt; font-weight:800; color:#5EEAD4; line-height:1.22;">
+          Every Child Heard. Every Reader Empowered.
+        </div>
+        <div style="font-size:14.5pt; font-weight:700; color:#FDE68A; line-height:1.3;">
+          ప్రతి చిన్నారి స్వరం వినిపించాలి • ప్రతి చదువు మెరుగుపడాలి.
+        </div>
+      </div>
+
+      <!-- Hero Child Reading Visual -->
+      <div style="height:2.25in; border-radius:0.16in; overflow:hidden; border:2px solid var(--amber-400); box-shadow:0 10px 24px rgba(0,0,0,0.4);">
+        <img src="file:///C:/Users/lenovo/Downloads/rag-main/TISC_Pitch_Deck_Assets/hero_child_reading.jpg" style="width:100%; height:100%; object-fit:cover; display:block;" />
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar footer-bar-dark">
+    <div class="footer-brand">
+      <img src="file:///C:/Users/lenovo/Downloads/rag-main/TISC_Pitch_Deck_Assets/shr_trinity_logo.png" class="footer-mini-logo" />
+      <span>SHR Trinity | AksharaMitra | TISC Innovation Pitch</span>
+    </div>
+    <span style="color:#93C5FD;">Slide 12 of 12</span>
+  </div>
+</div>
+
+</body>
+</html>

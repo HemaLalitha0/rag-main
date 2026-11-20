@@ -1,7 +1,7 @@
 """
 Static Mock Data Module for:
-Every Child Reads – Telugu & English AI Reading Assessment Platform
-Department of School Education, Government of Andhra Pradesh (Frontend-Only Prototype)
+AksharaMitra (అక్షరమిత్ర) – AI-Powered Bilingual Reading Intelligence & Personalized Learning Platform
+An Education Technology Innovation by SHR Trinity
 """
 from typing import Any, Dict, List
 

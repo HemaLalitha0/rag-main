@@ -1,22 +1,20 @@
-# 📖 Every Child Reads – Telugu AI Assessment (ప్రతి బిడ్డా చదవాలి)
-### *AI-Powered Student Reading Assessment Platform Prototype*
-**Department of School Education, Government of Andhra Pradesh**
+# 📖 AksharaMitra (అక్షరమిత్ర) – AI-Powered Bilingual Reading & Learning Companion
+### *Every Child Heard. Every Reader Empowered. • ప్రతి చిన్నారి స్వరం వినిపించాలి • ప్రతి చదువు మెరుగుపడాలి*
+**An Education Technology Innovation by SHR Trinity**
 
 ---
 
 ## 🏛️ Project Overview
 
-**Every Child Reads (ప్రతి బిడ్డా చదవాలి)** is a state-of-the-art frontend UI prototype developed for the Department of School Education to demonstrate how artificial intelligence can transform foundational literacy and reading assessments across schools in Andhra Pradesh (AP FLN Mission).
+**AksharaMitra (అక్షరమిత్ర)** is a student-focused bilingual reading and learning companion developed by **SHR Trinity** to help school students across **Classes 1 through 10** improve their oral reading skills in **Telugu** and **English**.
 
-The platform provides a child-friendly, interactive reading environment for students reading **Telugu** and **English** passages across **Classes 1 through 10**, evaluates word-level phonetic accuracy and fluency, and delivers actionable, systemic analytics to classroom teachers and headmasters.
-
-> **Note:** This repository is an official, presentation-ready frontend UI prototype. All data is driven by authentic static mock data. No backend, database, speech API, or AI models are required to execute or demonstrate this prototype.
+The platform provides a child-friendly, interactive reading environment, evaluates word-level phonetic accuracy and fluency (`READ → LISTEN → ANALYSE → IDENTIFY → IMPROVE → TRACK`), recommends targeted reading practice, and delivers actionable student and classroom insights to teachers and schools.
 
 ---
 
 ## ✨ Features & Available Screens
 
-The application includes five fully functional, interconnected UI screens demonstrating the end-to-end student assessment journey and teacher reporting experience:
+The application includes five interconnected UI screens demonstrating the end-to-end student reading journey and teacher intelligence experience:
 
 ### 1. Student Dashboard (`1. Student Dashboard`)
 - **Student Profile Hero:** Card featuring the student's avatar, English & Telugu names, student roll number, school name, district, active streak counter (🔥 12 Days), and current proficiency tier.
@@ -49,7 +47,7 @@ The application includes five fully functional, interconnected UI screens demons
 - **Speech Observations Panel:** Detailed notes on Telugu guninthalu, samyuktaksharalu, and syllable rhythm.
 
 ### 4. Assessment Results Screen (`4. Assessment Results`)
-- **Official Scorecard Header:** Department emblem motif, student ID, school, and overall score (**89 / 100 — Level 3: Proficient Reader**).
+- **AksharaMitra Evaluation Report Header:** Student ID, school, and overall score (**89 / 100 — Level 3: Proficient Reader**).
 - **4 Core Diagnostic Metrics:**
   - **Reading Accuracy:** 90.9%
   - **Pronunciation Score:** 86 / 100
@@ -57,7 +55,7 @@ The application includes five fully functional, interconnected UI screens demons
   - **Reading Speed:** 76 Words Per Minute (Benchmark: 78 WPM)
 - **Word Breakdown Diagnostics:** Visual progress bars for Correct, Mispronounced, Skipped, and Repeated words.
 - **Benchmark Comparison Chart:** Multi-metric bar chart comparing Student Score vs. State Benchmark vs. Class Average.
-- **Personalized Recommendations:** Targeted daily akshara drills, syllable segmentation exercises, and next passage recommendation.
+- **Personalized Improvement Plan:** Targeted daily akshara drills, syllable segmentation exercises, and next passage recommendation.
 
 ### 5. Teacher Dashboard (`5. Teacher Dashboard`)
 - **Executive School KPIs:** Total Students Assessed (348), Average Reading Proficiency (84.6%), Benchmark Attainment (81.3%), and Monthly Assessments (1,240).
@@ -92,24 +90,24 @@ The application includes five fully functional, interconnected UI screens demons
 - **Data & Analytics:** Pandas
 - **Typography & Styling:**
   - Google Fonts: `Plus Jakarta Sans` & `Noto Sans Telugu`
-  - High-Contrast Government Theme (Navy Blue `#1e3a8a`, Emerald Green `#10b981`, Soft Sky `#f0fdf4`)
+  - SHR Trinity & AksharaMitra Brand Palette (Deep Navy `#1e3a8a`, Cobalt Blue `#1e40af`, Learning Teal `#0d9488`, Emerald `#10b981`)
   - Pure CSS keyframe animations (Pulsing mic, audio sound wave bars)
-- **Mock Data Engine:** Custom Python module (`telugu_reading_data.py`) with authentic Telugu Unicode passages and student records.
+- **Dataset & Content Engine:** Custom Python module (`telugu_reading_data.py`) with authentic Telugu Unicode passages and student records.
 
 ---
 
 ## 📦 Directory Structure
 
 ```text
-Every_Child_Reads_UI_Prototype/
+AksharaMitra/
 ├── app.py                      # Primary Streamlit application entry point
-├── telugu_reading_app.py       # Core UI orchestrator containing all 5 screens & CSS
-├── telugu_reading_data.py      # Static mock dataset (passages, students, analytics)
-├── requirements.txt            # Minimal Python dependencies
-├── run_reading_app.bat         # 1-click Windows batch launcher
+├── telugu_reading_app.py       # Core AksharaMitra UI orchestrator containing all 5 screens & CSS
+├── telugu_reading_data.py      # Bilingual passage catalog & student analytics dataset
+├── requirements.txt            # Python dependencies
+├── run_reading_app.bat         # 1-click Windows batch launcher for AksharaMitra
 ├── README.md                   # Complete documentation & project guide
 ├── pages/
-│   └── Every_Child_Reads.py    # Multi-page Streamlit route
+│   └── AksharaMitra.py         # Multi-page Streamlit route for AksharaMitra
 └── screenshots/                # High-resolution screenshots of all 5 screens
     ├── 01_student_dashboard.png
     ├── 02_reading_assessment.png
@@ -120,38 +118,7 @@ Every_Child_Reads_UI_Prototype/
 
 ---
 
-## ⚙️ Installation & Setup Instructions
-
-### Prerequisites
-- Python 3.10, 3.11, or 3.12 installed on your system.
-- `pip` (Python package manager).
-
-### Step 1: Clone or Extract the Archive
-Extract `Every_Child_Reads_UI_Prototype.zip` to your preferred folder:
-```bash
-cd Every_Child_Reads_UI_Prototype
-```
-
-### Step 2: (Optional) Create a Virtual Environment
-```bash
-# Windows
-python -m venv venv
-.\venv\Scripts\activate
-
-# macOS / Linux
-python3 -m venv venv
-source venv/bin/activate
-```
-
-### Step 3: Install Required Dependencies
-Install the lightweight dependencies:
-```bash
-pip install -r requirements.txt
-```
-
----
-
-## 🚀 Running the Application Locally
+## 🚀 Running AksharaMitra Locally
 
 ### Method A: One-Click Launcher (Windows)
 Double-click `run_reading_app.bat` in the project root directory.
@@ -159,26 +126,14 @@ Double-click `run_reading_app.bat` in the project root directory.
 ### Method B: Terminal Command
 Run the application using Streamlit:
 ```bash
+streamlit run pages/AksharaMitra.py
+```
+or launch the full multi-page suite:
+```bash
 streamlit run app.py
 ```
 
-Once launched, your default web browser will automatically open:
+Once launched, open your browser at:
 ```text
-Local URL: http://localhost:8501
+Local URL: http://localhost:8501/AksharaMitra
 ```
-
----
-
-## 🧭 Navigation Tips for Demonstration
-
-1. **Sequential Journey:**
-   - **Student Dashboard:** Select student (e.g., Ananya Reddy), Grade (Class 4), Language (Telugu), and Tier (Intermediate). Click **"Start Reading Assessment"**.
-   - **Assessment Screen:** Click **"Start Recording"** to demonstrate the live audio capture wave animation and timer. Click **"Submit Reading for AI Assessment"**.
-   - **Analysis Screen:** Review green, red, orange, and blue word tokens, hover over highlighted words to see phoneme notes, and compare Reference vs. Recognized text. Click **"View Full Scorecard & Report"**.
-   - **Results Screen:** Inspect overall proficiency (89/100), metric cards, word progress distribution, and benchmark chart. Click **"Open Teacher Dashboard"**.
-   - **Teacher Dashboard:** Explore executive school KPIs, Telugu vs. English analytics, Grade 1–10 charts, common reading difficulties, and individual student progress curves.
-
-2. **Direct Sidebar Navigation:**
-   - Use the left sidebar at any time to instantly jump to any of the 5 screens.
-   - Use the **"Select Student Profile"** dropdown in the sidebar to test different grade levels and language preferences.
-
