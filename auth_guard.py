@@ -50,24 +50,33 @@ def init_auth_tables():
             lockout_end TIMESTAMP
         )
     """)
-    # Check if 'email', 'full_name', 'auth_provider' columns exist
+    conn.commit()
+
+    # Explicitly check all columns and add any missing ones
     cur.execute("PRAGMA table_info(users)")
-    cols = [r[1] for r in cur.fetchall()]
-    if "email" not in cols:
-        try:
-            cur.execute("ALTER TABLE users ADD COLUMN email TEXT")
-        except Exception:
-            pass
-    if "full_name" not in cols:
-        try:
-            cur.execute("ALTER TABLE users ADD COLUMN full_name TEXT")
-        except Exception:
-            pass
-    if "auth_provider" not in cols:
-        try:
-            cur.execute("ALTER TABLE users ADD COLUMN auth_provider TEXT DEFAULT 'local'")
-        except Exception:
-            pass
+    existing_cols = set()
+    for row in cur.fetchall():
+        col_name = row[1] if isinstance(row, (tuple, list)) else (row["name"] if "name" in row.keys() else str(row[1]))
+        existing_cols.add(str(col_name).lower())
+
+    required_columns = {
+        "email": "TEXT",
+        "full_name": "TEXT",
+        "auth_provider": "TEXT DEFAULT 'local'",
+        "created_at": "TIMESTAMP DEFAULT (datetime('now'))",
+        "last_login": "TIMESTAMP",
+        "login_attempts": "INTEGER DEFAULT 0",
+        "lockout_end": "TIMESTAMP",
+    }
+
+    for col, col_def in required_columns.items():
+        if col not in existing_cols:
+            try:
+                cur.execute(f"ALTER TABLE users ADD COLUMN {col} {col_def}")
+                conn.commit()
+            except Exception:
+                pass
+
     conn.commit()
     conn.close()
 
