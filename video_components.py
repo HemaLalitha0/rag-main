@@ -782,6 +782,7 @@ def render_interview_stage(
     </div>
 
     <script>
+        const BRIDGE_BASE_URL = (window.parent && window.parent.location.origin) ? (window.parent.location.origin + "/api/bridge") : (window.location.origin + "/api/bridge");
         const INTERVIEWER_NAME = "{escaped_interviewer}";
         const CANDIDATE_NAME = "{escaped_candidate}";
         const INITIAL_AUDIO_B64 = "{audio_base64}";
@@ -1141,7 +1142,7 @@ def render_interview_stage(
                 if (mediaRecorder && mediaRecorder.state === "inactive") {{
                     try {{ mediaRecorder.start(200); }} catch (e) {{}}
                 }}
-                fetch("http://127.0.0.1:8765/speaker_state", {{
+                fetch(BRIDGE_BASE_URL + "/speaker_state", {{
                     method: "POST",
                     headers: {{ "Content-Type": "application/json" }},
                     body: JSON.stringify({{ speaker: "candidate", live_transcript: spokenText || liveInterimTranscript || "" }})
@@ -1178,7 +1179,7 @@ def render_interview_stage(
                         }}
                         liveInterimTranscript = combined;
                         registerCandidateVoiceActivity(combined);
-                        fetch("http://127.0.0.1:8765/speaker_state", {{
+                        fetch(BRIDGE_BASE_URL + "/speaker_state", {{
                             method: "POST",
                             headers: {{ "Content-Type": "application/json" }},
                             body: JSON.stringify({{ speaker: "candidate", live_transcript: combined }})
@@ -1229,7 +1230,7 @@ def render_interview_stage(
             }}
 
             try {{
-                const resp = await fetch("http://127.0.0.1:8765/submit_audio", {{
+                const resp = await fetch(BRIDGE_BASE_URL + "/submit_audio", {{
                     method: "POST",
                     headers: {{ "Content-Type": "application/json" }},
                     body: JSON.stringify({{
@@ -1367,7 +1368,7 @@ def render_interview_stage(
                     currentCallStage = "WAITING_FOR_READINESS";
                     setVisualSpeakerState("waiting", "Can you hear me clearly, and are you ready to begin? Please say 'Yes, I am ready'");
                     emitClientEvent("SYNA", "Audio Playback Finished", "Introduction playback completed", playbackDurMs, "SUCCESS");
-                    fetch("http://127.0.0.1:8765/introduction_finished", {{ method: "POST" }}).catch(() => {{}});
+                    fetch(BRIDGE_BASE_URL + "/introduction_finished", {{ method: "POST" }}).catch(() => {{}});
                     liveInterimTranscript = "";
                     recordedChunks = [];
                     pcmFloatChunks = [];
@@ -1390,7 +1391,7 @@ def render_interview_stage(
                         try {{ speechRec.start(); }} catch (e) {{}}
                     }}
                 }}, ECHO_GUARD_COOLDOWN_MS);
-                fetch("http://127.0.0.1:8765/speaker_state", {{
+                fetch(BRIDGE_BASE_URL + "/speaker_state", {{
                     method: "POST",
                     headers: {{ "Content-Type": "application/json" }},
                     body: JSON.stringify({{
@@ -1442,7 +1443,7 @@ def render_interview_stage(
         let logTranscriptsVisible = true;
 
         function emitClientEvent(speaker, eventName, content, durationMs = null, status = "SUCCESS", details = {{}}) {{
-            fetch("http://127.0.0.1:8765/client_event", {{
+            fetch(BRIDGE_BASE_URL + "/client_event", {{
                 method: "POST",
                 headers: {{ "Content-Type": "application/json" }},
                 body: JSON.stringify({{
@@ -1511,7 +1512,7 @@ def render_interview_stage(
 
         async function toggleLogPrivacy() {{
             try {{
-                const res = await fetch("http://127.0.0.1:8765/log_control", {{
+                const res = await fetch(BRIDGE_BASE_URL + "/log_control", {{
                     method: "POST",
                     headers: {{ "Content-Type": "application/json" }},
                     body: JSON.stringify({{ action: "toggle_privacy" }})
@@ -1531,7 +1532,7 @@ def render_interview_stage(
 
         async function clearActivityLogs() {{
             try {{
-                const res = await fetch("http://127.0.0.1:8765/log_control", {{
+                const res = await fetch(BRIDGE_BASE_URL + "/log_control", {{
                     method: "POST",
                     headers: {{ "Content-Type": "application/json" }},
                     body: JSON.stringify({{ action: "clear" }})
@@ -1546,7 +1547,7 @@ def render_interview_stage(
         }}
 
         function exportActivityLogs(format) {{
-            window.open("http://127.0.0.1:8765/export_logs?format=" + encodeURIComponent(format), "_blank");
+            window.open(BRIDGE_BASE_URL + "/export_logs?format=" + encodeURIComponent(format), "_blank");
         }}
 
         function toggleLogRowDetail(seqId) {{
@@ -1898,7 +1899,7 @@ def render_interview_stage(
         async function pollServerState() {{
             if (isCallEnded || isSubmittingAudio) return;
             try {{
-                const res = await fetch("http://127.0.0.1:8765/state");
+                const res = await fetch(BRIDGE_BASE_URL + "/state");
                 if (!res.ok) return;
                 const state = await res.json();
                 applyServerState(state, false);
@@ -2073,7 +2074,7 @@ def render_interview_stage(
             // Configurable 20-second inactivity timeout when candidate has not started speaking
             if (!isCandidateSpeaking && waitingForCandidateSince > 0 && (now - waitingForCandidateSince) >= MAX_INACTIVITY_WAIT_MS) {{
                 waitingForCandidateSince = now;
-                fetch("http://127.0.0.1:8765/inactivity_timeout", {{ method: "POST" }})
+                fetch(BRIDGE_BASE_URL + "/inactivity_timeout", {{ method: "POST" }})
                     .then(r => r.ok ? r.json() : null)
                     .then(data => {{ if (data) applyServerState(data, true); }})
                     .catch(() => {{}});
@@ -2361,7 +2362,7 @@ def render_interview_stage(
 
             // 7. Notify backend bridge server to mark session FINISHED and cancel pending tasks
             try {{
-                await fetch("http://127.0.0.1:8765/end_call", {{ method: "POST" }});
+                await fetch(BRIDGE_BASE_URL + "/end_call", {{ method: "POST" }});
             }} catch (e) {{}}
 
             // 8. Trigger Streamlit transition to Stage 3 Completion Report (with retry safeguard)
