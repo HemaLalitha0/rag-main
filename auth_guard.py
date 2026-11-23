@@ -50,9 +50,9 @@ def init_auth_tables():
             lockout_end TIMESTAMP
         )
     """)
-    # Check if 'email' and 'full_name' columns exist
+    # Check if 'email', 'full_name', 'auth_provider' columns exist
     cur.execute("PRAGMA table_info(users)")
-    cols = [r["name"] for r in cur.fetchall()]
+    cols = [r[1] for r in cur.fetchall()]
     if "email" not in cols:
         try:
             cur.execute("ALTER TABLE users ADD COLUMN email TEXT")
@@ -461,3 +461,4 @@ def render_auth_page(app_title: str, app_subtitle: str, icon_emoji: str = "✨")
         )
 
     return False
+
