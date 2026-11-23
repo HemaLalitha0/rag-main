@@ -24,7 +24,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 st.set_page_config(
-    page_title="AI Interview Studio",
+    page_title="MockMate — AI Interview Studio | SHR Trinity",
     page_icon="🎙️",
     layout="wide",
     initial_sidebar_state="collapsed",
@@ -435,8 +435,8 @@ if st.session_state.interview_state == InterviewState.SETUP:
                 </div>
                 <div>
                     <div style="display: flex; align-items: center; gap: 10px;">
-                        <span style="font-size: 1.45rem; font-weight: 800; color: #F8FAFC; letter-spacing: -0.02em;">AI Mock Interview Studio</span>
-                        <span style="font-size: 0.72rem; font-weight: 700; color: #818CF8; background: rgba(99, 102, 241, 0.14); border: 1px solid rgba(99, 102, 241, 0.3); padding: 3px 10px; border-radius: 999px; letter-spacing: 0.04em;">LIVE INTERVIEW ROOM</span>
+                        <span style="font-size: 1.45rem; font-weight: 800; color: #F8FAFC; letter-spacing: -0.02em;">MockMate AI</span>
+                        <span style="font-size: 0.72rem; font-weight: 700; color: #818CF8; background: rgba(99, 102, 241, 0.14); border: 1px solid rgba(99, 102, 241, 0.3); padding: 3px 10px; border-radius: 999px; letter-spacing: 0.04em;">SHR TRINITY &bull; LIVE INTERVIEW STUDIO</span>
                     </div>
                     <div style="font-size: 0.86rem; color: #94A3B8; margin-top: 2px;">
                         Realistic, hands-free AI interview simulations with real-time speech analysis and executive competency scoring
