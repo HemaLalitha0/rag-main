@@ -37,8 +37,18 @@ VOICEBOX_BASE_URL = os.environ.get("VOICEBOX_API_URL", "http://127.0.0.1:17493")
 DEFAULT_TIMEOUT = 600  # 10 minutes max for neural cloned voice generation on CPU
 
 # Persistent disk cache for authentic Voicebox cloned audio to prevent duplicate CPU synthesis
-VOICEBOX_CACHE_DIR = Path(__file__).resolve().parent / "kb_cache" / "voicebox_audio_cache"
-VOICEBOX_APPDATA_DIR = Path(os.environ.get("APPDATA", r"C:\Users\lenovo\AppData\Roaming")) / "sh.voicebox.app"
+_PROJECT_ROOT = Path(__file__).resolve().parent
+VOICEBOX_CACHE_DIR = _PROJECT_ROOT / "kb_cache" / "voicebox_audio_cache"
+
+# Discover voicebox directory (checks in-repo /app/voice_data first for Docker/Linux, then APPDATA for Windows host)
+_LOCAL_VOICE_DIR = _PROJECT_ROOT / "voice_data"
+if (_LOCAL_VOICE_DIR / "voicebox.db").exists():
+    VOICEBOX_APPDATA_DIR = _LOCAL_VOICE_DIR
+elif os.environ.get("VOICEBOX_DATA_DIR") and Path(os.environ["VOICEBOX_DATA_DIR"]).exists():
+    VOICEBOX_APPDATA_DIR = Path(os.environ["VOICEBOX_DATA_DIR"])
+else:
+    VOICEBOX_APPDATA_DIR = Path(os.environ.get("APPDATA", r"C:\Users\lenovo\AppData\Roaming")) / "sh.voicebox.app"
+
 VOICEBOX_DB_PATH = VOICEBOX_APPDATA_DIR / "voicebox.db"
 
 SHR_AI_NEWS_DIR = Path(r"C:\Users\lenovo\Downloads\SHR_AI_NEWS")
