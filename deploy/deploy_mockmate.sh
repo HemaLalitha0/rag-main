@@ -89,3 +89,4 @@ echo "[6/6] MockMate container status:"
 docker ps --filter "name=${CONTAINER_NAME}" --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
 echo ""
 echo "Deployment successful!"
+
