@@ -323,12 +323,33 @@ def render_auth_page(app_title: str, app_subtitle: str, icon_emoji: str = "✨")
     _, center_col, _ = st.columns([1, 1.35, 1])
 
     with center_col:
+        # Load custom branded logo if available
+        logo_img_html = ""
+        robot_logo_path = os.path.join(_MAIN_DIR, "static", "logos", "aksharamitra_robot_logo.png")
+        if "AksharaMitra" in app_title and os.path.exists(robot_logo_path):
+            try:
+                import base64
+                with open(robot_logo_path, "rb") as f:
+                    b64_logo = base64.b64encode(f.read()).decode("utf-8")
+                logo_img_html = f"""
+                <div style="text-align: center; margin-bottom: 14px;">
+                    <img src="data:image/png;base64,{b64_logo}" style="width: 140px; height: auto; border-radius: 28px; box-shadow: 0 16px 36px -10px rgba(99, 102, 241, 0.55);" />
+                </div>
+                """
+            except Exception:
+                pass
+
+        if not logo_img_html:
+            logo_img_html = f"""
+            <div style="width: 58px; height: 58px; border-radius: 16px; background: linear-gradient(135deg, #4F46E5 0%, #06B6D4 100%); display: inline-flex; align-items: center; justify-content: center; font-size: 1.8rem; box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.5); margin-bottom: 12px;">
+                {icon_emoji}
+            </div>
+            """
+
         st.markdown(
             f"""
             <div style="text-align: center; margin-bottom: 24px;">
-                <div style="width: 58px; height: 58px; border-radius: 16px; background: linear-gradient(135deg, #4F46E5 0%, #06B6D4 100%); display: inline-flex; align-items: center; justify-content: center; font-size: 1.8rem; box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.5); margin-bottom: 12px;">
-                    {icon_emoji}
-                </div>
+                {logo_img_html}
                 <h1 style="font-size: 1.75rem; font-weight: 800; color: #F9FAFB; margin: 0; letter-spacing: -0.02em;">{app_title}</h1>
                 <p style="font-size: 0.88rem; color: #9CA3AF; margin-top: 6px;">{app_subtitle}</p>
             </div>
