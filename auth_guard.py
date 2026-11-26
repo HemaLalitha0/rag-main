@@ -356,39 +356,34 @@ def render_auth_page(app_title: str, app_subtitle: str, icon_emoji: str = "✨")
 
     with center_col:
         # Load custom branded logo if available
-        logo_img_html = ""
+        has_custom_logo = False
         robot_logo_path = os.path.join(_MAIN_DIR, "static", "logos", "aksharamitra_robot_logo.png")
         if "AksharaMitra" in app_title and os.path.exists(robot_logo_path):
             try:
-                st.markdown(
-                    "<div style='display:flex; justify-content:center;'>",
-                    unsafe_allow_html=True,
-                )
-                _, img_col, _ = st.columns([1.2, 1.0, 1.2])
+                _, img_col, _ = st.columns([1.15, 1.0, 1.15])
                 with img_col:
                     st.image(robot_logo_path, use_container_width=True)
-                st.markdown("</div>", unsafe_allow_html=True)
-                logo_img_html = "<!-- rendered via st.image -->"
+                has_custom_logo = True
             except Exception:
-                logo_img_html = ""
+                has_custom_logo = False
 
-        if not logo_img_html:
-            logo_img_html = f"""
-            <div style="width: 58px; height: 58px; border-radius: 16px; background: linear-gradient(135deg, #4F46E5 0%, #06B6D4 100%); display: inline-flex; align-items: center; justify-content: center; font-size: 1.8rem; box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.5); margin-bottom: 12px;">
-                {icon_emoji}
-            </div>
-            """
+        if has_custom_logo:
+            header_html = (
+                f'<div style="text-align: center; margin-bottom: 24px;">'
+                f'<h1 style="font-size: 1.75rem; font-weight: 800; color: #F9FAFB; margin: 0; letter-spacing: -0.02em;">{app_title}</h1>'
+                f'<p style="font-size: 0.88rem; color: #9CA3AF; margin-top: 6px;">{app_subtitle}</p>'
+                f'</div>'
+            )
+        else:
+            header_html = (
+                f'<div style="text-align: center; margin-bottom: 24px;">'
+                f'<div style="width: 58px; height: 58px; border-radius: 16px; background: linear-gradient(135deg, #4F46E5 0%, #06B6D4 100%); display: inline-flex; align-items: center; justify-content: center; font-size: 1.8rem; box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.5); margin-bottom: 12px;">{icon_emoji}</div>'
+                f'<h1 style="font-size: 1.75rem; font-weight: 800; color: #F9FAFB; margin: 0; letter-spacing: -0.02em;">{app_title}</h1>'
+                f'<p style="font-size: 0.88rem; color: #9CA3AF; margin-top: 6px;">{app_subtitle}</p>'
+                f'</div>'
+            )
 
-        st.markdown(
-            f"""
-            <div style="text-align: center; margin-bottom: 24px;">
-                {"" if "st.image" in logo_img_html else logo_img_html}
-                <h1 style="font-size: 1.75rem; font-weight: 800; color: #F9FAFB; margin: 0; letter-spacing: -0.02em;">{app_title}</h1>
-                <p style="font-size: 0.88rem; color: #9CA3AF; margin-top: 6px;">{app_subtitle}</p>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
+        st.markdown(header_html, unsafe_allow_html=True)
 
         auth_tab_choice = st.radio(
             "Auth Choice",
