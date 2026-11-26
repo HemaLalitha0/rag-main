@@ -58,12 +58,23 @@ if not hasattr(sys, "_interview_turn_lock"):
     sys._interview_turn_lock = threading.Lock()
 TURN_PROCESSING_LOCK = sys._interview_turn_lock
 
-# Allowed State Machine Transitions (including canonical aliases from Section 6)
+# Allowed State Machine Transitions (including canonical aliases from Section 6 & 7)
 VALID_STATE_TRANSITIONS: Dict[str, set] = {
-    "INITIALIZING": {"INTRODUCTION", "WAITING_FOR_READINESS", "INTERVIEW_ERROR", "ERROR", "COMPLETED", "INTERVIEW_COMPLETED"},
-    "INTRODUCTION": {"WAITING_FOR_READINESS", "ASKING_QUESTION", "QUESTION_PLAYING", "INTERVIEW_ERROR", "ERROR", "COMPLETED"},
-    "INITIAL_GREETING": {"WAITING_FOR_READINESS", "ASKING_QUESTION", "QUESTION_PLAYING", "INTERVIEW_ERROR", "ERROR", "COMPLETED"},
+    "INITIALIZING": {"INTRODUCTION", "INTRODUCTION_PLAYING", "WAITING_FOR_READINESS", "INTERVIEW_ERROR", "ERROR", "COMPLETED", "INTERVIEW_COMPLETED"},
+    "INTRODUCTION": {"INTRODUCTION_PLAYING", "WAITING_FOR_READINESS", "PROCESSING_READINESS", "ASKING_QUESTION", "QUESTION_PLAYING", "INTERVIEW_ERROR", "ERROR", "COMPLETED"},
+    "INTRODUCTION_PLAYING": {"WAITING_FOR_READINESS", "PROCESSING_READINESS", "ASKING_QUESTION", "QUESTION_PLAYING", "INTERVIEW_ERROR", "ERROR", "COMPLETED"},
+    "INITIAL_GREETING": {"INTRODUCTION_PLAYING", "WAITING_FOR_READINESS", "PROCESSING_READINESS", "ASKING_QUESTION", "QUESTION_PLAYING", "INTERVIEW_ERROR", "ERROR", "COMPLETED"},
     "WAITING_FOR_READINESS": {
+        "WAITING_FOR_READINESS",
+        "PROCESSING_READINESS",
+        "ASKING_QUESTION",
+        "QUESTION_PLAYING",
+        "CLARIFICATION_REQUESTED",
+        "INTERVIEW_ERROR",
+        "ERROR",
+        "COMPLETED",
+    },
+    "PROCESSING_READINESS": {
         "WAITING_FOR_READINESS",
         "ASKING_QUESTION",
         "QUESTION_PLAYING",
@@ -78,7 +89,9 @@ VALID_STATE_TRANSITIONS: Dict[str, set] = {
         "LISTENING",
         "RECORDING_ANSWER",
         "RECORDING",
+        "WAITING_FOR_SILENCE",
         "PROCESSING_AUDIO",
+        "PROCESSING_ANSWER",
         "INTERVIEW_ERROR",
         "ERROR",
         "COMPLETED",
@@ -89,7 +102,9 @@ VALID_STATE_TRANSITIONS: Dict[str, set] = {
         "LISTENING",
         "RECORDING_ANSWER",
         "RECORDING",
+        "WAITING_FOR_SILENCE",
         "PROCESSING_AUDIO",
+        "PROCESSING_ANSWER",
         "INTERVIEW_ERROR",
         "ERROR",
         "COMPLETED",
@@ -99,12 +114,15 @@ VALID_STATE_TRANSITIONS: Dict[str, set] = {
         "LISTENING",
         "RECORDING_ANSWER",
         "RECORDING",
+        "WAITING_FOR_SILENCE",
         "PROCESSING_AUDIO",
+        "PROCESSING_ANSWER",
         "TRANSCRIBING_ANSWER",
         "TRANSCRIBING",
         "WAITING_FOR_CANDIDATE",
         "ASKING_QUESTION",
         "QUESTION_PLAYING",
+        "NEXT_QUESTION",
         "INTERVIEW_ERROR",
         "ERROR",
         "COMPLETED",
@@ -113,13 +131,16 @@ VALID_STATE_TRANSITIONS: Dict[str, set] = {
         "WAITING_FOR_CANDIDATE",
         "RECORDING_ANSWER",
         "RECORDING",
+        "WAITING_FOR_SILENCE",
         "PROCESSING_AUDIO",
+        "PROCESSING_ANSWER",
         "TRANSCRIBING_ANSWER",
         "TRANSCRIBING",
         "LISTENING_TO_CANDIDATE",
         "LISTENING",
         "ASKING_QUESTION",
         "QUESTION_PLAYING",
+        "NEXT_QUESTION",
         "INTERVIEW_ERROR",
         "ERROR",
         "COMPLETED",
@@ -128,19 +149,25 @@ VALID_STATE_TRANSITIONS: Dict[str, set] = {
         "WAITING_FOR_CANDIDATE",
         "RECORDING_ANSWER",
         "RECORDING",
+        "WAITING_FOR_SILENCE",
         "PROCESSING_AUDIO",
+        "PROCESSING_ANSWER",
         "TRANSCRIBING_ANSWER",
         "TRANSCRIBING",
         "LISTENING_TO_CANDIDATE",
         "LISTENING",
         "ASKING_QUESTION",
         "QUESTION_PLAYING",
+        "NEXT_QUESTION",
         "INTERVIEW_ERROR",
         "ERROR",
         "COMPLETED",
     },
     "RECORDING_ANSWER": {
+        "RECORDING_ANSWER",
+        "WAITING_FOR_SILENCE",
         "PROCESSING_AUDIO",
+        "PROCESSING_ANSWER",
         "TRANSCRIBING_ANSWER",
         "TRANSCRIBING",
         "WAITING_FOR_CANDIDATE",
@@ -151,7 +178,25 @@ VALID_STATE_TRANSITIONS: Dict[str, set] = {
         "COMPLETED",
     },
     "RECORDING": {
+        "RECORDING",
+        "WAITING_FOR_SILENCE",
         "PROCESSING_AUDIO",
+        "PROCESSING_ANSWER",
+        "TRANSCRIBING_ANSWER",
+        "TRANSCRIBING",
+        "WAITING_FOR_CANDIDATE",
+        "LISTENING_TO_CANDIDATE",
+        "LISTENING",
+        "INTERVIEW_ERROR",
+        "ERROR",
+        "COMPLETED",
+    },
+    "WAITING_FOR_SILENCE": {
+        "RECORDING_ANSWER",
+        "RECORDING",
+        "WAITING_FOR_SILENCE",
+        "PROCESSING_AUDIO",
+        "PROCESSING_ANSWER",
         "TRANSCRIBING_ANSWER",
         "TRANSCRIBING",
         "WAITING_FOR_CANDIDATE",
@@ -162,6 +207,7 @@ VALID_STATE_TRANSITIONS: Dict[str, set] = {
         "COMPLETED",
     },
     "PROCESSING_AUDIO": {
+        "PROCESSING_READINESS",
         "TRANSCRIBING_ANSWER",
         "TRANSCRIBING",
         "PROCESSING_ANSWER",
@@ -176,6 +222,7 @@ VALID_STATE_TRANSITIONS: Dict[str, set] = {
         "COMPLETED",
     },
     "TRANSCRIBING_ANSWER": {
+        "PROCESSING_READINESS",
         "PROCESSING_ANSWER",
         "ANSWER_VALIDATION",
         "CLARIFICATION_REQUESTED",
@@ -183,6 +230,7 @@ VALID_STATE_TRANSITIONS: Dict[str, set] = {
         "TRANSCRIPTION_RETRY",
         "EVALUATING_ANSWER",
         "ANSWER_EVALUATION",
+        "ACKNOWLEDGING_ANSWER",
         "WAITING_FOR_CANDIDATE",
         "LISTENING_TO_CANDIDATE",
         "LISTENING",
@@ -194,6 +242,7 @@ VALID_STATE_TRANSITIONS: Dict[str, set] = {
         "COMPLETED",
     },
     "TRANSCRIBING": {
+        "PROCESSING_READINESS",
         "PROCESSING_ANSWER",
         "ANSWER_VALIDATION",
         "CLARIFICATION_REQUESTED",
@@ -201,6 +250,7 @@ VALID_STATE_TRANSITIONS: Dict[str, set] = {
         "TRANSCRIPTION_RETRY",
         "EVALUATING_ANSWER",
         "ANSWER_EVALUATION",
+        "ACKNOWLEDGING_ANSWER",
         "WAITING_FOR_CANDIDATE",
         "LISTENING_TO_CANDIDATE",
         "LISTENING",
@@ -212,11 +262,14 @@ VALID_STATE_TRANSITIONS: Dict[str, set] = {
         "COMPLETED",
     },
     "ANSWER_VALIDATION": {
+        "PROCESSING_ANSWER",
         "CLARIFICATION_REQUESTED",
         "REPEAT_REQUESTED",
         "TRANSCRIPTION_RETRY",
         "EVALUATING_ANSWER",
         "ANSWER_EVALUATION",
+        "ACKNOWLEDGING_ANSWER",
+        "NEXT_QUESTION",
         "WAITING_FOR_CANDIDATE",
         "LISTENING_TO_CANDIDATE",
         "LISTENING",
@@ -227,14 +280,19 @@ VALID_STATE_TRANSITIONS: Dict[str, set] = {
         "COMPLETED",
     },
     "PROCESSING_ANSWER": {
+        "ANSWER_VALIDATION",
         "CLARIFICATION_REQUESTED",
         "REPEAT_REQUESTED",
         "TRANSCRIPTION_RETRY",
         "EVALUATING_ANSWER",
         "ANSWER_EVALUATION",
+        "ACKNOWLEDGING_ANSWER",
+        "NEXT_QUESTION",
+        "GENERATING_NEXT_QUESTION",
         "WAITING_FOR_CANDIDATE",
         "LISTENING_TO_CANDIDATE",
         "LISTENING",
+        "ASKING_QUESTION",
         "INTERVIEW_ERROR",
         "ERROR",
         "COMPLETED",
@@ -267,6 +325,8 @@ VALID_STATE_TRANSITIONS: Dict[str, set] = {
         "ERROR",
     },
     "EVALUATING_ANSWER": {
+        "ACKNOWLEDGING_ANSWER",
+        "NEXT_QUESTION",
         "GENERATING_NEXT_QUESTION",
         "NEXT_QUESTION_GENERATION",
         "ASKING_QUESTION",
@@ -277,6 +337,29 @@ VALID_STATE_TRANSITIONS: Dict[str, set] = {
         "ERROR",
     },
     "ANSWER_EVALUATION": {
+        "ACKNOWLEDGING_ANSWER",
+        "NEXT_QUESTION",
+        "GENERATING_NEXT_QUESTION",
+        "NEXT_QUESTION_GENERATION",
+        "ASKING_QUESTION",
+        "QUESTION_PLAYING",
+        "COMPLETED",
+        "INTERVIEW_COMPLETED",
+        "INTERVIEW_ERROR",
+        "ERROR",
+    },
+    "ACKNOWLEDGING_ANSWER": {
+        "NEXT_QUESTION",
+        "GENERATING_NEXT_QUESTION",
+        "NEXT_QUESTION_GENERATION",
+        "ASKING_QUESTION",
+        "QUESTION_PLAYING",
+        "COMPLETED",
+        "INTERVIEW_COMPLETED",
+        "INTERVIEW_ERROR",
+        "ERROR",
+    },
+    "NEXT_QUESTION": {
         "GENERATING_NEXT_QUESTION",
         "NEXT_QUESTION_GENERATION",
         "ASKING_QUESTION",
@@ -287,6 +370,8 @@ VALID_STATE_TRANSITIONS: Dict[str, set] = {
         "ERROR",
     },
     "GENERATING_NEXT_QUESTION": {
+        "ACKNOWLEDGING_ANSWER",
+        "NEXT_QUESTION",
         "ASKING_QUESTION",
         "QUESTION_PLAYING",
         "COMPLETED",
@@ -295,6 +380,8 @@ VALID_STATE_TRANSITIONS: Dict[str, set] = {
         "ERROR",
     },
     "NEXT_QUESTION_GENERATION": {
+        "ACKNOWLEDGING_ANSWER",
+        "NEXT_QUESTION",
         "ASKING_QUESTION",
         "QUESTION_PLAYING",
         "COMPLETED",
@@ -302,37 +389,42 @@ VALID_STATE_TRANSITIONS: Dict[str, set] = {
         "INTERVIEW_ERROR",
         "ERROR",
     },
-    "INTERVIEW_COMPLETED": {"INITIALIZING", "INTRODUCTION", "COMPLETED"},
-    "COMPLETED": {"INITIALIZING", "INTRODUCTION", "INTERVIEW_COMPLETED"},
-    "INTERVIEW_ERROR": {"INITIALIZING", "INTRODUCTION", "WAITING_FOR_READINESS", "WAITING_FOR_CANDIDATE", "COMPLETED"},
-    "ERROR": {"INITIALIZING", "INTRODUCTION", "WAITING_FOR_READINESS", "WAITING_FOR_CANDIDATE", "COMPLETED"},
+    "INTERVIEW_COMPLETED": {"INITIALIZING", "INTRODUCTION", "INTRODUCTION_PLAYING", "COMPLETED"},
+    "COMPLETED": {"INITIALIZING", "INTRODUCTION", "INTRODUCTION_PLAYING", "INTERVIEW_COMPLETED"},
+    "INTERVIEW_ERROR": {"INITIALIZING", "INTRODUCTION", "INTRODUCTION_PLAYING", "WAITING_FOR_READINESS", "WAITING_FOR_CANDIDATE", "COMPLETED"},
+    "ERROR": {"INITIALIZING", "INTRODUCTION", "INTRODUCTION_PLAYING", "WAITING_FOR_READINESS", "WAITING_FOR_CANDIDATE", "COMPLETED"},
 }
 
-# Mapping from internal stage names to Section 6 canonical flow names
+# Mapping from internal stage names to Section 6 & 7 canonical flow names
 STAGE_TO_FLOW_STATE: Dict[str, str] = {
     "INITIALIZING": "INITIALIZING",
-    "INTRODUCTION": "INTRODUCTION",
-    "INITIAL_GREETING": "INTRODUCTION",
+    "INTRODUCTION": "INTRODUCTION_PLAYING",
+    "INTRODUCTION_PLAYING": "INTRODUCTION_PLAYING",
+    "INITIAL_GREETING": "INTRODUCTION_PLAYING",
     "WAITING_FOR_READINESS": "WAITING_FOR_READINESS",
-    "ASKING_QUESTION": "QUESTION_PLAYING",
-    "QUESTION_PLAYING": "QUESTION_PLAYING",
+    "PROCESSING_READINESS": "PROCESSING_READINESS",
+    "ASKING_QUESTION": "ASKING_QUESTION",
+    "QUESTION_PLAYING": "ASKING_QUESTION",
     "WAITING_FOR_CANDIDATE": "WAITING_FOR_CANDIDATE",
-    "LISTENING_TO_CANDIDATE": "LISTENING",
-    "LISTENING": "LISTENING",
-    "RECORDING_ANSWER": "RECORDING",
-    "RECORDING": "RECORDING",
-    "PROCESSING_AUDIO": "TRANSCRIBING",
-    "TRANSCRIBING_ANSWER": "TRANSCRIBING",
-    "TRANSCRIBING": "TRANSCRIBING",
-    "ANSWER_VALIDATION": "ANSWER_VALIDATION",
-    "PROCESSING_ANSWER": "ANSWER_VALIDATION",
+    "LISTENING_TO_CANDIDATE": "WAITING_FOR_CANDIDATE",
+    "LISTENING": "WAITING_FOR_CANDIDATE",
+    "RECORDING_ANSWER": "RECORDING_ANSWER",
+    "RECORDING": "RECORDING_ANSWER",
+    "WAITING_FOR_SILENCE": "WAITING_FOR_SILENCE",
+    "PROCESSING_AUDIO": "PROCESSING_ANSWER",
+    "TRANSCRIBING_ANSWER": "PROCESSING_ANSWER",
+    "TRANSCRIBING": "PROCESSING_ANSWER",
+    "ANSWER_VALIDATION": "PROCESSING_ANSWER",
+    "PROCESSING_ANSWER": "PROCESSING_ANSWER",
     "CLARIFICATION_REQUESTED": "CLARIFICATION_REQUESTED",
     "REPEAT_REQUESTED": "REPEAT_REQUESTED",
     "TRANSCRIPTION_RETRY": "TRANSCRIPTION_RETRY",
-    "EVALUATING_ANSWER": "ANSWER_EVALUATION",
-    "ANSWER_EVALUATION": "ANSWER_EVALUATION",
-    "GENERATING_NEXT_QUESTION": "NEXT_QUESTION_GENERATION",
-    "NEXT_QUESTION_GENERATION": "NEXT_QUESTION_GENERATION",
+    "EVALUATING_ANSWER": "PROCESSING_ANSWER",
+    "ANSWER_EVALUATION": "PROCESSING_ANSWER",
+    "ACKNOWLEDGING_ANSWER": "ACKNOWLEDGING_ANSWER",
+    "NEXT_QUESTION": "NEXT_QUESTION",
+    "GENERATING_NEXT_QUESTION": "NEXT_QUESTION",
+    "NEXT_QUESTION_GENERATION": "NEXT_QUESTION",
     "COMPLETED": "INTERVIEW_COMPLETED",
     "INTERVIEW_COMPLETED": "INTERVIEW_COMPLETED",
     "INTERVIEW_ERROR": "ERROR",
@@ -368,7 +460,7 @@ _DEFAULT_LIVE_SESSION: Dict[str, Any] = {
     "closing_audio_b64": "",
     "last_turn_timestamp": time.time(),
     "candidate_silent_prompts_count": 0,
-    "silence_threshold_ms": 2000,
+    "silence_threshold_ms": 20000,
     "max_inactivity_timeout_ms": 20000,
     "is_processing_turn": False,
     "last_submission_hash": "",
@@ -784,13 +876,17 @@ def reset_live_session(
     )
 
     full_greeting = (
-        f"Hello {cand_name}! Welcome to your mock interview. "
-        f"I'm {resolved_name}, and I'll be conducting your session today. "
-        f"For each question, please share structured examples and speak naturally—I will listen and guide us through each stage. "
-        f"Can you hear me clearly, and are you ready to begin?"
+        f"Hello! Good morning. My name is {resolved_name}, and I'll be your interviewer today. "
+        f"Welcome to your mock interview, {cand_name}. I hope you're doing well. "
+        f"Before we begin, are you comfortable and ready to start?"
     )
     default_greeting = (
-        f"Hello Candidate! Welcome to your mock interview. "
+        f"Hello! Good morning. My name is {resolved_name}, and I'll be your interviewer today. "
+        f"Welcome to your mock interview. I hope you're doing well. "
+        f"Before we begin, are you comfortable and ready to start?"
+    )
+    legacy_greeting = (
+        f"Hello {cand_name}! Welcome to your mock interview. "
         f"I'm {resolved_name}, and I'll be conducting your session today. "
         f"For each question, please share structured examples and speak naturally—I will listen and guide us through each stage. "
         f"Can you hear me clearly, and are you ready to begin?"
@@ -815,7 +911,7 @@ def reset_live_session(
         voice_init_err = voice_msg
     else:
         t_tts = time.perf_counter()
-        for candidate_text in (full_greeting, default_greeting, short_greeting):
+        for candidate_text in (full_greeting, default_greeting, legacy_greeting, short_greeting):
             cached_wav = vb_client.get_cached_bytes(candidate_text, profile=resolved_id, engine="chatterbox")
             if cached_wav and len(cached_wav) > 1000:
                 instant_b64 = base64.b64encode(cached_wav).decode("utf-8")
@@ -844,9 +940,9 @@ def reset_live_session(
         LIVE_SESSION["audio_generating"] = not bool(instant_b64) and not bool(voice_init_err)
         LIVE_SESSION["voice_error"] = voice_init_err
         if voice_init_err and not is_valid_voice:
-            _transition_state_locked("INTERVIEW_ERROR", "INTERVIEW_ERROR", reason=voice_init_err)
+            _transition_state_locked("INTERVIEW_ERROR", "ERROR", reason=voice_init_err)
         else:
-            _transition_state_locked("INTRODUCTION", "INTRODUCTION", reason="Interviewer introduction started")
+            _transition_state_locked("INTRODUCTION_PLAYING", "INTRODUCTION_PLAYING", reason="Interviewer introduction started")
             log_interview_event(
                 speaker="SYNA",
                 event="Introduction & Readiness Prompt",
@@ -915,7 +1011,7 @@ def get_live_state() -> Dict[str, Any]:
             "timing_metrics": dict(LIVE_SESSION.get("timing_metrics", {})),
             "current_audio_b64": LIVE_SESSION["current_audio_b64"],
             "closing_audio_b64": LIVE_SESSION["closing_audio_b64"],
-            "silence_threshold_ms": LIVE_SESSION.get("silence_threshold_ms", 2000),
+            "silence_threshold_ms": LIVE_SESSION.get("silence_threshold_ms", 20000),
             "max_inactivity_timeout_ms": LIVE_SESSION.get("max_inactivity_timeout_ms", 20000),
             "exit_requested": LIVE_SESSION["exit_requested"],
             "finished": LIVE_SESSION["call_stage"] in ("COMPLETED", "INTERVIEW_COMPLETED") or LIVE_SESSION.get("finished", False),
@@ -1037,80 +1133,144 @@ Return JSON:
     return f"Thank you for explaining that approach. Let's move to Question {next_idx + 1}: {planned_text}"
 
 
-def _classify_readiness_intent(transcript: str) -> str:
+def _classify_readiness_intent_semantic(transcript: str, interviewer_prompt: str = "") -> Tuple[str, str]:
     """
-    Classify candidate response during WAITING_FOR_READINESS into:
-      - 'UNREADY'   : Candidate says no, wait, hold on, can't hear, not ready
-      - 'READY'     : Candidate confirms readiness ("Yes, I am ready", "I am ready",
-                      "We can start now", "Let's begin", "Yes, let's start", "I am prepared", etc.)
-      - 'UNCLEAR'   : Candidate said something unrelated or ambiguous -> ask for clarification
+    Semantic + Natural-Language Intent Classification for Candidate Response during WAITING_FOR_READINESS.
+    Classifies any natural human response into 5 semantic categories:
+      - 'READY'     : Candidate expresses readiness to begin ("Yeah, I'm ready", "We may start now",
+                      "Yes, I'm comfortable", "Sure, we can proceed", "I'm good. Let's go", "I'm all set", etc.)
+      - 'GREETING'  : Candidate says hello/good morning without confirming readiness yet
+      - 'QUESTION'  : Candidate asks a question or requests clarification about the format/process
+      - 'UNREADY'   : Candidate says not yet, wait, hold on, can't hear, need a moment
+      - 'UNCLEAR'   : Candidate says something unrelated or ambiguous
+      - 'NOISE'     : Empty or silence/noise hallucination
+    Uses fast deterministic semantic grammar patterns PLUS LLM contextual NLU classification for open-ended phrasing.
     """
     lower_t = re.sub(r"\s+", " ", (transcript or "").lower()).strip()
     if not lower_t or is_whisper_hallucination_or_noise(lower_t):
-        return "NOISE"
+        return "NOISE", "Empty or noise hallucination"
 
     # 1. Explicit negative / unready patterns using word boundaries (so "now" never matches "no"!)
     negative_patterns = [
         r"\bno\b",
-        r"\bnot ready\b",
-        r"\bnot yet\b",
+        r"\bnot\s+ready\b",
+        r"\bnot\s+yet\b",
+        r"\bnot\s+comfortable\b",
         r"\bwait\b",
-        r"\bhold on\b",
+        r"\bhold\s+on\b",
         r"\bhold\b",
-        r"\bone minute\b",
-        r"\ba minute\b",
-        r"\bone second\b",
-        r"\bcan't hear\b",
-        r"\bcannot hear\b",
-        r"\bdon't hear\b",
-        r"\bunable to hear\b",
+        r"\bgive\s+me\s+a\s+(?:minute|second|moment)\b",
+        r"\bneed\s+(?:a\s+)?(?:minute|second|moment|more\s+time)\b",
+        r"\bone\s+(?:minute|second|moment)\b",
+        r"\ba\s+(?:minute|second|moment)\b",
+        r"\bcan't\s+hear\b",
+        r"\bcannot\s+hear\b",
+        r"\bdon't\s+hear\b",
+        r"\bunable\s+to\s+hear\b",
         r"\bpause\b",
     ]
     for pat in negative_patterns:
         if re.search(pat, lower_t):
-            return "UNREADY"
+            return "UNREADY", f"Matched negative readiness expression ({pat})"
 
-    # 2. Natural-language readiness phrases (including all 6 required variations)
+    # 2. Candidate asking a question or requesting clarification during readiness stage
+    question_indicators = [
+        r"\bhow\s+many\s+questions\b",
+        r"\bhow\s+long\b",
+        r"\bwhat\s+(?:kind|type)\s+of\s+questions\b",
+        r"\bcan\s+you\s+(?:explain|clarify|repeat|tell\s+me)\b",
+        r"\bcould\s+you\s+(?:explain|clarify|repeat|tell\s+me)\b",
+        r"\bwhat\s+is\s+the\s+format\b",
+        r"\bhow\s+does\s+this\s+work\b",
+        r"\bwhat\s+are\s+we\s+covering\b",
+    ]
+    for pat in question_indicators:
+        if re.search(pat, lower_t):
+            return "QUESTION", f"Candidate asked a question before starting ({pat})"
+    if lower_t.endswith("?") and not re.search(r"\b(?:shall|can|may)\s+we\s+(?:start|begin|proceed|go)\b", lower_t):
+        return "QUESTION", "Candidate utterance is an interrogative question"
+
+    # 3. Natural-language readiness & comfort expressions (broad semantic coverage)
     affirmative_phrases = [
-        r"\byes\s*,?\s*i\s+am\s+ready\b",
-        r"\bi\s+am\s+ready\b",
-        r"\bi'm\s+ready\b",
-        r"\bim\s+ready\b",
-        r"\bwe\s+can\s+start\s+now\b",
-        r"\bwe\s+can\s+start\b",
-        r"\bwe\s+can\s+begin\b",
-        r"\blet's\s+begin\b",
-        r"\blets\s+begin\b",
-        r"\byes\s*,?\s*let's\s+start\b",
-        r"\byes\s*,?\s*lets\s+start\b",
-        r"\blet's\s+start\b",
-        r"\blets\s+start\b",
-        r"\bi\s+am\s+prepared\b",
-        r"\bi'm\s+prepared\b",
-        r"\bim\s+prepared\b",
-        r"\bready\s+to\s+begin\b",
-        r"\bready\s+to\s+start\b",
-        r"\blet's\s+go\b",
-        r"\blets\s+go\b",
+        r"\b(?:yes|yeah|yep|yup|sure|okay|ok)\s*,?\s*i(?:'m|\s+am)\s+(?:ready|comfortable|good|set|all\s+set|prepared|fine)\b",
+        r"\bi(?:'m|\s+am)\s+(?:very\s+|quite\s+|fully\s+|completely\s+|all\s+)?(?:ready|prepared|comfortable|set|good\s+to\s+go)\b",
+        r"\bim\s+(?:ready|prepared|comfortable|all\s+set|good\s+to\s+go)\b",
+        r"\b(?:we|you)\s+(?:can|may|could|shall)\s+(?:start|begin|proceed|go\s+ahead|kick\s+off|get\s+started)\b",
+        r"\blet(?:'s|s|\s+us)\s+(?:begin|start|proceed|get\s+started|go|do\s+this|dive\s+in|kick\s+off)\b",
+        r"\b(?:ready|happy|excited|eager|good|set)\s+to\s+(?:begin|start|proceed|go|get\s+started)\b",
+        r"\b(?:start|begin|proceed)\s+now\b",
         r"\bgo\s+ahead\b",
-        r"\bstart\s+now\b",
-        r"\bbegin\s+now\b",
-        r"\bi\s+can\s+hear\s+you\b",
+        r"\bi\s+can\s+hear\s+you\s+(?:clearly|well|loud\s+and\s+clear|fine)\b",
+        r"\bhear\s+you\s+clearly\b",
+        r"\bloud\s+and\s+clear\b",
+        r"\bsounds\s+(?:good|great|clear)\b",
+        r"\bi(?:'m|\s+am)\s+good\b",
+        r"\ball\s+set\b",
+        r"\bgood\s+to\s+go\b",
+        r"\bfeeling\s+(?:comfortable|ready|good)\b",
+        r"\bplease\s+(?:proceed|start|begin|go\s+ahead)\b",
     ]
     for pat in affirmative_phrases:
         if re.search(pat, lower_t):
-            return "READY"
+            return "READY", f"Semantic readiness phrase matched ({pat})"
 
-    # Standalone affirmative words (only if the utterance isn't an unrelated long question)
     words = [w.strip(".,!?:;\"'()[]") for w in lower_t.split() if any(c.isalpha() for c in w)]
     standalone_affirmative = {
-        "yes", "ready", "prepared", "sure", "yep", "yeah", "yup",
-        "ok", "okay", "begin", "start", "proceed", "absolutely", "definitely",
+        "yes", "ready", "prepared", "comfortable", "sure", "yep", "yeah", "yup",
+        "ok", "okay", "begin", "start", "proceed", "absolutely", "definitely", "certainly",
     }
-    if words and len(words) <= 8 and any(w in standalone_affirmative for w in words):
-        return "READY"
+    if words and len(words) <= 10 and any(w in standalone_affirmative for w in words):
+        return "READY", "Concise affirmative response"
 
-    return "UNCLEAR"
+    # 4. Pure greeting / acknowledgement without readiness word (e.g., "Hello Manideep, good morning, I am doing well")
+    greeting_patterns = [
+        r"^(?:hello|hi|hey|good\s+morning|good\s+afternoon|good\s+evening|namaste|greetings)\b",
+        r"\bi(?:'m|\s+am)\s+doing\s+(?:well|great|fine)\b",
+        r"\bnice\s+to\s+meet\s+you\b",
+        r"\bthank\s+you\s+for\s+having\s+me\b",
+    ]
+    if words and len(words) <= 12 and any(re.search(pat, lower_t) for pat in greeting_patterns):
+        # If greeting is combined with "how about you" or pure pleasantry, classify via LLM or GREETING
+        return "GREETING", "Candidate greeted interviewer"
+
+    # 5. Semantic LLM Intent Classifier for any novel natural-language expression not covered by grammar rules
+    try:
+        nlu_prompt = f"""
+Classify the candidate's spoken response to the interviewer's introduction:
+Interviewer asked: "{interviewer_prompt or 'Hello! Good morning. Before we begin, are you comfortable and ready to start?'}"
+Candidate responded: "{transcript}"
+
+Classify the candidate's semantic intent into EXACTLY ONE of these 5 categories:
+- "READY": The candidate expresses readiness, comfort, willingness, or agreement to start the interview (e.g. "I'm in a good spot, fire away", "Everything works on my end, let's roll", "Yes I'm comfortable").
+- "GREETING": The candidate only exchanged greetings or pleasantries without indicating if they are ready to start yet.
+- "QUESTION": The candidate is asking the interviewer a question or requesting clarification before starting.
+- "UNREADY": The candidate is not ready yet, asks to wait, or reports an audio/technical issue.
+- "UNCLEAR": The response is unrelated, garbled, or ambiguous.
+
+Return strict JSON:
+{{"intent": "READY|GREETING|QUESTION|UNREADY|UNCLEAR", "reason": "1 short sentence"}}
+"""
+        raw = call_llm(
+            prompt=nlu_prompt,
+            system_prompt="You are a real-time conversational NLU classifier for an AI interviewer. Output strict JSON.",
+            json_mode=True,
+        )
+        parsed = clean_json_response(raw)
+        if isinstance(parsed, dict):
+            llm_intent = str(parsed.get("intent", "")).strip().upper()
+            llm_reason = str(parsed.get("reason", "LLM semantic intent classification")).strip()
+            if llm_intent in ("READY", "GREETING", "QUESTION", "UNREADY", "UNCLEAR"):
+                return llm_intent, f"LLM Semantic NLU: {llm_reason}"
+    except Exception:
+        pass
+
+    return "UNCLEAR", "Ambiguous response; requesting polite readiness confirmation"
+
+
+def _classify_readiness_intent(transcript: str) -> str:
+    """Backward-compatible wrapper returning the top-level intent label."""
+    intent, _ = _classify_readiness_intent_semantic(transcript)
+    return intent
 
 
 FILLER_INTERJECTIONS = {
@@ -1155,6 +1315,31 @@ def classify_candidate_turn_intent(
     for pat in stop_phrases:
         if re.search(pat, lower_t) and word_count <= 10:
             return "STOP_INTERVIEW", f"Matched exit command ({pat})"
+
+    # 1b. Candidate requests more time after an inactivity check-in or thinking pause
+    more_time_phrases = [
+        r"\bi\s+need\s+more\s+time\b",
+        r"\bneed\s+a\s+(?:minute|second|moment)\b",
+        r"\bgive\s+me\s+(?:a\s+)?(?:minute|second|moment|more\s+time)\b",
+        r"\blet\s+me\s+think\b",
+        r"\bone\s+(?:moment|second|minute)\s+please\b",
+    ]
+    for pat in more_time_phrases:
+        if re.search(pat, lower_t) and word_count <= 12:
+            return "NEED_MORE_TIME", f"Candidate requested more thinking time ({pat})"
+
+    # 1c. Candidate explicitly asks to skip the current question
+    skip_phrases = [
+        r"\bskip\s+(?:this\s+|the\s+)?question\b",
+        r"\bplease\s+skip\b",
+        r"\bi(?:'d|\s+would)\s+like\s+to\s+skip\b",
+        r"\bmove\s+to\s+the\s+next\s+question\b",
+        r"\bnext\s+question\s+please\b",
+        r"\bpass\s+on\s+this\s+question\b",
+    ]
+    for pat in skip_phrases:
+        if re.search(pat, lower_t) and word_count <= 12:
+            return "SKIP_QUESTION", f"Candidate requested to skip question ({pat})"
 
     # 2. Contextual Clarification Detection (only when utterance is not a long substantive answer)
     # Substantive answer guard: if the candidate spoke > 28 words explaining their work, don't misclassify
@@ -1281,22 +1466,24 @@ def handle_readiness_confirmation(
     questions: list,
 ) -> Dict[str, Any]:
     """
-    Verifies actual candidate readiness in natural language.
+    Verifies actual candidate readiness in natural language using semantic NLU + contextual grammar.
+    - Enters PROCESSING_READINESS state while analyzing the candidate's response.
+    - Understands natural affirmative phrases, greetings, questions, unready requests, and unclear responses.
     - Never auto-advances on a timer.
-    - Understands natural affirmative phrases ("Yes, I am ready", "I am ready", "We can start now",
-      "Let's begin", "Yes, let's start", "I am prepared").
-    - If the candidate says they are not ready, reassures them and waits.
-    - If the candidate says something unrelated or unclear, asks for clarification in the selected voice.
     """
-    intent = _classify_readiness_intent(transcript)
+    with SESSION_LOCK:
+        _transition_state_locked("PROCESSING_READINESS", "PROCESSING_READINESS", reason="Processing candidate readiness response")
+        interviewer_prompt = LIVE_SESSION.get("subtitles", "")
+
+    intent, intent_reason = _classify_readiness_intent_semantic(transcript, interviewer_prompt=interviewer_prompt)
     log_interview_event(
         speaker="SYSTEM",
         event="Readiness Intent",
-        content=f"Candidate readiness classified as '{intent}' from transcript: \"{transcript}\"",
-        status="SUCCESS" if intent == "READY" else ("WAITING" if intent in ("UNREADY", "NOISE") else "RETRY"),
+        content=f"Candidate readiness classified as '{intent}' ({intent_reason}) from transcript: \"{transcript}\"",
+        status="SUCCESS" if intent == "READY" else ("WAITING" if intent in ("UNREADY", "NOISE", "GREETING", "QUESTION") else "RETRY"),
         question_id=None,
         question_number=0,
-        details={"intent": intent, "transcript": transcript},
+        details={"intent": intent, "reason": intent_reason, "transcript": transcript},
     )
 
     if intent == "NOISE":
@@ -1318,6 +1505,40 @@ def handle_readiness_confirmation(
             LIVE_SESSION["current_audio_b64"] = b64_audio
             LIVE_SESSION["voice_error"] = err
         return {"status": "waiting_for_readiness", "transcript": transcript, **get_live_state()}
+
+    if intent == "GREETING":
+        greet_reply = f"Hello {candidate_name}, great to connect with you! Are you comfortable and ready to begin the interview?"
+        with SESSION_LOCK:
+            LIVE_SESSION["audio_generating"] = True
+            LIVE_SESSION["current_audio_b64"] = ""
+            LIVE_SESSION["subtitles"] = greet_reply
+            LIVE_SESSION["active_speaker"] = "syna"
+            _transition_state_locked("WAITING_FOR_READINESS", "WAITING_FOR_READINESS", reason="Acknowledged candidate greeting; awaiting readiness confirmation")
+        b64_audio, err = _synthesize_interviewer_audio(greet_reply, voice_id, event_context="Greeting Acknowledgement")
+        with SESSION_LOCK:
+            LIVE_SESSION["audio_generating"] = False
+            LIVE_SESSION["current_audio_b64"] = b64_audio
+            LIVE_SESSION["voice_error"] = err
+        return {"status": "waiting_for_readiness", "message": greet_reply, "transcript": transcript, **get_live_state()}
+
+    if intent == "QUESTION":
+        num_q = len(questions) if questions else 5
+        q_reply = (
+            f"We'll go through {num_q} structured interview questions tailored to your role. "
+            f"You can speak naturally at your own pace. Whenever you're ready to start, just let me know!"
+        )
+        with SESSION_LOCK:
+            LIVE_SESSION["audio_generating"] = True
+            LIVE_SESSION["current_audio_b64"] = ""
+            LIVE_SESSION["subtitles"] = q_reply
+            LIVE_SESSION["active_speaker"] = "syna"
+            _transition_state_locked("WAITING_FOR_READINESS", "WAITING_FOR_READINESS", reason="Answered candidate pre-interview question; awaiting readiness")
+        b64_audio, err = _synthesize_interviewer_audio(q_reply, voice_id, event_context="Pre-Interview Question Response")
+        with SESSION_LOCK:
+            LIVE_SESSION["audio_generating"] = False
+            LIVE_SESSION["current_audio_b64"] = b64_audio
+            LIVE_SESSION["voice_error"] = err
+        return {"status": "waiting_for_readiness", "message": q_reply, "transcript": transcript, **get_live_state()}
 
     if intent == "UNCLEAR":
         clarify_msg = "I didn't quite catch a clear confirmation. Could you please clarify if you are ready to begin the interview?"
@@ -1347,11 +1568,14 @@ def handle_readiness_confirmation(
             **get_live_state(),
         }
 
-    # Intent == "READY" -> Immediately begin Question 1 in the locked Voicebox identity
+    # Intent == "READY" -> Acknowledge warmly and immediately ask Question 1 in the locked Voicebox identity
     q1_item = questions[0] if questions else {"id": 1, "text": "Can you introduce yourself and describe your recent experience?"}
     q1_text = q1_item.get("text", "Can you introduce yourself and describe your recent experience?")
     q1_id = q1_item.get("id", 1)
-    syna_msg = q1_text
+    if not q1_text.lower().startswith(("wonderful", "great!")):
+        syna_msg = f"Wonderful! Let's get started. {q1_text}"
+    else:
+        syna_msg = q1_text
 
     with SESSION_LOCK:
         LIVE_SESSION["audio_generating"] = True
@@ -1397,12 +1621,12 @@ def handle_inactivity_timeout() -> Dict[str, Any]:
         LIVE_SESSION["candidate_silent_prompts_count"] = LIVE_SESSION.get("candidate_silent_prompts_count", 0) + 1
         prompt_count = LIVE_SESSION["candidate_silent_prompts_count"]
 
-    if stage in ("INTRODUCTION", "WAITING_FOR_READINESS", "INITIAL_GREETING"):
-        msg = "Are you ready to begin the interview? Please say 'Yes, I am ready' whenever you'd like to start."
+    if stage in ("INTRODUCTION", "INTRODUCTION_PLAYING", "WAITING_FOR_READINESS", "INITIAL_GREETING"):
+        msg = "Are you comfortable and ready to begin the interview? Just let me know whenever you'd like to start."
     else:
         msg = (
-            "I haven't heard a response yet. Please go ahead and share your answer whenever you are ready, "
-            "or let me know if you would like me to repeat or clarify the question."
+            "I haven't heard a response yet. Please let me know if you need more time, would like me to repeat the question, "
+            "or if you would like to skip to the next question."
         )
 
     log_interview_event(
@@ -1659,7 +1883,7 @@ def process_candidate_speech_blob(
                 question_number=curr_q_num,
             )
             with SESSION_LOCK:
-                if stage in ("INTRODUCTION", "WAITING_FOR_READINESS", "INITIAL_GREETING"):
+                if stage in ("INTRODUCTION", "INTRODUCTION_PLAYING", "WAITING_FOR_READINESS", "PROCESSING_READINESS", "INITIAL_GREETING"):
                     _transition_state_locked("WAITING_FOR_READINESS", "WAITING_FOR_READINESS")
                 else:
                     _transition_state_locked("LISTENING_TO_CANDIDATE", "WAITING_FOR_CANDIDATE")
@@ -1670,7 +1894,9 @@ def process_candidate_speech_blob(
             # If the candidate genuinely spoke (or STT failed) during an active question, trigger TRANSCRIPTION_RETRY
             if (simulate_stt_failure or (speech_duration_ms >= 1200 and audio_had_speech_energy)) and stage not in (
                 "INTRODUCTION",
+                "INTRODUCTION_PLAYING",
                 "WAITING_FOR_READINESS",
+                "PROCESSING_READINESS",
                 "INITIAL_GREETING",
             ):
                 retry_msg = "I couldn't hear your answer clearly due to audio interference. Could you please repeat your response to this question?"
@@ -1711,7 +1937,7 @@ def process_candidate_speech_blob(
                 question_number=curr_q_num,
             )
             with SESSION_LOCK:
-                if stage in ("INTRODUCTION", "WAITING_FOR_READINESS", "INITIAL_GREETING"):
+                if stage in ("INTRODUCTION", "INTRODUCTION_PLAYING", "WAITING_FOR_READINESS", "PROCESSING_READINESS", "INITIAL_GREETING"):
                     _transition_state_locked("WAITING_FOR_READINESS", "WAITING_FOR_READINESS")
                 else:
                     _transition_state_locked("LISTENING_TO_CANDIDATE", "WAITING_FOR_CANDIDATE")
@@ -1731,7 +1957,7 @@ def process_candidate_speech_blob(
         )
 
         # Case B: Readiness confirmation turn
-        if stage in ("INTRODUCTION", "WAITING_FOR_READINESS", "INITIAL_GREETING"):
+        if stage in ("INTRODUCTION", "INTRODUCTION_PLAYING", "WAITING_FOR_READINESS", "PROCESSING_READINESS", "INITIAL_GREETING"):
             return handle_readiness_confirmation(
                 transcript=transcript,
                 session_token=session_token,
@@ -1740,9 +1966,9 @@ def process_candidate_speech_blob(
                 questions=questions,
             )
 
-        # Enter ANSWER_VALIDATION state and classify candidate intent
+        # Enter PROCESSING_ANSWER / ANSWER_VALIDATION state and classify candidate intent
         with SESSION_LOCK:
-            _transition_state_locked("ANSWER_VALIDATION", "ANSWER_VALIDATION", reason="Validating transcript & classifying candidate intent")
+            _transition_state_locked("PROCESSING_ANSWER", "PROCESSING_ANSWER", reason="Processing and validating candidate spoken answer")
 
         intent, intent_reason = classify_candidate_turn_intent(
             transcript=transcript,
@@ -1776,6 +2002,22 @@ def process_candidate_speech_blob(
                 LIVE_SESSION["exit_requested"] = True
                 LIVE_SESSION["finished"] = True
             return {"status": "finished", "transcript": transcript, "voice_error": err, **get_live_state()}
+
+        # Case A2: Candidate asks for more thinking time
+        if intent == "NEED_MORE_TIME":
+            hold_msg = "Of course, take your time. Go ahead whenever you're ready with your answer."
+            with SESSION_LOCK:
+                LIVE_SESSION["audio_generating"] = True
+                LIVE_SESSION["current_audio_b64"] = ""
+                LIVE_SESSION["subtitles"] = hold_msg
+                LIVE_SESSION["active_speaker"] = "syna"
+                _transition_state_locked("ASKING_QUESTION", "ASKING_QUESTION", reason=f"Reassuring candidate on Q{curr_q_num}")
+            b64_audio, err = _synthesize_interviewer_audio(hold_msg, voice_id, event_context=f"More Time Q{curr_q_num}")
+            with SESSION_LOCK:
+                LIVE_SESSION["audio_generating"] = False
+                LIVE_SESSION["current_audio_b64"] = b64_audio
+                LIVE_SESSION["voice_error"] = err
+            return {"status": "waiting_for_candidate", "message": hold_msg, "transcript": transcript, **get_live_state()}
 
         # Case C1: Candidate requests question CLARIFICATION (Section 4)
         # Do NOT treat as answer, do NOT increment current_question_idx, keep same question_id!
@@ -2105,7 +2347,8 @@ def process_candidate_speech_blob(
         )
 
         with SESSION_LOCK:
-            _transition_state_locked("GENERATING_NEXT_QUESTION", "GENERATING_NEXT_QUESTION", reason=f"Generating Q{next_q_num} (ID={next_q_id})")
+            _transition_state_locked("ACKNOWLEDGING_ANSWER", "ACKNOWLEDGING_ANSWER", reason=f"Acknowledging candidate answer for Q{curr_q_num}")
+            _transition_state_locked("NEXT_QUESTION", "NEXT_QUESTION", reason=f"Advancing to Q{next_q_num} (ID={next_q_id})")
             LIVE_SESSION["audio_generating"] = True
             LIVE_SESSION["current_audio_b64"] = ""
 
@@ -2290,7 +2533,7 @@ class InterviewBridgeHTTPHandler(BaseHTTPRequestHandler):
 
         elif self.path in ("/introduction_finished", "/greeting_done"):
             with SESSION_LOCK:
-                if LIVE_SESSION.get("call_stage") in ("INTRODUCTION", "INITIAL_GREETING"):
+                if LIVE_SESSION.get("call_stage") in ("INTRODUCTION", "INTRODUCTION_PLAYING", "INITIAL_GREETING"):
                     _transition_state_locked("WAITING_FOR_READINESS", "WAITING_FOR_READINESS", reason="Interviewer introduction audio finished")
                     LIVE_SESSION["active_speaker"] = "waiting"
                     LIVE_SESSION["current_audio_b64"] = ""
@@ -2456,13 +2699,17 @@ class InterviewBridgeHTTPHandler(BaseHTTPRequestHandler):
                                 )
                             LIVE_SESSION["active_speaker"] = "waiting"
                             LIVE_SESSION["current_audio_b64"] = ""
+                        elif speaker == "waiting_for_silence":
+                            if LIVE_SESSION.get("call_stage") in ("RECORDING_ANSWER", "RECORDING", "LISTENING_TO_CANDIDATE", "WAITING_FOR_CANDIDATE"):
+                                _transition_state_locked("WAITING_FOR_SILENCE", "WAITING_FOR_SILENCE", reason="Candidate paused speaking; 20s silence grace timer active")
+                            LIVE_SESSION["active_speaker"] = "candidate"
                         elif speaker == "candidate":
-                            if LIVE_SESSION.get("call_stage") in ("LISTENING_TO_CANDIDATE", "WAITING_FOR_CANDIDATE", "ASKING_QUESTION"):
-                                _transition_state_locked("RECORDING_ANSWER", "RECORDING_ANSWER", reason="Candidate speech detected by VAD")
+                            if LIVE_SESSION.get("call_stage") in ("LISTENING_TO_CANDIDATE", "WAITING_FOR_CANDIDATE", "ASKING_QUESTION", "WAITING_FOR_SILENCE"):
+                                _transition_state_locked("RECORDING_ANSWER", "RECORDING_ANSWER", reason="Candidate speech detected by VAD (silence timer reset)")
                                 log_interview_event(
                                     speaker="CANDIDATE",
                                     event="Speech Detected",
-                                    content="Candidate started speaking (audio recording active)",
+                                    content="Candidate speaking (audio recording active; silence timer reset)",
                                     status="SUCCESS",
                                 )
                             LIVE_SESSION["active_speaker"] = "candidate"

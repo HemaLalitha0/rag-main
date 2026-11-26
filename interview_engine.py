@@ -625,6 +625,7 @@ def evaluate_universal_answer(
         or "unanswered" in lower_ans
         or "not attempted" in lower_ans
         or "silence" in lower_ans
+        or lower_ans in ("skip", "skip question", "skip this question", "next question", "pass")
         or is_whisper_hallucination_or_noise(raw_ans)
     )
     if is_unanswered:

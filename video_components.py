@@ -782,7 +782,9 @@ def render_interview_stage(
     </div>
 
     <script>
-        const BRIDGE_BASE_URL = (window.parent && window.parent.location.origin) ? (window.parent.location.origin + "/api/bridge") : (window.location.origin + "/api/bridge");
+        const _PARENT_ORIGIN = (window.parent && window.parent.location && window.parent.location.origin) ? window.parent.location.origin : window.location.origin;
+        const _IS_LOCAL_DEV = (_PARENT_ORIGIN.includes("127.0.0.1") || _PARENT_ORIGIN.includes("localhost"));
+        const BRIDGE_BASE_URL = _IS_LOCAL_DEV ? "http://127.0.0.1:8765" : (_PARENT_ORIGIN + "/api/bridge");
         const INTERVIEWER_NAME = "{escaped_interviewer}";
         const CANDIDATE_NAME = "{escaped_candidate}";
         const INITIAL_AUDIO_B64 = "{audio_base64}";
@@ -880,11 +882,13 @@ def render_interview_stage(
         let ambientNoiseFloor = 14.0;
         let consecutiveSpeechFrames = 0;
         const SPEECH_DEBOUNCE_FRAMES = 5;     // ~80-90ms continuous harmonic voice energy required
-        let SILENCE_DURATION_MS = 2000;       // 2.0s continuous silence after speaking (configurable 1.5s-2.5s)
+        let SILENCE_DURATION_MS = 20000;      // 20.0s continuous silence grace period after candidate stops speaking (configurable)
+        const READINESS_SILENCE_MS = 2200;    // 2.2s silence threshold for short readiness response ("Yes, I'm ready")
         const THINKING_PAUSE_GRACE_MS = 650;  // Extra grace if candidate pauses mid-clause ("and", "because", etc.)
         const MIN_SPEECH_MS = 950;            // Minimum ~1.0s of voiced speech
         let MAX_INACTIVITY_WAIT_MS = 20000;   // 20s inactivity timeout when candidate has not started speaking
         const ECHO_GUARD_COOLDOWN_MS = 450;   // Post-TTS acoustic echo guard cooldown after interviewer finishes speaking
+        let isWaitingForSilenceStateNotified = false;
 
         if (!window.sessionStorage.getItem("syna_call_start")) {{
             window.sessionStorage.setItem("syna_call_start", Date.now().toString());
@@ -1113,6 +1117,14 @@ def render_interview_stage(
         }}
 
         function getEffectiveSilenceThresholdMs() {{
+            if (
+                currentCallStage === "INITIAL_GREETING" ||
+                currentCallStage === "INTRODUCTION" ||
+                currentCallStage === "INTRODUCTION_PLAYING" ||
+                currentCallStage === "WAITING_FOR_READINESS"
+            ) {{
+                return READINESS_SILENCE_MS;
+            }}
             const trimmed = (liveInterimTranscript || "").trim().toLowerCase();
             if (!trimmed) return SILENCE_DURATION_MS;
             const midClauseEndings = [" and", " because", " so", " but", " or", " while", " where", " which", " that", " um", " uh", " like"];
@@ -1135,8 +1147,17 @@ def render_interview_stage(
             }}
             lastVoiceTime = now;
             waitingForCandidateSince = 0;
+            if (isWaitingForSilenceStateNotified) {{
+                isWaitingForSilenceStateNotified = false;
+                fetch(BRIDGE_BASE_URL + "/speaker_state", {{
+                    method: "POST",
+                    headers: {{ "Content-Type": "application/json" }},
+                    body: JSON.stringify({{ speaker: "candidate", live_transcript: spokenText || liveInterimTranscript || "" }})
+                }}).catch(() => {{}});
+            }}
             if (!isCandidateSpeaking) {{
                 isCandidateSpeaking = true;
+                isWaitingForSilenceStateNotified = false;
                 speechStartTime = now;
                 recordedChunks = [];
                 if (mediaRecorder && mediaRecorder.state === "inactive") {{
@@ -1364,9 +1385,13 @@ def render_interview_stage(
                 if (interviewerLiveCaption && textForSubtitles) interviewerLiveCaption.innerText = textForSubtitles;
 
                 // When introduction finishes, DO NOT auto-advance! Transition to WAITING_FOR_READINESS
-                if (currentCallStage === "INITIAL_GREETING" || currentCallStage === "INTRODUCTION") {{
+                if (
+                    currentCallStage === "INITIAL_GREETING" ||
+                    currentCallStage === "INTRODUCTION" ||
+                    currentCallStage === "INTRODUCTION_PLAYING"
+                ) {{
                     currentCallStage = "WAITING_FOR_READINESS";
-                    setVisualSpeakerState("waiting", "Can you hear me clearly, and are you ready to begin? Please say 'Yes, I am ready'");
+                    setVisualSpeakerState("waiting", "Before we begin, are you comfortable and ready to start?");
                     emitClientEvent("SYNA", "Audio Playback Finished", "Introduction playback completed", playbackDurMs, "SUCCESS");
                     fetch(BRIDGE_BASE_URL + "/introduction_finished", {{ method: "POST" }}).catch(() => {{}});
                     liveInterimTranscript = "";
@@ -1726,12 +1751,17 @@ def render_interview_stage(
                 introAudioHash &&
                 hash === introAudioHash &&
                 currentCallStage !== "INTRODUCTION" &&
+                currentCallStage !== "INTRODUCTION_PLAYING" &&
                 currentCallStage !== "INITIAL_GREETING" &&
                 currentCallStage !== "WAITING_FOR_READINESS"
             ) {{
                 return;
             }}
-            if (currentCallStage === "INTRODUCTION" || currentCallStage === "INITIAL_GREETING") {{
+            if (
+                currentCallStage === "INTRODUCTION" ||
+                currentCallStage === "INTRODUCTION_PLAYING" ||
+                currentCallStage === "INITIAL_GREETING"
+            ) {{
                 if (!introAudioHash) introAudioHash = hash;
             }}
             lastPlayedAudioHash = hash;
@@ -1804,10 +1834,10 @@ def render_interview_stage(
         function applyServerState(state, forcePlayNewTurn = false) {{
             if (isCallEnded || !state) return;
 
-            if (state.silence_threshold_ms && state.silence_threshold_ms >= 1500 && state.silence_threshold_ms <= 3000) {{
+            if (state.silence_threshold_ms && state.silence_threshold_ms >= 1500 && state.silence_threshold_ms <= 60000) {{
                 SILENCE_DURATION_MS = state.silence_threshold_ms;
             }}
-            if (state.max_inactivity_timeout_ms && state.max_inactivity_timeout_ms >= 10000) {{
+            if (state.max_inactivity_timeout_ms && state.max_inactivity_timeout_ms >= 5000) {{
                 MAX_INACTIVITY_WAIT_MS = state.max_inactivity_timeout_ms;
             }}
 
@@ -2052,7 +2082,20 @@ def render_interview_stage(
                         consecutiveSpeechFrames = 0;
                         if (isCandidateSpeaking) {{
                             let silenceElapsed = Date.now() - lastVoiceTime;
-                            if (silenceElapsed >= getEffectiveSilenceThresholdMs()) {{
+                            let targetSilenceMs = getEffectiveSilenceThresholdMs();
+                            if (silenceElapsed >= 1200 && !isWaitingForSilenceStateNotified && currentCallStage !== "WAITING_FOR_READINESS") {{
+                                isWaitingForSilenceStateNotified = true;
+                                fetch(BRIDGE_BASE_URL + "/speaker_state", {{
+                                    method: "POST",
+                                    headers: {{ "Content-Type": "application/json" }},
+                                    body: JSON.stringify({{ speaker: "waiting_for_silence", live_transcript: liveInterimTranscript || "" }})
+                                }}).catch(() => {{}});
+                            }}
+                            if (silenceElapsed >= 1200 && candidateBadge && currentCallStage !== "WAITING_FOR_READINESS") {{
+                                let remSec = Math.max(0, Math.ceil((targetSilenceMs - silenceElapsed) / 1000));
+                                candidateBadge.innerText = `⏳ LISTENING (SILENCE GRACE: ${{remSec}}s)`;
+                            }}
+                            if (silenceElapsed >= targetSilenceMs) {{
                                 finalizeCandidateUtterance();
                             }}
                         }}
