@@ -27,7 +27,13 @@ services:
     volumes:
       # Persist SQLite database & candidate session data in writable /app/data directory
       - ./auth_guard.py:/app/auth_guard.py:ro
+      - ./interview_bridge_server.py:/app/interview_bridge_server.py:ro
+      - ./video_components.py:/app/video_components.py:ro
+      - ./interview_engine.py:/app/interview_engine.py:ro
+      - ./audio_service.py:/app/audio_service.py:ro
+      - ./voicebox_client.py:/app/voicebox_client.py:ro
       - ./pages/MockMate.py:/app/pages/MockMate.py:ro
+      - ./pages/mock_interview.py:/app/pages/mock_interview.py:ro
       - ./static:/app/static:ro
       - ./data:/app/data
       - ./kb_cache:/app/kb_cache

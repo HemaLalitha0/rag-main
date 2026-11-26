@@ -64,6 +64,8 @@ from audio_service import (
     PERMANENT_VOICE_DESCRIPTIONS,
 )
 from report_exporter import export_report_to_pdf
+import video_components
+importlib.reload(video_components)
 from video_components import render_interview_stage
 from interview_bridge_server import (
     start_interview_bridge_server,

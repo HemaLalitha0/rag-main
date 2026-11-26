@@ -2775,14 +2775,14 @@ _SERVER_THREAD = getattr(sys, "_interview_bridge_server_thread", None)
 
 
 def start_interview_bridge_server(port: int = 8765):
-    """Starts the background localhost bridge server once (and hot-updates RequestHandlerClass on reload)."""
+    """Starts the background bridge server on 0.0.0.0:8765 so both localhost and Docker port-forwarding can reach it."""
     global _SERVER_INSTANCE, _SERVER_THREAD
     if _SERVER_INSTANCE is not None:
         _SERVER_INSTANCE.RequestHandlerClass = InterviewBridgeHTTPHandler
         return
 
     try:
-        _SERVER_INSTANCE = HTTPServer(("127.0.0.1", port), InterviewBridgeHTTPHandler)
+        _SERVER_INSTANCE = HTTPServer(("0.0.0.0", port), InterviewBridgeHTTPHandler)
         _SERVER_THREAD = threading.Thread(target=_SERVER_INSTANCE.serve_forever, daemon=True)
         _SERVER_THREAD.start()
         sys._interview_bridge_server_instance = _SERVER_INSTANCE
