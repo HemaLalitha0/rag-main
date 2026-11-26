@@ -24,11 +24,10 @@ services:
       - STREAMLIT_SERVER_ADDRESS=0.0.0.0
       - STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
     volumes:
-      # Persist SQLite database & student/application data
+      # Persist SQLite database & student/application data in writable /app/data directory
       - ./auth_guard.py:/app/auth_guard.py:ro
       - ./pages/AksharaMitra.py:/app/pages/AksharaMitra.py:ro
       - ./static:/app/static:ro
-      - ./users.db:/app/users.db
       - ./data:/app/data
       # Preserve uploaded files & RAG indexes
       - ./kb_cache:/app/kb_cache

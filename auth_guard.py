@@ -19,11 +19,34 @@ from typing import Optional, Tuple, Dict, Any
 import streamlit as st
 
 _MAIN_DIR = os.path.dirname(os.path.abspath(__file__))
-DB_PATH = os.path.join(_MAIN_DIR, "users.db")
+_DATA_DIR = os.path.join(_MAIN_DIR, "data")
+
+
+def _resolve_writable_db_path() -> str:
+    """Selects a writable SQLite path (/app/data/auth_users.db in Docker, or fallback if root is read-only)."""
+    candidates = [
+        os.path.join(_DATA_DIR, "auth_users.db"),
+        os.path.join(_MAIN_DIR, "users.db"),
+        "/tmp/shr_auth_users.db",
+    ]
+    for path in candidates:
+        parent = os.path.dirname(path) or "."
+        try:
+            os.makedirs(parent, exist_ok=True)
+            conn = sqlite3.connect(path, timeout=5.0)
+            conn.execute("CREATE TABLE IF NOT EXISTS _write_probe (id INT)")
+            conn.commit()
+            conn.close()
+            return path
+        except Exception:
+            continue
+    return "/tmp/shr_auth_users.db"
+
+
+DB_PATH = _resolve_writable_db_path()
 
 
 def get_db_connection():
-    os.makedirs(os.path.dirname(DB_PATH) if os.path.dirname(DB_PATH) else ".", exist_ok=True)
     conn = sqlite3.connect(DB_PATH, timeout=10.0)
     conn.row_factory = sqlite3.Row
     return conn
@@ -337,16 +360,17 @@ def render_auth_page(app_title: str, app_subtitle: str, icon_emoji: str = "✨")
         robot_logo_path = os.path.join(_MAIN_DIR, "static", "logos", "aksharamitra_robot_logo.png")
         if "AksharaMitra" in app_title and os.path.exists(robot_logo_path):
             try:
-                import base64
-                with open(robot_logo_path, "rb") as f:
-                    b64_logo = base64.b64encode(f.read()).decode("utf-8")
-                logo_img_html = f"""
-                <div style="text-align: center; margin-bottom: 14px;">
-                    <img src="data:image/png;base64,{b64_logo}" style="width: 140px; height: auto; border-radius: 28px; box-shadow: 0 16px 36px -10px rgba(99, 102, 241, 0.55);" />
-                </div>
-                """
+                st.markdown(
+                    "<div style='display:flex; justify-content:center;'>",
+                    unsafe_allow_html=True,
+                )
+                _, img_col, _ = st.columns([1.2, 1.0, 1.2])
+                with img_col:
+                    st.image(robot_logo_path, use_container_width=True)
+                st.markdown("</div>", unsafe_allow_html=True)
+                logo_img_html = "<!-- rendered via st.image -->"
             except Exception:
-                pass
+                logo_img_html = ""
 
         if not logo_img_html:
             logo_img_html = f"""
@@ -358,7 +382,7 @@ def render_auth_page(app_title: str, app_subtitle: str, icon_emoji: str = "✨")
         st.markdown(
             f"""
             <div style="text-align: center; margin-bottom: 24px;">
-                {logo_img_html}
+                {"" if "st.image" in logo_img_html else logo_img_html}
                 <h1 style="font-size: 1.75rem; font-weight: 800; color: #F9FAFB; margin: 0; letter-spacing: -0.02em;">{app_title}</h1>
                 <p style="font-size: 0.88rem; color: #9CA3AF; margin-top: 6px;">{app_subtitle}</p>
             </div>
