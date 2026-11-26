@@ -24,6 +24,9 @@ try:
 except Exception:
     pass
 
+import importlib
+import auth_guard
+importlib.reload(auth_guard)
 from auth_guard import render_auth_page, render_user_header
 from telugu_reading_app import render_main_app
 

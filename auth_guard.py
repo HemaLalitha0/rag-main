@@ -370,16 +370,16 @@ def render_auth_page(app_title: str, app_subtitle: str, icon_emoji: str = "✨")
         if has_custom_logo:
             header_html = (
                 f'<div style="text-align: center; margin-bottom: 24px;">'
-                f'<h1 style="font-size: 1.75rem; font-weight: 800; color: #F9FAFB; margin: 0; letter-spacing: -0.02em;">{app_title}</h1>'
-                f'<p style="font-size: 0.88rem; color: #9CA3AF; margin-top: 6px;">{app_subtitle}</p>'
+                f'<h1 style="font-size: 1.75rem; font-weight: 800; color: #1E293B; margin: 0; letter-spacing: -0.02em;">{app_title}</h1>'
+                f'<p style="font-size: 0.92rem; color: #475569; margin-top: 6px;">{app_subtitle}</p>'
                 f'</div>'
             )
         else:
             header_html = (
                 f'<div style="text-align: center; margin-bottom: 24px;">'
                 f'<div style="width: 58px; height: 58px; border-radius: 16px; background: linear-gradient(135deg, #4F46E5 0%, #06B6D4 100%); display: inline-flex; align-items: center; justify-content: center; font-size: 1.8rem; box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.5); margin-bottom: 12px;">{icon_emoji}</div>'
-                f'<h1 style="font-size: 1.75rem; font-weight: 800; color: #F9FAFB; margin: 0; letter-spacing: -0.02em;">{app_title}</h1>'
-                f'<p style="font-size: 0.88rem; color: #9CA3AF; margin-top: 6px;">{app_subtitle}</p>'
+                f'<h1 style="font-size: 1.75rem; font-weight: 800; color: #1E293B; margin: 0; letter-spacing: -0.02em;">{app_title}</h1>'
+                f'<p style="font-size: 0.92rem; color: #475569; margin-top: 6px;">{app_subtitle}</p>'
                 f'</div>'
             )
 

@@ -20,6 +20,9 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
+import importlib
+import auth_guard
+importlib.reload(auth_guard)
 from auth_guard import render_auth_page, render_user_header
 
 # Check authentication gate
