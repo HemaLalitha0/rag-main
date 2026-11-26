@@ -63,7 +63,7 @@ def init_auth_tables():
         "email": "TEXT",
         "full_name": "TEXT",
         "auth_provider": "TEXT DEFAULT 'local'",
-        "created_at": "TIMESTAMP DEFAULT (datetime('now'))",
+        "created_at": "TIMESTAMP",
         "last_login": "TIMESTAMP",
         "login_attempts": "INTEGER DEFAULT 0",
         "lockout_end": "TIMESTAMP",
