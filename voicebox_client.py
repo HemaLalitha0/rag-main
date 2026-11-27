@@ -819,12 +819,6 @@ class VoiceboxClient:
             if not http_up and os.environ.get("VOICEBOX_SYNC_CPU_SYNTH") != "1":
                 prof_wav, prof_meta = _lookup_profile_completed_chatterbox_wav(profile_id, clean_text)
                 if prof_wav and prof_meta:
-                    if (prof_meta.get("matched_audio_text") or "").strip().lower() == clean_text.lower():
-                        try:
-                            cache_wav.write_bytes(prof_wav)
-                            cache_meta.write_text(json.dumps(prof_meta, ensure_ascii=False, indent=2), encoding="utf-8")
-                        except Exception:
-                            pass
                     return prof_wav, prof_meta
 
             # 3. Synthesize using the 2-stage memory-safe Voicebox Chatterbox pipeline with the profile's conditionals
