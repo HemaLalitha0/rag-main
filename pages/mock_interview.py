@@ -564,10 +564,20 @@ if st.session_state.interview_state == InterviewState.SETUP:
             unsafe_allow_html=True,
         )
 
+        # Retrieve candidate name from authenticated user session if available
+        auth_user_dict = st.session_state.get("authenticated_user") or {}
+        auth_full_name = (
+            auth_user_dict.get("full_name")
+            or auth_user_dict.get("username")
+            or st.session_state.get("username")
+            or st.session_state.get("user")
+            or ""
+        ).strip()
+
         default_cand_name = (
             st.session_state.candidate_profile.candidate_name
             if st.session_state.candidate_profile and st.session_state.candidate_profile.candidate_name
-            else st.session_state.get("user", "Candidate")
+            else (auth_full_name if auth_full_name else "Candidate")
         )
         candidate_name_input = st.text_input(
             "Your Display Name",

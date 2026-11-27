@@ -2093,8 +2093,7 @@ def render_interview_stage(
                                 }}).catch(() => {{}});
                             }}
                             if (silenceElapsed >= 1200 && candidateBadge && currentCallStage !== "WAITING_FOR_READINESS") {{
-                                let remSec = Math.max(0, Math.ceil((targetSilenceMs - silenceElapsed) / 1000));
-                                candidateBadge.innerText = `⏳ LISTENING (SILENCE GRACE: ${{remSec}}s)`;
+                                candidateBadge.innerText = "🎙️ LISTENING...";
                             }}
                             if (silenceElapsed >= targetSilenceMs) {{
                                 finalizeCandidateUtterance();

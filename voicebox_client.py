@@ -139,17 +139,20 @@ def _lookup_voicebox_db_generation(
     Check the shared Voicebox SQLite database (read-only) for:
       1. An already-completed generation matching (profile_id, engine, text) whose WAV file exists on disk.
       2. Or an actively-running 'generating' job (only when server_running=True).
-    Returns (wav_bytes_or_None, meta_dict_or_None, in_progress_gen_id_or_None).
+    STRICT SECURITY RULE: Never return a 'kokoro' generation for any of the 4 permanent cloned profiles
+    (Manideep, Chirag, Hema, Sushma) — only authentic 'chatterbox' generations are accepted.
     """
     if not VOICEBOX_DB_PATH.exists():
         return None, None, None
     try:
+        # Enforce chatterbox engine for all 4 cloned profiles
+        effective_engine = "chatterbox" if profile_id in PERMANENT_VOICE_PROFILES.values() else engine
         conn = sqlite3.connect(f"file:{VOICEBOX_DB_PATH}?mode=ro", uri=True, timeout=2.0)
         cur = conn.cursor()
         cur.execute(
             "SELECT id, status, audio_path, duration FROM generations "
             "WHERE profile_id=? AND engine=? AND trim(text)=? ORDER BY created_at DESC",
-            (profile_id, engine, clean_text),
+            (profile_id, effective_engine, clean_text),
         )
         rows = cur.fetchall()
         conn.close()
@@ -162,7 +165,7 @@ def _lookup_voicebox_db_generation(
                     meta = {
                         "id": gid,
                         "profile_id": profile_id,
-                        "engine": engine,
+                        "engine": effective_engine,
                         "status": "completed",
                         "duration": dur,
                         "cached_from_voicebox_db": True,

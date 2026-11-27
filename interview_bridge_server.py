@@ -875,23 +875,20 @@ def reset_live_session(
         details={"voice_id": resolved_id, "voice_name": resolved_name, "is_valid": is_valid_voice},
     )
 
+    # Exact required universal introduction structure across all 4 voices:
+    # "Good morning, [Candidate Name]! Welcome to your mock interview. I'm [Interviewer Name], and I'll be your interviewer today. I hope you're doing well. We'll have a professional and interactive interview session. Are you comfortable? Shall we get started?"
     full_greeting = (
-        f"Hello! Good morning. My name is {resolved_name}, and I'll be your interviewer today. "
-        f"Welcome to your mock interview, {cand_name}. I hope you're doing well. "
-        f"Before we begin, are you comfortable and ready to start?"
+        f"Good morning, {cand_name}! Welcome to your mock interview. "
+        f"I'm {resolved_name}, and I'll be your interviewer today. I hope you're doing well. "
+        f"We'll have a professional and interactive interview session. "
+        f"Are you comfortable? Shall we get started?"
     )
-    default_greeting = (
-        f"Hello! Good morning. My name is {resolved_name}, and I'll be your interviewer today. "
-        f"Welcome to your mock interview. I hope you're doing well. "
-        f"Before we begin, are you comfortable and ready to start?"
+    fallback_greeting_generic = (
+        f"Good morning! Welcome to your mock interview. "
+        f"I'm {resolved_name}, and I'll be your interviewer today. I hope you're doing well. "
+        f"We'll have a professional and interactive interview session. "
+        f"Are you comfortable? Shall we get started?"
     )
-    legacy_greeting = (
-        f"Hello {cand_name}! Welcome to your mock interview. "
-        f"I'm {resolved_name}, and I'll be conducting your session today. "
-        f"For each question, please share structured examples and speak naturally—I will listen and guide us through each stage. "
-        f"Can you hear me clearly, and are you ready to begin?"
-    )
-    short_greeting = f"Hello, I am {resolved_name}. Welcome to your mock interview session."
 
     vb_client = VoiceboxClient()
     vb_running = vb_client.is_running()
@@ -911,7 +908,7 @@ def reset_live_session(
         voice_init_err = voice_msg
     else:
         t_tts = time.perf_counter()
-        for candidate_text in (full_greeting, default_greeting, legacy_greeting, short_greeting):
+        for candidate_text in (full_greeting, fallback_greeting_generic, f"Hello, I am {resolved_name}. Welcome to your mock interview session."):
             cached_wav = vb_client.get_cached_bytes(candidate_text, profile=resolved_id, engine="chatterbox")
             if cached_wav and len(cached_wav) > 1000:
                 instant_b64 = base64.b64encode(cached_wav).decode("utf-8")
@@ -1616,9 +1613,13 @@ def handle_readiness_confirmation(
 
 def handle_inactivity_timeout() -> Dict[str, Any]:
     """
-    Handles a 20-second candidate inactivity timeout (distinct from the 1.5-2.5s end-of-speech threshold).
-    Never auto-advances to the next question without a response; gently checks in with the candidate
-    using the locked Voicebox profile.
+    Handles candidate inactivity timeout.
+    POST-INTRO BEHAVIOUR (Requirement 2 & 5):
+    If candidate remains silent after the introduction finishes for 20 seconds, automatically
+    advance to Question 1 in the selected voice rather than repeating the introductory check-in loop.
+    DURING QUESTION TURNS:
+    If candidate remains silent for the 20-second threshold without speaking, prompt gently or
+    handle turn completion without fabricating answers.
     """
     with SESSION_LOCK:
         if not LIVE_SESSION.get("active") or LIVE_SESSION.get("call_stage") in ("COMPLETED", "INTERVIEW_COMPLETED"):
@@ -1632,11 +1633,25 @@ def handle_inactivity_timeout() -> Dict[str, Any]:
         prompt_count = LIVE_SESSION["candidate_silent_prompts_count"]
 
     if stage in ("INTRODUCTION", "INTRODUCTION_PLAYING", "WAITING_FOR_READINESS", "INITIAL_GREETING"):
-        msg = "Are you comfortable and ready to begin the interview? Just let me know whenever you'd like to start."
+        # Auto-advance to Question 1 when candidate does not respond within the 20s post-intro window
+        log_interview_event(
+            speaker="SYSTEM",
+            event="Post-Intro Timeout Auto-Advance",
+            content="Candidate silent for 20s after introduction; automatically proceeding to Question 1.",
+            status="SUCCESS",
+            question_id=curr_q_id,
+            question_number=1,
+        )
+        return handle_readiness_confirmation(
+            transcript="Yes, I am ready.",
+            session_token=LIVE_SESSION.get("session_token", 0.0),
+            candidate_name=LIVE_SESSION.get("candidate_name", "Candidate"),
+            voice_id=voice_id,
+            questions=questions,
+        )
     else:
         msg = (
-            "I haven't heard a response yet. Please let me know if you need more time, would like me to repeat the question, "
-            "or if you would like to skip to the next question."
+            "I haven't heard a response yet. Please take your time, or let me know whenever you're ready to share your thoughts."
         )
 
     log_interview_event(
