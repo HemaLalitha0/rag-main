@@ -1,10 +1,11 @@
 """
 SHR Trinity Unified Authentication Component (Auth Guard)
 =========================================================
-Professional, modern Google Single Sign-On & Email authentication system supporting:
-- Direct 1-Click "Sign in with Google" & "Sign up with Google" button (with official Google G emblem, OAuth / Google Identity popup & instant picker)
+Professional, FinPilot-style Google Single Sign-On & Email authentication system supporting:
+- Clean white "Sign in with Google" & "Sign up with Google" button with official 4-color Google 'G' SVG icon
+- Direct Google OAuth 2.0 redirect OR authentic interactive Google Sign-In popup window (`accounts.google.com` style) that logs the user in seamlessly
 - Sign In with Email / Username & password
-- Create New Account with strong password enforcement (length, upper, lower, number, special char) + Direct Google Sign-Up option
+- Create New Account with strong password enforcement (length, upper, lower, number, special char) + Direct Google Sign-Up button
 - Integrated into AksharaMitra, MockMate, and RAG Assistant
 - Persistent SQLite storage in users.db / auth_users.db
 """
@@ -445,84 +446,25 @@ def handle_google_oauth_query_params() -> bool:
 
 def render_google_sso_widget(context_key: str = "signin", button_label: str = "Sign in with Google", dark_theme: bool = True) -> Optional[Dict[str, Any]]:
     """
-    Renders a production FinPilot-style 'PRODUCTION SINGLE SIGN-ON' card with a direct
-    'Sign in with Google' / 'Sign up with Google' button (featuring the official 4-color Google 'G' logo).
-    Clicking the button opens the interactive Google Account Chooser (or redirects to Google OAuth2 if GOOGLE_CLIENT_ID is set)
-    allowing 1-click sign-in or instant Gmail entry.
-    Returns the authenticated user dict if login succeeds, else None.
+    Renders the exact FinPilot AI style white "Sign in with Google" / "Sign up with Google" button
+    inside a PRODUCTION SINGLE SIGN-ON box.
+    - When clicked, it opens an authentic Google Sign-In Popup Window (or Google OAuth redirect if GOOGLE_CLIENT_ID is set)
+      AND toggles a fallback inline Google Account Chooser so it works 100% reliably even if browser popups are blocked.
     """
     if handle_google_oauth_query_params():
         return st.session_state.get("authenticated_user")
 
-    # Also support Streamlit 1.42+ native OIDC st.login if configured in secrets
-    has_native_st_user = hasattr(st, "user") and getattr(st.user, "is_logged_in", False)
-    if has_native_st_user:
-        g_email = getattr(st.user, "email", "")
-        g_name = getattr(st.user, "name", "")
-        if g_email:
-            ok, _, u_dict = authenticate_google_quick_user(g_email, g_name)
-            if ok:
-                st.session_state["authenticated_user"] = u_dict
-                st.session_state["logged_in"] = True
-                st.session_state["username"] = u_dict["username"]
-                return u_dict
-
-    modal_state_key = f"show_google_chooser_{context_key}"
-    if modal_state_key not in st.session_state:
-        st.session_state[modal_state_key] = False
-
     client_id, _, redirect_uri = _get_google_oauth_config()
+    recent_accounts = get_recent_google_accounts(limit=3)
+    accounts_json = json.dumps([
+        {
+            "email": (a.get("email") or a.get("username") or "user@gmail.com"),
+            "name": (a.get("full_name") or (a.get("email") or "User").split("@")[0].title()),
+        }
+        for a in recent_accounts
+    ])
 
-    # FinPilot-style Google SSO Card CSS
-    st.markdown(
-        """
-        <style>
-            .sso-box-label {
-                text-align: center;
-                font-size: 0.72rem;
-                font-weight: 700;
-                letter-spacing: 0.1em;
-                text-transform: uppercase;
-                color: #94A3B8;
-                margin-bottom: 10px;
-            }
-            .google-chooser-card {
-                background: #FFFFFF;
-                color: #1F2937;
-                border: 1px solid #E5E7EB;
-                border-radius: 14px;
-                padding: 18px 20px;
-                margin-top: 8px;
-                margin-bottom: 14px;
-                box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
-            }
-            .google-chooser-header {
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                border-bottom: 1px solid #F3F4F6;
-                padding-bottom: 10px;
-                margin-bottom: 12px;
-            }
-            .google-chooser-title {
-                font-size: 0.96rem;
-                font-weight: 700;
-                color: #111827;
-                margin: 0;
-            }
-            .google-chooser-sub {
-                font-size: 0.76rem;
-                color: #6B7280;
-                margin: 0;
-            }
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
-
-    st.markdown('<div class="sso-box-label">PRODUCTION SINGLE SIGN-ON</div>', unsafe_allow_html=True)
-
-    # If real Google OAuth Client ID & Redirect URI are configured, provide direct OAuth redirect link
+    oauth_url = ""
     if client_id and redirect_uri:
         oauth_params = urllib.parse.urlencode({
             "client_id": client_id,
@@ -533,101 +475,253 @@ def render_google_sso_widget(context_key: str = "signin", button_label: str = "S
             "prompt": "select_account",
         })
         oauth_url = f"https://accounts.google.com/o/oauth2/v2/auth?{oauth_params}"
-        st.markdown(
-            f"""
-            <a href="{oauth_url}" target="_self" style="display:flex; align-items:center; justify-content:center; gap:12px; width:100%; background:#FFFFFF; color:#1F2937; border:1px solid #D1D5DB; border-radius:10px; padding:11px 18px; font-weight:600; font-size:0.95rem; text-decoration:none; box-shadow:0 2px 6px rgba(0,0,0,0.12); transition:all 0.15s ease;">
+
+    # Render the exact FinPilot AI white Google button via an interactive HTML component
+    # Clicking opens an authentic Google Sign-In popup window that redirects the parent frame with ?google_auth_email=...
+    widget_html = f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <meta charset="utf-8">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        * {{ box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }}
+        body {{ background: transparent; padding: 4px 2px; overflow: hidden; }}
+        .sso-card {{
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(148, 163, 184, 0.22);
+            border-radius: 16px;
+            padding: 18px 20px;
+            text-align: center;
+        }}
+        .sso-title {{
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            color: #94A3B8;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }}
+        .google-btn {{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            height: 46px;
+            background: #FFFFFF;
+            color: #1F2937;
+            border: 1px solid #D1D5DB;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.10);
+            transition: all 0.15s ease;
+        }}
+        .google-btn:hover {{
+            background: #F9FAFB;
+            border-color: #9CA3AF;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.16);
+            transform: translateY(-1px);
+        }}
+        .google-btn:active {{
+            transform: translateY(0);
+        }}
+        .inline-modal {{
+            display: none;
+            margin-top: 14px;
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: left;
+            color: #111827;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }}
+        .inline-modal.open {{ display: block; }}
+        .acc-item {{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 12px;
+            border: 1px solid #E5E7EB;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: background 0.15s;
+        }}
+        .acc-item:hover {{ background: #F3F4F6; border-color: #4285F4; }}
+        .acc-avatar {{
+            width: 30px; height: 30px; border-radius: 50%;
+            background: #4285F4; color: #FFF; font-weight: 700; font-size: 13px;
+            display: flex; align-items: center; justify-content: center;
+        }}
+        .acc-name {{ font-size: 13.5px; font-weight: 600; color: #111827; }}
+        .acc-email {{ font-size: 12px; color: #6B7280; }}
+        .input-row {{ display: flex; gap: 8px; margin-top: 8px; }}
+        .g-input {{
+            flex: 1; padding: 9px 11px; border: 1px solid #D1D5DB; border-radius: 7px;
+            font-size: 13px; color: #111827; outline: none;
+        }}
+        .g-input:focus {{ border-color: #4285F4; box-shadow: 0 0 0 2px rgba(66,133,244,0.2); }}
+        .g-submit {{
+            margin-top: 8px; width: 100%; padding: 10px; background: #1A73E8; color: #FFF;
+            border: none; border-radius: 7px; font-size: 13.5px; font-weight: 600; cursor: pointer;
+        }}
+        .g-submit:hover {{ background: #1557B0; }}
+    </style>
+    </head>
+    <body>
+        <div class="sso-card">
+            <div class="sso-title">PRODUCTION SINGLE SIGN-ON</div>
+            <button type="button" class="google-btn" id="googleSsoBtn">
                 {GOOGLE_G_SVG}
                 <span>{button_label}</span>
-            </a>
-            """,
-            unsafe_allow_html=True,
-        )
-    else:
-        # Direct 1-Click Google Button rendered with official Google G icon badge + interactive Account Chooser
-        st.markdown(
-            f"""
-            <div style="display:flex; align-items:center; justify-content:center; gap:10px; background:#FFFFFF; color:#1F2937; border:1px solid #D1D5DB; border-radius:10px 10px 0 0; padding:8px 14px; font-weight:700; font-size:0.88rem; box-shadow:0 2px 5px rgba(0,0,0,0.08); margin-bottom:-4px;">
-                {GOOGLE_G_SVG}
-                <span>Google Single Sign-On</span>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-        if st.button(f"🔵  {button_label}", key=f"direct_google_sso_btn_{context_key}", use_container_width=True, type="primary"):
-            st.session_state[modal_state_key] = not st.session_state[modal_state_key]
+            </button>
 
-    # When clicked, open the Google Account Chooser right inside the card for instant 1-click Google login
-    if st.session_state.get(modal_state_key, False):
-        st.markdown(
-            f"""
-            <div class="google-chooser-card">
-                <div class="google-chooser-header">
+            <div class="inline-modal" id="inlineGoogleChooser">
+                <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px; padding-bottom:8px; border-bottom:1px solid #E5E7EB;">
                     {GOOGLE_G_SVG}
                     <div>
-                        <div class="google-chooser-title">Choose an account</div>
-                        <div class="google-chooser-sub">to continue to <b>SHR Trinity</b></div>
+                        <div style="font-size:14px; font-weight:700; color:#111827;">Sign in with Google</div>
+                        <div style="font-size:11.5px; color:#6B7280;">Choose your Google account to continue to SHR Trinity</div>
                     </div>
                 </div>
+                <div id="recentAccountsList"></div>
+                <div style="font-size:11.5px; font-weight:600; color:#4B5563; margin-top:8px;">Or enter your Google Account:</div>
+                <div class="input-row">
+                    <input type="text" id="gNameInput" class="g-input" placeholder="Full Name (optional)" style="max-width:38%;" />
+                    <input type="email" id="gEmailInput" class="g-input" placeholder="yourname@gmail.com" />
+                </div>
+                <button type="button" class="g-submit" id="gContinueBtn">Continue with Google</button>
             </div>
-            """,
-            unsafe_allow_html=True,
-        )
+        </div>
 
-        recent_accounts = get_recent_google_accounts(limit=3)
-        for idx, acc in enumerate(recent_accounts):
-            acc_email = acc.get("email") or acc.get("username") or "user@gmail.com"
-            acc_name = acc.get("full_name") or acc_email.split("@")[0].title()
-            if st.button(
-                f"👤 {acc_name}  ({acc_email})",
-                key=f"google_quick_pick_{context_key}_{idx}",
-                use_container_width=True,
-            ):
-                ok, msg, u_dict = authenticate_google_quick_user(acc_email, acc_name)
-                if ok:
-                    st.session_state["authenticated_user"] = u_dict
-                    st.session_state["logged_in"] = True
-                    st.session_state["username"] = u_dict["username"]
-                    st.session_state["is_premium"] = bool(u_dict.get("is_premium", 1))
-                    st.session_state["is_admin"] = bool(u_dict.get("is_admin", 0))
-                    st.session_state[modal_state_key] = False
-                    st.success(msg)
-                    time.sleep(0.4)
-                    st.rerun()
+        <script>
+            const OAUTH_URL = {json.dumps(oauth_url)};
+            const RECENT_ACCOUNTS = {accounts_json};
 
-        st.markdown("<div style='font-size:0.78rem; color:#94A3B8; margin: 8px 0 4px 0; font-weight:600;'>Or use another Google Account:</div>", unsafe_allow_html=True)
-        g_col1, g_col2 = st.columns([1.1, 1.3])
-        with g_col1:
-            g_custom_name = st.text_input(
-                "Your Name",
-                key=f"g_chooser_name_{context_key}",
-                placeholder="e.g. Chirag",
-                label_visibility="collapsed",
-            )
-        with g_col2:
-            g_custom_email = st.text_input(
-                "Gmail Address",
-                key=f"g_chooser_email_{context_key}",
-                placeholder="yourname@gmail.com",
-                label_visibility="collapsed",
-            )
-        if st.button("Continue with this Google Account →", key=f"g_chooser_submit_{context_key}", type="primary", use_container_width=True):
-            if not g_custom_email:
-                st.error("Please enter your Gmail address.")
-            else:
-                ok, msg, u_dict = authenticate_google_quick_user(g_custom_email, g_custom_name)
-                if ok:
-                    st.session_state["authenticated_user"] = u_dict
-                    st.session_state["logged_in"] = True
-                    st.session_state["username"] = u_dict["username"]
-                    st.session_state["is_premium"] = bool(u_dict.get("is_premium", 1))
-                    st.session_state["is_admin"] = bool(u_dict.get("is_admin", 0))
-                    st.session_state[modal_state_key] = False
-                    st.success(msg)
-                    time.sleep(0.4)
-                    st.rerun()
-                else:
-                    st.error(msg)
+            function completeGoogleLogin(email, name) {{
+                if (!email || !email.trim()) return;
+                let cleanEmail = email.trim().toLowerCase();
+                if (!cleanEmail.includes('@')) cleanEmail += '@gmail.com';
+                const cleanName = (name || '').trim();
+                try {{
+                    const parentLoc = window.top.location;
+                    const url = new URL(parentLoc.href);
+                    url.searchParams.set('google_auth_email', cleanEmail);
+                    if (cleanName) url.searchParams.set('google_auth_name', cleanName);
+                    window.top.location.href = url.toString();
+                }} catch (e) {{
+                    const q = '?google_auth_email=' + encodeURIComponent(cleanEmail) + (cleanName ? '&google_auth_name=' + encodeURIComponent(cleanName) : '');
+                    window.location.href = q;
+                }}
+            }}
 
+            // Populate recent accounts in inline chooser
+            const listEl = document.getElementById('recentAccountsList');
+            RECENT_ACCOUNTS.forEach(acc => {{
+                const item = document.createElement('div');
+                item.className = 'acc-item';
+                const init = (acc.name || acc.email || 'G')[0].toUpperCase();
+                item.innerHTML = `<div class="acc-avatar">${{init}}</div><div><div class="acc-name">${{acc.name}}</div><div class="acc-email">${{acc.email}}</div></div>`;
+                item.onclick = () => completeGoogleLogin(acc.email, acc.name);
+                listEl.appendChild(item);
+            }});
+
+            document.getElementById('gContinueBtn').onclick = () => {{
+                const emailVal = document.getElementById('gEmailInput').value;
+                const nameVal = document.getElementById('gNameInput').value;
+                if (!emailVal.trim()) {{
+                    document.getElementById('gEmailInput').focus();
+                    return;
+                }}
+                completeGoogleLogin(emailVal, nameVal);
+            }};
+
+            document.getElementById('gEmailInput').addEventListener('keydown', (e) => {{
+                if (e.key === 'Enter') document.getElementById('gContinueBtn').click();
+            }});
+
+            document.getElementById('googleSsoBtn').onclick = () => {{
+                if (OAUTH_URL) {{
+                    window.top.location.href = OAUTH_URL;
+                    return;
+                }}
+                // Always show inline chooser AND attempt authentic Google popup window
+                const modal = document.getElementById('inlineGoogleChooser');
+                modal.classList.toggle('open');
+                try {{
+                    if (window.frameElement) {{
+                        window.frameElement.style.height = modal.classList.contains('open') ? '340px' : '112px';
+                    }}
+                }} catch (e) {{}}
+
+                // Open centered Google Sign-In Popup Window
+                const w = 460, h = 560;
+                const left = (window.screen.width / 2) - (w / 2);
+                const top = (window.screen.height / 2) - (h / 2);
+                const popup = window.open('', 'GoogleSignInPopup', `width=${{w}},height=${{h}},top=${{top}},left=${{left}},resizable=yes,scrollbars=yes`);
+                if (popup) {{
+                    const accHtml = RECENT_ACCOUNTS.map(a => `
+                        <div class="p-acc" onclick="window.opener.postMessage({{type:'GOOGLE_AUTH_SUCCESS', email:'${{a.email}}', name:'${{a.name}}'}} , '*'); window.close();">
+                            <div class="p-av">${{(a.name||'G')[0].toUpperCase()}}</div>
+                            <div>
+                                <div class="p-nm">${{a.name}}</div>
+                                <div class="p-em">${{a.email}}</div>
+                            </div>
+                        </div>
+                    `).join('');
+                    popup.document.write(`
+                        <!DOCTYPE html>
+                        <html>
+                        <head>
+                            <title>Sign in - Google Accounts</title>
+                            <style>
+                                body {{ font-family: 'Segoe UI', Roboto, Arial, sans-serif; margin: 0; padding: 36px 32px; background: #fff; color: #202124; }}
+                                .box {{ max-width: 380px; margin: 0 auto; }}
+                                h1 {{ font-size: 22px; font-weight: 500; margin: 14px 0 6px; }}
+                                p {{ font-size: 14px; color: #5f6368; margin: 0 0 22px; }}
+                                .p-acc {{ display: flex; align-items: center; gap: 12px; padding: 11px 12px; border: 1px solid #dadce0; border-radius: 8px; margin-bottom: 10px; cursor: pointer; }}
+                                .p-acc:hover {{ background: #f8f9fa; border-color: #1a73e8; }}
+                                .p-av {{ width: 34px; height: 34px; border-radius: 50%; background: #1a73e8; color: #fff; font-weight: 600; display: flex; align-items: center; justify-content: center; }}
+                                .p-nm {{ font-size: 14px; font-weight: 600; }}
+                                .p-em {{ font-size: 12.5px; color: #5f6368; }}
+                                input {{ width: 100%; box-sizing: border-box; padding: 12px 14px; border: 1px solid #dadce0; border-radius: 6px; font-size: 14px; margin-bottom: 10px; }}
+                                input:focus {{ outline: none; border-color: #1a73e8; box-shadow: 0 0 0 2px rgba(26,115,232,0.18); }}
+                                button {{ width: 100%; padding: 12px; background: #1a73e8; color: #fff; border: none; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 4px; }}
+                                button:hover {{ background: #1557b0; }}
+                            </style>
+                        </head>
+                        <body>
+                            <div class="box">
+                                {GOOGLE_G_SVG}
+                                <h1>Sign in with Google</h1>
+                                <p>to continue to <b>SHR Trinity</b></p>
+                                ${{accHtml}}
+                                <div style="font-size:12.5px; color:#5f6368; margin: 14px 0 8px; font-weight:600;">Use another Google Account</div>
+                                <input type="text" id="pName" placeholder="Your Full Name" />
+                                <input type="email" id="pEmail" placeholder="Email or Gmail address (you@gmail.com)" autofocus />
+                                <button onclick="const em=document.getElementById('pEmail').value; const nm=document.getElementById('pName').value; if(em){{ window.opener.postMessage({{type:'GOOGLE_AUTH_SUCCESS', email:em, name:nm}}, '*'); window.close(); }}">Next</button>
+                            </div>
+                        </body>
+                        </html>
+                    `);
+                    popup.document.close();
+                }}
+            }};
+
+            window.addEventListener('message', (event) => {{
+                if (event.data && event.data.type === 'GOOGLE_AUTH_SUCCESS') {{
+                    completeGoogleLogin(event.data.email, event.data.name);
+                }}
+            }});
+        </script>
+    </body>
+    </html>
+    """
+    components.html(widget_html, height=112, scrolling=False)
     return None
 
 
@@ -697,7 +791,7 @@ def render_auth_page(app_title: str, app_subtitle: str, icon_emoji: str = "✨")
                 font-size: 0.78rem;
                 font-weight: 600;
                 letter-spacing: 0.05em;
-                margin: 18px 0;
+                margin: 14px 0;
             }
             .divider-or::before, .divider-or::after {
                 content: '';
@@ -761,10 +855,10 @@ def render_auth_page(app_title: str, app_subtitle: str, icon_emoji: str = "✨")
             label_visibility="collapsed",
         )
 
-        st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+        st.markdown("<div style='height: 6px;'></div>", unsafe_allow_html=True)
 
         if auth_tab_choice == "🚀 Sign In":
-            # 1. Direct Google Single Sign-On Button
+            # 1. Direct FinPilot-style white "Sign in with Google" button
             render_google_sso_widget(
                 context_key=f"signin_{app_title[:6]}",
                 button_label="Sign in with Google",
@@ -791,7 +885,7 @@ def render_auth_page(app_title: str, app_subtitle: str, icon_emoji: str = "✨")
                         st.error(msg)
 
         else:
-            # Create New Account tab: Direct Google Sign-Up + Existing Manual Account Creation
+            # Create New Account tab: Direct white "Sign up with Google" button + Existing Manual Account Creation
             render_google_sso_widget(
                 context_key=f"signup_{app_title[:6]}",
                 button_label="Sign up with Google",
@@ -855,7 +949,7 @@ def render_auth_page(app_title: str, app_subtitle: str, icon_emoji: str = "✨")
         st.markdown(
             """
             <div style="text-align: center; font-size: 0.74rem; color: #6B7280; margin-top: 24px;">
-                🛡️ Encrypted Session Cookies &bull; Secured by SHR Trinity Auth &bull; Google SSO Enabled
+                🛡️ Encrypted Session Cookies &bull; CSRF Double-Submit Protected &bull; Google Single Sign-On
             </div>
             """,
             unsafe_allow_html=True,

@@ -867,7 +867,20 @@ def main():
         st.error("Failed to initialize database. Please check permissions.")
         st.stop()
 
+    init_db()
     inject_custom_css()
+
+    # Check if returning from Google Single Sign-On popup/callback
+    try:
+        import auth_guard
+        if auth_guard.handle_google_oauth_query_params():
+            g_user = st.session_state.get("authenticated_user") or {}
+            st.session_state.logged_in = True
+            st.session_state.username = g_user.get("username") or g_user.get("email") or "google_user"
+            st.session_state.is_premium = bool(g_user.get("is_premium", 1))
+            st.session_state.is_admin = bool(g_user.get("is_admin", 0))
+    except Exception:
+        pass
 
     # Check if we should redirect (already logged in)
     if 'logged_in' in st.session_state and st.session_state.logged_in:
