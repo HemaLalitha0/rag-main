@@ -441,16 +441,6 @@ def finalize_and_transition_to_report():
 # =====================================================================
 if st.session_state.interview_state == InterviewState.SETUP:
 
-    # Authenticated user badge + Sign Out option
-    u_col1, u_col2 = st.columns([5.2, 0.8])
-    with u_col1:
-        render_user_header("MockMate AI")
-    with u_col2:
-        if st.button("Sign Out", key="mockmate_sign_out_btn", use_container_width=True):
-            st.session_state["authenticated_user"] = None
-            st.session_state["logged_in"] = False
-            st.rerun()
-
     # Top Studio Navigation Bar
     nav_left, nav_right = st.columns([4, 1])
     with nav_left:
