@@ -1300,6 +1300,8 @@ def classify_candidate_turn_intent(
     """
     cleaned = re.sub(r"\s+", " ", (transcript or "").strip())
     lower_t = cleaned.lower().strip(" .,!?:;\"'()-[]{}…")
+    if "[unanswered" in lower_t or "unanswered - 20s" in lower_t:
+        return "UNANSWERED_TIMEOUT", "Candidate silence exceeded 20s threshold"
     if not lower_t or is_whisper_hallucination_or_noise(cleaned):
         return "NOISE_OR_FILLER", "Empty or Whisper silence/noise hallucination"
 
@@ -1650,29 +1652,24 @@ def handle_inactivity_timeout() -> Dict[str, Any]:
             questions=questions,
         )
     else:
-        msg = (
-            "I haven't heard a response yet. Please take your time, or let me know whenever you're ready to share your thoughts."
+        # Scenario B (Task Requirement 4): Candidate does not answer the question within 20s.
+        # Mark the current question as Unanswered (score 0.0, no fabricated answer) and automatically proceed to next question!
+        log_interview_event(
+            speaker="SYSTEM",
+            event="Question Inactivity Timeout",
+            content=f"Candidate gave no answer on Q{q_idx + 1} (ID={curr_q_id}) within 20s. Marking as Unanswered and automatically proceeding to next question.",
+            status="WAITING",
+            question_id=curr_q_id,
+            question_number=q_idx + 1,
+            details={"inactivity_count": prompt_count, "question_id": curr_q_id},
         )
-
-    log_interview_event(
-        speaker="SYSTEM",
-        event="Inactivity Check-In",
-        content=f"Candidate silent for timeout window (prompt #{prompt_count}). Keeping Q{q_idx + 1} (ID={curr_q_id}) active without advancing.",
-        status="WAITING",
-        question_id=curr_q_id,
-        question_number=q_idx + 1,
-        details={"inactivity_count": prompt_count, "question_id": curr_q_id},
-    )
-
-    with SESSION_LOCK:
-        LIVE_SESSION["audio_generating"] = True
-        LIVE_SESSION["current_audio_b64"] = ""
-        LIVE_SESSION["subtitles"] = msg
-        LIVE_SESSION["active_speaker"] = "syna"
-
-    b64_audio, err = _synthesize_interviewer_audio(msg, voice_id, event_context=f"Inactivity Prompt #{prompt_count}")
-    with SESSION_LOCK:
-        LIVE_SESSION["audio_generating"] = False
+        return process_candidate_speech_blob(
+            audio_bytes=b"",
+            browser_transcript="[Unanswered - 20s silence threshold]",
+            speech_duration_ms=0.0,
+            syna_currently_speaking=False,
+            simulate_stt_failure=False,
+        )
         LIVE_SESSION["current_audio_b64"] = b64_audio
         LIVE_SESSION["voice_error"] = err
 
@@ -1870,6 +1867,7 @@ def process_candidate_speech_blob(
                 )
 
         # Fallback to browser SpeechRecognition transcript if server audio STT was empty (and not simulating STT failure)
+        is_unanswered_timeout = (browser_transcript or "").strip() == "[Unanswered - 20s silence threshold]"
         if not simulate_stt_failure:
             b_txt = (browser_transcript or "").strip()
             if not b_txt and recent_live_transcript:
@@ -1880,7 +1878,10 @@ def process_candidate_speech_blob(
                     transcript = b_txt
                     stt_provider = "Browser WebSpeech STT"
             if not transcript or len(transcript) < 2:
-                if b_txt and not is_whisper_hallucination_or_noise(b_txt):
+                if is_unanswered_timeout:
+                    transcript = "[Unanswered - 20s silence threshold]"
+                    stt_provider = "Inactivity Timeout (Unanswered)"
+                elif b_txt and not is_whisper_hallucination_or_noise(b_txt):
                     transcript = b_txt
                     stt_provider = "Browser WebSpeech STT"
                     with SESSION_LOCK:
@@ -1901,6 +1902,7 @@ def process_candidate_speech_blob(
         # Reject interviewer TTS acoustic echo if browser STT picked up Syna's own words
         if (
             transcript
+            and not is_unanswered_timeout
             and current_interviewer_subtitles
             and len(transcript) > 12
             and transcript.lower() in current_interviewer_subtitles.lower()
@@ -1921,7 +1923,7 @@ def process_candidate_speech_blob(
             return {"status": "echo_ignored", **get_live_state()}
 
         # Check if transcript is empty or Whisper silence/noise hallucination
-        if not transcript or is_whisper_hallucination_or_noise(transcript):
+        if not is_unanswered_timeout and (not transcript or is_whisper_hallucination_or_noise(transcript)):
             # If the candidate genuinely spoke (or STT failed) during an active question, trigger TRANSCRIPTION_RETRY
             if (simulate_stt_failure or (speech_duration_ms >= 1200 and audio_had_speech_energy)) and stage not in (
                 "INTRODUCTION",

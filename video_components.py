@@ -2093,7 +2093,8 @@ def render_interview_stage(
                                 }}).catch(() => {{}});
                             }}
                             if (silenceElapsed >= 1200 && candidateBadge && currentCallStage !== "WAITING_FOR_READINESS") {{
-                                candidateBadge.innerText = "🎙️ LISTENING...";
+                                let remSec = Math.max(0, Math.ceil((targetSilenceMs - silenceElapsed) / 1000));
+                                candidateBadge.innerText = `⏳ LISTENING (SILENCE: ${{remSec}}s)`;
                             }}
                             if (silenceElapsed >= targetSilenceMs) {{
                                 finalizeCandidateUtterance();
@@ -2130,12 +2131,19 @@ def render_interview_stage(
                 return;
             }}
             // Configurable 20-second inactivity timeout when candidate has not started speaking
-            if (!isCandidateSpeaking && waitingForCandidateSince > 0 && (now - waitingForCandidateSince) >= MAX_INACTIVITY_WAIT_MS) {{
-                waitingForCandidateSince = now;
-                fetch(BRIDGE_BASE_URL + "/inactivity_timeout", {{ method: "POST" }})
-                    .then(r => r.ok ? r.json() : null)
-                    .then(data => {{ if (data) applyServerState(data, true); }})
-                    .catch(() => {{}});
+            if (!isCandidateSpeaking && waitingForCandidateSince > 0) {{
+                let inactiveElapsed = now - waitingForCandidateSince;
+                if (inactiveElapsed >= 1000 && candidateBadge && currentCallStage !== "WAITING_FOR_READINESS") {{
+                    let remSec = Math.max(0, Math.ceil((MAX_INACTIVITY_WAIT_MS - inactiveElapsed) / 1000));
+                    candidateBadge.innerText = `⏳ LISTENING (SILENCE: ${{remSec}}s)`;
+                }}
+                if (inactiveElapsed >= MAX_INACTIVITY_WAIT_MS) {{
+                    waitingForCandidateSince = now;
+                    fetch(BRIDGE_BASE_URL + "/inactivity_timeout", {{ method: "POST" }})
+                        .then(r => r.ok ? r.json() : null)
+                        .then(data => {{ if (data) applyServerState(data, true); }})
+                        .catch(() => {{}});
+                }}
             }}
         }}, 180);
 
