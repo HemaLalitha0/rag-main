@@ -915,7 +915,8 @@ def reset_live_session(
             cached_wav = vb_client.get_cached_bytes(candidate_text, profile=resolved_id, engine="chatterbox")
             if cached_wav and len(cached_wav) > 1000:
                 instant_b64 = base64.b64encode(cached_wav).decode("utf-8")
-                chosen_greeting = candidate_text
+                # Always display the full natural greeting & readiness prompt on screen
+                chosen_greeting = full_greeting
                 tts_ms = round((time.perf_counter() - t_tts) * 1000.0, 2)
                 log_interview_event(
                     speaker="SYNA",
@@ -1187,7 +1188,12 @@ def _classify_readiness_intent_semantic(transcript: str, interviewer_prompt: str
     for pat in question_indicators:
         if re.search(pat, lower_t):
             return "QUESTION", f"Candidate asked a question before starting ({pat})"
-    if lower_t.endswith("?") and not re.search(r"\b(?:shall|can|may)\s+we\s+(?:start|begin|proceed|go)\b", lower_t):
+    q_words = [w.strip(".,!?:;\"'()[]") for w in lower_t.split() if any(c.isalpha() for c in w)]
+    if (
+        lower_t.endswith("?")
+        and len(q_words) >= 3
+        and not re.search(r"\b(?:shall|can|may)\s+we\s+(?:start|begin|proceed|go)\b", lower_t)
+    ):
         return "QUESTION", "Candidate utterance is an interrogative question"
 
     # 3. Natural-language readiness & comfort expressions (broad semantic coverage)
@@ -1218,9 +1224,13 @@ def _classify_readiness_intent_semantic(transcript: str, interviewer_prompt: str
     standalone_affirmative = {
         "yes", "ready", "prepared", "comfortable", "sure", "yep", "yeah", "yup",
         "ok", "okay", "begin", "start", "proceed", "absolutely", "definitely", "certainly",
+        "introduce", "introduced", "background", "experience", "myself",
     }
-    if words and len(words) <= 10 and any(w in standalone_affirmative for w in words):
+    if words and len(words) <= 12 and any(w in standalone_affirmative for w in words):
         return "READY", "Concise affirmative response"
+    # If the candidate already began introducing themselves or answering during the readiness check, treat as READY!
+    if len(words) >= 6 and any(w in ("introduce", "introduced", "myself", "name", "working", "engineer", "experience", "developer") for w in words):
+        return "READY", "Candidate directly began introducing themselves"
 
     # 4. Pure greeting / acknowledgement without readiness word (e.g., "Hello Manideep, good morning, I am doing well")
     greeting_patterns = [
@@ -1845,27 +1855,33 @@ def process_candidate_speech_blob(
                 )
 
         # Fallback to browser SpeechRecognition transcript if server audio STT was empty (and not simulating STT failure)
-        if not simulate_stt_failure and (not transcript or len(transcript) < 2):
-            fallback_txt = (browser_transcript or "").strip()
-            if not fallback_txt and recent_live_transcript:
-                fallback_txt = recent_live_transcript.strip()
-            if fallback_txt and not is_whisper_hallucination_or_noise(fallback_txt):
-                transcript = fallback_txt
-                stt_provider = "Browser WebSpeech STT"
-                with SESSION_LOCK:
-                    _transition_state_locked("TRANSCRIBING_ANSWER", "TRANSCRIBING_ANSWER", reason="Using Browser WebSpeech STT transcript")
-                log_interview_event(
-                    speaker="SYSTEM",
-                    event="STT Transcription Completed",
-                    content=f"Provider: {stt_provider} ({len(transcript.split())} words)",
-                    duration_ms=stt_duration_ms if stt_duration_ms > 0 else 12.0,
-                    status="SUCCESS",
-                    question_id=curr_q_id,
-                    question_number=curr_q_num,
-                    details={"stt_provider": stt_provider},
-                )
-            else:
-                transcript = ""
+        if not simulate_stt_failure:
+            b_txt = (browser_transcript or "").strip()
+            if not b_txt and recent_live_transcript:
+                b_txt = recent_live_transcript.strip()
+            # During WAITING_FOR_READINESS, if browser WebSpeech recognized a clear affirmative phrase, prefer it if server STT returned empty or 1-word noise
+            if stage in ("INTRODUCTION", "INTRODUCTION_PLAYING", "WAITING_FOR_READINESS", "PROCESSING_READINESS", "INITIAL_GREETING"):
+                if b_txt and _classify_readiness_intent(b_txt) == "READY" and (not transcript or _classify_readiness_intent(transcript) != "READY"):
+                    transcript = b_txt
+                    stt_provider = "Browser WebSpeech STT"
+            if not transcript or len(transcript) < 2:
+                if b_txt and not is_whisper_hallucination_or_noise(b_txt):
+                    transcript = b_txt
+                    stt_provider = "Browser WebSpeech STT"
+                    with SESSION_LOCK:
+                        _transition_state_locked("TRANSCRIBING_ANSWER", "TRANSCRIBING_ANSWER", reason="Using Browser WebSpeech STT transcript")
+                    log_interview_event(
+                        speaker="SYSTEM",
+                        event="STT Transcription Completed",
+                        content=f"Provider: {stt_provider} ({len(transcript.split())} words)",
+                        duration_ms=stt_duration_ms if stt_duration_ms > 0 else 12.0,
+                        status="SUCCESS",
+                        question_id=curr_q_id,
+                        question_number=curr_q_num,
+                        details={"stt_provider": stt_provider},
+                    )
+                else:
+                    transcript = ""
 
         # Reject interviewer TTS acoustic echo if browser STT picked up Syna's own words
         if (

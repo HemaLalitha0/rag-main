@@ -258,6 +258,11 @@ def analyze_and_filter_wav_bytes(audio_bytes: bytes) -> Tuple[bytes, Dict[str, f
                     metrics["is_likely_speech"] = 0.0
                     return audio_bytes, metrics
 
+                # Normalize audio gain when speech peak is quiet (< 0.55) so STT engines clearly recognize speech
+                if 0.015 < peak_val < 0.55:
+                    gain = min(4.5, 0.72 / peak_val)
+                    filtered = [max(-32768, min(32767, int(s * gain))) for s in filtered]
+
                 # Repack high-pass filtered mono WAV
                 out_buf = io.BytesIO()
                 with wave.open(out_buf, "wb") as out_wf:

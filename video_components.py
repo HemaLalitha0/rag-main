@@ -883,7 +883,8 @@ def render_interview_stage(
         let consecutiveSpeechFrames = 0;
         const SPEECH_DEBOUNCE_FRAMES = 5;     // ~80-90ms continuous harmonic voice energy required
         let SILENCE_DURATION_MS = 20000;      // 20.0s continuous silence grace period after candidate stops speaking (configurable)
-        const READINESS_SILENCE_MS = 2200;    // 2.2s silence threshold for short readiness response ("Yes, I'm ready")
+        const READINESS_SILENCE_MS = 1800;    // 1.8s silence threshold for short readiness response ("Yes, I'm ready")
+        const MAX_READINESS_SPEECH_MS = 4800; // Auto-finalize readiness check after 4.8s even if background TV/fan noise continues
         const THINKING_PAUSE_GRACE_MS = 650;  // Extra grace if candidate pauses mid-clause ("and", "because", etc.)
         const MIN_SPEECH_MS = 950;            // Minimum ~1.0s of voiced speech
         let MAX_INACTIVITY_WAIT_MS = 20000;   // 20s inactivity timeout when candidate has not started speaking
@@ -2110,6 +2111,21 @@ def render_interview_stage(
         turnMonitorInterval = setInterval(() => {{
             if (isCallEnded || isSynaSpeaking || isWithinEchoCooldown() || !isMicOn || isSubmittingAudio) return;
             const now = Date.now();
+            const isReadinessStage = (
+                currentCallStage === "INITIAL_GREETING" ||
+                currentCallStage === "INTRODUCTION" ||
+                currentCallStage === "INTRODUCTION_PLAYING" ||
+                currentCallStage === "WAITING_FOR_READINESS"
+            );
+            // If in readiness stage and candidate has spoken for >= 1.2s with an affirmative word OR total recording exceeds 4.8s (e.g. background room noise), finalize immediately!
+            if (isCandidateSpeaking && isReadinessStage) {{
+                const lowerInterim = (liveInterimTranscript || "").toLowerCase();
+                const hasReadyWord = /\\b(yes|yeah|yep|ready|start|begin|sure|ok|okay|proceed|go|comfortable|set)\\b/.test(lowerInterim);
+                if ((hasReadyWord && (now - speechStartTime) >= 1200) || (now - speechStartTime) >= MAX_READINESS_SPEECH_MS) {{
+                    finalizeCandidateUtterance();
+                    return;
+                }}
+            }}
             if (isCandidateSpeaking && (now - lastVoiceTime) >= getEffectiveSilenceThresholdMs()) {{
                 finalizeCandidateUtterance();
                 return;
