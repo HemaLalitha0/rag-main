@@ -77,6 +77,21 @@ from interview_bridge_server import (
 # Start local WebRTC / VAD audio bridge server on port 8765
 start_interview_bridge_server()
 
+# =====================================================================
+# 0. AUTHENTICATION GATE (GOOGLE SINGLE SIGN-ON & CREATE ACCOUNT)
+# =====================================================================
+import auth_guard
+importlib.reload(auth_guard)
+from auth_guard import render_auth_page, render_user_header
+
+_is_mockmate_authenticated = render_auth_page(
+    app_title="Sign in to MockMate AI",
+    app_subtitle="Access the AI Mock Interview Studio, personalized resume grounding, and executive rubric analytics.",
+    icon_emoji="🎙️",
+)
+if not _is_mockmate_authenticated:
+    st.stop()
+
 
 # =====================================================================
 # 1. SESSION STATE INITIALIZATION
@@ -425,6 +440,16 @@ def finalize_and_transition_to_report():
 # STAGE 1: INTERVIEW CONFIGURATION STUDIO (SETUP)
 # =====================================================================
 if st.session_state.interview_state == InterviewState.SETUP:
+
+    # Authenticated user badge + Sign Out option
+    u_col1, u_col2 = st.columns([5.2, 0.8])
+    with u_col1:
+        render_user_header("MockMate AI")
+    with u_col2:
+        if st.button("Sign Out", key="mockmate_sign_out_btn", use_container_width=True):
+            st.session_state["authenticated_user"] = None
+            st.session_state["logged_in"] = False
+            st.rerun()
 
     # Top Studio Navigation Bar
     nav_left, nav_right = st.columns([4, 1])

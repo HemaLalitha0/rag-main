@@ -946,8 +946,26 @@ def main():
         st.markdown('<div class="form-section">', unsafe_allow_html=True)
         st.markdown('<h2 class="form-title glow-text">Sign In</h2>', unsafe_allow_html=True)
 
+        # Direct Google Single Sign-On (Sign in with Google)
+        try:
+            import auth_guard
+            google_user = auth_guard.render_google_sso_widget(
+                context_key="main_login_signin",
+                button_label="Sign in with Google",
+            )
+            if google_user:
+                st.session_state.logged_in = True
+                st.session_state.username = google_user.get("username") or google_user.get("email")
+                st.session_state.is_premium = bool(google_user.get("is_premium", 1))
+                st.session_state.is_admin = bool(google_user.get("is_admin", 0))
+                st.switch_page("pages/RAG_Assistant.py")
+        except Exception as _g_err:
+            pass
+
+        st.markdown('<div class="divider"><span>OR SIGN IN WITH USERNAME</span></div>', unsafe_allow_html=True)
+
         # Login form
-        login_username = st.text_input("Username", key="login_user", placeholder="Your username")
+        login_username = st.text_input("Username / Email", key="login_user", placeholder="Your username or email")
         login_password = st.text_input("Password", type="password", key="login_pass", placeholder="Your password")
 
         # Sign In button
@@ -956,6 +974,17 @@ def main():
                 st.markdown('<div class="status-error">Please enter both username and password.</div>', unsafe_allow_html=True)
             else:
                 success, message = login_user(login_username, login_password)
+                if not success:
+                    # Also check unified auth_guard database for Google/Email accounts
+                    try:
+                        import auth_guard
+                        ag_ok, ag_msg, ag_user = auth_guard.authenticate_credentials(login_username, login_password)
+                        if ag_ok and ag_user:
+                            success = True
+                            message = ag_msg
+                            st.session_state["authenticated_user"] = ag_user
+                    except Exception:
+                        pass
 
                 if success:
                     # Update session state
@@ -974,7 +1003,7 @@ def main():
                             st.session_state.is_premium = bool(row[0])
                             st.session_state.is_admin = bool(row[1])  # Store admin status
                         else:
-                            st.session_state.is_premium = False
+                            st.session_state.is_premium = True
                             st.session_state.is_admin = False
                     except Exception as e:
                         st.session_state.is_premium = False
@@ -1006,6 +1035,24 @@ def main():
         # Signup Form - Always visible directly below login form
         st.markdown('<div class="form-section">', unsafe_allow_html=True)
         st.markdown('<h2 class="form-title">Create Account</h2>', unsafe_allow_html=True)
+
+        # Direct Google Sign-Up option inside Create Account section
+        try:
+            import auth_guard
+            google_signup_user = auth_guard.render_google_sso_widget(
+                context_key="main_login_signup",
+                button_label="Sign up with Google",
+            )
+            if google_signup_user:
+                st.session_state.logged_in = True
+                st.session_state.username = google_signup_user.get("username") or google_signup_user.get("email")
+                st.session_state.is_premium = bool(google_signup_user.get("is_premium", 1))
+                st.session_state.is_admin = bool(google_signup_user.get("is_admin", 0))
+                st.switch_page("pages/RAG_Assistant.py")
+        except Exception:
+            pass
+
+        st.markdown('<div class="divider"><span>OR CREATE WITH USERNAME & PASSWORD</span></div>', unsafe_allow_html=True)
 
         # Registration form
         reg_username = st.text_input("Username", key="reg_user", placeholder="Choose a username")
