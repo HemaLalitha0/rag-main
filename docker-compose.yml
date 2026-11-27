@@ -26,6 +26,9 @@ services:
     volumes:
       # Persist SQLite database & student/application data in writable /app/data directory
       - ./auth_guard.py:/app/auth_guard.py:ro
+      - ./aksharamitra_engine.py:/app/aksharamitra_engine.py:ro
+      - ./telugu_reading_app.py:/app/telugu_reading_app.py:ro
+      - ./telugu_reading_data.py:/app/telugu_reading_data.py:ro
       - ./pages/AksharaMitra.py:/app/pages/AksharaMitra.py:ro
       - ./static:/app/static:ro
       - ./data:/app/data

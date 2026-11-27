@@ -86,6 +86,9 @@ def init_auth_tables():
         "email": "TEXT",
         "full_name": "TEXT",
         "auth_provider": "TEXT DEFAULT 'local'",
+        "user_role": "TEXT DEFAULT 'student'",
+        "grade_class": "TEXT DEFAULT 'Class 4'",
+        "linked_student_id": "TEXT",
         "created_at": "TIMESTAMP",
         "last_login": "TIMESTAMP",
         "login_attempts": "INTEGER DEFAULT 0",
@@ -99,6 +102,72 @@ def init_auth_tables():
                 conn.commit()
             except Exception:
                 pass
+
+    # AksharaMitra persistent reading assessments, streaks, and assignments tables
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS akshara_reading_assessments (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            student_id TEXT NOT NULL,
+            student_name TEXT,
+            grade TEXT,
+            language TEXT,
+            difficulty TEXT,
+            passage_title TEXT,
+            reference_text TEXT,
+            spoken_transcript TEXT,
+            accuracy_pct REAL,
+            wpm INTEGER,
+            fluency_score REAL,
+            pronunciation_score REAL,
+            total_words INTEGER,
+            correct_words INTEGER,
+            mispronounced_words TEXT,
+            skipped_words TEXT,
+            word_alignment_json TEXT,
+            duration_sec REAL,
+            created_at TIMESTAMP DEFAULT (datetime('now'))
+        )
+    """)
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS akshara_student_progress (
+            student_id TEXT PRIMARY KEY,
+            student_name TEXT,
+            grade TEXT,
+            points INTEGER DEFAULT 120,
+            streak_days INTEGER DEFAULT 5,
+            completed_assessments INTEGER DEFAULT 0,
+            badges_json TEXT DEFAULT '["First Step Reader", "Bilingual Explorer"]',
+            weak_areas_json TEXT DEFAULT '[]',
+            offline_saved_passages_json TEXT DEFAULT '[]',
+            updated_at TIMESTAMP DEFAULT (datetime('now'))
+        )
+    """)
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS akshara_teacher_assignments (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            teacher_username TEXT,
+            target_grade TEXT,
+            target_student_id TEXT,
+            language TEXT,
+            difficulty TEXT,
+            passage_title TEXT,
+            notes TEXT,
+            status TEXT DEFAULT 'Assigned',
+            created_at TIMESTAMP DEFAULT (datetime('now'))
+        )
+    """)
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS akshara_comprehension_attempts (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            student_id TEXT,
+            passage_title TEXT,
+            language TEXT,
+            total_questions INTEGER,
+            correct_answers INTEGER,
+            score_pct REAL,
+            created_at TIMESTAMP DEFAULT (datetime('now'))
+        )
+    """)
 
     conn.commit()
     conn.close()

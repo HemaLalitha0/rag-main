@@ -4,13 +4,17 @@ An Education Technology Innovation by SHR Trinity
 Core Streamlit UI Module
 """
 import base64
+import json
 import os
 import time
 import textwrap
 import pandas as pd
 import streamlit as st
+import streamlit.components.v1 as components
 
 import telugu_reading_data as data
+import aksharamitra_engine as engine
+from audio_service import transcribe_audio_bytes_detailed
 
 
 def get_shr_trinity_logo_b64() -> str:
@@ -390,6 +394,11 @@ def init_session_state():
         "teacher_filter_status": "All",
         "selected_teacher_student_id": "AP-EDU-2026-0412",
         "reading_font_size": "Large (పిల్లలకు అనుకూలం)",
+        "live_eval_result": None,
+        "custom_passage": None,
+        "virtual_kb_buffer": "",
+        "selected_gunintham_consonant": "క",
+        "companion_chat_history": [],
     }
     for key, value in defaults.items():
         if key not in st.session_state:
@@ -403,7 +412,10 @@ def init_session_state():
             "reading_assessment",
             "reading_analysis",
             "assessment_results",
+            "akshara_phonics_lab",
+            "bilingual_library",
             "teacher_dashboard",
+            "parent_dashboard",
         ]:
             st.session_state["active_screen"] = requested_screen
     except Exception:
@@ -469,10 +481,13 @@ def render_sidebar():
 
         nav_options = [
             ("student_dashboard", "1. Student Dashboard", "🏠"),
-            ("reading_assessment", "2. Reading Assessment", "🎙️"),
+            ("reading_assessment", "2. Reading & Listen-Follow", "🎙️"),
             ("reading_analysis", "3. AI Reading Analysis", "🔍"),
-            ("assessment_results", "4. Assessment Results", "📊"),
-            ("teacher_dashboard", "5. Teacher Dashboard", "👩‍🏫"),
+            ("assessment_results", "4. Results & Remedial Plan", "📊"),
+            ("akshara_phonics_lab", "5. Akshara, Phonics & Keyboard", "🔤"),
+            ("bilingual_library", "6. Library, Quiz & Companion", "📚"),
+            ("teacher_dashboard", "7. Teacher Intelligence", "👩‍🏫"),
+            ("parent_dashboard", "8. Parent & Offline Mode", "👪"),
         ]
 
         for screen_key, label, icon in nav_options:
@@ -705,26 +720,51 @@ def render_student_dashboard():
             st.session_state["assessment_submitted"] = False
             st.rerun()
 
-    # Recent assessments history table
+    # Recent assessments history table (merges real SQLite assessments with baseline records)
     st.markdown("---")
+    st.markdown("#### 🏆 Gamified Reading Challenges & Student History")
+    gam_prof = engine.get_student_gamification_profile(student["student_id"], student)
+    gcol1, gcol2, gcol3 = st.columns(3)
+    with gcol1:
+        st.metric("🌟 Total Reading Points", f"{gam_prof['points']} XP", f"Level {gam_prof['level']} Reader")
+    with gcol2:
+        st.metric("🔥 Daily Reading Streak", f"{gam_prof['streak_days']} Days", "+1 Day Active")
+    with gcol3:
+        st.metric("🏅 Earned Badges", f"{len(gam_prof['badges'])} Badges", ", ".join(gam_prof["badges"][:2]))
+
     st.markdown("#### 📜 Recent Assessment History for this Student")
-    recent_history = [
+    db_history = engine.get_student_assessment_history(student["student_id"], limit=10)
+    recent_history = []
+    for row in db_history:
+        acc_val = float(row.get("accuracy_pct", 0.0))
+        st_lbl = "Advanced" if acc_val >= 90 else ("Proficient" if acc_val >= 75 else "Developing")
+        recent_history.append({
+            "Date": str(row.get("created_at", ""))[:16],
+            "Language": row.get("language", "Telugu"),
+            "Passage": row.get("passage_title", ""),
+            "Grade": row.get("grade", student["grade"]),
+            "Score": f"{round(acc_val)}/100",
+            "WPM": row.get("wpm", 0),
+            "Accuracy": f"{acc_val}%",
+            "Status": st_lbl,
+        })
+    recent_history.extend([
         {"Date": "17 Nov 2026", "Language": "Telugu", "Passage": "గోదావరి నది ప్రవాహం", "Grade": "Class 4", "Score": "89/100", "WPM": 76, "Accuracy": "90.9%", "Status": "Proficient"},
         {"Date": "10 Nov 2026", "Language": "Telugu", "Passage": "మన తోటలోని పూలు", "Grade": "Class 4", "Score": "92/100", "WPM": 72, "Accuracy": "94.0%", "Status": "Advanced"},
         {"Date": "03 Nov 2026", "Language": "English", "Passage": "A Sunny Morning", "Grade": "Class 4", "Score": "85/100", "WPM": 68, "Accuracy": "88.2%", "Status": "Proficient"},
-    ]
+    ])
     st.dataframe(pd.DataFrame(recent_history), use_container_width=True, hide_index=True)
 
 
 # ============================================================================
-# 5. SCREEN 2: READING ASSESSMENT SCREEN
+# 5. SCREEN 2: READING ASSESSMENT & LISTEN-AND-FOLLOW SCREEN
 # ============================================================================
 def render_reading_assessment():
-    """Render Reading Assessment: Passage display, Mic recording button, Timer, Progress indicator, Submit."""
+    """Render Reading Assessment: Listen-and-Follow Karaoke Player, Real Audio Capture, STT & Live Word Alignment."""
     student = data.get_student_by_id(st.session_state["selected_student_id"])
     lang = st.session_state["selected_language"]
     diff = st.session_state["selected_difficulty"]
-    passage = data.get_passage(lang, diff)
+    passage = st.session_state.get("custom_passage") or data.get_passage(lang, diff)
 
     # Top Context bar
     col_nav, col_info = st.columns([1, 3])
@@ -744,13 +784,23 @@ def render_reading_assessment():
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # Header Card for Passage
+    # Header Card for Passage + Accessibility Font Size Switcher
+    f_col1, f_col2 = st.columns([3, 1])
+    with f_col2:
+        font_choice = st.selectbox(
+            "🔠 Text Size (అక్షర పరిమాణం):",
+            ["Standard (1.35rem)", "Large - Child Friendly (1.6rem)", "Extra Large - Dyslexia Friendly (1.9rem)"],
+            index=1,
+            key="assess_font_size_sel",
+        )
+    font_px = "1.35rem" if "Standard" in font_choice else ("1.9rem" if "Extra" in font_choice else "1.6rem")
+
     st.markdown(
         f"""
-        <div style="background: linear-gradient(90deg, #eff6ff 0%, #f0fdf4 100%); border: 1px solid #bfdbfe; border-radius: 14px; padding: 16px 22px; margin-bottom: 20px;">
+        <div style="background: linear-gradient(90deg, #eff6ff 0%, #f0fdf4 100%); border: 1px solid #bfdbfe; border-radius: 14px; padding: 16px 22px; margin-bottom: 16px;">
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
                 <div>
-                    <span class="status-pill status-proficient">{passage['grade_band']}</span>
+                    <span class="status-pill status-proficient">{passage.get('grade_band', passage.get('grade', 'Classes 1–10'))}</span>
                     <h2 style="margin: 6px 0 2px 0; color: #1e3a8a; font-size: 1.45rem;">{passage['title']}</h2>
                     <p style="margin: 0; color: #64748b; font-size: 0.92rem;">{passage['subtitle']}</p>
                 </div>
@@ -764,113 +814,188 @@ def render_reading_assessment():
         unsafe_allow_html=True,
     )
 
-    # Passage Text Box with Large Child-Friendly Font
-    box_class = "reading-box-telugu" if lang == "Telugu" else "reading-box-english"
-    st.markdown(
-        f"""
-        <div class="{box_class}">
-            {passage['reference_text']}
-        </div>
-        """,
-        unsafe_allow_html=True,
+    # Interactive Listen-and-Follow Karaoke Component (TTS + Word-by-Word & Sentence Highlighting + Slow Mode)
+    st.markdown("#### 🔊 Listen-and-Follow Guided Reading (వినండి మరియు అనుసరించండి)")
+    ref_text_clean = passage["reference_text"].replace('"', "&quot;").replace("'", "&#39;")
+    tts_lang_code = "te-IN" if lang == "Telugu" else "en-IN"
+    words_list = passage["reference_text"].split()
+    words_spans_html = " ".join(
+        f'<span id="karaoke-w-{i}" style="padding: 2px 5px; border-radius: 6px; transition: all 0.18s ease; cursor: pointer;" onclick="speakSingleWord(this.innerText)">{w}</span>'
+        for i, w in enumerate(words_list)
     )
 
-    st.caption("💡 Student Instruction: Click the microphone below, read the passage clearly aloud at your natural pace, and press 'Submit Reading' when finished.")
+    karaoke_html = f"""
+    <div style="font-family: 'Plus Jakarta Sans', 'Noto Sans Telugu', sans-serif; background: #fffbeb; border: 2px solid #fde68a; border-radius: 16px; padding: 20px 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid #fde68a;">
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <button onclick="startKaraokeReading(1.0)" style="background: #1e40af; color: white; border: none; border-radius: 8px; padding: 8px 14px; font-weight: 700; cursor: pointer;">▶️ Listen Normal Pace</button>
+                <button onclick="startKaraokeReading(0.65)" style="background: #0d9488; color: white; border: none; border-radius: 8px; padding: 8px 14px; font-weight: 700; cursor: pointer;">🐢 Slow Pace (మెల్లగా)</button>
+                <button onclick="stopKaraokeReading()" style="background: #dc2626; color: white; border: none; border-radius: 8px; padding: 8px 14px; font-weight: 700; cursor: pointer;">⏹ Stop</button>
+            </div>
+            <div style="font-size: 0.84rem; color: #92400e; font-weight: 600;">
+                💡 Click any word below to hear its individual pronunciation!
+            </div>
+        </div>
+        <div id="karaoke-passage-box" style="font-size: {font_px}; line-height: 2.25; color: #0f172a; font-weight: 500;">
+            {words_spans_html}
+        </div>
+    </div>
+    <script>
+        const PASSAGE_WORDS = {json.dumps(words_list, ensure_ascii=False)};
+        const TTS_LANG = "{tts_lang_code}";
+        let karaokeTimer = null;
 
-    # Recording Console
-    st.markdown("<br>", unsafe_allow_html=True)
+        function clearHighlights() {{
+            for (let i = 0; i < PASSAGE_WORDS.length; i++) {{
+                const el = document.getElementById("karaoke-w-" + i);
+                if (el) {{
+                    el.style.background = "transparent";
+                    el.style.color = "#0f172a";
+                    el.style.fontWeight = "500";
+                }}
+            }}
+        }}
 
-    col_mic, col_controls = st.columns([1, 1], gap="large")
+        function stopKaraokeReading() {{
+            if (karaokeTimer) clearInterval(karaokeTimer);
+            if (window.speechSynthesis) window.speechSynthesis.cancel();
+            clearHighlights();
+        }}
+
+        function speakSingleWord(wordText) {{
+            stopKaraokeReading();
+            if (!window.speechSynthesis) return;
+            const u = new SpeechSynthesisUtterance(wordText);
+            u.lang = TTS_LANG;
+            u.rate = 0.8;
+            window.speechSynthesis.speak(u);
+        }}
+
+        function startKaraokeReading(rateVal) {{
+            stopKaraokeReading();
+            let idx = 0;
+            const intervalMs = Math.round(480 / rateVal);
+
+            if (window.speechSynthesis) {{
+                const fullText = PASSAGE_WORDS.join(" ");
+                const utter = new SpeechSynthesisUtterance(fullText);
+                utter.lang = TTS_LANG;
+                utter.rate = rateVal;
+                utter.onend = () => {{
+                    if (karaokeTimer) clearInterval(karaokeTimer);
+                    setTimeout(clearHighlights, 600);
+                }};
+                window.speechSynthesis.speak(utter);
+            }}
+
+            karaokeTimer = setInterval(() => {{
+                clearHighlights();
+                if (idx < PASSAGE_WORDS.length) {{
+                    const el = document.getElementById("karaoke-w-" + idx);
+                    if (el) {{
+                        el.style.background = "#fde047";
+                        el.style.color = "#1e3a8a";
+                        el.style.fontWeight = "800";
+                    }}
+                    idx++;
+                }} else {{
+                    clearInterval(karaokeTimer);
+                }}
+            }}, intervalMs);
+        }}
+    </script>
+    """
+    components.html(karaoke_html, height=280, scrolling=True)
+
+    st.caption("💡 Student Instruction: Record your voice reading the passage aloud using the live microphone below, or test with your spoken transcript for instant AI word-by-word diagnosis.")
+
+    # Real Audio Capture & AI Speech Evaluation Console
+    col_mic, col_controls = st.columns([1.15, 1], gap="large")
 
     with col_mic:
-        is_rec = st.session_state["is_recording"]
+        st.markdown("#### 🎤 Live Student Voice Recording (విద్యార్థి స్వర రికార్డింగ్)")
+        audio_input_val = None
+        if hasattr(st, "audio_input"):
+            audio_input_val = st.audio_input("Click microphone to record your reading aloud:", key="akshara_live_mic")
+        uploaded_wav = st.file_uploader("Or upload a recorded reading audio file (.wav / .mp3):", type=["wav", "mp3", "m4a"], key="akshara_audio_upload")
 
-        if is_rec:
-            st.markdown(
-                """
-                <div class="mic-container mic-active">
-                    <div class="pulse-circle">🎙️</div>
-                    <div class="wave-box">
-                        <div class="wave-bar"></div><div class="wave-bar"></div>
-                        <div class="wave-bar"></div><div class="wave-bar"></div>
-                        <div class="wave-bar"></div><div class="wave-bar"></div>
-                        <div class="wave-bar"></div><div class="wave-bar"></div>
-                    </div>
-                    <div style="font-size: 1.15rem; font-weight: 700; color: #b91c1c; margin-top: 6px;">
-                        ● RECORDING LIVE IN PROGRESS...
-                    </div>
-                    <div style="font-size: 0.88rem; color: #7f1d1d;">Speaking audio is being captured by AI audio buffer</div>
-                </div>
-                """,
-                unsafe_allow_html=True,
-            )
-            if st.button("⏹ Stop Recording (రికార్డింగ్ ఆపు)", key="btn_stop_rec", type="secondary", use_container_width=True):
-                st.session_state["is_recording"] = False
-                st.session_state["recording_elapsed"] = 42
-                st.rerun()
-        else:
-            st.markdown(
-                """
-                <div class="mic-container">
-                    <div style="width: 72px; height: 72px; background: #2563eb; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);">
-                        🎙️
-                    </div>
-                    <div style="font-size: 1.15rem; font-weight: 700; color: #1e3a8a; margin-top: 10px;">
-                        Microphone Ready (మైక్రోఫోన్ సిద్ధంగా ఉంది)
-                    </div>
-                    <div style="font-size: 0.88rem; color: #64748b;">Click below to begin reading assessment</div>
-                </div>
-                """,
-                unsafe_allow_html=True,
-            )
-            if st.button("🎤 Start Recording (రికార్డింగ్ ప్రారంభించండి)", key="btn_start_rec", type="primary", use_container_width=True):
-                st.session_state["is_recording"] = True
-                st.rerun()
+        active_audio_bytes = None
+        if audio_input_val is not None:
+            active_audio_bytes = audio_input_val.getvalue()
+        elif uploaded_wav is not None:
+            active_audio_bytes = uploaded_wav.read()
+
+        if active_audio_bytes and len(active_audio_bytes) > 400:
+            st.success(f"✅ Captured {round(len(active_audio_bytes)/1024.0, 1)} KB student audio! Ready for AI transcription & alignment.")
+            if st.button("🧠 Transcribe & Analyze Recorded Audio Now", key="btn_run_real_stt", type="primary", use_container_width=True):
+                with st.spinner("Transcribing student speech and aligning with reference passage..."):
+                    stt_meta = transcribe_audio_bytes_detailed(active_audio_bytes, filename_hint="student_reading.wav")
+                    recognized_txt = (stt_meta.get("text") or "").strip()
+                    dur_s = max(8.0, float(stt_meta.get("audio_metrics", {}).get("duration_sec") or 30.0))
+                    if not recognized_txt:
+                        recognized_txt = st.session_state.get("manual_transcript_override", "").strip()
+                    eval_res = engine.align_and_evaluate_reading(
+                        reference_text=passage["reference_text"],
+                        spoken_transcript=recognized_txt,
+                        duration_sec=dur_s,
+                        target_wpm=passage.get("target_wpm", 65),
+                        language=lang,
+                    )
+                    st.session_state["live_eval_result"] = eval_res
+                    engine.save_reading_assessment_to_db(
+                        student_id=student["student_id"],
+                        student_name=student["name"],
+                        grade=student["grade"],
+                        language=lang,
+                        difficulty=diff,
+                        passage_title=passage["title"],
+                        reference_text=passage["reference_text"],
+                        eval_result=eval_res,
+                    )
+                    st.session_state["active_screen"] = "reading_analysis"
+                    st.rerun()
 
     with col_controls:
-        st.markdown("#### ⏱️ Reading Progress & Controls")
-
-        # Timer & Recording Status
-        timer_display = "00:42" if not st.session_state["is_recording"] else "00:35 (Recording...)"
-        st.markdown(
-            f"""
-            <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px 20px; margin-bottom: 16px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #64748b;">TIMER & DURATION</span>
-                    <span style="font-size: 1.25rem; font-weight: 800; color: #1e3a8a;">{timer_display} / 01:00 min</span>
-                </div>
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #64748b;">RECORDING STATUS</span>
-                    <span class="status-pill status-advanced">{'🔴 Active Capture' if is_rec else '✅ Voice Sample Ready'}</span>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True,
+        st.markdown("#### ✍️ Live Speech Transcript & Instant Diagnosis")
+        default_sim_text = passage.get("student_recognized_text") or passage["reference_text"]
+        spoken_text_input = st.text_area(
+            "Student Spoken Transcript (Auto-filled by Mic STT or editable to test specific reading errors/omissions):",
+            value=default_sim_text,
+            height=115,
+            key="manual_transcript_override",
+        )
+        reading_dur_input = st.slider(
+            "Reading Duration (Seconds):",
+            min_value=10,
+            max_value=120,
+            value=int(passage.get("expected_duration_sec", 42)),
+            key="reading_dur_slider",
         )
 
-        # Reading progress indicator
-        st.markdown("**Passage Progress Tracker:**")
-        st.progress(0.91)
-        st.caption("38 of 44 words read • 91% passage complete")
-
-        st.markdown("<br>", unsafe_allow_html=True)
-        col_btn1, col_btn2 = st.columns(2)
-        with col_btn1:
-            if st.button("🔄 Restart (మళ్లీ ప్రారంభించు)", key="btn_reset_recording", use_container_width=True):
-                st.session_state["is_recording"] = False
-                st.session_state["recording_elapsed"] = 0
-                st.rerun()
-        with col_btn2:
-            if st.button("🔊 Play Demo Audio", key="btn_sample_audio", use_container_width=True):
-                st.info("Demonstrating model audio playback for classroom pronunciation benchmark.")
-
-        st.markdown("<br>", unsafe_allow_html=True)
         if st.button(
-            "✅ Submit Reading for AI Assessment (సమర్పించండి) ➔",
+            "✅ Run Real AI Word-by-Word Assessment (సమర్పించండి) ➔",
             key="btn_submit_reading",
             type="primary",
             use_container_width=True,
         ):
+            eval_res = engine.align_and_evaluate_reading(
+                reference_text=passage["reference_text"],
+                spoken_transcript=spoken_text_input,
+                duration_sec=float(reading_dur_input),
+                target_wpm=passage.get("target_wpm", 65),
+                language=lang,
+            )
+            st.session_state["live_eval_result"] = eval_res
+            engine.save_reading_assessment_to_db(
+                student_id=student["student_id"],
+                student_name=student["name"],
+                grade=student["grade"],
+                language=lang,
+                difficulty=diff,
+                passage_title=passage["title"],
+                reference_text=passage["reference_text"],
+                eval_result=eval_res,
+            )
             st.session_state["is_recording"] = False
             st.session_state["assessment_submitted"] = True
             st.session_state["active_screen"] = "reading_analysis"
@@ -885,8 +1010,34 @@ def render_reading_analysis():
     student = data.get_student_by_id(st.session_state["selected_student_id"])
     lang = st.session_state["selected_language"]
     diff = st.session_state["selected_difficulty"]
-    passage = data.get_passage(lang, diff)
-    metrics = passage["metrics"]
+    base_passage = st.session_state.get("custom_passage") or data.get_passage(lang, diff)
+    live_res = st.session_state.get("live_eval_result")
+
+    if live_res:
+        metrics = live_res
+        word_tokens = [
+            {
+                "word": w["word"],
+                "status": "mispronounced" if w["status"] == "needs_work" else w["status"],
+                "spoken": w.get("spoken", w["word"]),
+                "note": w.get("issue", ""),
+            }
+            for w in live_res.get("word_analysis", [])
+        ]
+        student_rec_text = live_res.get("student_transcript") or base_passage.get("student_recognized_text", "")
+        obs_list = live_res.get("ai_observations", base_passage.get("observations", []))
+        rec_list = live_res.get("recommendations", base_passage.get("recommendations", []))
+        passage = {
+            **base_passage,
+            "metrics": metrics,
+            "word_tokens": word_tokens,
+            "student_recognized_text": student_rec_text,
+            "observations": obs_list,
+            "recommendations": rec_list,
+        }
+    else:
+        passage = base_passage
+        metrics = passage["metrics"]
 
     # Top Context bar
     col_nav, col_jump = st.columns([1, 1])
@@ -1102,8 +1253,18 @@ def render_assessment_results():
     student = data.get_student_by_id(st.session_state["selected_student_id"])
     lang = st.session_state["selected_language"]
     diff = st.session_state["selected_difficulty"]
-    passage = data.get_passage(lang, diff)
-    metrics = passage["metrics"]
+    base_passage = st.session_state.get("custom_passage") or data.get_passage(lang, diff)
+    live_res = st.session_state.get("live_eval_result")
+    if live_res:
+        metrics = {
+            **base_passage.get("metrics", {}),
+            **live_res,
+            "repeated_words": live_res.get("inserted_words", 0),
+        }
+        passage = {**base_passage, "metrics": metrics}
+    else:
+        passage = base_passage
+        metrics = passage["metrics"]
 
     # Navigation buttons
     col_nav1, col_nav2 = st.columns([1, 1])
@@ -1264,36 +1425,26 @@ def render_assessment_results():
         }).set_index("Metric")
         st.bar_chart(benchmark_df, height=240)
 
-    # Personalized Improvement Suggestions
+    # Personalized Improvement Suggestions + Automated Remedial Drill Generator
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("### 🎯 Personalized Improvement Plan (వ్యక్తిగత అభ్యసన ప్రణాళిక)")
+    st.markdown("### 🎯 Personalized Remedial Learning Plan (వ్యక్తిగత అభ్యసన ప్రణాళిక)")
+    remedial_plan = engine.generate_personalized_remedial_plan(metrics, language=lang)
+    st.info(
+        f"**Assigned Remedial Tier:** `{remedial_plan['assigned_tier']}`  |  "
+        f"**Target Focus Words:** `{', '.join(remedial_plan['target_words'])}`  |  "
+        f"**Recommended Daily Practice:** `{remedial_plan['daily_goal_minutes']} minutes`"
+    )
 
-    rec_c1, rec_c2 = st.columns(2)
-    with rec_c1:
+    for drill in remedial_plan["drills"]:
         st.markdown(
             f"""
-            <div class="ecr-card" style="border-left: 4px solid #f59e0b; height: 100%;">
-                <div class="ecr-card-header">🗣️ Daily Practice Interventions</div>
-                <ul style="padding-left: 20px; color: #334155; line-height: 1.8;">
-                    <li><b>Consonant Cluster Practice:</b> Spend 5 minutes daily reading compound aksharalu ('స్త', 'శ్య', 'త్మ').</li>
-                    <li><b>Syllable Pacing:</b> Segment multi-syllabic words like 'త్ర-యం-బ-కే-శ్వ-రం' before full speed oral reading.</li>
-                    <li><b>Connector Focus:</b> Track along words using finger or card ruler to ensure words like 'మరియు' are not skipped.</li>
-                </ul>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-
-    with rec_c2:
-        st.markdown(
-            f"""
-            <div class="ecr-card" style="border-left: 4px solid #10b981; height: 100%;">
-                <div class="ecr-card-header">⭐ Recommended Next Steps</div>
-                <ul style="padding-left: 20px; color: #334155; line-height: 1.8;">
-                    <li><b>Next Recommended Passage:</b> "కృష్ణానది వైభవం" (Telugu - Intermediate Tier 2).</li>
-                    <li><b>Audio Mirror Practice:</b> Listen to the model narrator speech and repeat in echo-mode.</li>
-                    <li><b>Teacher Review:</b> Scheduled for weekly classroom oral reading review.</li>
-                </ul>
+            <div class="ecr-card" style="border-left: 4px solid #6366f1; padding: 12px 18px; margin-bottom: 10px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                    <div style="font-size: 1.15rem; font-weight: 800; color: #1e3a8a;">🔤 Practice Word: {drill['word']}</div>
+                    <span class="status-pill status-proficient">{drill['focus_skill']}</span>
+                </div>
+                <div style="font-size: 0.92rem; color: #0f172a; margin: 4px 0;"><b>Linguistic Breakdown:</b> <code>{drill['breakdown']}</code></div>
+                <div style="font-size: 0.86rem; color: #475569;">🎯 <b>Remedial Drill:</b> {drill['exercise']}</div>
             </div>
             """,
             unsafe_allow_html=True,
@@ -1604,6 +1755,488 @@ def render_teacher_dashboard():
         }).set_index("Session")
         st.line_chart(trend_df, height=180)
 
+    # Teacher Exercise Assignment Creator (Persisted in SQLite)
+    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown("### 📝 Assign Reading & Remedial Exercise to Students (అభ్యాసాల కేటాయింపు)")
+    with st.expander("➕ Create New Classroom or Individual Reading Assignment", expanded=True):
+        ac1, ac2, ac3 = st.columns(3)
+        with ac1:
+            assign_grade = st.selectbox("Target Class:", ["All", "Class 1", "Class 2", "Class 3", "Class 4", "Class 5", "Class 6", "Class 7", "Class 8", "Class 9", "Class 10"], key="t_assign_grade")
+            assign_student = st.selectbox("Target Student:", ["All"] + list(student_options.keys()), format_func=lambda x: "All Students in Class" if x == "All" else student_options[x], key="t_assign_stu")
+        with ac2:
+            assign_lang = st.selectbox("Language:", ["Telugu", "English"], key="t_assign_lang")
+            assign_diff = st.selectbox("Difficulty Tier:", ["Beginner", "Intermediate", "Advanced"], key="t_assign_diff")
+        with ac3:
+            avail_titles = [p["title"] for p in engine.BILINGUAL_LIBRARY_PASSAGES if p["language"] == assign_lang]
+            assign_passage = st.selectbox("Select Passage:", avail_titles or ["మన తోటలోని పూలు"], key="t_assign_pass")
+            assign_notes = st.text_input("Teacher Focus Note:", value="Practice Ottulu and read aloud twice.", key="t_assign_notes")
+
+        if st.button("📤 Publish Reading Assignment", key="btn_publish_assignment", type="primary"):
+            teacher_user = (st.session_state.get("authenticated_user") or {}).get("username") or "Lead_Teacher"
+            engine.create_teacher_assignment(
+                teacher_username=teacher_user,
+                target_grade=assign_grade,
+                target_student_id=assign_student,
+                language=assign_lang,
+                difficulty=assign_diff,
+                passage_title=assign_passage,
+                notes=assign_notes,
+            )
+            st.success(f"Assignment '{assign_passage}' published to {assign_grade}!")
+
+    saved_assigns = engine.get_teacher_assignments()
+    if saved_assigns:
+        st.markdown("##### 📌 Active Teacher Assignments")
+        st.dataframe(
+            pd.DataFrame([
+                {
+                    "ID": a["id"],
+                    "Grade": a["target_grade"],
+                    "Student": a["target_student_id"],
+                    "Language": a["language"],
+                    "Tier": a["difficulty"],
+                    "Passage": a["passage_title"],
+                    "Teacher Notes": a["notes"],
+                    "Assigned On": str(a["created_at"])[:16],
+                }
+                for a in saved_assigns
+            ]),
+            use_container_width=True,
+            hide_index=True,
+        )
+
+
+# ============================================================================
+# 8B. SCREEN 6: TELUGU AKSHARA INTELLIGENCE, PHONICS, PRONUNCIATION COACH & VIRTUAL KEYBOARD
+# ============================================================================
+def render_akshara_phonics_lab():
+    """Render Modules 2, 3, 7, 9: Telugu Akshara Intelligence, English Phonics, Pronunciation Coach & Virtual Keyboard."""
+    st.markdown(
+        """
+        <div style="background: linear-gradient(90deg, #1e3a8a 0%, #4338ca 55%, #0d9488 100%); color: white; border-radius: 14px; padding: 18px 24px; margin-bottom: 20px;">
+            <h2 style="margin: 0; font-size: 1.45rem; color: #ffffff;">🔤 Telugu Akshara Intelligence, English Phonics & Virtual Keyboard Lab</h2>
+            <p style="margin: 4px 0 0 0; color: #e0e7ff; font-size: 0.9rem;">
+                Interactive Achulu, Hallulu, Mahapranalu, Guninthalu, Ottulu/Vattulu, English Sound Blending, AI Pronunciation Coach & Unicode Keyboard
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    tab_te, tab_en, tab_kb, tab_coach = st.tabs([
+        "🇮🇳 1. Telugu Akshara Intelligence",
+        "🇬🇧 2. English Phonics & Word Decoding",
+        "⌨️ 3. Telugu Virtual Akshara Keyboard",
+        "🎙️ 4. AI Pronunciation Coach",
+    ])
+
+    with tab_te:
+        st.markdown("#### 🅰️ అచ్చులు (Achulu - 16 Vowels) & హల్లులు (Hallulu - 36 Consonants)")
+        sub_c1, sub_c2 = st.columns([1, 1.2], gap="medium")
+        with sub_c1:
+            st.markdown("##### అచ్చులు (Achulu)")
+            st.dataframe(pd.DataFrame(engine.TELUGU_ACHULU), use_container_width=True, hide_index=True, height=260)
+        with sub_c2:
+            st.markdown("##### హల్లులు & మహాప్రాణాక్షరాలు (Hallulu & Mahapranalu)")
+            only_maha = st.checkbox("Show only Mahapranalu (మహాప్రాణాక్షరాలు: ఖ, ఘ, ఛ, ఝ, ఠ, ఢ, థ, ధ, ఫ, భ, ష, హ)", value=False)
+            h_list = [h for h in engine.TELUGU_HALLULU if (not only_maha or h["is_mahaprana"])]
+            st.dataframe(pd.DataFrame(h_list), use_container_width=True, hide_index=True, height=260)
+
+        st.markdown("---")
+        g_col1, g_col2 = st.columns([1, 1], gap="large")
+        with g_col1:
+            st.markdown("#### 🔡 గుణింతాల పట్టిక (Interactive Guninthalu Generator)")
+            consonant_choices = [h["letter"] for h in engine.TELUGU_HALLULU if h["letter"] != "క్ష"]
+            chosen_c = st.selectbox("Select Hallu (Consonant) to build full 15-step Gunintham:", consonant_choices, index=0)
+            g_series = engine.generate_gunintham_chart(chosen_c)
+            pills_html = " ".join(
+                f'<span style="display:inline-block; background:#eff6ff; border:1.5px solid #93c5fd; border-radius:10px; padding:8px 12px; margin:4px; font-size:1.3rem; font-weight:700; color:#1e3a8a;" title="{item["marker_name"]} ({item["sound"]})">{item["akshara"]}</span>'
+                for item in g_series
+            )
+            st.markdown(f'<div class="telugu-text">{pills_html}</div>', unsafe_allow_html=True)
+            st.dataframe(pd.DataFrame(g_series), use_container_width=True, hide_index=True, height=210)
+
+        with g_col2:
+            st.markdown("#### 🔗 ఒత్తులు / సంయుక్తాక్షరాలు (Ottulu & Vattulu)")
+            ottu_df = pd.DataFrame(engine.generate_ottulu_examples())
+            st.dataframe(ottu_df, use_container_width=True, hide_index=True, height=240)
+
+            st.markdown("##### 🔍 Live Telugu Akshara Word Analyzer (అక్షర విభజన)")
+            sample_te_word = st.text_input("Enter any Telugu word to segment into Aksharas:", value="సీతాకోకచిలుకలు", key="te_seg_input")
+            if sample_te_word:
+                seg_res = engine.segment_telugu_aksharas(sample_te_word)
+                seg_pills = " + ".join(
+                    f'<span style="background:#f0fdf4; border:1.5px solid #86efac; padding:6px 12px; border-radius:8px; font-size:1.25rem; font-weight:700; color:#166534;">{s["akshara"]} <small style="font-size:0.72rem; color:#475569;">({s["category"].split()[0]})</small></span>'
+                    for s in seg_res
+                )
+                st.markdown(f'<div style="margin: 10px 0;">{seg_pills}</div>', unsafe_allow_html=True)
+                st.dataframe(pd.DataFrame(seg_res), use_container_width=True, hide_index=True)
+
+    with tab_en:
+        st.markdown("#### 🇬🇧 English Phonics, Sound Blending & Syllable Decoder")
+        p_col1, p_col2 = st.columns([1.1, 1], gap="large")
+        with p_col1:
+            for cat_name, items in engine.ENGLISH_PHONICS_CATEGORIES.items():
+                st.markdown(f"##### 📌 {cat_name}")
+                st.dataframe(pd.DataFrame(items), use_container_width=True, hide_index=True)
+        with p_col2:
+            st.markdown("##### 🔬 Interactive Word Decoder & Sound Blender")
+            en_word_in = st.text_input("Type any English word to decode phonemes & syllables:", value="environment", key="en_decode_in")
+            if en_word_in:
+                dec = engine.decode_english_word_phonics(en_word_in)
+                st.markdown(
+                    f"""
+                    <div class="ecr-card" style="background: #f8fafc; border-left: 4px solid #0d9488;">
+                        <div style="font-size: 1.35rem; font-weight: 800; color: #1e3a8a; margin-bottom: 8px;">
+                            {dec['word'].upper()} ({dec['syllable_count']} Syllables)
+                        </div>
+                        <div style="font-size: 1.1rem; color: #0f766e; font-weight: 700; margin-bottom: 10px;">
+                            🔊 Sound Blending: <code>{dec['blend_guide']}</code>
+                        </div>
+                        <div style="font-size: 0.9rem; color: #334155; line-height: 1.8;">
+                            <b>Onset:</b> <code>{dec['onset']}</code> &nbsp;|&nbsp; <b>Rime:</b> <code>{dec['rime']}</code><br>
+                            <b>Vowels:</b> {dec['vowel_count']} &nbsp;|&nbsp; <b>Consonants:</b> {dec['consonant_count']}<br>
+                            <b>Detected Digraphs / Clusters:</b> <code>{', '.join(dec['digraphs']) if dec['digraphs'] else 'None (Direct Phonetic)'}</code>
+                        </div>
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+
+    with tab_kb:
+        st.markdown("#### ⌨️ Telugu Virtual Akshara Keyboard & Phonetic Transliteration")
+        st.caption("Click Achulu, Hallulu, Guninthalu markers, or Virama (్) below to construct Telugu words, or type in English to transliterate.")
+
+        kb_c1, kb_c2 = st.columns([2, 1])
+        with kb_c1:
+            curr_buf = st.text_input("📝 Constructed Telugu Word / Sentence:", value=st.session_state["virtual_kb_buffer"], key="kb_text_display")
+            st.session_state["virtual_kb_buffer"] = curr_buf
+        with kb_c2:
+            roman_in = st.text_input("🔤 English-to-Telugu Transliteration (e.g. 'aksharamitra pustakam'):", value="", key="kb_roman_in")
+            if roman_in:
+                trans_out = engine.transliterate_english_to_telugu(roman_in)
+                st.success(f"Transliterated: **{trans_out}**")
+                if st.button("➕ Append Transliterated Text", key="btn_append_trans"):
+                    st.session_state["virtual_kb_buffer"] = (st.session_state["virtual_kb_buffer"] + " " + trans_out).strip()
+                    st.rerun()
+
+        act_b1, act_b2, act_b3 = st.columns([1, 1, 2])
+        with act_b1:
+            if st.button("⌫ Backspace", key="kb_backspace", use_container_width=True):
+                st.session_state["virtual_kb_buffer"] = st.session_state["virtual_kb_buffer"][:-1]
+                st.rerun()
+        with act_b2:
+            if st.button("🗑️ Clear All", key="kb_clear", use_container_width=True):
+                st.session_state["virtual_kb_buffer"] = ""
+                st.rerun()
+        with act_b3:
+            if st.button("➕ Spacebar (ఖాళీ)", key="kb_space", use_container_width=True):
+                st.session_state["virtual_kb_buffer"] += " "
+                st.rerun()
+
+        st.markdown("**అచ్చులు (Achulu):**")
+        achu_cols = st.columns(8)
+        for idx, item in enumerate(engine.TELUGU_ACHULU):
+            with achu_cols[idx % 8]:
+                if st.button(item["letter"], key=f"kb_achu_{idx}", use_container_width=True):
+                    st.session_state["virtual_kb_buffer"] += item["letter"]
+                    st.rerun()
+
+        st.markdown("**గుణింతపు గుర్తులు & ఒత్తు పొల్లు (Guninthalu Matras & Virama '్'):**")
+        matra_list = [m for m in engine.TELUGU_GUNINTHALU_SIGNS if m["sign"]] + [{"name": "Pollu / Ottu Joiner", "sign": engine.TELUGU_VIRAMA}]
+        m_cols = st.columns(8)
+        for idx, m_item in enumerate(matra_list):
+            with m_cols[idx % 8]:
+                lbl = f"{m_item['sign']} ({m_item['name'].split()[0]})"
+                if st.button(lbl, key=f"kb_matra_{idx}", use_container_width=True):
+                    st.session_state["virtual_kb_buffer"] += m_item["sign"]
+                    st.rerun()
+
+        st.markdown("**హల్లులు (Hallulu - Click Virama '్' between two Hallulu to create an Ottu):**")
+        h_cols = st.columns(9)
+        for idx, h_item in enumerate(engine.TELUGU_HALLULU):
+            with h_cols[idx % 9]:
+                if st.button(h_item["letter"], key=f"kb_hallu_{idx}", use_container_width=True):
+                    st.session_state["virtual_kb_buffer"] += h_item["letter"]
+                    st.rerun()
+
+        if st.session_state["virtual_kb_buffer"]:
+            st.markdown("##### 🔍 Live Unicode Akshara Breakdown of Your Constructed Word:")
+            kb_seg = engine.segment_telugu_aksharas(st.session_state["virtual_kb_buffer"])
+            st.dataframe(pd.DataFrame(kb_seg), use_container_width=True, hide_index=True)
+
+    with tab_coach:
+        st.markdown("#### 🎙️ AI Pronunciation Coach (ఉచ్చారణ శిక్షకుడు)")
+        practice_words = ["సీతాకోకచిలుకలు", "గ్రంథాలయం", "ప్రోత్సహిస్తారు", "శ్రీకృష్ణదేవరాయలు", "harvesting", "environment", "transforming"]
+        target_p_word = st.selectbox("Select or practice a challenging word:", practice_words, key="coach_target_word")
+        custom_p_word = st.text_input("Or type any custom Telugu/English word to practice:", value=target_p_word, key="coach_custom_word")
+
+        is_te_word = any(0x0C00 <= ord(c) <= 0x0C7F for c in custom_p_word)
+        if is_te_word:
+            seg = engine.segment_telugu_aksharas(custom_p_word)
+            guide_str = "  +  ".join(s["akshara"] for s in seg)
+        else:
+            guide_str = engine.decode_english_word_phonics(custom_p_word)["blend_guide"]
+
+        st.info(f"**Expected Phonetic Breakdown:** `{guide_str}`")
+        spoken_attempt = st.text_input("Speak or enter your pronunciation attempt:", value=custom_p_word, key="coach_attempt_in")
+        if st.button("🎯 Evaluate My Pronunciation", key="btn_eval_coach", type="primary"):
+            res = engine.align_and_evaluate_reading(custom_p_word, spoken_attempt, duration_sec=3.0, language="Telugu" if is_te_word else "English")
+            score = res["pronunciation_score"]
+            if score >= 85:
+                st.success(f"🌟 **Excellent Pronunciation ({score}%)!** You articulated '{custom_p_word}' accurately.")
+            else:
+                st.warning(f"🟠 **Keep Practicing ({score}%)!** Focus on blending each syllable slowly: `{guide_str}`")
+
+
+# ============================================================================
+# 8C. SCREEN 7: BILINGUAL READING LIBRARY (CLASSES 1-10), COMPREHENSION & AI COMPANION
+# ============================================================================
+def render_bilingual_library():
+    """Render Modules 6, 8, 15: Bilingual Reading Library (Classes 1-10), AI Comprehension Quiz & AI Reading Companion."""
+    student = data.get_student_by_id(st.session_state["selected_student_id"])
+
+    st.markdown(
+        """
+        <div style="background: linear-gradient(90deg, #0f172a 0%, #1e40af 55%, #047857 100%); color: white; border-radius: 14px; padding: 18px 24px; margin-bottom: 20px;">
+            <h2 style="margin: 0; font-size: 1.45rem; color: #ffffff;">📚 Bilingual Reading Library (Classes 1–10), Comprehension & AI Companion</h2>
+            <p style="margin: 4px 0 0 0; color: #e0f2fe; font-size: 0.9rem;">
+                Curated Telugu & English Stories, Poems, Science Lessons, Interactive Quizzes, and Your AI Reading Friend
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    tab_lib, tab_quiz, tab_comp = st.tabs([
+        "📖 1. Bilingual Reading Library (Classes 1–10)",
+        "🧠 2. AI Reading Comprehension Quiz",
+        "🤖 3. AI Reading Companion (అక్షరమిత్ర నేస్తం)",
+    ])
+
+    with tab_lib:
+        f1, f2, f3 = st.columns(3)
+        with f1:
+            lib_lang = st.selectbox("Filter Language:", ["All", "Telugu", "English"], key="lib_f_lang")
+        with f2:
+            lib_diff = st.selectbox("Filter Difficulty:", ["All", "Beginner", "Intermediate", "Advanced"], key="lib_f_diff")
+        with f3:
+            lib_search = st.text_input("🔍 Search Title, Grade, or Genre:", value="", key="lib_f_search")
+
+        filtered_passages = engine.BILINGUAL_LIBRARY_PASSAGES
+        if lib_lang != "All":
+            filtered_passages = [p for p in filtered_passages if p["language"] == lib_lang]
+        if lib_diff != "All":
+            filtered_passages = [p for p in filtered_passages if p["difficulty"] == lib_diff]
+        if lib_search.strip():
+            q_s = lib_search.strip().lower()
+            filtered_passages = [
+                p for p in filtered_passages
+                if q_s in p["title"].lower() or q_s in p["grade"].lower() or q_s in p["genre"].lower() or q_s in p["reference_text"].lower()
+            ]
+
+        for p_item in filtered_passages:
+            st.markdown(
+                f"""
+                <div class="ecr-card" style="border-left: 4px solid #2563eb; margin-bottom: 14px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                        <div>
+                            <span class="status-pill status-proficient">{p_item['grade']} • {p_item['language']}</span>
+                            <span class="status-pill status-advanced" style="margin-left: 6px;">{p_item['genre']}</span>
+                            <h3 style="margin: 6px 0 2px 0; color: #1e3a8a;">{p_item['title']}</h3>
+                            <p style="margin: 0; font-size: 0.85rem; color: #64748b;">{p_item['subtitle']} • Target: {p_item['target_wpm']} WPM</p>
+                        </div>
+                    </div>
+                    <div class="telugu-text" style="background: #f8fafc; padding: 12px 16px; border-radius: 8px; margin-top: 10px; font-size: 1.08rem; color: #1e293b; line-height: 1.85;">
+                        {p_item['reference_text']}
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+            b_col1, b_col2 = st.columns([1, 2])
+            with b_col1:
+                if st.button(f"🎙️ Practice & Assess '{p_item['title'][:24]}'", key=f"lib_open_{p_item['id']}", type="primary"):
+                    st.session_state["selected_language"] = p_item["language"]
+                    st.session_state["selected_difficulty"] = p_item["difficulty"]
+                    st.session_state["custom_passage"] = {
+                        **data.get_passage(p_item["language"], p_item["difficulty"]),
+                        "title": p_item["title"],
+                        "subtitle": p_item["subtitle"],
+                        "grade_band": p_item["grade"],
+                        "target_wpm": p_item["target_wpm"],
+                        "reference_text": p_item["reference_text"],
+                        "student_recognized_text": p_item["reference_text"],
+                    }
+                    st.session_state["active_screen"] = "reading_assessment"
+                    st.rerun()
+            with b_col2:
+                vocab_items = [f"**{k}**: {v}" for k, v in p_item.get("vocabulary", {}).items()]
+                if vocab_items:
+                    st.caption("📘 **Key Vocabulary:** " + "  |  ".join(vocab_items))
+
+    with tab_quiz:
+        st.markdown("#### 🧠 AI Reading Comprehension Assessment (MCQ, Fill-in-the-Blank & True/False)")
+        quiz_passage_titles = {p["id"]: f"{p['title']} ({p['grade']} - {p['language']})" for p in engine.BILINGUAL_LIBRARY_PASSAGES}
+        selected_pid = st.selectbox("Select Passage for Comprehension Check:", list(quiz_passage_titles.keys()), format_func=lambda x: quiz_passage_titles[x], key="quiz_pid_sel")
+        chosen_p = next(p for p in engine.BILINGUAL_LIBRARY_PASSAGES if p["id"] == selected_pid)
+
+        st.info(f"📖 **Passage Reference:** {chosen_p['reference_text']}")
+        questions = chosen_p.get("comprehension", [])
+        user_answers = {}
+        for idx, q_obj in enumerate(questions):
+            q_type_badge = {"MCQ": "Multiple Choice", "TF": "True / False", "FIB": "Fill in the Blank"}.get(q_obj["type"], "Question")
+            st.markdown(f"**Q{idx + 1} [{q_type_badge}]: {q_obj['q']}**")
+            user_answers[idx] = st.radio(
+                f"Select answer for Q{idx + 1}:",
+                q_obj["options"],
+                key=f"quiz_ans_{selected_pid}_{idx}",
+                label_visibility="collapsed",
+                horizontal=True,
+            )
+
+        if st.button("✅ Submit Comprehension Answers", key="btn_submit_quiz", type="primary"):
+            correct_c = 0
+            for idx, q_obj in enumerate(questions):
+                if user_answers.get(idx) == q_obj["answer"]:
+                    correct_c += 1
+                    st.success(f"✔ Q{idx + 1}: Correct! ({q_obj['answer']})")
+                else:
+                    st.error(f"✘ Q{idx + 1}: Your answer '{user_answers.get(idx)}' — Expected: **{q_obj['answer']}**")
+            pct = engine.save_comprehension_attempt(
+                student_id=student["student_id"],
+                passage_title=chosen_p["title"],
+                language=chosen_p["language"],
+                total_questions=len(questions),
+                correct_answers=correct_c,
+            )
+            st.metric("🎯 Comprehension Score", f"{pct}%", f"{correct_c} / {len(questions)} Correct")
+
+    with tab_comp:
+        st.markdown("#### 🤖 AI Reading Companion (అక్షరమిత్ర నేస్తం - Word & Sentence Explainer)")
+        st.caption("Ask about any difficult Telugu or English word, sentence meaning, or pronunciation tip!")
+        q_col1, q_col2 = st.columns([3, 1])
+        with q_col1:
+            comp_query = st.text_input("Ask AksharaMitra Companion:", placeholder="e.g., గ్రంథాలయం అంటే ఏమిటి? or Explain 'harvesting'", key="comp_query_in")
+        with q_col2:
+            st.markdown("<br>", unsafe_allow_html=True)
+            ask_clicked = st.button("💬 Ask Companion", key="btn_ask_comp", type="primary", use_container_width=True)
+
+        if ask_clicked and comp_query:
+            curr_p = st.session_state.get("custom_passage") or data.get_passage(st.session_state["selected_language"], st.session_state["selected_difficulty"])
+            ans_text = engine.ask_reading_companion(
+                query=comp_query,
+                passage_context=curr_p["reference_text"],
+                language=st.session_state["selected_language"],
+                grade=student["grade"],
+            )
+            st.session_state["companion_chat_history"].insert(0, {"q": comp_query, "a": ans_text})
+
+        for turn in st.session_state["companion_chat_history"][:5]:
+            st.markdown(
+                f"""
+                <div class="ecr-card" style="border-left: 4px solid #10b981; background: #f0fdf4; margin-bottom: 10px;">
+                    <div style="font-weight: 700; color: #1e3a8a; margin-bottom: 6px;">🧒 Student Asked: "{turn['q']}"</div>
+                    <div style="color: #0f172a; font-size: 0.95rem; line-height: 1.7;">{turn['a']}</div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+
+
+# ============================================================================
+# 8D. SCREEN 8: PARENT PROGRESS DASHBOARD & OFFLINE READING MODE
+# ============================================================================
+def render_parent_dashboard():
+    """Render Modules 12 & 13: Parent Progress Dashboard & Offline Reading Pack Download/Sync."""
+    student = data.get_student_by_id(st.session_state["selected_student_id"])
+    gam = engine.get_student_gamification_profile(student["student_id"], student)
+    history = engine.get_student_assessment_history(student["student_id"], limit=10)
+    assignments = engine.get_teacher_assignments(grade=student["grade"], student_id=student["student_id"])
+
+    st.markdown(
+        f"""
+        <div style="background: linear-gradient(90deg, #1e3a8a 0%, #0d9488 100%); color: white; border-radius: 14px; padding: 18px 24px; margin-bottom: 20px;">
+            <h2 style="margin: 0; font-size: 1.45rem; color: #ffffff;">👪 Parent Progress Portal & Offline Reading Mode (తల్లిదండ్రుల వేదిక)</h2>
+            <p style="margin: 4px 0 0 0; color: #e0f2fe; font-size: 0.9rem;">
+                Child: <b>{student['name']} ({student['name_te']})</b> • {student['grade']} • {student['school']}
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    p1, p2, p3, p4 = st.columns(4)
+    with p1:
+        st.metric("📖 Completed Lessons", f"{gam['completed_assessments']} Lessons")
+    with p2:
+        st.metric("🎯 Average Accuracy", f"{student['avg_accuracy']}%", "+2.4% This Week")
+    with p3:
+        st.metric("🔥 Daily Reading Streak", f"{gam['streak_days']} Days")
+    with p4:
+        st.metric("🌟 Earned Points", f"{gam['points']} XP", f"Level {gam['level']}")
+
+    st.markdown("---")
+    c_left, c_right = st.columns(2, gap="large")
+
+    with c_left:
+        st.markdown("#### 🏡 Recommended Home Practice for Parents (ఇంటి వద్ద అభ్యాస సూచనలు)")
+        weak_list = gam.get("weak_words") or ["సీతాకోకచిలుకలు", "గ్రంథాలయం", "ప్రోత్సహిస్తారు"]
+        st.markdown(
+            f"""
+            <div class="ecr-card" style="border-left: 4px solid #f59e0b;">
+                <div class="ecr-card-header">🎯 Focus Areas Identified This Week</div>
+                <p style="font-size: 0.92rem; color: #334155;">
+                    <b>Words to Practice Together at Home:</b> <code>{', '.join(weak_list)}</code>
+                </p>
+                <ul style="font-size: 0.9rem; color: #475569; line-height: 1.8;">
+                    <li><b>10-Minute Evening Read-Aloud:</b> Sit with {student['name']} and use the <i>Listen-and-Follow Slow Pace</i> player for 10 minutes after dinner.</li>
+                    <li><b>Finger-Pointing Technique:</b> Ask your child to point at each Telugu Gunintham / Ottu word while reading aloud so no connectors are skipped.</li>
+                    <li><b>Praise Effort & Streak:</b> Celebrate their <b>{gam['streak_days']}-day streak</b> to build reading confidence!</li>
+                </ul>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+        if assignments:
+            st.markdown("##### 📬 Teacher Assigned Homework")
+            for a in assignments[:3]:
+                st.info(f"📌 **{a['passage_title']}** ({a['language']} - {a['difficulty']})\n\nTeacher Note: *{a['notes']}*")
+
+    with c_right:
+        st.markdown("#### 📴 Offline Reading Mode (ఇంటర్నెట్ లేకుండా చదువుకునే సదుపాయం)")
+        st.caption("Download bilingual lesson packs to practice offline on any phone or tablet, and sync progress when internet returns.")
+
+        offline_pack = {
+            "platform": "SHR Trinity - AksharaMitra Offline Lesson Pack",
+            "student_id": student["student_id"],
+            "student_name": student["name"],
+            "grade": student["grade"],
+            "downloaded_at": datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC"),
+            "lessons": engine.BILINGUAL_LIBRARY_PASSAGES,
+            "guninthalu_reference": engine.generate_gunintham_chart("క"),
+            "ottulu_reference": engine.generate_ottulu_examples(),
+        }
+        offline_json_str = json.dumps(offline_pack, ensure_ascii=False, indent=2)
+
+        st.download_button(
+            label="📥 Download Complete Offline Bilingual Lesson Pack (.json)",
+            data=offline_json_str.encode("utf-8"),
+            file_name=f"AksharaMitra_Offline_Pack_{student['student_id']}.json",
+            mime="application/json",
+            use_container_width=True,
+            type="primary",
+        )
+
+        uploaded_sync = st.file_uploader("🔄 Upload Offline Practice Log to Synchronize Progress:", type=["json"], key="offline_sync_uploader")
+        if uploaded_sync is not None:
+            try:
+                sync_data = json.loads(uploaded_sync.read().decode("utf-8"))
+                st.success(f"✅ Synchronized offline pack for {sync_data.get('student_name', student['name'])} ({len(sync_data.get('lessons', []))} lessons verified)!")
+            except Exception as e:
+                st.error(f"Could not parse offline file: {e}")
+
 
 # ============================================================================
 # 9. FOOTER & MAIN ORCHESTRATOR
@@ -1642,8 +2275,14 @@ def render_main_app():
         render_reading_analysis()
     elif current_screen == "assessment_results":
         render_assessment_results()
+    elif current_screen == "akshara_phonics_lab":
+        render_akshara_phonics_lab()
+    elif current_screen == "bilingual_library":
+        render_bilingual_library()
     elif current_screen == "teacher_dashboard":
         render_teacher_dashboard()
+    elif current_screen == "parent_dashboard":
+        render_parent_dashboard()
     else:
         render_student_dashboard()
 
