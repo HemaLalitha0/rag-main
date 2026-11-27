@@ -129,6 +129,12 @@ def _lookup_voicebox_db_profile(profile_id: str) -> Optional[Dict]:
     return None
 
 
+def _resolve_voicebox_wav_path(apath: str) -> Path:
+    """Normalize Windows or Linux paths stored in voicebox.db into a platform-safe Path."""
+    norm_parts = (apath or "").strip().replace("\\", "/").split("/")
+    return VOICEBOX_APPDATA_DIR.joinpath(*norm_parts)
+
+
 def _lookup_voicebox_db_generation(
     profile_id: str,
     engine: str,
@@ -159,7 +165,7 @@ def _lookup_voicebox_db_generation(
         in_progress_id = None
         for gid, status, apath, dur in rows:
             if status == "completed" and apath:
-                wav_path = VOICEBOX_APPDATA_DIR / apath
+                wav_path = _resolve_voicebox_wav_path(apath)
                 if wav_path.exists() and wav_path.stat().st_size > 1000:
                     wav_bytes = wav_path.read_bytes()
                     meta = {
@@ -231,7 +237,7 @@ def _lookup_profile_completed_chatterbox_wav(
         for gid, gtext, status, apath, dur in rows:
             if not apath:
                 continue
-            wav_path = VOICEBOX_APPDATA_DIR / apath
+            wav_path = _resolve_voicebox_wav_path(apath)
             if not (wav_path.exists() and wav_path.stat().st_size > 1000):
                 continue
             txt_str = (gtext or "").strip()
